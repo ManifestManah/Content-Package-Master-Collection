@@ -1,0 +1,251 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block burn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 6 15
+				es damage event_var(userid) server_var(wcs_dmg) 0 event_var(attacker)
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Burn - You took server_var(wcs_dmg) fire damage
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Burn - event_var(es_username) took server_var(wcs_dmg) fire damage
+				es_playsound event_var(userid) wcs/firecast.mp3 .9
+				es_playsound event_var(attacker) wcs/firecast.mp3 .7
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 10
+				es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 40 10 0 255 255 255 255 8
+				es_xmath wcs_z2 + 30
+				es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 20 10 0 255 255 255 255 8
+				es_xmath wcs_z2 + 40
+				es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 1 (END)
+	}
+}
+
+block slow_attackspeed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_attack_slowed wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_attack_slowed event_var(userid) 1
+					es_delayed 1 wcsgroup set is_attack_slowed event_var(userid) 0
+					es wcs_setfx attackspeed event_var(userid) = .5 1
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Disarm - Your attack speed has been reduced!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Disarm - You reduced event_var(es_attackername) attack speed!
+					es_playsound event_var(userid) wcs/execute.mp3 .7
+					es_playsound event_var(attacker) wcs/execute.mp3 .8
+					es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 160 0.5 10 0 0 180 182 212 255 5
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 190 0.5 10 0 0 180 182 212 255 2
+					es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 160 0.5 10 0 0 180 182 212 255 5
+					es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 190 0.5 10 0 0 180 182 212 255 2
+					es_xmath wcs_z1 + 15
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 160 0.5 10 0 0 180 182 212 255 5
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 190 0.5 10 0 0 180 182 212 255 2
+					es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 160 0.5 10 0 0 180 182 212 255 5
+					es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 190 0.5 10 0 0 180 182 212 255 2
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 3 (END)
+	}
+}
+
+block froststorm
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/fire_and_ice/froststorm_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es wcs_centertell server_var(wcs_userid) Frost storm froze server_var(wcs_count_players_actually_affected) enemies!
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frost storm affected server_var(wcs_count_players_actually_affected) enemies
+				es_playsound server_var(wcs_userid) ambient\wind\windgust.wav .7
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 server_var(wcs_radius) 0.8 70 10 0.6 188 201 254 230 5				
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (END)
+	}
+}
+
+block froststorm_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/fire_and_ice/froststorm_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block froststorm_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You were frozen for 2 seconds by a frost storm!
+	es wcs_setfx freeze server_var(wcs_targetid) = 1 2
+	es_playsound server_var(wcs_targetid) ambient\wind\windgust.wav .7
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 2 50 10 0.6 188 201 254 230 5
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 2 38 10 0 2 41 200 50 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire and Ice - [Block] Skill: 4 (EXECUTED END)
+	}
+}

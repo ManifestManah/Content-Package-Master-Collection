@@ -1,0 +1,348 @@
+////////////////////////
+//Novakiller Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Spawn (START)
+	}
+	es wcsgroup get hybridskulls vector2 event_var(userid)
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 180 2 45 10 0 0 0 255 210 5
+	es est_effect 10 #a 0 sprites\scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 180 2 10 10 0 0 0 255 210 5
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 10 10 0 0 0 255 210 15
+	es est_effect 10 #a 0 sprites\scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 3 10 0 0 0 80 20 5
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 10 10 0 0 0 255 210 15	
+	es est_effect 10 #a 0 sprites\scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 3 10 0 0 0 80 20 5	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] OnChange (START)
+	}
+	es wcsgroup set hybridskulls server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] OnChange (END)
+	}
+}
+
+block skulls
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get hybridskulls vector2 event_var(attacker)
+				if (server_var(vector2) != 30) do
+				{
+					es wcsgroup get hybridskulls vector2 event_var(attacker)
+					es_xmath vector2 + 1
+					es wcsgroup set hybridskulls event_var(attacker) server_var(vector2)
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Skull hunter - You acquired a skull
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Skull hunter - You currently have server_var(vector2) skulls
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 30
+					es_xmath wcs_z2 + 10
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 1 1 10 10 0 0 0 0 255 210 10
+					es est_effect_06 #a 0 sprites/scanner_bottom.vmt server_var(vector2) server_var(vector1) 1 1 5 5 0 0 0 0 255 20 25
+					es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 10 10 0 0 0 255 210 15
+					es est_effect 10 #a 0 sprites\scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 3 10 0 0 0 80 20 5
+					es_xmath wcs_z2 + 40
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 1 1 10 10 0 0 0 0 255 210 10
+					es est_effect_06 #a 0 sprites/scanner_bottom.vmt server_var(vector2) server_var(vector1) 1 1 5 5 0 0 0 0 255 20 25
+					es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 10 10 0 0 0 255 210 15
+					es est_effect 10 #a 0 sprites\scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 60 2 3 10 0 0 0 80 20 5
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 1 (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_xmath wcs_multiplier * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra tail - Has increased your jump length to server_var(wcs_multiplier)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 2 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 3 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zealot legs - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 3 (END)
+	}
+}
+
+block invis
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 4 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dark templars coat - You're now less visible
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 4 (END)
+	}
+}
+
+block respawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		es playerget primary wcs_primary event_var(userid)
+		es playerget secondary wcs_secondary event_var(userid)
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_delayed 2.5 wcs_spawn event_var(userid) 1
+		es_delayed 2.6 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_emitsound player event_var(userid) wcs/resurrect.mp3 1.0 0.3
+		es_delayed 2.6 es_give event_var(userid) server_var(wcs_primary)
+		es_delayed 2.6 es_give event_var(userid) server_var(wcs_secondary)
+		es wcs_centertell event_var(userid) You'll be respawned!	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 5 (END)
+	}
+}
+
+block mineral
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 6 (START)
+	}
+	es wcsgroup get hybridskulls vector8 event_var(userid)
+	if (server_var(vector8) == 0) do
+	{
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals - You have 0 skulls and therefore got 0 health and cash
+	}
+	if (server_var(vector8) != 1) do
+	{	
+		es_math vector8 * server_var(wcs_addhealth)
+		es wcs_setfx health event_var(userid) + server_var(vector8) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals and gas - Gave you server_var(vector8) health
+		es_math vector8 / server_var(wcs_addhealth)
+		es_math vector8 * server_var(wcs_money)
+		es wcs_setfx cash event_var(userid) + server_var(vector8) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals and gas - Gave you server_var(vector8) cash
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 6 (END)
+	}
+}
+
+block warp
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 7 (START)
+	}
+    es_xset wcs_ok 1
+
+    es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+    es_xmath wcs_z2 + 25
+	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 1
+    es_xmath wcs_z2 - 25
+
+    es_xcopy wcs_x wcs_x1
+    es_xcopy wcs_y wcs_y1
+    es_xcopy wcs_z wcs_z1
+
+    es_math wcs_x - server_var(wcs_x2)
+    es_math wcs_y - server_var(wcs_y2)
+    es_math wcs_z - server_var(wcs_z2)
+
+    if (server_var(wcs_x) < 0) then es_xmath wcs_x * -1
+    if (server_var(wcs_y) < 0) then es_xmath wcs_y * -1
+    if (server_var(wcs_z) < 0) then es_xmath wcs_z * -1
+
+    if (server_var(wcs_range) < server_var(wcs_x)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_y)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_z)) do
+    {
+		es_xset wcs_ok 0
+    }
+    
+    ifx true(wcs_ok) do
+    {
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+ 	    ifx true(wcs_legacy_teleport_type) do
+	    {
+	    	//To Do: Improve this by finding an alternative teleportation method that prevent players from getting stuck in displacemnts and models
+	    	es playerset location server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    	es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    }
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
+	    }
+        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenWarp - You Warped!
+        es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
+    }
+    
+    else do
+    {
+        if (server_var(wcs_range) < server_var(wcs_x)) do
+        {
+            if (server_var(wcs_x2) >= 0) do
+            {
+                if (server_var(wcs_x1) >= 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_x1) < 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_x1 wcs_x2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_y)) do
+        {
+            if (server_var(wcs_y2) >= 0) do
+            {
+                if (server_var(wcs_y1) >= 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_y1) < 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_y1 wcs_y2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_z)) do
+        {
+            if (server_var(wcs_z2) >= 0) do
+            {
+                if (server_var(wcs_z1) >= 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_z1) < 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_z1 wcs_z2
+        }
+
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) .1
+	    }
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenWarp - Cannot transport you that far!
+	    es wcs_setcooldown server_var(wcs_userid) 0
+    }
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hybrid - [Block] Skill: 7 (END)
+	}
+}

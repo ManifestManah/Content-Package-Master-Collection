@@ -1,0 +1,285 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block frostbite
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_delayed .5 es_playsound event_var(userid) ambient\levels\citadel\weapon_disintegrate1.wav 1.0
+			es_delayed .5 es_playsound event_var(attacker) ambient\levels\citadel\weapon_disintegrate1.wav 1.0
+		}
+		es_delayed 2.8 wcs_spawn event_var(userid) 1
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+		es_delayed 3 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Respawn - Respawning where you died in 3 seconds
+		es_xmath wcs_z1 + 85
+		es est_effect 11 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 0.5 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 1 (END)
+	}
+}
+
+block blind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+				es_delayed 2 es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have been #green blinded #lightgreen by event_var(es_attackername) for 2 seconds.
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You have #green blinded #lightgreen event_var(es_username) for 2 seconds.
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2.3 90
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 2 (END)
+	}
+}
+
+block flash
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_color event_var(userid) 15 0 255 0 1
+				es_delayed .5 es wcs_color event_var(userid) 15 0 255 20 1
+				es_delayed 1 wcs_color event_var(userid) 15 0 255 25 1
+				es_delayed 1.5 es wcs_color event_var(userid) 15 0 255 35 1
+				es_delayed 2 wcs_color event_var(userid) 15 0 255 60 1
+				es_delayed 2.5 es wcs_color event_var(userid) 15 0 255 80 1
+				es_delayed 3 wcs_color event_var(userid) 15 0 255 115 1
+				es_delayed 3.5 es wcs_color event_var(userid) 15 0 255 135 1
+				es_delayed 4 wcs_color event_var(userid) 15 0 255 165 1
+				es_delayed 4.5 es wcs_color event_var(userid) 15 0 255 185 1
+				es_delayed 5 wcs_color event_var(userid) 155 155 255 200 1
+				es_delayed 5.5 es wcs_color event_var(userid) 105 105 255 225 1
+				es_delayed 6 wcs_color event_var(userid) 255 255 255 225 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You're becoming more visible over time
+				es est_effect 4 #a 0 sprites/tp_beam001.vmt event_var(attacker) 2 10 20 5 100 155 255 255
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) weapons/physcannon/energy_sing_flyby2.wav 1.0
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					
+					es_playsound event_var(userid) weapons\sensorgrenade\sensor_explode.wav 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 3 (END)
+	}
+}
+
+block flashfreeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 300 "es_xdoblock wcs/tools/manifest/flashfreeze/ultimate_path"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Flash Freeze affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Flash Freeze immobilized server_var(wcs_count_players_actually_affected) enemies
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_path 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/flashfreeze/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_paralyzed wcs_tmp3 server_var(wcs_targetid)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_paralyzed server_var(wcs_targetid) 1
+		es_delayed .75 wcsgroup set is_paralyzed server_var(wcs_targetid) 0
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Flash Freeze - immobilized you for a short duration
+		es wcs_centertell server_var(wcs_targetid) Flash Freeze briefly immobilized you!
+		es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 64
+		es_delayed .75 es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 131329
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 3 150 100 0 45 65 251 255 0
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 server_var(wcs_radius) 1 20 50 1 75 155 255 255 10
+		es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 2 13 16 100 155 255 255
+		es_xmath wcs_z1 + 50
+		es_xmath wcs_z2 + 50
+		es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 100 155 255 255
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
+		es_xmath wcs_z2 + 100
+		es_xmath wcs_z1 + 50
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 server_var(wcs_radius) 1 20 100 1 100 155 255 255 10
+		es_xmath wcs_z1 + 800
+		es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 100 155 255 255
+		es wcsgroup get is_already_colored wcs_tmp2 server_var(wcs_targetid)
+		if (server_var(wcs_tmp2) == 0) do
+		{
+			es wcsgroup set is_already_colored server_var(wcs_targetid) 1
+			es wcs_getcolors server_var(wcs_targetid) wcs_red wcs_green wcs_blue wcs_alpha
+			es wcs_color server_var(wcs_targetid) 15 0 255 255 1
+			es_delayed server_var(wcs_duration) wcsgroup set is_already_colored server_var(wcs_targetid) 0
+			es_delayed server_var(wcs_duration) wcs_color server_var(wcs_targetid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha)
+		}
+	}
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es wcs_centertell server_var(wcs_userid) Your target was immune to paralyzing effects!
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flash Freeze - [Block] Skill: 4 (EXECUTED END)
+	}
+}

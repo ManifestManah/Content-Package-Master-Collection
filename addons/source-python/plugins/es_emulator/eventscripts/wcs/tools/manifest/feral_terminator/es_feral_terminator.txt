@@ -1,0 +1,157 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 vgui/gfx/vgui/cs_logo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 650 20 2 20 10 0 255 0 0 255 1
+	es_delayed .2 es est_effect 10 #a 0 sprites/scanner.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 650 20 2 35 10 0 255 0 0 255 1
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 vgui/gfx/vgui/cs_logo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 650 20 2 20 10 0 255 0 0 255 1
+	es_delayed .2 es est_effect 10 #a 0 sprites/scanner.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 650 20 2 35 10 0 255 0 0 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Spawn (END)
+	}
+}
+
+block speed_health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es wcs_setfx health event_var(userid) + 30 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Conditioning - Increased your speed and health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 1 (END)
+	}
+}
+
+block armour
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 2 (START)
+	}
+	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Synthetic Armor Upgrades - Increased your armor by server_var(wcs_armor)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 100 5 10 120 1 255 255 255 255 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 2 (END)
+	}
+}
+
+block random_smg
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 3 (START)
+	}
+	es_xrand wcs_tmp2 1 3
+	if (server_var(wcs_tmp2) = 1) do
+	{
+		es_delayed .1 es_give event_var(userid) weapon_mac10
+		es_tell event_var(userid) #multi #greenStandard Armaments#lightgreen : You have recieved a free#green MAC10.
+	}
+	if (server_var(wcs_tmp2) = 2) do
+	{
+		es_delayed .1 es_give event_var(userid) weapon_ump45
+		es_tell event_var(userid) #multi #greenStandard Armaments#lightgreen : You have recieved a free#green UMP.
+	}
+	if (server_var(wcs_tmp2) = 3) do
+	{
+		es_delayed .1 es_give event_var(userid) weapon_p90
+		es_tell event_var(userid) #multi #greenStandard Armaments#lightgreen : You have recieved a free#green P90.
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 3 (END)
+	}
+}
+
+block evasion_armour
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup set evasion event_var(userid) 1
+				es wcsgroup set evasion_chance event_var(userid) 33
+				es wcsgroup set evasion_count event_var(userid) 0
+			    es_delayed 2 wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+			    es_delayed 2 es_tell event_var(userid) #multi #green [WCS]: #lightgreenHardening - You evaded server_var(wcs_tmp1) attacks
+				es_delayed 2 wcsgroup set evasion event_var(userid) 0
+				es_delayed 2 wcsgroup set evasion_chance event_var(userid) 0
+				es wcs_fade event_var(userid) 255 255 255 70 0.5 1
+				es playerget armor wcs_tmp event_var(userid)
+				if (server_var(wcs_tmp) => 120) do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hardening - Gave you 33% chance to evade attacks for 2 seconds
+				}
+				else do
+				{
+					es_xrand wcs_tmp2 5 20
+					es wcs_setfx armor event_var(userid) + server_var(wcs_tmp2) 0
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hardening - Gave you server_var(wcs_tmp2) armor and 33% chance to evade attacks for 2 seconds
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 4 (END)
+	}
+}
+
+block damage_lowhealth
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es playerget health wcs_tmp event_var(userid)
+				if (server_var(wcs_tmp) <= 100) do
+				{
+					es_xrand wcs_dmg 15 22
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(userid) You did + server_var(wcs_dmg) to an enemy
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 4 5 255 0 0 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Feral Terminator - [Block] Skill: 5 (END)
+	}
+}

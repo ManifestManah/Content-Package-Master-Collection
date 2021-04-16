@@ -1,0 +1,171 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es playerset model event_var(userid) headcrabclassic
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a classic headcrab!
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_setmodel event_var(userid) models/chicken/chicken_zombie.mdl
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a zombie chicken!
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es wcs_setfx jetpack event_var(userid) = 0 0
+	es wcsgroup set headcrab_classic_fly event_var(userid) 1
+	es wcs_setfx health event_var(userid) - 50 0
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 345 60 2 10 10 5 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 345 2 8 10 4 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 315 60 2 10 10 5 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 315 2 8 10 4 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 285 60 2 10 10 5 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 285 2 8 10 4 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 255 60 2 10 10 5 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 255 2 8 10 4 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 225 60 2 10 10 5 255 255 255 255 1
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 225 2 8 10 4 255 255 255 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Death (START)
+	}
+	es wcsgroup set headcrab_classic_fly event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] OnChange (START)
+	}
+	es wcsgroup set headcrab_classic_fly server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] OnChange (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Four Legs - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 1 (END)
+	}
+}
+
+block levitation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 2 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Pounce - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 2 (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_xmath wcs_multiplier * 100
+	es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Crab attack - You have had your jump length increased by server_var(wcs_multiplier)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 3 (END)
+	}
+}
+
+block fly
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 4 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get headcrab_classic_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set headcrab_classic_fly server_var(wcs_userid) 2
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es_playsound server_var(wcs_userid) wcs/tidetotem.mp3 .8
+			es wcs_centertell server_var(wcs_userid) You are now flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 55 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 60 1 10 10 0 153 217 234 200 1
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set headcrab_classic_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es_playsound server_var(wcs_userid) wcs/tidetotem.mp3 .8
+			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 55 5 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 5 1 10 10 0 153 217 234 200 1
+			es playerget health wcs_tmp1 server_var(wcs_userid)
+			if (server_var(wcs_tmp1) >= server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+			}
+			if (server_var(wcs_tmp1) < server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 1 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headcrab Classic - [Block] Skill: 4 (END)
+	}
+}

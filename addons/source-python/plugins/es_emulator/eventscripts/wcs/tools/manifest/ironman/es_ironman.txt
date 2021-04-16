@@ -1,0 +1,160 @@
+////////////////////////
+//MiBShidobu Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 174 171 214 255 1
+	es wcsgroup set ironman_fly event_var(userid) 1
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] OnChange (START)
+	}
+	es wcsgroup set ironman_fly server_var(wcs_userid) 0
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] OnChange (END)
+	}
+}
+
+block evade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 1 (START)
+	}
+	es wcsgroup set evasion event_var(userid) 1
+	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Iron armour - server_var(wcs_chance)% chance to not take damage
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Metallic boots - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Ion laser dealt + server_var(wcs_dmg) damage
+				es_xrand wcs_rand 1 2
+				if (server_var(wcs_rand) == 1) do
+				{
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 30
+					es_xmath wcs_z1 + 30
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/combineball_trail_blue_1.vmt server_var(vector1) server_var(vector2) 5 1 8 8 0 0 0 206 223 220 5
+					es est_effect_06 #a 0 sprites/light_glow01.vmt server_var(vector1) server_var(vector2) 5 1 25 25 0 0 0 232 251 245 26
+				}
+				if (server_var(wcs_rand) == 2) do
+				{
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 30
+					es_xmath wcs_z1 + 30
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/combineball_trail_red_1.vmt server_var(vector1) server_var(vector2) 5 1 8 8 0 0 200 0 0 220 5
+					es est_effect_06 #a 0 sprites/light_glow01.vmt server_var(vector1) server_var(vector2) 5 1 25 25 0 0 225 0 0 245 26
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 3 (END)
+	}
+}
+
+block jetpack
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 4 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get ironman_fly wcs_tmp server_var(wcs_userid)
+		if (server_var(wcs_tmp) == 1) do
+		{
+			es wcsgroup set ironman_fly server_var(wcs_userid) 2
+			es wcs_setfx speed server_var(wcs_userid) + .35 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_centertell server_var(wcs_userid) You are now flying
+			es wcs_cancelulti server_var(wcs_userid)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
+			es_xmath wcs_z1 + 3
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 90 .75 10 10 0 147 240 228 230 1
+			es_xmath wcs_z1 + 2
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 10 10 0 147 240 228 230 1
+			es_xmath wcs_z1 + 2
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 70 .75 10 10 0 147 240 228 230 1
+		}
+		if (server_var(wcs_tmp) == 2) do
+		{
+			es wcsgroup set ironman_fly server_var(wcs_userid) 1
+			es wcs_setfx speed server_var(wcs_userid) - .35 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
+			es_xmath wcs_z1 + 3
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 90 .75 10 10 0 147 240 228 230 1
+			es_xmath wcs_z1 + 2
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 10 10 0 147 240 228 230 1
+			es_xmath wcs_z1 + 2
+			es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 70 .75 10 10 0 147 240 228 230 1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Iron man - [Block] Skill: 4 (END)
+	}
+}

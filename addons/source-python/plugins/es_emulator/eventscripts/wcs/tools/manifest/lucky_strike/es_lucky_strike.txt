@@ -1,0 +1,151 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es wcsgroup set ulti_immunity event_var(userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es wcsgroup set ulti_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] OnChange (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 6 16
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Lucky strike dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es est_effect 3 #a 0 sprites/halo01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 50 55 255 200 255 155
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 1 (END)
+	}
+}	
+
+block evade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcsgroup set evasion event_var(userid) 1
+		es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
+	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+	    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wild card - You evaded server_var(wcs_tmp1) attacks last round
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wild card - You have server_var(wcs_chance)% chance to evade
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 130
+		es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 50 50 200 255 255 255
+		es_xmath wcs_x2 + 40
+		es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 50 50 200 255 255 255
+		es_xmath wcs_x2 - 80
+		es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 50 50 200 255 255 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 2 (END)
+	}
+}
+		
+block leech_cash
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_money 25 400
+				es playerget cash wcs_tmp1 event_var(userid)
+				if (server_var(wcs_tmp1) < server_var(wcs_money)) do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Striking luck - Failed, the target doesn't have enough cash
+				}
+				if (server_var(wcs_tmp1) >= server_var(wcs_money)) do
+				{
+					es wcs_setfx cash event_var(userid) - server_var(wcs_money) 0
+					es wcs_setfx cash event_var(attacker) + server_var(wcs_money) 0
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Striking luck - You stole server_var(wcs_money) from event_var(es_username)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Striking luck - Lucky Strike stole server_var(wcs_money)$ from you
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 40
+					es_xmath wcs_z2 + 40
+					es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 45 45 125 25 25 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 3 (END)
+	}
+}
+
+block ultimate_immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set ulti_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Joker - Renders you immune to enemy ultimates
+			es_playsound event_var(userid) wcs/divine.mp3 .8
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 7 225
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lucky Strike - [Block] Skill: 4 (END)
+	}
+}

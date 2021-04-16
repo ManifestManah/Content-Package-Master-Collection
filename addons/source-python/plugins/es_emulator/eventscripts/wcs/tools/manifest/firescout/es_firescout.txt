@@ -1,0 +1,145 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;aug;sg550;awp;sg552;g3sg1;m249"
+		es_delayed .1 es_give event_var(userid) weapon_scout
+		es_playsound event_var(userid) weapons/mortar/mortar_shell_incomming1.wav .9
+		es_delayed 1 es_playsound event_var(userid) weapons/mortar/mortar_explode3.wav .9
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;m249;negev"
+		es_delayed .1 es_give event_var(userid) weapon_ssg08
+	}
+	es_delayed .5 wcs_setfx 1stclip event_var(userid) = 33 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 350 2 90 200 0 155 155 155 155 2
+	es_xmath wcs_z1 + 15
+	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 3 255
+	es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 350 2 90 200 0 255 15 100 255 2
+	es_xmath wcs_z1 + 10
+	es est_effect 11 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 5 3 255
+	es_xmath wcs_z1 + 45
+	es est_effect 11 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 5 3 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .5 wcs_color event_var(userid) 255 20 147 80 1
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hasty movement - Increased your speed by server_var(wcs_speed)%
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 1 (END)
+	}
+}
+
+block fiery
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_cexec event_var(userid) r_screenoverlay effects/tp_eyefx/tp_eyefx.vmt
+				es_delayed server_var(wcs_duration) es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fiery enchantment - Distorted your view for server_var(wcs_duration) seconds
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Fiery enchantment - Distorted your enemy's view for server_var(wcs_duration) seconds
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 15
+				es est_effect 11 #a 0 sprites/xfireball3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.2 1 200
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 2 (END)
+	}
+}
+
+block crit
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 3 (START)
+	}
+	if (event_var(weapon) == hegrenade) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Grenade boost dealt + server_var(wcs_dmg) damage!
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+						es_playsound event_var(userid) npc/strider/fire.wav .6
+						es_playsound event_var(attacker) npc/strider/fire.wav 1
+				}
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_math wcs_z1 + 35
+				es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 500 2 17 10 1 255 255 255 255 10
+				es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 400 2 17 10 1 255 0 0 255 15
+				es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 300 2 17 10 1 200 20 120 255 20
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 3 (END)
+	}
+}
+
+block ammo
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 4 (START)
+	}
+	es_give server_var(wcs_userid) weapon_hegrenade
+	es_give server_var(wcs_userid) weapon_flashbang
+	es_give server_var(wcs_userid) weapon_smokegrenade
+	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_ammo)
+	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.015" server_var(wcs_ammo)
+	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.016" server_var(wcs_ammo)
+	es_tell server_var(wcs_userid) #multi #green[WCS]: #lightgreenYou've received server_var(wcs_ammo) flashbangs, smoke and HE grenades!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_math wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 100 1 30 10 1 200 100 50 200 6
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Fire Scout - [Block] Skill: 4 (END)
+	}
+}
