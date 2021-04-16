@@ -18,7 +18,7 @@ The majority of the content is reworked/remastered content of old and existing c
 NOTE! If you already have a races.ini or an autoexec.cfg then make a copy of this as it will be overwritten by the contents in this package!
 - Go to your csgo or cstrike directory (NOTE! Some servers name this directory the server's IP instead).
 - Drag and drop the three folders named: "addons", "cfg" and "resource" in to the directory.
-- Copy all the text and paste it in your races.ini file and restart your the server.
+- Restart your the server.
 
 
 ## Known Bugs & Issues
