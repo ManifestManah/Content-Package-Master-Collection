@@ -1,0 +1,194 @@
+/////////////////////////////
+//Various Authors Race Pack//
+//Version 1.0.0D           //
+/////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Spawn (START)
+	}
+	es wcsgroup get killing_evading wcs_tmp9 event_var(userid)
+	es wcsgroup set evasion event_var(userid) 1
+	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
+    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Granted you server_var(wcs_tmp9) chance to evade
+	es wcsgroup get killing_speed wcs_tmp8 event_var(userid)
+	es_xmath wcs_tmp8 / 50
+	es_xmath wcs_tmp8 + 1	
+	es wcs_setfx speed event_var(userid) = server_var(wcs_tmp8) 0
+	es_xmath wcs_tmp8 * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Adrenaline - Increased your speed by server_var(wcs_tmp8)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] OnChange (END)
+	}
+}
+
+block damage_increasing
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get killing_damage wcs_tmp10 event_var(attacker)
+				if (server_var(wcs_tmp10) < 40) do
+				{
+					es_xset wcs_dmg 10
+					es wcsgroup get killing_damage wcs_tmp10 event_var(attacker)
+					es_xmath wcs_tmp10 + 1
+					es wcsgroup set killing_damage event_var(attacker) server_var(wcs_tmp10)
+					es_math wcs_dmg + server_var(wcs_tmp10)
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Platinium Bullets - Upgraded, now dealing 1 more damage.
+				}
+				if (server_var(wcs_tmp10) => 40) do
+				{
+					es_xset wcs_dmg 10
+					es wcsgroup get killing_damage wcs_tmp10 event_var(attacker)
+					es_math wcs_dmg + server_var(wcs_tmp10)
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Platinium Bullets - Cannot be upgraded any further.
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 1 (END)
+	}
+}
+
+block evasion_increasing
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get killing_evading wcs_tmp9 event_var(userid)
+				if (server_var(wcs_tmp9) < 20) do
+				{
+					es wcsgroup get killing_evading wcs_tmp9 event_var(userid)
+					es_xmath wcs_tmp9 + 1
+					es wcsgroup set killing_evading event_var(userid) server_var(wcs_tmp9)
+					es wcsgroup set evasion event_var(userid) 1
+					es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Increased your chance to dodge by 1%.
+				}
+				if (server_var(wcs_tmp9) => 20) do
+				{
+					es wcsgroup get killing_evading wcs_tmp9 event_var(userid)
+					es wcsgroup set evasion event_var(userid) 1
+					es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Cannot be upgraded any further.
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 2 (END)
+	}
+}
+
+block speed_increasing
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get killing_speed wcs_tmp8 event_var(attacker)
+				if (server_var(wcs_tmp8) < 40) do
+				{
+					es wcsgroup get killing_speed wcs_tmp8 event_var(attacker)
+					es_xmath wcs_tmp8 + 1
+					es wcsgroup set killing_speed event_var(attacker) server_var(wcs_tmp8)
+					es_xmath wcs_tmp8 / 50
+					es_xmath wcs_tmp8 + 1
+					es wcs_setfx speed event_var(attacker) = server_var(wcs_tmp8) 0
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Adrenaline - Increased your speed by 2%.
+				}
+				if (server_var(wcs_tmp8) => 40) do
+				{
+					es wcsgroup get killing_speed wcs_tmp8 event_var(attacker)
+					es_xmath wcs_tmp8 / 50
+					es_xmath wcs_tmp8 + 1
+					es wcs_setfx speed event_var(attacker) = server_var(wcs_tmp8) 0
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Adrenaline - Cannot be upgraded any further.
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 3 (END)
+	}
+}
+
+block invisibility_temporary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 4 (START)
+	}
+	es wcs_color server_var(wcs_userid) 255 255 255 50 0
+	es_delayed 2 wcs_color server_var(wcs_userid) 255 255 255 255 0
+	es wcs_centertell server_var(wcs_userid) You've cloaked yourself for 2 seconds, you're less visible
+	es_playsound server_var(wcs_userid) wcs/invisibility.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 70 3 30 100 0 255 100 100 255 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Killing Machine - [Block] Skill: 4 (END)
+	}
+}

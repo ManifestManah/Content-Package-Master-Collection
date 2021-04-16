@@ -1,0 +1,323 @@
+////////////////////////////
+//TeacherCreatur Race Pack//
+//Version 1.0.0D          //
+////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Spawn (START)
+	}
+	es wcsgroup set resist_knife event_var(userid) 0.0
+	es wcsgroup set resist_hegrenade event_var(userid) 0.0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Death (START)
+	}
+	es wcsgroup set resist_knife event_var(userid) 0.0
+	es wcsgroup set resist_hegrenade event_var(userid) 0.0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] OnChange (START)
+	}
+	es wcsgroup set resist_knife server_var(wcs_userid) 0.0
+	es wcsgroup set resist_hegrenade server_var(wcs_userid)	0.0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] OnChange (END)
+	}
+}
+ 
+block book
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_attackerdead) = 0) do
+	{
+		es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+		es wcs_centertell event_var(attacker) Death book granted you server_var(wcs_addhealth) health!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z1 + 20
+		es_xmath wcs_z2 + 20
+		es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 40 40 128 0 0 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 1 (END)
+	}
+}
+
+block flesh
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 5 1 15 15 0 .2 128 0 0 175 15
+				es est_effect_06 #a 0 effects/blueflare1.vmt server_var(vector2) server_var(vector1) 5 1 30 30 0 0 180 0 0 255 20
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 155 65 1 30 10 0 128 0 0 175 15
+				es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 155 65 1 20 10 0 180 0 0 175 20
+				es_xmath wcs_z2 + 8
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_addhealth 12 20
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+					es playerget health wcs_tmp2 event_var(attacker)
+					if (server_var(wcs_tmp2) > 260) do
+					{
+						es wcs_setfx health event_var(attacker) = 260 0
+					}
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 2 (END)
+	}
+}
+
+block bandage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set resist_hegrenade event_var(userid) 1.0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bandage wrap - You cannot take damage from grenades	
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 3 (END)
+	}
+}
+
+block embalmed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set resist_knife event_var(userid) 1.0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Embalmed skin - You are immune to knife damage
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 4 (END)
+	}
+}
+
+block poison
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_delayed 1 damage event_var(userid) server_var(wcs_dmg) 0 event_var(attacker)
+				es wcs_centertell event_var(attacker) You've poisoned an enemy!
+				es wcs_fade event_var(userid) 20 200 20 220 2 4
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 40 40 21 200 21 180
+				es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 30 1 60 200 0 21 200 21 180 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 5 (END)
+	}
+}
+
+block plague
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+			if (server_var(wcs_targetid) != 0) do
+			{
+				es_xdoblock wcs/tools/manifest/mummy/ultimate_checks
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+				if (server_var(wcs_tmp) != 1) do
+				{
+					es_xset wcs_ultinotexec 0
+					es_xdoblock wcs/tools/manifest/mummy/ultimate_final
+				}
+				if (server_var(wcs_tmp) == 1) do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (EXECUTED START)
+	}
+	es damage server_var(wcs_targetid) 25 1 server_var(wcs_userid)
+	es wcs_setfx health server_var(wcs_userid) + 10 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 40
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 3 60 100 0.8 0 200 100 200 1
+	es wcs_centertell server_var(wcs_userid) You've unleashed a scarab plague on an enemy!
+	es wcs_centertell server_var(wcs_targetid) You've been affected by the mummy's scarab plague!
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_targetid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_targetid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "basespread 55"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "spreadspeed 60"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "speed 30"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rate 60"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "startsize 1"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "endsize 2"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "twist 150"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "jetlength 50"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "angles 90 90 90"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "SmokeMaterial sprites/scanner.vmt"
+	es_fire server_var(wcs_targetid) server_var(ss_name) turnon
+	es_delayed 1 es_fire server_var(wcs_targetid) server_var(ss_name) kill
+	es_playsound server_var(wcs_targetid) ambient\creatures\flies4.wav 1
+	es_delayed .2 es_playsound server_var(wcs_targetid) ambient\creatures\flies3.wav 1
+	es_delayed .5 es_playsound server_var(wcs_targetid) ambient\creatures\flies2.wav 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mummy - [Block] Skill: 6 (EXECUTED END)
+	}
+}

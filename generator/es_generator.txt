@@ -1,0 +1,224 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 1 (END)
+	}
+}
+
+block healthsfx
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 2 (END)
+	}
+}
+
+block invisibility
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 3 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_playsound event_var(userid) wcs/invisibility.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 3 (END)
+	}
+}
+
+block roots
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/generator/ultimate_checks_roots"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_playsound server_var(wcs_userid) wcs/root.mp3 .7
+				es wcs_centertell server_var(wcs_userid) You entangled server_var(wcs_count_players_actually_affected) in roots for server_var(wcs_duration) seconds
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks_roots 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/generator/ultimate_final_roots
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}	
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final_roots
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 2.5 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es wcs_setfx freeze server_var(wcs_targetid) = 1 2.5
+	}
+	es_playsound server_var(wcs_targetid) wcs/root.mp3 .8
+	es wcs_centertell server_var(wcs_targetid) You've been entangled in roots for 2.5 seconds
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_xmath wcs_z1 + 38
+	es_xmath wcs_z2 + 38
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/laser.vmt server_var(vector1) server_var(vector2) 10 1 5 5 10 4 0 160 0 155 2
+	es est_effect_06 #a 0 sprites/laser.vmt server_var(vector1) server_var(vector2) 10 1 5 5 10 2 0 108 0 180 2
+	es est_effect_06 #a 0 sprites/laser.vmt server_var(vector1) server_var(vector2) 10 1 5 5 10 4 0 80 0 190 2
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 20 1 3 3 5 0 80 0 155 2
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 35 1 3 3 6 0 108 0 190 2
+	es_xmath wcs_z2 - 13
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 20 1 3 3 5 0 80 0 155 2
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 35 1 3 3 6 0 108 0 190 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Generator - [Block] Skill: 4 (EXECUTED END)
+	}
+}

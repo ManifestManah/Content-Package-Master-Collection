@@ -1,0 +1,161 @@
+////////////////////////
+//MiBShidobu Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 10
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+	es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+	es_xmath wcs_z1 + 20
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+	es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+	es_xmath wcs_z1 + 20
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+	es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+	es_xmath wcs_z1 + 20
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+	es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Swift feet - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 5 15
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Heroic sword - Dealt server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 12
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+				es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+				es_xmath wcs_z1 + 12
+				es_xmath wcs_z2 + 24
+				es_xmath wcs_x2 + 500
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 5 1 14 14 0 0 255 255 100 180 27
+				es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 5 1 10 10 0 0 153 217 234 210 5
+				es_xmath wcs_z1 + 12
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 60 200 1 1 16 16 0 255 255 100 180 27 5
+				es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 200 1 1 10 10 0 153 217 234 210 1 5
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 2 (END)
+	}
+}
+
+block dmg
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 2 6
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Black-iron spear dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+				es_xmath wcs_z1 + 10
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 100 300 1 1 64 10 0 255 255 100 180 27 5
+				es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 100 300 1 1 50 50 0 153 217 234 210 1 5
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 3 (END)
+	}
+}
+
+block warcry
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es wcs_setfx health server_var(wcs_userid) + 15 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen War cry - Buffed you with 15 health
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_targetid #t "es_xdoblock wcs/tools/manifest/legendary_knight/crybuff" 
+		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_targetid #ct "es_xdoblock wcs/tools/manifest/legendary_knight/crybuff"
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 10
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/crystal_beam1.vmt server_var(vector1) 100 750 1 2 64 10 0 255 255 100 180 27 5
+	es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 100 750 1 2 50 50 0 153 217 234 210 1 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (END)
+	}
+}
+
+block crybuff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (CRYBUFF EXECUTED START)
+	}
+	es wcs_setfx health server_var(wcs_targetid) + 15 0
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen War cry - Buffed all allies by 15 health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (CRYBUFF EXECUTED END)
+	}
+}

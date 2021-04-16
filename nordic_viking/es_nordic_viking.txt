@@ -1,0 +1,223 @@
+////////////////////
+//Teller Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire event_var(userid) server_var(ss_name) addoutput "basespread 65"
+	es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 110"
+	es_fire event_var(userid) server_var(ss_name) addoutput "speed 125"
+	es_fire event_var(userid) server_var(ss_name) addoutput "rate 100"
+	es_fire event_var(userid) server_var(ss_name) addoutput "startsize 20"
+	es_fire event_var(userid) server_var(ss_name) addoutput "endsize 40"
+	es_fire event_var(userid) server_var(ss_name) addoutput "twist 90"
+	es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 140"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 90 90 90"
+	es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/rollerglow.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+	es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 1500 1 40 150 5 115 102 189 55 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1500 30 1 40 150 5 115 102 189 55 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 70 1000 1 100 150 5 115 102 189 65 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1000 70 1 100 150 5 115 102 189 65 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] OnChange (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 1 (END)
+	}
+}
+
+block speedboost
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 60) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed server_var(wcs_duration) wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) + 0.35 server_var(wcs_duration)
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(userid) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(userid) server_var(ss_name) addoutput "basespread 10"
+					es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 110"
+					es_fire event_var(userid) server_var(ss_name) addoutput "speed 125"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rate 100"
+					es_fire event_var(userid) server_var(ss_name) addoutput "startsize 20"
+					es_fire event_var(userid) server_var(ss_name) addoutput "endsize 40"
+					es_fire event_var(userid) server_var(ss_name) addoutput "twist 20"
+					es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 140"
+					es_fire event_var(userid) server_var(ss_name) addoutput "angles 90 90 90"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 115 102 189"
+					es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/rollerglow.vmt"
+					es_fire event_var(userid) server_var(ss_name) turnon
+					es_delayed server_var(wcs_duration) es_fire event_var(userid) server_var(ss_name) kill
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Brute force dealt server_var(wcs_dmg) more damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/blueflare1_noz.vmt server_var(vector1) server_var(vector2) 5 1 12 12 0 0 255 255 255 255 100
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 80 1 4 2 2 14 0 0 255 255 100
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 80 1 4 2 1 14 115 102 189 255 100
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 3 (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(attacker) You froze event_var(es_username) for 1 second!
+					es wcs_centertell event_var(userid) for event_var(es_attackername) Froze you for 1 second!
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es est_effect 11 #a 0 effects/stunstick.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 200
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 4 (END)
+	}
+}
+
+block immortality
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 5 (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 1
+	es wcsgroup set evasion_chance server_var(wcs_userid) 60
+	es wcsgroup set evasion_count server_var(wcs_userid) 0
+    es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
+    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blessing of the Nordic Gods - You evaded server_var(wcs_tmp1) attacks
+	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
+	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blessing of the Nordic Gods - 60% chance to evade for server_var(wcs_duration) seconds
+	es wcs_centertell server_var(wcs_userid) You pray to the gods that you may survive!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 150 0.5 40 50 8 255 255 255 255 5
+	es est_effect 4 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_userid) 2 10 1 1 255 255 255 180
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Skill: 5 (END)
+	}
+}

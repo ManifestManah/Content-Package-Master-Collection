@@ -1,0 +1,154 @@
+/////////////////////////////
+//Various Authors Race Pack//
+//Version 1.0.0D           //
+/////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Spawn (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - You have increased jump length
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 1 (END)
+	}
+}
+
+block speed_when_struck
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 80) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 2
+				es wcs_centertell event_var(userid) You run faster for 2 seconds!
+				es_playsound event_var(userid) wcs/speed.mp3 .8
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 5
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+				es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+				es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+				es_xmath wcs_z2 + 8
+				es_createvectorstring vector1 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 25 10
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 2 (END)
+	}
+}
+
+block freeze_when_struck
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(attacker)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(attacker) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(attacker) 0
+					es wcs_setfx freeze event_var(attacker) = 1 1
+					es wcs_centertell event_var(attacker) You froze when hitting event_var(es_username) for 1 second!
+					es wcs_centertell event_var(userid) You froze event_var(es_attackername) for 1 second!
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+					es_delayed .2 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+					es_xmath wcs_z2 + 5
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 3 (END)
+	}
+}
+
+block levitation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 4 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 4 (END)
+	}
+}
+
+block speed_temporary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 5 (START)
+	}
+	es wcs_setfx speed server_var(wcs_userid) + .65 7
+	es wcs_centertell server_var(wcs_userid) You're running faster for 7 seconds!
+	es_playsound server_var(wcs_userid) wcs/speed.mp3 1
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z2 + 5
+	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+	es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+	es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+	es_xmath wcs_z2 + 8
+	es_createvectorstring vector1 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 25 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Faith - [Block] Skill: 5 (END)
+	}
+}

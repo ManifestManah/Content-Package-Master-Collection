@@ -1,0 +1,117 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Spawn (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Death (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] OnChange (START)
+	}
+	es wcsgroup set ulti_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] OnChange (END)
+	}
+}
+
+block regeneration
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_xrand wcs_duration 5 15
+		es wcs_regeneration event_var(userid) server_var(wcs_addhealth) server_var(wcs_duration) 175 1000 50
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Regenaretion - Heals you when you are below 175 health
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 1 (END)
+	}
+}
+
+block ultimate_immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set ulti_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ultimate immunity - Renders you immune to enemy ultimates
+			es_playsound event_var(userid) wcs/divine.mp3 .8
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Critical strike did + server_var(wcs_dmg) damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 - 10
+				es_xmath wcs_z2 - 10
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Le Wikk - [Block] Skill: 3 (END)
+	}
+}

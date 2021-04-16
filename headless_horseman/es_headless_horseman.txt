@@ -1,0 +1,283 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Spawn (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	es wcsgroup set horseman_fly event_var(userid) 1
+	es wcsgroup set horseman_aura event_var(userid) 1
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_delayed .5 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed .5 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_delayed 1 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed 1 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_xmath wcs_z2 + 15
+	es_delayed .2 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed .2 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_xmath wcs_z2 + 15
+	es_delayed .4 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed .4 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_xmath wcs_z2 + 15
+	es_delayed .6 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed .6 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+	es_xmath wcs_z2 + 15
+	es_delayed .8 est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 .5 6 10 0 255 255 255 255 10
+	es_delayed .8 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 600 1 20 10 0 255 0 0 255 10
+    es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 105"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 65"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 125"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 300"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 50"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 5"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 15"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 300"
+    es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 30 200 20"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle\fire.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Death (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	es wcsgroup set horseman_fly event_var(userid) 0
+	es wcsgroup set horseman_aura event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] OnChange (START)
+	}
+	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
+	es wcsgroup set horseman_fly server_var(wcs_userid) 0
+	es wcsgroup set horseman_aura server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] OnChange (END)
+	}
+}
+
+block immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set headshot_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Jack o' lantern - You're immune to headshots
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Black stead - server_var(wcs_speed)% increased movement speed
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+				ifx false(wcs_tmp3) do
+				{
+					es wcsgroup set is_burning event_var(userid) 1
+					es_delayed 2 wcsgroup set is_burning event_var(userid) 0
+					es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+					es wcs_setfx burn event_var(userid) = 1 2
+					es wcs_centertell event_var(attacker) Fiery Sword set your target on fire!	
+					es_playsound event_var(attacker) skills/breathfire.mp3 .7
+					es_playsound event_var(userid) skills/breathfire.mp3 .7
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 600 1 40 10 0 255 255 255 255 8
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 275 625 1 60 10 0 255 0 0 255 8
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 40 10 0 255 255 255 255 8
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 225 1 60 10 0 255 0 0 255 8
+					es_xmath wcs_z2 + 40
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 40 10 0 255 255 255 255 8
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 225 1 60 10 0 255 0 0 255 8
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 - 20
+					es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
+					es_xmath wcs_y1 + 40
+					es_xmath wcs_x1 + 40
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/fire1.vmt server_var(vector1) server_var(vector2) 2 .5 8 30 10 .8 255 255 255 255 255
+					es_xmath wcs_y1 - 80
+					es_xmath wcs_x1 - 80
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/fire1.vmt server_var(vector1) server_var(vector2) 2 .5 8 30 10 .8 255 255 255 255 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 3 (END)
+	}
+}
+
+block aura
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(attacker)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(attacker) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(attacker) 0
+					es wcs_setfx speed event_var(attacker) = 0.75 2
+					es wcs_centertell event_var(userid) Your Aura of Dread is affecting event_var(es_attackername)!
+					es wcs_centertell event_var(attacker) event_var(es_username)'s Aura of Dread is affecting you!
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(attacker) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(attacker) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(attacker) server_var(ss_name) addoutput "basespread 100"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "spreadspeed 65"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "speed 125"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "rate 300"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "startsize 50"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "endsize 5"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "twist 15"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "jetlength 30"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "angles 0 0 0"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "rendercolor 30 200 20"
+					es_fire event_var(attacker) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+					es_fire event_var(attacker) server_var(ss_name) turnon
+					es_fire event_var(attacker) server_var(ss_name) setparent !activator
+					es_delayed 2 es_fire event_var(attacker) server_var(ss_name) kill
+					es damage event_var(attacker) 3 0 event_var(userid)
+					es_delayed .4 damage event_var(attacker) 3 0 event_var(userid)
+					es_delayed .8 damage event_var(attacker) 3 0 event_var(userid)
+					es_delayed 1.2 damage event_var(attacker) 3 0 event_var(userid)
+					es_delayed 1.6 damage event_var(attacker) 3 0 event_var(userid)
+					es_delayed 2 damage event_var(attacker) 3 0 event_var(userid)
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 4 (END)
+	}
+}
+
+block fly
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 5 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get horseman_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set horseman_fly server_var(wcs_userid) 2
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_setfx speed server_var(wcs_userid) + .25 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_centertell server_var(wcs_userid) Your stead is now flying
+			es wcs_setcooldown server_var(wcs_userid) 1
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 100 .5 35 10 0 36 56 10 255 8
+			es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 100 .5 10 10 0 255 255 255 255 25
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 200 .5 35 10 0 36 56 10 255 8
+			es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 200 .5 10 10 0 255 255 255 255 25
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 300 .5 35 10 0 36 56 10 255 8
+			es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 300 .5 10 10 0 255 255 255 255 25
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 400 .5 35 10 0 36 56 10 255 8
+			es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 400 .5 10 10 0 255 255 255 255 25
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set horseman_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_setfx speed server_var(wcs_userid) - .25 0
+			es wcs_centertell server_var(wcs_userid) Your stead is now walking
+			es playerget health wcs_tmp1 server_var(wcs_userid)
+			if (server_var(wcs_tmp1) >= server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+			}
+			if (server_var(wcs_tmp1) < server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 1 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Headless Horseman - [Block] Skill: 5 (END)
+	}
+}

@@ -1,0 +1,116 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 2 60 100 0.8 0 20 100 255 1
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 60 2 20 10 1 10 255 0 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Spawn (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 1 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Has reduced your gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 1 (END)
+	}
+}
+
+block frost
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 1.5 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) = 0.5 1.5
+					es wcs_centertell event_var(userid) event_var(es_attackername)'s frost nova slowed you for 1.5 seconds!
+					es wcs_centertell event_var(attacker) Frost nova slowed event_var(es_username) for 1.5 seconds!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 35
+					es_xmath wcs_z2 + 35
+					es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 5 5 100 0 100 255
+					es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 12 12 0 0 255 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 2 (END)
+	}
+}
+
+block dod
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_xrand wcs_ammo 10 25
+			es wcs_drop event_var(userid) 1
+			es_delayed .5 es_give event_var(userid) weapon_ak47
+			es_delayed 1 wcs_setfx 1stclip event_var(userid) + server_var(wcs_ammo) 0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death and decay - Granted you an AK with server_var(wcs_ammo) extra ammo
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 3 (END)
+	}
+}
+
+block ritual
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 4 (START)
+	}
+	es playerget cash wcs_money server_var(wcs_userid)
+	if (server_var(wcs_money) >= 125) do
+	{
+		es wcs_setfx cash server_var(wcs_userid) - 100 0
+		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+		es wcs_centertell server_var(wcs_userid) Sacrificed 100 mana and recieved server_var(wcs_addhealth) health!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 25
+		es est_effect 10 #a 0 sprites/yellowglow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 1.2 10 10 0 100 0 100 210 0
+		es_delayed .2 est_effect 10 #a 0 sprites/yellowglow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 55 1 15 10 0 100 0 100 210 0
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lich - [Block] Skill: 4 (END)
+	}
+}

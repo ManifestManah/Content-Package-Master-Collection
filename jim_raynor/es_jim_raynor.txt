@@ -1,0 +1,197 @@
+////////////////////////
+//Novakiller Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health pack - Increased your health by server_var(wcs_addhealth)
+		es_playsound event_var(userid) wcs/defiance.mp3 .8
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 40 10 0 200 0 0 180 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 50 10 0 255 70 70 200 5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed pack - Increased your speed by server_var(wcs_speed)%
+		es_playsound event_var(userid) wcs/speed.mp3 .7
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 425 1.5 25 10 0 200 110 55 240 3
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 400 1.5 40 10 0 200 200 50 200 5
+		es_xmath wcs_z2 + 15
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 300 1.5 25 10 0 200 110 55 240 3
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 300 1.5 40 10 0 200 200 50 200 5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 2 (END)
+	}
+}
+
+block weapon_primary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_delayed .1 es_give event_var(userid) weapon_m4a1
+			es_delayed .1 es_give event_var(userid) weapon_m4a1
+			es_delayed .1 es_give event_var(userid) weapon_m4a1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Supplies - You created three m4a1s for your team
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 3 (END)
+	}
+}
+
+block phoenix
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 4 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es wcsgroup set phoenix_ffa event_var(userid) 0
+		if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+		{
+			es_xrand wcs_rand 0 2
+			ifx false(wcs_rand) do
+			{
+				es wcsgroup set phoenix_ffa event_var(userid) 1
+				es_tell event_var(userid) #multi #green[WCS]#lightgreen Phoenix - You'll be reborn if you die during this round!
+			}
+		}
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es wcsgroup get has_used_phoenix wcs_tmp3 event_var(userid)
+		if (server_var(wcs_tmp3) == 0) do
+		{
+			es wcsgroup set has_used_phoenix event_var(userid) 1
+			if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+			{
+				if (event_var(es_userteam) = 2) then es_xset wcs_team #t
+				if (event_var(es_userteam) = 3) then es_xset wcs_team #ct
+				es wcsgroup get phoenix wcs_phoenix server_var(wcs_team)
+				es_xmath wcs_phoenix + 1
+				es wcsgroup set phoenix server_var(wcs_team) server_var(wcs_phoenix)
+				es_tell event_var(userid) #multi #green[WCS]#lightgreen Phoenix - The first from your team to die will be revived
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 15
+				es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 600 2 70 10 0 255 255 255 255 8
+				es_xmath wcs_z2 + 15
+				es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 500 2 60 10 0 255 255 255 255 6
+				es_xmath wcs_z2 + 15
+				es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 400 2 50 10 0 255 255 255 255 4
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 4 (END)
+	}
+}
+
+block team_health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			ifx true(wcs_ffa_enabled) do
+			{
+				es_xrand wcs_rand 5 25
+				es wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Team power - Granted you server_var(wcs_rand) health
+			}
+			ifx false(wcs_ffa_enabled) do
+			{
+				es_getplayerteam wcs_team event_var(userid)
+				if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/manifest/jim_raynor/team_health_add" 
+				if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/manifest/jim_raynor/team_health_add"
+			}
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 20
+			es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 225
+			es_xmath wcs_z1 + 40
+			es_xmath wcs_x1 + 25
+			es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 225
+			es_xmath wcs_x1 - 50
+			es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 225
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 5 (END)
+	}
+}
+
+block team_health_add
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 5 (EXECUTED START)
+	}
+	es_xrand wcs_rand 5 25
+	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Team power - Granted you and your team server_var(wcs_rand) health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 5 (EXECUTED END)
+	}
+}
+
+block temporary_speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 6 (START)
+	}
+	es_xrand wcs_speed 5 8
+	es_xmath wcs_speed / 100
+	es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Stim pack - You sacrificed 10 health for more speed
+	es damage server_var(wcs_userid) 10 1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 25
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 180 180 200 255 2
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 250 180 60 200 7
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jim Raynor - [Block] Skill: 6 (END)
+	}
+}

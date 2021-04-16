@@ -1,0 +1,110 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 5 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_speed)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your movement speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 3 10
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) Took server_var(wcs_dmg) damage from event_var(es_attackername)'s damage!
+				es wcs_centertell event_var(attacker) Dealt + server_var(wcs_dmg) damage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_xmath wcs_z2 + 25
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 3 6 100 255 55 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 2 (END)
+	}
+}
+
+block beam
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Dealt server_var(wcs_dmg) damage with beam!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 20 30 150 150 150 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 3 (END)
+	}
+}
+
+block noclip
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx longjump server_var(wcs_userid) + .25 server_var(wcs_duration)
+	es wcs_setfx speed server_var(wcs_userid) = 1.5 server_var(wcs_duration)
+	es_delayed .2 wcs_setfx gravity server_var(wcs_userid) = .5 server_var(wcs_duration)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z1 + 45
+	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 255
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Environmental boost - Boosted your stats for server_var(wcs_duration) seconds
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Methane Man - [Block] Skill: 4 (END)
+	}
+}

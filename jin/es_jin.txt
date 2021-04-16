@@ -1,0 +1,334 @@
+//////////////////////
+//Darkeden Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] OnChange (END)
+	}
+}
+
+block counter
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Counter - Granted you additional speed and health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) more damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 35
+				es_xmath wcs_z2 + 35
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/physring1.vmt server_var(vector1) server_var(vector2) 80 3 10 5 10 0 0 0 255 255 100
+				es est_effect_06 #a 0 sprites/physring1.vmt server_var(vector1) server_var(vector2) 80 3 1 2 10 0 255 0 0 255 100
+				es est_effect_06 #a 0 sprites/bubble.vmt server_var(vector1) server_var(vector2) 80 3 1 2 10 2 255 255 255 255 100
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 2 (END)
+	}
+}
+
+block gravel
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es wcs_teleport event_var(attacker) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_xrand wcs_dmg 10 18
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 100
+				es_delayed .2 est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .4 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .6 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .8 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed 1 est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 100
+				es_delayed .2 est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .4 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .6 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed .8 es est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+				es_delayed 1 est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 3 (END)
+	}
+}
+
+block evade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 4 (START)
+	}
+	es wcsgroup set evasion event_var(userid) 1
+	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
+    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+    es_tell event_var(userid) #multi #green [WCS]: #lightgreenSide winder - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Side winder - Gives you server_var(wcs_chance)% chance to evade incoming attacks
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 4 (END)
+	}
+}
+
+block jin_froststorm
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 "es_xdoblock wcs/tools/manifest/jin/froststorm_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frost storm affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Frost storm dealt 20 damage to server_var(wcs_count_players_actually_affected) enemies
+				es_playsound server_var(wcs_userid) ambient\wind\css15_wind_10.wav 1
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (END)
+	}
+}
+
+block froststorm_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/jin/froststorm_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (CHECKS END)
+	}
+}
+
+block froststorm_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (EXECUTED START)
+	}
+	es_playsound server_var(wcs_targetid) ambient\wind\css15_wind_10.wav 1
+	es wcs_pushed server_var(wcs_targetid) 0 0 650
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 2 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es wcs_setfx freeze server_var(wcs_targetid) = 1 2
+	}
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Jin trapped you in a frost storm and dealt 20 damage to you
+	es wcs_centertell server_var(wcs_targetid) You took 20 damage from the Jin's Froststorm
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es est_effect 3 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 61 210 218 255
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
+	es_math wcs_z2 + 750
+	es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 4 13 16 61 210 218 255
+	es_math wcs_z2 - 750
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 9 4 30 0 0 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 19 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 29 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 39 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 49 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 59 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 70 69 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 79 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 90 89 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 99 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 110 109 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 119 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 130 129 4 10 0 5 61 210 218 255 100
+	es_math wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 140 139 4 10 0 5 61 210 218 255 100
+	es damage server_var(wcs_targetid) 20 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Jin - [Block] Skill: 5 (EXECUTED END)
+	}
+}

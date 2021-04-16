@@ -1,0 +1,241 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 110
+	es est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .1 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .2 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .3 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .4 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .5 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .6 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 - 15
+	es_delayed .7 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 1.7 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 1.8 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 1.9 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 2 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 2.1 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 2.2 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	es_xmath wcs_z1 + 15
+	es_delayed 2.3 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] Death (START)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Nordic Viking - [Block] OnChange (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angelic blessing - Granted you server_var(wcs_addhealth) health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 1 (END)
+	}
+}
+
+block drop
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_rand 1 2
+				if (server_var(wcs_rand) == 1) then es_xdoblock wcs/tools/manifest/lethal_angel/secdrop
+				if (server_var(wcs_rand) == 2) then es_xdoblock wcs/tools/manifest/lethal_angel/pdrop
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 6
+				es est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+				es_delayed .1 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+				es_delayed .2 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+				es_delayed .3 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+				es_delayed .4 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1 10 10 3 150 150 150 175 5
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (END)
+	}
+}
+
+block secdrop
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (SECDROP EXECUTED START)
+	}
+	es wcs_drop event_var(attacker) 2
+	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Peace-keeper - You were forced to drop your secondary weapon!
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Peace-keeper - Forced event_var(es_attackername) to drop his secondary weapon!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (SECDROP EXECUTED END)
+	}
+}
+
+block pdrop
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (PDROP EXECUTED START)
+	}
+	es wcs_drop event_var(attacker) 1
+	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Peace-keeper - You were forced to drop your primary weapon!
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Peace-keeper - Forced event_var(es_attackername) to drop his primary weapon!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 2 (PDROP EXECUTED END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es playerget health wcs_tmp event_var(userid)
+				if (server_var(wcs_tmp) <= 50) do
+				{
+					es damage event_var(userid) 25 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Your shot of reckoning did 25 extra damage!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/splodesprite.vmt server_var(vector1) server_var(vector2) 5 2 10 10 0 0 150 150 150 175 50
+					es est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 101 100 2 10 10 3 150 150 150 175 5
+					es_xmath wcs_z1 + 60
+					es_xmath wcs_z2 + 60
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 101 100 2 10 10 3 150 150 150 175 5
+					es est_effect_06 #a 0 sprites/splodesprite.vmt server_var(vector1) server_var(vector2) 5 2 10 10 0 0 150 150 150 175 50
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 3 (END)
+	}
+}
+
+block shield
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 4 (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 1
+	es wcsgroup set evasion_chance server_var(wcs_userid) 75
+	es wcsgroup set evasion_count server_var(wcs_userid) 0
+    es_delayed 2 wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
+    es_delayed 2 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Wing shielding - You evaded server_var(wcs_tmp1) attacks
+	es_delayed 2 wcsgroup set evasion server_var(wcs_userid) 0
+	es_delayed 2 wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es wcs_setfx freeze server_var(wcs_userid) = 1 2
+	es wcsgroup set is_frozen server_var(wcs_userid) 1
+	es_delayed 2 wcsgroup set is_frozen server_var(wcs_userid) 0
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav 1.0
+		es_delayed 2 es_stopsound ambient/atmosphere/city_skypass1.wav
+	}
+	es wcs_centertell server_var(wcs_userid) You have 75% chance to evade for 2 seconds!
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Wing shielding - You're evasion chance is increased to 75% for 2 seconds
+	es_delayed 1 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Wing shielding - Your evasion is fading...
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 110
+	es est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .1 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .2 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .3 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .4 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .5 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .6 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	es_xmath wcs_z1 - 15
+	es_delayed .7 est_effect 10 #a 0 sprites/splodesprite.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 50 1.3 20 10 3 150 150 150 45 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Lethal Angel - [Block] Skill: 4 (END)
+	}
+}

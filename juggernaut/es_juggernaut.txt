@@ -1,0 +1,133 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx health event_var(userid) + 40 0
+		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_xmath wcs_addhealth + 40
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thick skinned - Increased your health by server_var(wcs_addhealth)
+		es_playsound event_var(userid) wcs/defiance.mp3 .8
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 100
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .7 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .8 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+		es_xmath wcs_z2 - 10
+		es_delayed .9 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 12 10 0 200 0 0 180 5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 1 (END)
+	}
+}
+
+block weapon_primary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+			}
+			es_delayed .2 wcs_drop event_var(userid) 1
+			es_delayed .5 es_give event_var(userid) weapon_xm1014
+			es_delayed .8 wcs_setfx 1stclip event_var(userid) = 50 0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Armaments - You received a xm1014 with 50 bullets
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 120 2 20 10 1 10 255 0 255 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 135 220 2 20 10 1 10 255 0 255 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 235 320 2 20 10 1 10 255 0 255 1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 3 5
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Accurate aim dealt extra damage
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_playsound event_var(userid) wcs/zeal.mp3 .8
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 150
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 1 1 26 1 0 0 0 200 200 255 5
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 1 1 45 1 0 0 0 100 100 150 3
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 3 (END)
+	}
+}
+
+block temporary_speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx speed server_var(wcs_userid) = 2.25 3
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Rhino charge - Your speed was increased to 225% for 3 seconds
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 400 1 50 10 0 180 180 200 255 2
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 400 1 50 10 0 250 180 60 200 7
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 175 500 1 50 10 0 180 180 200 255 2
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 175 500 1 50 10 0 250 180 60 200 7	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Juggernaut - [Block] Skill: 4 (END)
+	}
+}

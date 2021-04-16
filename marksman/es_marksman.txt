@@ -1,0 +1,281 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Spawn (START)
+	}
+	es wcsgroup set marksman_player event_var(userid) 1
+	es wcsgroup set fleshripperbullet event_var(userid) 0
+	ifx false(wcs_falldamage_compensation) do
+	{
+		es wcsgroup set falldamage event_var(userid) 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Death (START)
+	}
+	es wcsgroup set marksman_player event_var(userid) 0
+	es wcsgroup set fleshripperbullet event_var(userid) 0
+	ifx false(wcs_falldamage_compensation) do
+	{
+		es wcsgroup set falldamage event_var(userid) 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] OnChange (START)
+	}
+	es wcsgroup set marksman_player server_var(wcs_userid) 0
+	es wcsgroup set fleshripperbullet server_var(wcs_userid) 0
+	es wcs_unrestrict server_var(wcs_userid) all
+	ifx false(wcs_falldamage_compensation) do
+	{
+		es wcsgroup set falldamage server_var(wcs_userid) 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] OnChange (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Quick steps - Set your speed to server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 1 (END)
+	}
+}
+
+block piercer
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 2 (START)
+	}
+	if (event_var(hitgroup) = 2) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get fleshripperbullet wcs_tmp5 event_var(attacker)
+				if (server_var(wcs_tmp5) == 1) do
+				{
+					es wcsgroup set fleshripperbullet event_var(attacker) 0
+					es damage event_var(userid) 35 1 event_var(attacker)
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Flesh ripper - Dealt 35 additional damage
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flesh ripper - Took 35 additional damage
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 25
+					es_xmath wcs_z2 + 25
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/laser.vmt server_var(vector1) server_var(vector2) 10 .3 1 8 8 0 160 0 169 255 1
+					es est_effect_06 #a 0 sprites/halo01.vmt server_var(vector1) server_var(vector2) 10 .3 1 12 12 0 160 0 169 255 60
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 200 .5 40 10 0 160 0 169 255 5
+					es est_effect 10 #a 0 sprites/halo01.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 200 .5 70 10 0 160 0 169 255 8
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) weapons\pistol\pistol_fire2.wav .9
+						es_delayed .1 es_playsound event_var(userid) weapons\pistol\pistol_fire3.wav .7
+						es_delayed .2 es_playsound event_var(userid) weapons\pistol\pistol_fire3.wav .9
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) weapons\taser\taser_shoot.wav .9
+						es_delayed .1 es_playsound event_var(userid) weapons\taser\taser_shoot.wav .7
+						es_delayed .2 es_playsound event_var(userid) weapons\taser\taser_shoot.wav .9
+					}
+				}
+				if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+				{
+					es wcsgroup get heartpiercerbullet wcs_tmp4 event_var(attacker)
+					if (server_var(wcs_tmp4) == 0) do
+					{
+						es wcsgroup set heartpiercerbullet event_var(userid) 1
+					}
+					if (server_var(wcs_tmp4) == 1) do
+					{
+						es wcsgroup set heartpiercerbullet event_var(userid) 0
+						es damage event_var(userid) 25 1 event_var(attacker)
+						es wcs_centertell event_var(attacker) Heart piercer dealt 25 extra damage
+						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 180 1 10 10 0 200 0 0 220 2
+						es_xmath wcs_z1 + 25
+						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 180 1 10 10 0 200 0 0 220 2
+						es est_effect 10 #a 0 sprites/halo01.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 180 1 20 10 0 225 0 0 255 10
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 180 1 10 10 0 200 0 0 220 2
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 2 (END)
+	}
+}
+
+block impairing
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				if (event_var(hitgroup) == 6)
+				{
+					es_xrand wcs_rand 1 2
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 400 .8 40 10 0 255 255 255 255 1
+					es_xmath wcs_z1 + 6
+					es_delayed .1 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 360 .8 40 10 0 255 255 255 255 1				
+					if (server_var(wcs_rand) == 1) do
+					{
+						es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+						if (server_var(wcs_tmp3) == 0) do
+						{
+							es wcsgroup set is_slowed event_var(userid) 1
+							es_delayed 1.5 wcsgroup set is_slowed event_var(userid) 0
+							es wcs_setfx speed event_var(userid) = .8 1.5
+							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You slowed down your target
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were slowed down by an enemy
+						}
+					}
+					if (server_var(wcs_rand) == 2) do
+					{
+						es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+						if (server_var(wcs_tmp4) == 0) do
+						{
+							es wcsgroup set is_frozen event_var(userid) 1
+							es_delayed .5 wcsgroup set is_frozen event_var(userid) 0
+							es wcs_setfx freeze event_var(userid) = 1 .5
+							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You briefly froze target
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were briefly frozen by an enemy
+						}
+					}
+				}
+				if (event_var(hitgroup) == 7)
+				{
+					es_xrand wcs_rand 1 2
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 400 .8 40 10 0 255 255 255 255 1
+					es_xmath wcs_z1 + 6
+					es_delayed .1 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 360 .8 40 10 0 255 255 255 255 1				
+					if (server_var(wcs_rand) == 1) do
+					{
+						es wcs_setfx speed event_var(userid) = .8 1.5
+						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You slowed down your target
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were slowed down by an enemy
+					}
+					if (server_var(wcs_rand) == 2) do
+					{
+						es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+						if (server_var(wcs_tmp4) == 0) do
+						{
+							es wcsgroup set is_frozen event_var(userid) 1
+							es_delayed .5 wcsgroup set is_frozen event_var(userid) 0
+							es wcs_setfx freeze event_var(userid) = 1 .5
+							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You briefly froze target
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were briefly frozen by an enemy
+						}
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 3 (END)
+	}
+}
+
+block nofall
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_delayed .2 wcs_setfx gravity event_var(userid) = .70 0
+			ifx false(wcs_falldamage_compensation) do
+			{
+				es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+				es_tell event_var(userid) #lightgreen Gravitational device - Reduced your gravity and removed all fall damage
+			}
+			ifx true(wcs_falldamage_compensation) do
+			{
+				es_delayed .5 wcs_setfx health event_var(userid) + 25 0
+				es_tell event_var(userid) #lightgreen Gravitational device - Reduced your gravity
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+			}
+		}
+	}
+	else do
+	{
+		es_tell event_var(userid) #lightgreen Gravitational device - Your device malfunctioned!
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 4 (END)
+	}
+}
+
+block fleshripper
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 5 (START)
+	}
+	es wcsgroup get marksman_player wcs_tmp2 server_var(wcs_userid)
+	if (server_var(wcs_tmp2) == 1) do
+	{
+		es wcsgroup set fleshripperbullet server_var(wcs_userid) 1
+		es_delayed 2 wcsgroup set fleshripperbullet server_var(wcs_userid) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Flesh ripper - Shoot at an enemy to rip their flesh
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 5 (END)
+	}
+}

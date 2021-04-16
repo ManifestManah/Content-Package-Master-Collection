@@ -1,0 +1,162 @@
+//////////////////////
+//Zuzs GoW Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;aug;sg550;awp;sg552;g3sg1;m249"
+		es_delayed .1 es_give event_var(userid) weapon_scout
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;m249;negev"
+		es_delayed .1 es_give event_var(userid) weapon_ssg08
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Death (START)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] OnChange (END)
+	}
+}
+
+block scout_damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_attackerweapon) == weapon_scout) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Torque bow did + server_var(wcs_dmg) damage!
+				es wcs_shake event_var(userid) 25 15 2
+				es_playsound event_var(attacker) weapons/hegrenade/explode4.wav .7
+				es_playsound event_var(userid) weapons/hegrenade/explode4.wav 1
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_createvectorstring vector2 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector2) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 1 (END)
+	}
+}
+
+block health_when_struck
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_addhealth 7 25
+				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Recovery - You recovered server_var(wcs_addhealth) health
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 .7 36 10 0 180 0 0 200 12
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 85 250 .7 28 10 0 180 0 0 200 12
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 3 (END)
+	}
+}
+
+block immortality
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 4 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) npc/ichthyosaur/attack_growl1.wav 1.0
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 1
+	es wcsgroup set evasion_chance server_var(wcs_userid) 60
+	es wcsgroup set evasion_count server_var(wcs_userid) 0
+	es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Retreat - You dodged server_var(wcs_tmp1) attacks
+	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
+	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Retreat - 60% chance to dodge for server_var(wcs_duration) seconds
+	es wcs_centertell server_var(wcs_userid) You hope to make it out alive!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 150 0.5 40 50 8 255 255 255 255 5
+	es est_effect 4 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_userid) 2 10 1 1 255 255 255 180
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 4 (END)
+	}
+}
