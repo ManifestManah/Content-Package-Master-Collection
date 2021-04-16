@@ -1,0 +1,174 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Spawn (START)
+	}
+	es wcsgroup set noflash event_var(userid) 1
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angel of the light - You cannot be flashed
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 80
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 900 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .7 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .8 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed .9 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
+	es_xmath wcs_z1 - 10
+	es_delayed 1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 500 2 100 300 0 255 255 255 200 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Death (START)
+	}
+	es wcsgroup set noflash event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] OnChange (START)
+	}
+	es wcsgroup set noflash server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] OnChange (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 1 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen White feathers - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 15 35
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Divine attack did + server_var(wcs_dmg) damage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 30
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 2 10 300 0 255 255 255 200 1
+				es_xmath wcs_z1 - 10
+				es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 2 10 300 0 255 255 255 200 1
+				es_xmath wcs_z1 - 10
+				es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 2 10 300 0 255 255 255 200 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mental health - Increased your health by server_var(wcs_addhealth)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 3 (END)
+	}
+}
+
+block weapon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcs_removeweapon event_var(userid) 1
+			es_delayed .2 es_give event_var(userid) weapon_m4a1
+			es_delayed .5 wcs_setfx 1stclip event_var(userid) = 50 0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angelic armoury - Received a m4a1 with 50 bullets
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 4 (END)
+	}
+}
+
+block soul
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 5 (START)
+	}
+	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_speed) 5
+	es wcs_color server_var(wcs_userid) 255 255 255 server_var(wcs_invis) 1
+	es_delayed 5 wcs_color server_var(wcs_userid) 255 255 255 255 1
+	es wcs_centertell server_var(wcs_userid) Purified soul increased your speed and invisibility for 5 seconds
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z2 + 8
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector2) 75 600 10 .3 12 10 1 255 255 255 210 8 1
+	es_xmath wcs_z2 + 8
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_delayed .1 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector2) 75 800 10 .3 12 10 1 255 255 255 210 6 1
+	es_xmath wcs_z2 + 8
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_delayed .2 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector2) 75 800 10 .3 12 10 1 255 255 255 210 4 1
+	es_xmath wcs_z2 + 8
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_delayed .3 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector2) 75 800 10 .3 12 10 1 255 255 255 210 2 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Angel Of The Light - [Block] Skill: 5 (END)
+	}
+}

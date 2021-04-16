@@ -1,0 +1,246 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_setplayerprop event_var(userid) CBaseEntity.m_fEffects 256
+	}
+	es_delayed .5 wcs_color event_var(userid) 180 0 0 255 0 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 decals/bloodstain_001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 250 3 60 10 0 255 255 255 255 10
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 decals/bloodstain_003.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 250 3 90 10 0 255 255 255 255 15
+	es est_effect 10 #a 0 decals/bloodstain_003.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 399 3 165 10 0 255 255 255 255 15
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Death (START)
+	}
+	es wcsgroup set spinal_armour event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Death (END)
+	}
+}
+
+block mark
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_playsound event_var(userid) physics\flesh\flesh_bloody_break.wav 1.0
+				es_playsound event_var(attacker) physics\flesh\flesh_bloody_break.wav 1.0
+				es wcs_getinfo event_var(userid) wcs_dmg level race
+				es_xmath wcs_dmg + 5
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) Took + server_var(wcs_dmg) damage from a death mark
+				es wcs_centertell event_var(attacker) A death mark dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 10 #a 0 decals/bloodstain_003.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 350 1 25 10 5 51 51 204 100 8
+				es_xmath wcs_z1 + 100
+				es est_effect 10 #a 0 decals/bloodstain_002.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 350 1 20 10 5 51 51 204 100 5
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 1 (END)
+	}
+}
+
+block reflect
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup set evasion event_var(attacker) 0
+				es wcsgroup set evasion_chance event_var(attacker) 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 2 (END)
+	}
+}
+
+block armour
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + 25 0
+	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Armour of spines - Granted you 25 health and server_var(wcs_armor) armour
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 3 (END)
+	}
+}
+
+block execution
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 "es_xdoblock wcs/tools/manifest/darkeida/executionpath"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Execution affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Execution dealt server_var(wcs_dmg) damage
+				es_playsound server_var(wcs_userid) wcs\execute.mp3 1
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (END)
+	}
+}
+
+block executionpath 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_ultinotexec 0
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/darkeida/execution_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_xset wcs_ultinotexec 1
+						}
+					}
+				}
+				else do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block execution_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) Took server_var(wcs_dmg) damage from execution
+	es_playsound server_var(wcs_targetid) wcs\execute.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
+	es est_effect 10 #a 0 decals/bloodstain_002.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 200 1 25 10 5 51 51 204 100 5
+	es_xmath wcs_z1 + 25
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_14 #a 0 decals/blood5.vmt server_var(vector1) server_var(vector1) 100 100 800
+	es est_effect_14 #a 0 decals/bloodstain_001.vmt server_var(vector1) server_var(vector1) 100 100 400
+	es est_effect_14 #a 0 decals/bloodstain_001.vmt server_var(vector1) server_var(vector1) 100 100 200
+	es wcs_getinfo server_var(wcs_targetid) wcs_dmg level race
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (EXECUTED END)
+	}
+}

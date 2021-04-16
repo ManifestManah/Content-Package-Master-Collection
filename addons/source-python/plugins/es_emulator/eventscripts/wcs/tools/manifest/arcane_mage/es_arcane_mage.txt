@@ -1,0 +1,168 @@
+/////////////////////////////
+//Various Authors Race Pack//
+//Version 1.0.0D           //
+/////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Spawn (START)
+	}
+	es wcsgroup get arcanepower wcs_tmp4 event_var(userid)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Arcane power - You have accumulated server_var(wcs_tmp4) arcane power
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Spawn (END)
+	}
+}
+
+block arcane_power
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es wcsgroup get arcanepower wcs_tmp2 event_var(userid)
+			if (server_var(wcs_tmp2) < 10) do
+			{
+				es_xmath wcs_tmp2 + 1
+				es wcsgroup set arcanepower event_var(userid) server_var(wcs_tmp2)
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Arcane power - You acquired 1 arcane power
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 1 (END)
+	}
+}
+
+block arcane_bolt
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do 
+		{
+			es wcsgroup get arcanepower wcs_tmp4 event_var(attacker)
+			if (server_var(wcs_tmp4) > 0) do
+			{
+				es_xmath wcs_tmp4 - 1
+				es wcsgroup set arcanepower event_var(attacker) server_var(wcs_tmp4)
+				es wcs_fade event_var(attacker) 128 0 128 35 1 1
+				es wcs_fade event_var(userid) 128 0 128 35 1 1
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) damage with an arcane bolt
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 51 50 1 1 50 10 1 160 0 160 255 5 1
+				es_xmath wcs_z1 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_delayed 1 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 500 1 .5 50 10 1 120 0 120 255 3 1
+				es_delayed 1 est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 50 500 1 .5 50 10 1 160 0 160 255 5 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 2 (END)
+	}
+}
+
+block redemption
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			if (event_var(es_userdead) = 1) do
+			{
+				es wcsgroup get arcanepower wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) => 2) do
+				{
+					es_xmath wcs_tmp3 - 2
+					es wcsgroup set arcanepower event_var(userid) server_var(wcs_tmp3)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Redemption - You'll revive in your spawn in 2 seconds!
+					es wcs_centertell event_var(userid) You'll be revived in your spawn in 2 seconds
+					es_delayed 1 wcs_centertell event_var(userid) You'll be revived in your spawn in 1 seconds
+					es_delayed 2 wcs_centertell event_var(userid) You have been revived, but lost 2 arcane power!
+					es_delayed 2 es_emitsound player event_var(userid) wcs/resurrect.mp3 1.0 0.3
+					es_delayed 2 wcs_spawn event_var(userid) 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 25
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 75 400 1 2 60 10 .8 160 0 160 255 5 1
+					es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 75 400 1 2 60 10 .5 255 128 64 255 5 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 3 (END)
+	}
+}
+
+block arcane_torrent
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 128 0 128 255 0
+				es_xrand wcs_tmp2 5 10
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Arcane torrent destroyed invisibility and did server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .8 100 0 100 150 4 1
+				es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .5 255 128 64 100 5 1
+				es_delayed .25 est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .8 100 0 100 150 4 1
+				es_delayed .25 est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .5 255 128 64 100 5 1
+				es_delayed .5 est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .8 100 0 100 150 4 1
+				es_delayed .5 est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 400 50 1 .5 55 10 .5 255 128 64 100 5 1
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(userid) env_smokestack
+				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(userid) server_var(ss_name) addoutput "basespread 100"
+				es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 50"
+				es_fire event_var(userid) server_var(ss_name) addoutput "speed 100"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rate 200"
+				es_fire event_var(userid) server_var(ss_name) addoutput "startsize 25"
+				es_fire event_var(userid) server_var(ss_name) addoutput "endsize 6"
+				es_fire event_var(userid) server_var(ss_name) addoutput "twist 1000"
+				es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 50"
+				es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 0 128"
+				es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+				es_fire event_var(userid) server_var(ss_name) turnon
+				es_fire event_var(userid) server_var(ss_name) setparent !activator
+				es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log  [Race]: Arcane Mage - [Block] Skill: 4 (END)
+	}
+}

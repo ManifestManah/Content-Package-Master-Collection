@@ -1,0 +1,128 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 2 60 100 0.8 0 20 100 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Spawn (END)
+	}
+}
+
+block unholy
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unholy Aura - Increased your speed
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 4 2 0 255 100 0 255 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 1 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 2 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Gravity Aura - Reduced your gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 2 (END)
+	}
+}
+
+block shock
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient\levels\citadel\pod_close1 1.0
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient\energy\weld2.wav 1
+				}
+				es wcs_pushed event_var(userid) 0 0 520
+				es_delayed .4 wcs_pushed event_var(userid) 0 240 0
+				es_delayed .8 wcs_pushed event_var(userid) 260 0 0
+				es wcs_centertell event_var(attacker) Your shock aura affected event_var(es_username)
+				es wcs_centertell event_var(userid) event_var(es_attackername)'s shock aura struck you
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 2 60 100 0.8 0 20 100 255 1
+				es_xmath wcs_z1 + 10
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 2 60 100 0.8 0 20 100 255 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 3 (END)
+	}
+}
+
+block ancient
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 40 40 128 0 0 255
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_addhealth 12 20
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Ancient aura leeched server_var(wcs_addhealth) health!
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Aura Master - [Block] Skill: 4 (END)
+	}
+}

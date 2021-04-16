@@ -1,0 +1,169 @@
+////////////////////
+//Naiken Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block mystic
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= 6) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Mystic shot dealt + server_var(wcs_dmg) extra damage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 128
+				es est_effect 3 #a 0 sprites/blueshaft1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 10 10 200 200 255 255
+				es est_effect 3 #a 0 sprites/laserbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 6 6 200 200 255 255
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient/levels/labs/electric_explosion3.wav .8
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 1 (END)
+	}
+}
+
+block flux
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) = .8 2
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Slow - Been slowed for 2 seconds by event_var(es_attackername)!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Slow - You slowed event_var(es_username) for 2 seconds!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 6
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 8
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 10
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 12
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 14
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 16
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 18
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 20
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 22
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 24
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 26
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 28
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 30
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 32
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 34
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 36
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 38
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+					es_xmath wcs_z1 + 40
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 2 (END)
+	}
+}
+
+block barrage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) 16 1 event_var(attacker)
+				es_delayed .2 es wcs_centertell event_var(userid) You were shot by an arcane barrage dealing 16 extra damage!
+				es_delayed .2 es wcs_centertell event_var(attacker) You shot event_var(es_username) with an arcane barrage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 10 255 255 255 0 255
+				es_delayed .3 es est_effect 10 #a 0 sprites/flare1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 80 0.5 80 80 255 255 75 0 100 10
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 3 (END)
+	}
+}
+
+block shift
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 4 (START)
+	}
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es wcs_doteleport server_var(wcs_userid)
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_emitsound player server_var(wcs_userid) ambient\machines\teleport3.wav 0.2 0.5
+		es_delayed .5 es_emitsound player server_var(wcs_userid) ambient/levels/labs/electric_explosion1.wav 0.1 0.5
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) wcs\teleport.mp3 1
+	}
+	es est_effect 10 #a 0 sprites/yellowflare.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 1 1 10 15 20 245 245 245 255 .3
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 effects/combinemuzzle1_noz.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 1 1.25 10 15 20 245 245 245 255 .3
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/yellowflare.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 1 1.5 10 15 20 245 245 245 255 .3
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/yellowflare.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 1 1.25 10 15 20 245 245 245 255 .3
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/yellowflare.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 1 1 10 15 20 245 245 245 255 .3
+	es_delayed .5 es est_effect 11 #a 0 effects/combinemuzzle1_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 165
+	es_delayed .5 es est_effect 10 #a 0.0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 125 1 10 15 20 245 245 245 255 .3
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ezreal - [Block] Skill: 4 (END)
+	}
+}

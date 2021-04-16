@@ -1,0 +1,389 @@
+/////////////////////////
+//Holliday V3 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Spawn (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Death (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] OnChange (START)
+	}
+	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] OnChange (END)
+	}
+}
+
+block push
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) weapons/shotgun/shotgun_dbl_fire7.wav .5
+					es_playsound event_var(userid) weapons/shotgun/shotgun_dbl_fire7.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) weapons\sensorgrenade\sensor_explode.wav .5
+					es_playsound event_var(userid) weapons\sensorgrenade\sensor_explode.wav 1
+				}
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 10
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es wcs_pushto event_var(userid) server_var(vector1) -2
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Push back - You have been pushed by a Dwarfen Warrior
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Push back - You pushed back your enemy
+			//	es playerget viewcoord event_var(attacker) wcs_x1 wcs_y1 wcs_z1
+			//	es playerget viewcoord event_var(attacker) wcs_x2 wcs_y2 wcs_z2
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 80
+				es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 4 4 175 175 255 255
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 180 0.3 30 100 0.8 175 175 255 255 1
+				es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 255
+
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 1 (END)
+	}
+}
+
+block fast
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set headshot_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Quickness - You're too fast to be shot in the head
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 40
+			es est_effect 10 #a 0 sprites/scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 99 5000 2 3 11 0 25 25 25 255 9
+			es_xmath wcs_z1 + 10
+			es_delayed .2 est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 99 5000 2 3 11 0 0 255 0 255 9
+			es_xmath wcs_z1 + 10
+			es_delayed .4 est_effect 10 #a 0 sprites/scanner_bottom.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 99 5000 2 3 11 0 25 25 25 255 9
+			es_xmath wcs_z1 + 10
+			es_delayed .6 est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 99 5000 2 3 11 0 25 255 0 255 9
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 2 (END)
+	}
+}
+
+block immortal
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav 1.0
+				es_delayed 1.4 es_stopsound ambient/atmosphere/city_skypass1.wav
+				es_delayed 1.5 es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav .7
+				es_delayed 2 es_stopsound ambient/atmosphere/city_skypass1.wav
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound server_var(wcs_userid) player/halloween/ghostmode_on.wav 1.0
+			}
+			es wcsgroup set evasion event_var(userid) 1
+			es wcsgroup set evasion_chance event_var(userid) 50
+			es wcsgroup set evasion_count event_var(userid) 0
+			es_delayed 2 wcsgroup set evasion event_var(userid) 0
+			es_delayed 2 wcsgroup set evasion_chance event_var(userid) 0
+		    es_delayed 2 es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+		    es_delayed 2 es_tell event_var(userid) #multi #green [WCS]: #lightgreenEvasion - You dodged server_var(wcs_tmp1) attacks last round
+			es wcs_centertell event_var(userid) Increased evasion chance 2 seconds!
+			es_xrand wcs_rand 1 2
+			if (server_var(wcs_rand) == 1) then es_xdoblock wcs/tools/manifest/dwarfen_warrior/effect1
+			if (server_var(wcs_rand) == 2) then es_xdoblock wcs/tools/manifest/dwarfen_warrior/effect2
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (END)
+	}
+}
+
+block effect1
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (EFFECT1 EXECUTED START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_y1 + 50
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_delayed .2 est_effect_06 #a 0 sprites/plasmaember.vmt server_var(vector2) server_var(vector1) 100 .3 15 10 10 0 228 28 228 255 100
+	es_xmath wcs_y1 - 100
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_delayed .2 est_effect_06 #a 0 sprites/plasmaember.vmt server_var(vector2) server_var(vector1) 100 .3 15 10 10 0 228 28 228 255 100
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (EFFECT1 EXECUTED END)
+	}
+}
+
+block effect2
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (EFFECT2 EXECUTED START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+	es_xmath wcs_z1 + 1500
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 .1 10 15 10 10 228 228 228 255 100
+	es_delayed .2 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 .1 10 15 10 10 28 28 228 255 100
+	es_delayed .4 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 .1 10 15 10 10 255 8 225 255 100
+	es_delayed .6 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 .1 10 15 10 10 2 228 28 255 100
+	es_delayed .8 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 .1 10 15 10 10 228 28 228 255 100
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 3 (EFFECT2 EXECUTED END)
+	}
+}
+
+//DOES not max targets or radius variables
+block shake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 "es_xdoblock wcs/tools/manifest/dwarfen_warrior/ultimate_path"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ground shake affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) You made the earth tremble, slowing and shaking nearby enemies
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) npc\antlion\rumble1.wav .8
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient\misc\rock2.wav .8
+				}
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_path 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/dwarfen_warrior/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_slowed wcs_tmp3 server_var(wcs_targetid)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_slowed server_var(wcs_targetid) 1
+		es_delayed 3 wcsgroup set is_slowed server_var(wcs_targetid) 0
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_playsound server_var(wcs_targetid) npc\antlion\rumble1.wav 1
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es_playsound server_var(wcs_targetid) ambient\misc\rock2.wav 1
+		}
+		es wcs_centertell server_var(wcs_targetid) Ground shake slowed and shook you
+		es wcs_centertell server_var(wcs_targetid) A dwarfen warrior made the ground tremble before your feet
+		es wcs_shake server_var(wcs_targetid) 40 25 3
+		es wcs_setfx speed server_var(wcs_targetid) = .75 3
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+		es_xmath wcs_z1 + 1500
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 1 10 15 10 10 228 228 228 255 100
+		es_delayed .1 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 1 10 15 10 10 28 28 228 255 100
+		es_delayed .4 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 100 1 10 15 10 10 228 28 228 255 100
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 509 2 500 3 0.4 45 75 255 55 1
+	}
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es wcs_centertell server_var(wcs_userid) Your target was immune to slows!
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Dwarf Warrior - [Block] Skill: 4 (EXECUTED END)
+	}
+}

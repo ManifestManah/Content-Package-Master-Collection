@@ -1,0 +1,171 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Spawn (START)
+	}
+	es wcsgroup get diglett wcs_tmp3 event_var(userid)
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es_getplayerlocation wcs_x12 wcs_y12 wcs_z12 event_var(userid)
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 10
+		es_xmath wcs_z1 + 20
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 10
+		es_xmath wcs_z1 + 40
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 10
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Death (START)
+	}
+	es wcsgroup set burrowed event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] OnChange (START)
+	}
+	es wcsgroup set burrowed server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] OnChange (END)
+	}
+}
+
+block rock
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) = .7 2
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rocktomb - Slowed you down for 2 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Rocktomb - You slowed the enemy for 2 seconds!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 1 (END)
+	}
+}
+
+block sand
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+				es_delayed 1.5 es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sand attack - event_var(es_attackername) blinded you for 1.5 seconds
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Sand attack - Blinded event_var(es_username) for 1.5 seconds
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 2 (END)
+	}
+}
+
+block earthquake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_shake event_var(attacker) 10 25 3
+				es wcs_centertell event_var(userid) You were hit by an earthquake!
+				es wcs_centertell event_var(attacker) Earthquake shaked event_var(es_username)!
+				es_playsound event_var(userid) ambient\weather\thunder1.wav 1
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 50 3 50 100 1.8 255 75 25 255 2
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 75 25 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 3 (END)
+	}
+}
+
+block dig
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 4 (START)
+	}
+	es wcsgroup set diglett server_var(wcs_userid) 1
+	es_getplayerlocation wcs_x12 wcs_y12 wcs_z12 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 80 1 10 10 0 90 56 37 255 0
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 95 1 10 10 0 90 56 37 255 0
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 110 1 10 10 0 90 56 37 255 0
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 125 1 10 10 0 90 56 37 255 0
+	es_math wcs_z12 - 56
+	es playerset location server_var(wcs_userid) server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12)
+	es_delayed server_var(wcs_duration) es wcsgroup set diglett server_var(wcs_userid) 0
+	es_math wcs_z12 + 56
+	es wcs_setfx freeze server_var(wcs_userid) = 1 server_var(wcs_duration)
+	es wcsgroup set is_frozen server_var(wcs_userid) 1
+	es_delayed server_var(wcs_duration) wcsgroup set is_frozen server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dig - You buried yourself for server_var(wcs_duration) seconds!
+	es_delayed server_var(wcs_duration) playerset location server_var(wcs_userid) server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12)
+	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 80 1 10 10 0 90 56 37 255 0
+	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 95 1 10 10 0 90 56 37 255 0
+	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 110 1 10 10 0 90 56 37 255 0
+	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 125 1 10 10 0 90 56 37 255 0
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dig - You went above ground!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Diglett - [Block] Skill: 4 (END)
+	}
+}

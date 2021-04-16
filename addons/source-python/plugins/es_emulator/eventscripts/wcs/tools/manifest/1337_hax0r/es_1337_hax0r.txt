@@ -1,0 +1,175 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Spawn (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Death (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] OnChange (START)
+	}
+	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] OnChange (END)
+	}
+}
+
+block headshot_immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set headshot_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Headshot Immunity - You won't take damage from headshots
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 1 (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(attacker) You froze event_var(es_username) for 1 second!
+					es wcs_centertell event_var(userid) for event_var(es_attackername) Froze you for 1 second!
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es est_effect 3 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 10 10 0 0 255 255
+					es_xmath wcs_z2 + 5
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 2 (END)
+	}
+}
+
+block shake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_shake event_var(userid) 15 22 2
+				es_playsound event_var(userid) ambient/weather/thunder2.wav 1
+				es_playsound event_var(attacker) ambient/weather/thunder2.wav 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shake - You were shaken for 2 seconds
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shake - You shook event_var(es_username)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 75 25 255
+				es_xmath wcs_z2 - 15
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 50 3 50 100 1.8 255 75 25 255 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 3 (END)
+	}
+}
+
+block speed_gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mobility - You can run faster and jump higher
+	es_playsound event_var(userid) skills/hymn.mp3 .8
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_delayed .2 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 255 255 255 255 5
+	es_delayed .2 est_effect 10 #a 0 sprites/halo01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 153 217 234 255 10
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 255 255 255 255 5
+	es est_effect 10 #a 0 sprites/halo01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 153 217 234 255 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 4 (END)
+	}
+}
+
+block invisibility_temporary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 5 (START)
+	}
+	es wcs_color server_var(wcs_userid) 255 255 255 50 0
+	es_delayed 2 wcs_color server_var(wcs_userid) 255 255 255 255 0
+	es wcs_centertell server_var(wcs_userid) You've cloaked yourself for 2 seconds, you're less visible
+	es_playsound server_var(wcs_userid) wcs/invisibility.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 325 40 .4 50 10 0 180 180 180 225 15
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Leet HaxOr - [Block] Skill: 5 (END)
+	}
+}

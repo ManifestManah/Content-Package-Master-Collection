@@ -1,0 +1,291 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\materials\rock2.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\misc\rock2.wav 1
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 75 25 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Spawn (END)
+	}
+}
+
+block shake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_shake event_var(attacker) 12 25 3
+				es_playsound event_var(userid) ambient/weather/thunder2.wav 1
+				es_playsound event_var(attacker) ambient/weather/thunder2.wav 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen event_var(es_attackername) struck you with earth shake!
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You've struck event_var(es_username) with your earth shake!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 75 25 255
+				es_xmath wcs_z2 - 15
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 50 3 50 100 1.8 255 75 25 255 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 1 (END)
+	}
+}
+
+block quake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_shake event_var(attacker) 12 20 3
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient/materials/rock4.wav 1
+					es_playsound event_var(attacker) ambient/materials/rock4.wav 1
+				}
+				es wcs_centertell event_var(userid) You struck event_var(es_attackername) with a quake shake!
+				es wcs_centertell event_var(attacker) Struck by event_var(es_username)'s quake shake!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 75 25 255
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 50 3 50 100 1.8 255 75 25 255 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 2 (END)
+	}
+}
+
+block shock
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es wcs_shake event_var(attacker) 12 25 3
+			es damage event_var(attacker) 35 1 event_var(userid)
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen event_var(es_attackername) Took 35 damage from your after shock!
+			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Took 35 damage from event_var(es_username) after shock!	
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 20
+			es est_effect 10 #a 3 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 400 3 50 100 1.8 255 75 25 255 2
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 3 (END)
+	}
+}
+
+block earthquake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 "es_xdoblock wcs/tools/manifest/earth_quake/ultimate_path"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Earthquake affected server_var(wcs_count_players_actually_affected) enemies
+				es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .8
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_path 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/earth_quake/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, your target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 1 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es wcs_setfx freeze server_var(wcs_targetid) = 1 1
+	}
+	es wcs_pushed server_var(wcs_targetid) 0 0 435
+	es_delayed 1.1 wcs_pushed server_var(wcs_targetid) 150 0 0
+	es_delayed 1.3 wcs_pushed server_var(wcs_targetid) -50 -150 120
+	es wcs_shake server_var(wcs_targetid) 33 22 3
+	es_playsound server_var(wcs_targetid) weapons/hegrenade/explode4.wav .8
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 1250 2 50 10 1.8 175 175 255 255 1
+	es_xmath wcs_z1 + 30
+	es_xmath wcs_z2 + 30
+	es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 75 25 255
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 3 50 100 2 255 75 25 255 2
+	es_delayed .8 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 3 50 100 2 255 75 25 255 2
+	es_delayed 1.3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 3 50 100 2 255 75 25 255 2
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Earth Quake - [Block] Skill: 4 (EXECUTED END)
+	}
+}

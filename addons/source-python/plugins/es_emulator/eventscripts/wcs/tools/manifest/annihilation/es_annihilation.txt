@@ -1,0 +1,210 @@
+/////////////////////////
+//Eareland V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 180 103 77 200 1
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 50
+	es_format coords "origin %1 %2 %3" server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) point_tesla
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire event_var(userid) server_var(ss_name) addoutput "m_Color 128 0 128"
+	es_fire event_var(userid) server_var(ss_name) addoutput "m_flRadius 850"
+	es_fire event_var(userid) server_var(ss_name) addoutput "beamcount_min 750"
+	es_fire event_var(userid) server_var(ss_name) addoutput "beamcount_max 4000"
+	es_fire event_var(userid) server_var(ss_name) addoutput "thick_min 10"
+	es_fire event_var(userid) server_var(ss_name) addoutput "thick_max 4"
+	es_fire event_var(userid) server_var(ss_name) addoutput "lifetime_min .1"
+	es_fire event_var(userid) server_var(ss_name) addoutput "lifetime_max .4"
+	es_fire event_var(userid) server_var(ss_name) addoutput "interval_min .1"
+	es_fire event_var(userid) server_var(ss_name) addoutput "interval_max .2"
+	es_fire event_var(userid) server_var(ss_name) addoutput "texture sprites/lgtning.vmt"
+	es_fire event_var(userid) server_var(ss_name) addoutput server_var(coords)
+	es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed .4 es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed .8 es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed 1.2 es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed 1.6 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Spawn (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 5 15
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Rocket launcher did server_var(wcs_dmg) additional damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				ifx true(wcs_ffa_enabled) do
+				{
+					es_xset wcs_targetteam #alive
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					es_getplayerteam wcs_team event_var(attacker)
+					if (server_var(wcs_team) = 2) then es_xset wcs_targetteam #ct
+					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam #t
+				}
+				es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 "es_xdoblock wcs/tools/manifest/annihilation/sound"
+				es_playsound event_var(userid) ambient\explosions\explode_9.wav .5
+				es_xmath wcs_z1 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 1 (END)
+	}
+}
+
+block sound
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 1 (SOUND EXECUTED START)
+	}
+	es damage server_var(wcs_player) server_var(wcs_dmg) 1 event_var(attacker)
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_player) weapons/mortar/mortar_explode2.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_player) weapons\hegrenade\explode3.wav 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 1 (SOUND EXECUTED END)
+	}
+}
+
+block grenade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 2 (START)
+	}
+	if (event_var(weapon) = hegrenade) do
+	{
+		if (event_var(es_userdead) = 0) do 
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen HE blast - Dealt server_var(wcs_dmg) additional damage
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen HE Blast - Dealt server_var(wcs_dmg) additional damage to you
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 80 1.5 8 10 5 128 0 128 200 1
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 80 1.5 8 10 5 128 0 128 200 1
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 180 120 1.5 8 40 5 128 0 128 200 1
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 80 1.5 8 10 5 128 0 128 200 1
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 80 1.5 8 10 5 128 0 128 200 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 2 (END)
+	}
+}
+
+block burn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+				ifx false(wcs_tmp3) do
+				{
+					es wcsgroup set is_burning event_var(userid) 1
+					es_delayed 4 wcsgroup set is_burning event_var(userid) 0
+					es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+					es wcs_setfx burn event_var(userid) = 1 4
+					es wcs_centertell event_var(attacker) Flamethrower bathed your enemy in vicious flames!
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) ambient\fire\gascan_ignite1.wav .8
+						es_delayed .2 es_playsound event_var(attacker) ambient\fire\gascan_ignite1.wav .8
+						es_delayed .3 es_playsound event_var(attacker) ambient\fire\gascan_ignite1.wav .8
+						es_playsound event_var(userid) ambient\fire\gascan_ignite1.wav .8
+						es_delayed .2 es_playsound event_var(userid) ambient\fire\gascan_ignite1.wav .8
+						es_delayed .3 es_playsound event_var(userid) ambient\fire\gascan_ignite1.wav .8
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) weapons\molotov\fire_ignite_2.wav .8
+						es_delayed .2 es_playsound event_var(attacker) weapons\molotov\fire_ignite_2.wav .8
+						es_delayed .3 es_playsound event_var(attacker) weapons\molotov\fire_ignite_1.wav .8
+						es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
+						es_delayed .2 es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
+						es_delayed .3 es_playsound event_var(userid) weapons\molotov\fire_ignite_1.wav .8
+					}
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z2 + 10
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 350 1 40 10 0 255 255 255 255 8
+					es_xmath wcs_z2 + 30
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 250 1 30 10 0 255 255 255 255 8
+					es_xmath wcs_z2 + 40
+					es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1.5 200
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 3 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Warmen - You're running server_var(wcs_speed)% faster
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Annihilation - [Block] Skill: 4 (END)
+	}
+}

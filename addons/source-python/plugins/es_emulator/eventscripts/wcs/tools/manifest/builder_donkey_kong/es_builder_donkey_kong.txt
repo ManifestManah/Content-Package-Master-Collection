@@ -1,0 +1,187 @@
+//////////////////////
+//Builders Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es wcsgroup set bconstruction event_var(userid) 15
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_xrand wcs_tmp3 2 3
+	es_delayed .4 es_give event_var(userid) weapon_hegrenade
+	es_delayed .5 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_tmp3)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Detonators - You received server_var(wcs_tmp3) barrel detonators
+	es wcs_setfx speed event_var(userid) = 1.55 0
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es_delayed .1 es_give event_var(userid) weapon_hegrenade
+	es_delayed .5 es_give event_var(userid) weapon_hegrenade
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Death (START)
+	}
+	es wcsgroup set bconstruction event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] OnChange (START)
+	}
+	es wcsgroup set bconstruction server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] OnChange (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 1 (END)
+	}
+}
+
+block barreldrop
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get barrel_cooldown wcs_tmp3 event_var(attacker)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set barrel_cooldown event_var(attacker) 1
+					es_delayed 1.5 wcsgroup set barrel_cooldown event_var(attacker) 0
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es playerset model event_var(attacker) models/props_c17/oildrum001
+						es_delayed 3 playerset model event_var(attacker) 0
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es wcs_setmodel event_var(attacker) models/props_c17/oildrum001.mdl
+						es_delayed 3 wcs_setmodel event_var(attacker) 0
+					}
+					es wcs_setfx speed event_var(attacker) - .35 3
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Barrel drop - You were thrown into a barrel
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_xmath wcs_z1 + 10
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
+					es_xmath wcs_z1 + 15
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 2 (END)
+	}
+}
+
+block longjump_gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + .5 0
+	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - Gave you longjump and lower gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 3 (END)
+	}
+}
+
+block wallclimb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 4 (START)
+	}
+	es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize server_var(wcs_range)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wall climb - You can now climb over tall objects
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 4 (END)
+	}
+}
+
+block build
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 5 (START)
+	}
+	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
+	if (server_var(wcs_tmp11) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+	}
+	if (server_var(wcs_tmp11) => 1) do
+	{
+		es_xmath wcs_tmp11 - 1
+		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_prop_physics_create server_var(wcs_userid) props_c17/oildrum001_explosive.mdl
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_explosive_barrel server_var(wcs_userid)
+		}
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 5 (END)
+	}
+}

@@ -1,0 +1,260 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Spawn (START)
+	}
+	es wcs_fade event_var(userid) 225 101 9 160 2.5 4
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Spawn (END)
+	}
+}
+
+block element
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_rand 1 4
+				if (server_var(wcs_rand) == 1) do
+				{
+					es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+					ifx false(wcs_tmp3) do
+					{
+						es wcsgroup set is_burning event_var(userid) 1
+						es_delayed 2 wcsgroup set is_burning event_var(userid) 0
+						es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+						es wcs_setfx burn event_var(userid) = 1 2
+						es wcs_centertell event_var(attacker) Your enemy caught on fire!
+						es wcs_fade event_var(userid) 225 101 9 35 1 4
+						es wcs_fade event_var(attacker) 225 101 9 35 1 4
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_xmath wcs_z1 + 20
+						es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 8 20 0 255 255 255 200 5
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 175 .75 8 30 0 255 255 255 200 5
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 8 20 0 255 255 255 200 5
+					}
+				}
+				if (server_var(wcs_rand) == 2) do
+				{
+					es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+					if (server_var(wcs_tmp4) == 0) do
+					{
+						es wcsgroup set is_frozen event_var(userid) 1
+						es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+						es wcs_setfx freeze event_var(userid) = 1 1
+						es wcs_centertell event_var(userid) You've been frozen for 1 second 
+						es wcs_centertell event_var(attacker) You've frozen an enemy for 1 second
+						es wcs_fade event_var(userid) 40 244 255 30 1 4
+						es wcs_fade event_var(attacker) 40 244 255 30 1 4
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_xmath wcs_z1 + 20
+						es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 8 10 0 255 255 255 200 5
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 175 .75 8 10 0 255 255 255 200 5
+						es_xmath wcs_z1 + 15
+						es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 8 10 0 255 255 255 200 5
+					}
+				}
+				if (server_var(wcs_rand) == 3) do
+				{
+					es wcs_shake event_var(userid) 20 20 3
+					es wcs_centertell event_var(userid) You've been shaken for 2 seconds  
+					es wcs_centertell event_var(attacker) You've shaken your enemy for 2 seconds
+					es wcs_fade event_var(userid) 147 116 87 70 1 4
+					es wcs_fade event_var(attacker) 147 116 87 70 1 4
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 10 10 2 115 81 34 255 5
+					es_xmath wcs_z1 + 25
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 175 .75 18 10 3 115 81 34 255 5
+					es_xmath wcs_z1 + 25
+					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 10 10 2 115 81 34 255 5
+				}
+				if (server_var(wcs_rand) == 4) do
+				{
+					es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+					if (server_var(wcs_tmp3) == 0) do
+					{
+						es wcsgroup set is_slowed event_var(userid) 1
+						es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+						es wcs_setfx speed event_var(userid) = 0.75 1.5
+						es wcs_centertell event_var(userid) You've been slowed down for 1.5 seconds
+						es wcs_centertell event_var(attacker) You've slowed an enemy for 1.5 seconds
+						es wcs_fade event_var(userid) 153 217 234 45 1 4
+						es wcs_fade event_var(attacker) 153 217 234 45 1 4
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_xmath wcs_z1 + 20
+						es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 10 10 2 255 255 255 200 5
+						es_xmath wcs_z1 + 25
+						es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 175 .75 18 10 3 255 255 255 200 5
+						es_xmath wcs_z1 + 25
+						es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 150 .75 10 10 2 255 255 255 200 5
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 1 (END)
+	}
+}
+
+block disable
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 8
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 8 10 .5 12 10 2 100 100 200 255 1
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 110 10 .5 12 10 2 100 100 220 140 5
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 210 100 .5 12 10 2 100 100 220 140 5
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 310 200 .5 12 10 2 100 100 220 140 5
+				es_xrand wcs_red 1 2
+				if (server_var(wcs_red) == 1) do
+				{
+					es wcsgroup get erader_slowed wcs_tmp10 event_var(userid)
+					if (server_var(wcs_tmp10) == 0) do
+					{
+						es wcs_setfx speed event_var(userid) = 1 5
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Abolish magic - Set your speed to default 5 seconds
+						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Abolish magic - Removed your enemy's speed buff for 5 seconds
+					}
+				}
+				if (server_var(wcs_red) == 2) do
+				{
+					es wcs_setfx gravity event_var(userid) = 1 5
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Abolish magic - Set your gravity to default for 5 seconds
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Abolish magic - Removed your enemy's gravity buff for 5 seconds
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 2 (END)
+	}
+}
+
+block sleep
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_paralyzed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_paralyzed event_var(userid) 1
+					es_delayed 1 wcsgroup set is_paralyzed event_var(userid) 0
+					es wcs_fade event_var(userid) 5 5 5 255 .6 1
+					es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
+					es_delayed 1 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
+					es_delayed .5 es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+					es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(userid) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(userid) server_var(ss_name) addoutput "basespread 20"
+					es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 30"
+					es_fire event_var(userid) server_var(ss_name) addoutput "speed 150"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rate 150"
+					es_fire event_var(userid) server_var(ss_name) addoutput "startsize 10"
+					es_fire event_var(userid) server_var(ss_name) addoutput "endsize 18"
+					es_fire event_var(userid) server_var(ss_name) addoutput "twist 10"
+					es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 90"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 221 179 34"
+					es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+					es_fire event_var(userid) server_var(ss_name) turnon
+					es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 3 (END)
+	}
+}
+
+block transform
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_speed) server_var(wcs_duration)
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Transform - Recieved server_var(wcs_speed)% Health and speed for server_var(wcs_duration) seconds
+	es_xmath wcs_speed / 100
+	es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) server_var(wcs_duration)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z2 + 25
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 sprites/fire.vmt server_var(vector2) 80 75 10 1.25 60 10 .5 255 50 50 255 6 1
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_lightglow
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "GlowProxySize 90"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 255 0 0"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "VerticalGlowSize 85"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "HorizontalGlowSize 85"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "MinDist 20"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "MaxDist 225"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "OuterMaxDist 4"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "GlowProxySize 9"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "EndSprite particle/fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) setparent !activator
+	es_delayed server_var(wcs_duration) es_fire server_var(wcs_userid) server_var(ss_name) kill
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 40"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 8"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 50"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 80"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 14"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 21"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 10"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 90"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 160 0 0"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+	es_delayed server_var(wcs_duration) es_fire server_var(wcs_userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Eredar Sorcerer - [Block] Skill: 4 (END)
+	}
+}

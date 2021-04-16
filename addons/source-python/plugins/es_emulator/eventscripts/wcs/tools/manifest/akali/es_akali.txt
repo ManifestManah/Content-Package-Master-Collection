@@ -1,0 +1,174 @@
+////////////////////
+//Naiken Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 1
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Death (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] OnChange (START)
+	}
+	es wcsgroup set ulti_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] OnChange (END)
+	}
+}
+
+block slash
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice2) <= 33) do
+	{
+		if (event_var(weapon) = knife) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				if (event_var(es_attackerdead) = 0) do 
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen event_var(es_attackername)'s #greenCresent slash #lightgreenmade you bleed for 3 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Your Cresent slash made event_var(es_username) bleed for 3 seconds!
+					es_delayed 1 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es_delayed 2 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es_delayed 3 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_emitsound player event_var(attacker) ambient\machines\slicer1.wav 1.0 0.5
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 1 (END)
+	}
+}
+
+block mark
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice3) <= 33) do
+	{
+		if (event_var(weapon) = knife) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				if (event_var(es_attackerdead) = 0) do 
+				{
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Mark of the assassin dealt + server_var(wcs_dmg) damage!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 2 (END)
+	}
+}
+
+block shroud
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 3 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do 
+		{
+			es wcsgroup get is_slowed wcs_tmp3 event_var(attacker)
+			if (server_var(wcs_tmp3) == 0) do
+			{
+				es wcsgroup set akali_shroud event_var(attacker) 1
+				es_delayed server_var(wcs_duration) es wcsgroup set akali_shroud event_var(attacker) 0
+				es wcs_setfx speed event_var(attacker) = .75 server_var(wcs_duration)
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 0 1
+				es_cexec event_var(userid) r_screenoverlay effects\flicker_256.vmt
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Twillight Shroud made you invisible and slowed your enemy for server_var(wcs_duration) seconds!
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient\wind\wind_hit1.wav .7
+					es_playsound event_var(userid) npc\manhack\mh_blade_snick1.wav .7
+				}
+				es_delayed server_var(wcs_duration) wcs_color event_var(userid) 255 255 255 255 1
+				es_delayed server_var(wcs_duration) es_cexec event_var(userid) r_screenoverlay 0
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 11 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2.5 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 3 (END)
+	}
+}
+
+block dance
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_range) 0.5
+	es wcs_color server_var(wcs_userid) 255 255 255 75 0
+	es_delayed .5 wcs_color server_var(wcs_userid) 255 255 255 255 0
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) npc\roller\blade_out.wav .5
+		es_playsound server_var(wcs_userid) npc\scanner\scanner_nearmiss2.wav .5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Akali - [Block] Skill: 4 (END)
+	}
+}

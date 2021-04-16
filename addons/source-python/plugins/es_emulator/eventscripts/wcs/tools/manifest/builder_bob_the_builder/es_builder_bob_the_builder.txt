@@ -1,0 +1,106 @@
+//////////////////////
+//Builders Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Spawn (START)
+	}
+	es wcsgroup set bconstruction event_var(userid) 15
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 376 3 150 10 0 128 0 128 200 10
+	es est_effect 10 #a 0 sprites/plasma.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 376 3 150 10 0 128 0 128 200 10
+	es_xmath wcs_z1 + 25
+	es est_effect 10 #a 0 sprites/plasma.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 3 11 11 0 128 0 128 255 1
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/plasma.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 3 6 6 0 128 0 128 255 2
+	es_xmath wcs_z1 + 15		
+	es est_effect 10 #a 0 sprites/plasma.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 3 4 4 0 128 0 128 255 3
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] OnChange (START)
+	}
+	es wcsgroup set bconstruction server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] OnChange (END)
+	}
+}
+
+block regen
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 1 (START)
+	}
+	es_xrand wcs_duration 5 15
+	es wcs_regeneration event_var(userid) server_var(wcs_rand) server_var(wcs_duration) 175 1000 250
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen First aid - Heals you and your team when below serveer_var(wcs_maxhealth) health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Quick and mobile - Granted you additional speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Working suit - Gave you + server_var(wcs_addhealth) health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 3 (END)
+	}
+}
+
+block build
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
+	if (server_var(wcs_tmp11) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+	}
+	if (server_var(wcs_tmp11) => 1) do
+	{
+		es_xmath wcs_tmp11 - 1
+		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
+		es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 4 (END)
+	}
+}

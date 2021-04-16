@@ -1,0 +1,109 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;aug;sg550;awp;sg552;g3sg1;m249"
+		es_delayed .1 es_give event_var(userid) weapon_scout
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;m249;negev"
+		es_delayed .1 es_give event_var(userid) weapon_ssg08
+	}
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You can only use sniper rifles
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Spawn (END)
+	}
+}
+
+block cloak
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 1 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've become harder to see.
+	es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 1 30 100 0.8 255 100 100 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 1 (END)
+	}
+}
+
+block awp
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es_delayed .3 es_give event_var(userid) weapon_scout
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es_delayed .3 es_give event_var(userid) weapon_ssg08
+			}
+			es_delayed .2 wcs_drop event_var(userid) 1
+			es_delayed .5 wcs_setfx 1stclip event_var(userid) = 30 0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've picked up your trustworthy scout!
+			es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 60 2 20 10 1 10 255 0 255 1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 2 (END)
+	}
+}
+
+block critical
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_centertell event_var(attacker) You hit event_var(es_username) with a critical shot!
+				es damage event_var(userid) 35 1 event_var(attacker)
+				es_xrand wcs_x1 40 300
+				es_xrand wcs_y1 40 300
+				es_xrand wcs_z1 340 515
+				es wcs_pushed event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 10 0.5 30 100 3 255 100 100 255 1
+				es_xmath wcs_z1 + 120
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 10 0.5 30 100 3 255 100 100 255 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Cadian Sniper - [Block] Skill: 3 (END)
+	}
+}

@@ -1,0 +1,232 @@
+//////////////////////
+//Holliday Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) npc/ichthyosaur/water_growl5.wav 1
+	}
+	es wcsgroup set blooddemon_player event_var(userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Spawn (END)
+	}
+}
+
+block player_death
+{
+	es wcsgroup set blooddemon_upgraded event_var(userid) 0
+}
+
+block onchange
+{
+	es wcsgroup set blooddemon_player server_var(wcs_userid) 0
+	es wcsgroup set blooddemon_upgraded server_var(wcs_userid) 0
+}
+
+block blooddemon_p90
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 1 (START)
+	}
+	es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+	es_delayed .1 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+	es_delayed .2 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+	es_delayed .3 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+	es_delayed .4 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+	es_delayed .5 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+	es_delayed .6 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+	es_delayed .7 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+	es_delayed .8 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+	es_delayed .9 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+	es_delayed 1 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+	es_delayed 1.1 es_cexec event_var(userid) r_screenoverlay 0
+	es playerget primary wcs_tmp event_var(userid)
+	if (server_var(wcs_tmp) = 0) do
+	{
+		es wcs_removeweapon event_var(userid) 1
+		es_delayed .2 es_give event_var(userid) weapon_p90
+		es_delayed .5 wcs_setfx 1stclip event_var(userid) + server_var(wcs_ammo) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen P90 - You received a P90 with server_var(wcs_ammo) more ammo
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 1 (END)
+	}
+}
+
+event player_death
+{
+	es wcsgroup get blooddemon_player wcs_tmp2 event_var(attacker)
+	if (server_var(wcs_tmp2) == 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Blood Demon - [Block] Event Player_Death (START)
+		}
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+			es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector2) 100 100 1000
+			es_delayed .1 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+			es_delayed .2 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+			es_delayed .3 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+			es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+			es_delayed .1 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+			es_delayed .2 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+			es_delayed .3 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+			es_delayed .4 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+			es_delayed .5 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+			es_delayed .6 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+			es_delayed .7 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+			es_delayed .8 es_cexec event_var(userid) r_screenoverlay effects/mh_blood3.vmt
+			es_delayed .9 es_cexec event_var(userid) r_screenoverlay effects/mh_blood1.vmt
+			es_delayed 1 es_cexec event_var(userid) r_screenoverlay effects/mh_blood2.vmt
+			es_delayed 1.1 es_cexec event_var(userid) r_screenoverlay 0
+			es wcs_get_skill_level event_var(attacker) wcs_tmp4 1
+			if (server_var(wcs_tmp4) == 1) do
+			{
+				es_xset wcs_ammo 5
+			}
+			if (server_var(wcs_tmp4) == 2) do
+			{
+				es_xset wcs_ammo 10
+			}
+			if (server_var(wcs_tmp4) == 3) do
+			{
+				es_xset wcs_ammo 14
+			}
+			if (server_var(wcs_tmp4) == 4) do
+			{
+				es_xset wcs_ammo 18
+			}
+			if (server_var(wcs_tmp4) == 5) do
+			{
+				es_xset wcs_ammo 21
+			}
+			if (server_var(wcs_tmp4) == 6) do
+			{
+				es_xset wcs_ammo 24
+			}
+			if (server_var(wcs_tmp4) == 7) do
+			{
+				es_xset wcs_ammo 27
+			}
+			if (server_var(wcs_tmp4) == 8) do
+			{
+				es_xset wcs_ammo 30
+			}
+			es wcsgroup get blooddemon_upgraded wcs_tmp3 event_var(attacker)
+			if (server_var(wcs_tmp3) == 2) do
+			{
+				es_xrand wcs_rand 0 1
+				ifx true(wcs_rand) do
+				{
+					es_xrand wcs_addhealth 30 40
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Upgrade - You received server_var(wcs_addhealth) bonus health
+				}
+				else do
+				{
+					es_xrand wcs_speed 20 30
+					es_xmath wcs_speed / 100
+					es wcs_setfx speed event_var(attacker) + server_var(wcs_speed) 0
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Upgrade - You gained some more speed!
+				}
+			}
+			if (server_var(wcs_tmp3) == 1) do
+			{
+				es_xmath wcs_tmp3 + 1
+				es wcsgroup set blooddemon_upgraded event_var(attacker) server_var(wcs_tmp3)
+				es_delayed .5 es_give event_var(attacker) weapon_m4a1
+				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
+				es wcs_drop event_var(attacker) 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Upgrade - You received a m4a1 with server_var(wcs_ammo) more ammo
+			}
+			if (server_var(wcs_tmp3) == 0) do
+			{
+				es_xmath wcs_tmp3 + 1
+				es wcsgroup set blooddemon_upgraded event_var(attacker) server_var(wcs_tmp3)
+				es_delayed .5 es_give event_var(attacker) weapon_ak47
+				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
+				es wcs_drop event_var(attacker) 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Upgrade - You received an AK47 with server_var(wcs_ammo) more ammo
+			}
+		}
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Blood Demon - [Block] Event Player_Death (END)
+		}
+	}
+}
+
+block mole
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcs_domole event_var(userid) 4
+			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
+			es wcs_centertell event_var(userid) Warping to enemy spawn in 4 seconds!
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 3 (END)
+	}
+}
+
+block blooddemon_reset
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get blooddemon_upgraded wcs_tmp3 server_var(wcs_userid)
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es wcsgroup set blooddemon_upgraded server_var(wcs_userid) 0
+		es_delayed .2 wcs_spawn server_var(wcs_userid) 1
+		es_delayed .4 wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You have used reset!
+		es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav 1
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_xmath wcs_z1 + 600
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es_delayed .1 est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 10 3 111 7 10 10 255 255 255 255 172
+		es_delayed .2 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 500 200 10 1 90 400 0 255 255 255 255 100 1
+		es_delayed .3 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 800 500 10 1 90 400 0 255 255 255 255 100 1
+		es_delayed .4 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 700 400 10 1 90 400 0 255 255 255 255 100 1
+		es_delayed .5 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 600 300 10 1 90 400 0 255 255 255 255 100 1
+		es_delayed .6 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 500 200 10 1 90 400 0 255 255 255 255 100 1
+		es_delayed .6 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 100 900 10 1 90 400 0 255 255 255 255 100 1
+	}
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You can't reset before you've killed someone!
+	}	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blood Demon - [Block] Skill: 4 (END)
+	}
+}

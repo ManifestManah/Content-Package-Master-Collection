@@ -1,0 +1,130 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block damage_deagle
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerweapon) == weapon_deagle) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				if (event_var(es_attackerdead) = 0) do
+				{
+					es_xrand wcs_dmg 12 25
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 1 (END)
+	}
+}
+
+block drug
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_fade event_var(userid) 255 0 0 100 1 1
+				es_delayed .5 wcs_fade event_var(userid) 0 255 0 100 1 1
+				es_delayed 1 wcs_fade event_var(userid) 0 0 255 100 1 1
+				es_delayed 1.5 wcs_fade event_var(userid) 150 0 155 100 1 1
+				es_delayed 2 wcs_fade event_var(userid) 155 155 0 100 1 1
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Drug - You drugged your enemy
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Drug - You have been drugged
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 15
+				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 175 20 1 14 10 .3 255 0 255 250 3
+				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 175 1 14 10 .3 255 0 255 250 3
+				es_xmath wcs_z2 + 10
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 175 20 1 14 10 .3 255 0 255 250 3
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 175 1 14 10 .3 255 0 255 250 3
+				es_xmath wcs_z2 + 10
+				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 175 20 1 14 10 .3 255 0 255 250 3
+				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 175 1 14 10 .3 255 0 255 250 3
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 2 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 3 (END)
+	}
+}
+
+block create_random_weapon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 4 (START)
+	}
+	es_xrand wcs_rand 1 6
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Insidious Theft - You stole a weapon
+	if (server_var(wcs_rand) == 1) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_give server_var(wcs_userid) weapon_p90
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_give server_var(wcs_userid) weapon_awp
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_give server_var(wcs_userid) weapon_ak47
+	}
+	if (server_var(wcs_rand) == 4) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_give server_var(wcs_userid) weapon_m4a1
+	}
+	if (server_var(wcs_rand) == 5) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_give server_var(wcs_userid) weapon_m249
+	}
+	if (server_var(wcs_rand) == 6) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 2
+		es_give server_var(wcs_userid) weapon_deagle
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Beautiful Actress - [Block] Skill: 4 (END)
+	}
+}

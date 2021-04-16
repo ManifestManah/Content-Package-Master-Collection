@@ -1,0 +1,545 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 90
+	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .1 es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 8 10 0 255 0 0 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .2 es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .3 es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 8 10 0 255 0 0 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .4 es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .5 es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 8 10 0 255 0 0 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .6 es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .7 es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 8 10 0 255 0 0 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .8 es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed .9 es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 8 10 0 255 0 0 255 1
+	es_xmath wcs_z1 - 9
+	es_delayed 1 est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 2 10 0 255 255 255 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] OnChange (START)
+	}
+	es wcsgroup set houndpoints server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] OnChange (END)
+	}
+}
+
+block points
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 1) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get houndpoints wcs_tmp3 event_var(attacker)
+				if (server_var(wcs_tmp3) != 15) do
+				{
+					es_xmath wcs_tmp3 + 1
+					es wcsgroup set houndpoints event_var(attacker) server_var(wcs_tmp3)
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Hunter points - You now have Granted you server_var(wcs_tmp3) points
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 1 (END)
+	}
+}
+
+block invis
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup get houndpoints wcs_tmp3 event_var(userid)
+			if (server_var(wcs_tmp3) == 1) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 230 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 2) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 217 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 3) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 204 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 4) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 191 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 5) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 179 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 6) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 166 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 7) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 153 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 8) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 140 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 9) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 135 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 10) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 130 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 11) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 120 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 12) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 110 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 13) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 100 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 14) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 90 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+			if (server_var(wcs_tmp3) == 15) do
+			{
+				es_delayed .5 wcs_color event_var(userid) 255 255 255 80 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 100
+				es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 2 10 0 255 255 255 255 1
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 0 0 255 1
+				es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 1 2 10 0 255 255 255 255 1
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 1 10 10 0 255 0 0 255 1
+				es_xmath wcs_z1 - 75
+				es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 2 10 0 255 255 255 255 1
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 0 0 255 1
+				es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 1 2 10 0 255 255 255 255 1
+				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 250 1 10 10 0 255 0 0 255 1
+				es wcsgroup get houndpoints wcs_tmp3 event_var(attacker)
+				if (server_var(wcs_tmp3) == 1) do
+				{
+					es damage event_var(userid) 2 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +2 extra damage
+				}
+				if (server_var(wcs_tmp3) == 2) do
+				{
+					es damage event_var(userid) 4 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +4 extra damage
+				}
+				if (server_var(wcs_tmp3) == 3) do
+				{
+					es damage event_var(userid) 6 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +6 extra damage
+				}
+				if (server_var(wcs_tmp3) == 4) do
+				{
+					es damage event_var(userid) 8 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +8 extra damage
+				}
+				if (server_var(wcs_tmp3) == 5) do
+				{
+					es damage event_var(userid) 10 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +10 extra damage
+				}
+				if (server_var(wcs_tmp3) == 6) do
+				{
+					es damage event_var(userid) 12 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +12 extra damage
+				}
+				if (server_var(wcs_tmp3) == 7) do
+				{
+					es damage event_var(userid) 14 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +14 extra damage
+				}
+				if (server_var(wcs_tmp3) == 8) do
+				{
+					es damage event_var(userid) 16 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +16 extra damage
+				}
+				if (server_var(wcs_tmp3) == 9) do
+				{
+					es damage event_var(userid) 18 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +18 extra damage
+				}
+				if (server_var(wcs_tmp3) == 10) do
+				{
+					es damage event_var(userid) 20 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +20 extra damage
+				}
+				if (server_var(wcs_tmp3) == 11) do
+				{
+					es damage event_var(userid) 22 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +22 extra damage
+				}
+				if (server_var(wcs_tmp3) == 12) do
+				{
+					es damage event_var(userid) 24 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +24 extra damage
+				}
+				if (server_var(wcs_tmp3) == 13) do
+				{
+					es damage event_var(userid) 26 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +26 extra damage
+				}
+				if (server_var(wcs_tmp3) == 14) do
+				{
+					es damage event_var(userid) 28 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +28 extra damage
+				}
+				if (server_var(wcs_tmp3) == 15) do
+				{
+					es damage event_var(userid) 30 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Beastiality dealt +30 extra damage
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 3 (END)
+	}
+}
+
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get houndpoints wcs_tmp3 event_var(userid)
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 2) do
+	{
+		es_xmath wcs_speed * 2
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 3) do
+	{
+		es_xmath wcs_speed * 3
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 4) do
+	{
+		es_xmath wcs_speed * 4
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 5) do
+	{
+		es_xmath wcs_speed * 5
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 6) do
+	{
+		es_xmath wcs_speed * 6
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 7) do
+	{
+		es_xmath wcs_speed * 7
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 8) do
+	{
+		es_xmath wcs_speed * 8
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 9) do
+	{
+		es_xmath wcs_speed * 9
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 10) do
+	{
+		es_xmath wcs_speed * 10
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 11) do
+	{
+		es_xmath wcs_speed * 11
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 12) do
+	{
+		es_xmath wcs_speed * 12
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 13) do
+	{
+		es_xmath wcs_speed * 13
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 14) do
+	{
+		es_xmath wcs_speed * 14
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	if (server_var(wcs_tmp3) == 15) do
+	{
+		es_xmath wcs_speed * 15
+		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 4 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 5 (START)
+	}
+	es wcsgroup get houndpoints wcs_tmp3 event_var(userid)
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 2) do
+	{
+		es_xmath wcs_gravity * 2
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 3) do
+	{
+		es_xmath wcs_gravity * 3
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 4) do
+	{
+		es_xmath wcs_gravity * 4
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 5) do
+	{
+		es_xmath wcs_gravity * 5
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 6) do
+	{
+		es_xmath wcs_gravity * 6
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 7) do
+	{
+		es_xmath wcs_gravity * 7
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 8) do
+	{
+		es_xmath wcs_gravity * 8
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 9) do
+	{
+		es_xmath wcs_gravity * 9
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 10) do
+	{
+		es_xmath wcs_gravity * 10
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 11) do
+	{
+		es_xmath wcs_gravity * 11
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 12) do
+	{
+		es_xmath wcs_gravity * 12
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 13) do
+	{
+		es_xmath wcs_gravity * 13
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 14) do
+	{
+		es_xmath wcs_gravity * 14
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	if (server_var(wcs_tmp3) == 15) do
+	{
+		es_xmath wcs_gravity * 15
+		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 5 (END)
+	}
+}
+
+block sacrifice
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 6 (START)
+	}
+	es wcsgroup get houndpoints wcs_tmp3 server_var(wcs_userid)
+	if (server_var(wcs_tmp3) <= 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Resistance - Failed, you don't have any hunter points
+	}
+	if (server_var(wcs_tmp3) => 1) do
+	{
+		es_xrand wcs_rand 1 2
+		es_xrand wcs_addhealth 25 35
+		if (server_var(wcs_rand) == 1) then es_xmath wcs_tmp3 - 1
+		if (server_var(wcs_rand) == 2) then es_xmath wcs_tmp3 - 2
+		es wcsgroup set houndpoints server_var(wcs_userid) server_var(wcs_tmp3)
+		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Resistance - Sacrificed server_var(wcs_rand) hunter points to gain server_var(wcs_addhealth) health
+		es wcs_centertell server_var(wcs_userid) Received server_var(wcs_addhealth) more health
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkness Hound - [Block] Skill: 6 (END)
+	}
+}

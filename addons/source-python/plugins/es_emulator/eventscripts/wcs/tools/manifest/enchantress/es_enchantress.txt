@@ -1,0 +1,317 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) physics\nearmiss\whoosh_large1.wav 1
+		es_delayed .3 es_playsound event_var(userid) physics\nearmiss\whoosh_large1.wav 1
+		es_delayed .8 es_playsound event_var(userid) physics\nearmiss\whoosh_large4.wav 1
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 effects/blueblackflash_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 130 50 2 7 11 0 0 175 255 255 9
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 effects/blueblackflash_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 130 50 2 7 11 0 0 175 255 255 9
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 30
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	es_xmath wcs_z1 + 35
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	es_xmath wcs_z1 - 35
+	es_xmath wcs_x1 + 45
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	es_xmath wcs_x1 - 90
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	es_xmath wcs_x1 + 45
+	es_xmath wcs_y1 + 45
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	es_xmath wcs_y1 - 90
+	es est_effect 11 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 0.2 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Spawn (END)
+	}
+}
+
+block shiver
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(attacker) = 0.75 2
+					es_tell event_var(attacker) #multi #lightgreen You've been slowed down for 2 seconds by #green event_var(es_username)'s shivering armor.
+					es_tell event_var(userid) #multi #lightgreen Your #green shivering armor #lightgreen slowed down #green event_var(es_attackername) #lightgreen for #green 2 seconds.
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 125
+					es_xmath wcs_z2 + 5
+					es est_effect 3 #a 0 effects/bluemuzzle.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2.0 40 60 0 175 255 230
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 1 (END)
+	}
+}
+
+block chains
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(userid) Frozen by chains of ice for 1 second!
+					es wcs_centertell event_var(attacker) Chains of ice froze event_var(es_username) for 1 second!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 40
+					es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 41 4 2 0 15 0 0 255 255 1
+					es_xmath wcs_z1 - 7
+					es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 42 43 3 3 0 13 0 0 255 255 3
+					es_xmath wcs_z1 + 13
+					es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 48 49 4 4 0 13 0 0 255 255 2
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 2 (END)
+	}
+}
+
+block icecicle
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 1 6
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Impaled event_var(es_username) with an icecicle - dealing server_var(wcs_dmg) extra damage
+				es wcs_centertell event_var(userid) You've been impaled with event_var(es_attackername)'s icecicle - took server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 + 100
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_y2 + 130
+				es_xmath wcs_z2 + 15
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 - 200
+				es_xmath wcs_z2 + 50
+				es_xmath wcs_y2 - 230
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 + 260
+				es_xmath wcs_z2 - 10
+				es_xmath wcs_y2 + 330
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 - 120
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_z2 + 40
+				es_xmath wcs_y2 - 130
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 + 195
+				es_xmath wcs_z2 - 30
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_y2 - 190
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_x2 - 180
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+				es_xmath wcs_y2 + 215
+				es est_effect 3 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 0 175 255 230
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 3 (END)
+	}
+}
+
+block nova
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 300 "es_xdoblock wcs/tools/manifest/enchantress/ultimate_path"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frost Nova affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Frost Nova dealt 20 damage to server_var(wcs_count_players_actually_affected) enemies
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_path 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_ultinotexec 0
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/enchantress/ultimate_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_xset wcs_ultinotexec 1
+						}
+					}
+				}
+				else do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, your target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Frost Nova - You took 20 damage!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 1.5 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es wcs_setfx freeze server_var(wcs_targetid) = 1 1.5
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Frost Nova - You took 20 damage and became frozen for 1.5 second
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 8
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1.5 8 8 0.8 0 175 255 255 15
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1.5 8 8 1.2 0 175 255 255 15
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1.5 8 8 2 0 175 255 255 15
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1.5 8 8 1.6 0 175 255 255 15
+	es damage server_var(wcs_targetid) 20 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Enchantress Of The Frozen Wastes - [Block] Skill: 4 (EXECUTED END)
+	}
+}

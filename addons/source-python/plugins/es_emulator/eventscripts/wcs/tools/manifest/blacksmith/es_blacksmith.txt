@@ -1,0 +1,210 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Death (START)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] OnChange (END)
+	}
+}
+
+block weapon_primary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 1 (START)
+	}
+	es_delayed .4 wcs_drop event_var(userid) 1
+	es_delayed .5 es_give event_var(userid) weapon_m4a1
+	es_delayed .5 es_give event_var(userid) weapon_m4a1
+	es_delayed .5 es_give event_var(userid) weapon_m4a1
+	es_delayed .6 wcs_setfx 1stclip event_var(userid) = server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen M4A1 creator - Received a m4a1 with server_var(wcs_invis) bullets
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 550 2 65 10 1 255 128 65 180 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 1 (END)
+	}
+}
+
+block weapon_secondary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 2 (START)
+	}
+	es_delayed .4 wcs_drop event_var(userid) 2
+	es_delayed .5 es_give event_var(userid) weapon_deagle
+	es_delayed .5 es_give event_var(userid) weapon_deagle
+	es_delayed .5 es_give event_var(userid) weapon_deagle
+	es_delayed .6 wcs_setfx 2ndclip event_var(userid) = server_var(wcs_multiplier) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Deagle creator - Received a deagle with server_var(wcs_multiplier) bullets
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 600 2 65 10 1 255 240 30 160 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 2 (END)
+	}
+}
+
+block armour_leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 10
+				es_xmath wcs_z2 + 10
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 5 .5 15 15 0 .2 255 242 0 175 10
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 155 65 .5 20 10 0 255 242 0 175 8
+				es playerget armor wcs_tmp1 event_var(attacker)
+				if (server_var(wcs_tmp1) > 250) do
+				{
+					es wcs_setfx armor event_var(attacker) = 250 0
+					es wcs_centertell event_var(attacker) Your armor is capped off!
+				}
+				if (server_var(wcs_tmp1) <= 250) do
+				{
+					es_xrand wcs_armor 4 21
+					es wcs_setfx armor event_var(attacker) + server_var(wcs_armor) 0
+					es wcs_centertell event_var(attacker) You drained server_var(wcs_armor) armor!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 3 (END)
+	}
+}
+
+block life_leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_playsound event_var(attacker) wcs/vampiricstrike.mp3 .7
+				es_playsound event_var(userid) wcs/vampiricstrike.mp3 .8
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 5 1 15 15 0 .2 128 0 0 175 15
+				es est_effect_06 #a 0 effects/blueflare1.vmt server_var(vector2) server_var(vector1) 5 1 30 30 0 0 180 0 0 255 20
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 155 65 1 30 10 0 128 0 0 175 15
+				es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 155 65 1 20 10 0 180 0 0 255 20
+				es playerget health wcs_tmp1 event_var(attacker)
+				if (server_var(wcs_tmp1) > 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) Your health leeching is capped!
+				}
+				if (server_var(wcs_tmp1) <= 260) do
+				{
+					es_xrand wcs_addhealth 4 21
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 4 (END)
+	}
+}
+
+block immortality
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 5 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav 1.0
+		es_delayed 1.4 es_stopsound ambient/atmosphere/city_skypass1.wav
+		es_delayed 1.5 es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav .7
+		es_delayed server_var(wcs_duration) es_stopsound ambient/atmosphere/city_skypass1.wav
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) player/halloween/ghostmode_on.wav 1.0
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 1
+	es wcsgroup set evasion_chance server_var(wcs_userid) 65
+	es wcsgroup set evasion_count server_var(wcs_userid) 0
+    es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
+    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Inner vitality - You evaded server_var(wcs_tmp1) attacks
+	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
+	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Inner vitality - 65% chance to evade for server_var(wcs_duration) seconds
+	es wcs_centertell server_var(wcs_userid) Increased your chance to evade for server_var(wcs_duration) seconds!
+	es_xmath wcs_duration - 1
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Inner vitality - Your evasion is fading...
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 150 .5 40 10 .8 255 244 0 125 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 210 .5 40 10 .8 255 244 0 125 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Blacksmith - [Block] Skill: 5 (END)
+	}
+}

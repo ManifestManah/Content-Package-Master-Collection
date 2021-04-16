@@ -1,0 +1,171 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es playerset model event_var(userid) models/props_c17/oildrum001
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_setmodel event_var(userid) models\props_c17\oildrum001.mdl
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es wcsgroup set bconstruction event_var(userid) 15
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] OnChange (START)
+	}
+	es wcsgroup set bconstruction server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] OnChange (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive speed - Increased your speed by server_var(wcs_speed)%
+		es_playsound event_var(userid) wcs/speed.mp3 .7
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 425 1.5 25 10 0 200 110 55 240 3
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 400 1.5 40 10 0 200 200 50 200 5
+		es_xmath wcs_z2 + 15
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 300 1.5 25 10 0 200 110 55 240 3
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 300 1.5 40 10 0 200 200 50 200 5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 1 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive gravity - Reduced your gravity to server_var(wcs_gravity)%
+		es_playsound event_var(userid) skills/hymn.mp3 .8
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 410 411 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 400 401 2 15 10 0 0 255 230 200 2
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 310 311 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 301 2 15 10 0 0 255 230 200 2
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 210 211 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 201 2 15 10 0 0 255 230 200 2
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 2 (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 3 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive longjump - Your jump length is increased
+		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 5
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 255	
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 25 10 0 100 100 225 200 8
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 28 10 0 150 150 150 210 1
+		es_xmath wcs_z1 + 15
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 25 10 0 100 100 225 200 8
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 28 10 0 150 150 150 210 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 3 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 4 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive health - Increased your health by server_var(wcs_addhealth)
+		es_playsound event_var(userid) wcs/defiance.mp3 .8
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 40 10 0 200 0 0 180 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 300 2 50 10 0 255 70 70 200 5
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 4 (END)
+	}
+}
+
+block illusion
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 5 (START)
+	}
+	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
+	if (server_var(wcs_tmp11) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Illusive mirage - You don't have any mirages left
+	}
+	if (server_var(wcs_tmp11) => 1) do
+	{
+		es_xmath wcs_tmp11 - 1
+		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
+		es_prop_physics_create server_var(wcs_userid) props_c17/oildrum001.mdl
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Illusive mirage - server_var(wcs_tmp11) mirages left
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trickster Assassin - [Block] Skill: 5 (END)
+	}
+}

@@ -1,0 +1,270 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Spawn (START)
+	}
+	es wcsgroup set bray_shaman_invisibility event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Death (START)
+	}
+	es wcsgroup set bray_shaman_invisibility event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] OnChange (START)
+	}
+	es wcsgroup set bray_shaman_invisibility server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] OnChange (END)
+	}
+}
+
+block longjump_footstep
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+		es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize 128
+		es_xmath wcs_multiplier * 100
+		es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unruly - Your jump length is increased by server_var(wcs_multiplier)% and you walk over small obstacles with ease
+		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 8
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 255	
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 35 10 0 100 100 225 200 8
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 45 10 0 150 150 150 210 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 1 (END)
+	}
+}
+
+block mole
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		es wcs_domole event_var(userid) 3
+		es_emitsound player event_var(userid) wcs/mole.mp3 1 .6
+		es_tell event_var(userid) You'll mole to the enemy spawn in 3 seconds!
+		es wcs_centertell event_var(userid) Warping to enemy spawn in 3 seconds!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es est_effect 10 #a 0 sprites/glow04.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 185 85 1 20 10 1 20 82 0 180 2
+		es est_effect 10 #a 0 sprites/glow04.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 285 185 1 30 10 1 20 82 0 180 2
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 2 (END)
+	}
+}
+
+block blend
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es wcsgroup get bray_shaman_invisibility wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcs_color event_var(userid) 255 255 255 0 1
+					es wcsgroup set bray_shaman_invisibility event_var(userid) 1
+					es_delayed 1 wcsgroup set bray_shaman_invisibility event_var(userid) 0
+					es_delayed 1 wcs_color event_var(userid) 255 255 255 255 1
+					es wcs_centertell event_var(userid) Blend turned you completely invisible for 1 second!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 3 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) weapons/crossbow/fire1.wav .7
+					es_playsound event_var(userid) weapons/crossbow/fire1.wav .9
+				}
+				es_xrand wcs_dmg 8 13
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Hunter's spear did + server_var(wcs_dmg) damage and pushed event_var(es_username) back!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_math wcs_z1 + 42
+				es_math wcs_z2 + 75
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es wcs_pushto event_var(userid) server_var(vector2) -1
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 10 1 5 6 5 4 17 85 0 220 2
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 10 1 5 6 5 5 20 82 0 220 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 4 (END)
+	}
+}
+
+block chain_heal
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 5 (START)
+	}
+	es_xset wcs_targetteam 0
+	es_xset wcs_targetid 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xrand wcs_addhealth 10 20
+		es playerget health wcs_tmp1 server_var(wcs_userid)
+		if (server_var(wcs_tmp1) >= 250) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
+		}
+		if (server_var(wcs_tmp1) < 250) do
+		{
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_centertell server_var(wcs_userid) Bray Shaman's Chain Heal healed you for server_var(wcs_addhealth) health!
+		}
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_playsound server_var(wcs_userid) ambient/levels/canals/windchime2.wav .8
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es_playsound server_var(wcs_userid) ambient\misc\windchime2.wav .8
+		}
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_math wcs_z2 + 128
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/plasmabeam.vmt server_var(vector2) server_var(vector1) 10 0.5 18 15 5 2 200 255 220 255 20
+		es est_effect_06 #a 0 sprites/plasmabeam.vmt server_var(vector2) server_var(vector1) 10 0.5 18 15 5 6 200 255 220 255 16
+		es est_effect_25 #a 0 server_var(vector1) server_var(vector2)
+		es est_effect_25 #a 0 server_var(vector2) server_var(vector1)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 "es_exists ex userid server_var(wcs_targetid);if (server_var(ex) = 1) then es_xdoblock wcs/tools/manifest/bray_shaman/chain_healexe"
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 5 (END)
+	}
+}
+
+block chain_healexe 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 5 (EXECUTED START)
+	}
+	es_xrand wcs_addhealth 10 20
+	es playerget health wcs_tmp1 server_var(wcs_targetid)
+	if (server_var(wcs_tmp1) >= 250) do
+	{
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
+	}
+	if (server_var(wcs_tmp1) < 250) do
+	{
+		es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
+		es wcs_centertell server_var(wcs_targetid) Bray Shaman's Chain Heal healed you for server_var(wcs_addhealth) health!
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient/levels/canals/windchime2.wav .8
+		es_playsound server_var(wcs_targetid) ambient/levels/canals/windchime2.wav .9
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient\misc\windchime2.wav .8
+		es_playsound server_var(wcs_targetid) ambient\misc\windchime2.wav .9
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_math wcs_z1 + 25
+	es_math wcs_z2 + 25
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/plasmabeam.vmt server_var(vector2) server_var(vector1) 10 0.5 18 15 5 2 200 255 220 255 20
+	es est_effect_06 #a 0 sprites/plasmabeam.vmt server_var(vector2) server_var(vector1) 10 0.5 18 15 5 6 200 255 220 255 20
+	es est_effect_25 #a 0 server_var(vector1) server_var(vector2)
+	es est_effect_25 #a 0 server_var(vector2) server_var(vector1)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Bray Shaman - [Block] Skill: 5 (EXECUTED END)
+	}
+}

@@ -1,0 +1,343 @@
+/////////////////////////
+//Holliday V3 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Spawn (START)
+	}
+	es wcs_setfx jetpack event_var(userid) = 0 0
+	es wcsgroup set deviljin_fly event_var(userid) 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 1000
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es est_effect_06 #a 0 sprites/glow08.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 255 255 255 50
+	es est_effect_06 #a 0 sprites/blackbeam.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es_xmath wcs_y2 + 1000
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bubble.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 228 228 228 255 100
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es_xmath wcs_y2 - 2000
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bubble.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 228 228 228 255 100
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es_xmath wcs_x2 + 1000
+	es_xmath wcs_y2 + 1000
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bubble.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 228 228 228 255 100
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es_xmath wcs_x2 - 2000
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bubble.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 228 228 228 255 100
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 40 15 0 0 255 0 0 255 100
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 900 3 60 100 0 255 55 57 255 90
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 900 20 3 60 100 0 255 55 57 255 90
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 1000
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 4096 3 60 10 1 255 0 0 255 90
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 4096 40 3 60 10 1 255 0 0 255 90
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Spawn (END)
+	}
+}
+
+block influence
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Your influence power gave you additional health and increased speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 1 (END)
+	}
+}
+
+block kick
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 10 15
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Spiver kick dealt + server_var(wcs_dmg) damage!
+				es wcs_centertell event_var(userid) Recieved + server_var(wcs_dmg) damage from a spiver kick!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 50
+				es_xmath wcs_z2 + 50
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/greenspit1.vmt server_var(vector1) server_var(vector2) 100 3 8 9 10 0 228 228 228 255 50
+				es est_effect_06 #a 0 sprites/hydragutbeam.vmt server_var(vector2) server_var(vector1) 100 3 3 2 10 0 228 228 228 255 100
+				es est_effect_06 #a 0 sprites/physring1.vmt server_var(vector1) server_var(vector2) 100 3 5 6 0 0 228 228 228 255 100
+				es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 100 3 7 8 0 0 255 0 0 255 100
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 2 (END)
+	}
+}
+
+block vision
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inlutrim vision made you and event_var(es_attackername) trade places!
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Inlutrim vision made you and event_var(es_username) trade places!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es wcs_teleport event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es wcs_teleport event_var(attacker) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 2 5 255 151 67 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 3 (END)
+	}
+}
+
+block bomb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 35
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+		es_getplayerteam wcs_team event_var(userid)
+		ifx true(wcs_ffa_enabled) do
+		{
+			es_xset wcs_targetteam "#alive"
+			es_getlivingplayercount wcs_pcount
+		}
+		ifx false(wcs_ffa_enabled) do
+		{
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) do
+			{
+				es_xset wcs_targetteam "#ct,#alive"
+				es_getlivingplayercount wcs_pcount 3
+			}	
+			if (server_var(wcs_team) = 3) do
+			{
+				es_xset wcs_targetteam "#t,#alive"
+				es_getlivingplayercount wcs_pcount 2
+			}
+		}
+		if (server_var(wcs_targetteam) != 0) do
+		{
+			if (server_var(wcs_pcount) > 0) do
+			{
+				es_xset wcs_counter 0
+				es_xset wcs_initial_players_struck 0
+				es_xset wcs_count_players_ultimate_immunity 0
+				es_xset wcs_count_players_actually_affected 0
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/devil_jin/wcs_ulti_suicide_checks"
+				if (server_var(wcs_execute_ultimate) == 1) do
+				{
+					//No matter how many targets are affected, this section will only be executed once.
+					//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
+					
+					es wcs_centertell event_var(userid) The Explosion damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
+					es_xrand wcs_rand 1 3
+					if (server_var(wcs_rand) == 1) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+					}
+					if (server_var(wcs_rand) == 2) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+					}
+					if (server_var(wcs_rand) == 3) do
+					{
+					es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+					}
+				}
+			}
+			else do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, there are no living enemies!
+			}
+			if (server_var(wcs_counter) = 0) do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, no nearby enemies!
+			}
+		}
+		else do
+		{
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Could not target an enemy team
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/devil_jin/wcs_ulti_suicide_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, all nearby enemy targets were immune!
+						}
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, you can't hit that many targets at once!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_magnitude) damage from an Explosion
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 4 (EXECUTED END)
+	}
+}
+
+block liftoff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 5 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get deviljin_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set deviljin_fly server_var(wcs_userid) 2
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_centertell server_var(wcs_userid) You are now flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 55 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 60 1 10 10 0 153 217 234 200 1
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set deviljin_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 55 5 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 5 1 10 10 0 153 217 234 200 1
+			es playerget health wcs_tmp1 server_var(wcs_userid)
+			if (server_var(wcs_tmp1) >= server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+			}
+			if (server_var(wcs_tmp1) < server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 1 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Devil Jin - [Block] Skill: 5 (END)
+	}
+}

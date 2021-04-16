@@ -1,0 +1,150 @@
+/////////////////////////
+//Eareland V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] OnChange (END)
+	}
+}
+
+block blind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+				es_delayed .75 es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Dark Void - Made your enemy fall asleep for 0.75 seconds
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dark Void - Put you to sleep for 0.75 seconds
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 1 (END)
+	}
+}
+
+block speed_temp_dark
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_color event_var(userid) 255 255 255 0 1
+					es_delayed 2 wcs_color event_var(userid) 20 20 20 255 1
+					es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 2
+					es wcs_centertell event_var(userid) Became invisible and faster for 2 seconds!
+					es_playsound event_var(userid) wcs/speed.mp3 .8
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z2 + 5
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+					es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 40 .8 14 10 0 249 225 57 200 2
+					es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 240 80 .8 14 10 0 249 225 57 200 2
+					es_xmath wcs_z2 + 8
+					es_createvectorstring vector1 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 25 10
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 2 (END)
+	}
+}
+
+block evade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 3 (START)
+	}
+	es wcsgroup set evasion event_var(userid) 1
+	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
+    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Team - You dodged server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Team - Grants you server_var(wcs_chance)% chance to dodge an attack
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 3 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Dark Pulse inflicted server_var(wcs_dmg) additional damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 - 10
+				es_xmath wcs_z2 - 10
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Darkrai - [Block] Skill: 4 (END)
+	}
+}

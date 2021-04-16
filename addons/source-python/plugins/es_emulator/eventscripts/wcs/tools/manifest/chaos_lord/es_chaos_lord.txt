@@ -1,0 +1,255 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 130 0 255 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Spawn (END)
+	}
+}
+
+block shift
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) npc\antlion\digup1.wav .3
+					es_playsound event_var(userid) npc\antlion\digup1.wav .3
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) physics\metal\bullet_metal_solid_06.wav .3
+					es_playsound event_var(userid) physics\metal\bullet_metal_solid_06.wav .3
+				}
+				es_xrand wcs_dmg 20 30
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Arcane shift - Dealt server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 50
+				es_xmath wcs_z2 + 50
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 2 159 0 255 255
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 15 15 159 0 255 255
+				es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 3 3 10 10 10 255
+				es_xmath wcs_z1 + 20
+				es est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 95 0.3 5 50 50 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .1 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 95 90 .3 50 10 10 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .2 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 90 85 .3 50 10 10 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .3 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 85 80 .3 50 10 10 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .4 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 75 .3 50 10 10 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .5 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 70 .3 50 10 10 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .6 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 70 65 .3 50 10 50 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .7 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 60 .3 50 10 50 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .8 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 55 .3 50 10 50 255 0 0 255 10
+				es_xmath wcs_z1 - 8
+				es_delayed .9 est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 50 .3 50 10 50 255 0 0 255 10
+				es_xmath wcs_z1 - 14
+				es est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 100 1.2 5 50 10 159 0 255 255 15
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 1 (END)
+	}
+}
+
+block petrify
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_paralyzed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_paralyzed event_var(userid) 1
+					es_delayed .5 wcsgroup set is_paralyzed event_var(userid) 0
+					es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
+					es_delayed .5 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Petrify - Paralysed event_var(es_username) for a half second
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Petrify - Paralysed you for a half second
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) npc\vort\health_charge.wav 0.5
+						es_delayed .7 es_stopsound event_var(userid) npc\vort\health_charge.wav
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) ambient\creatures\dog_bark_close_02.wav .5
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Chaos waves - Increased your health by server_var(wcs_addhealth)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 3 (END)
+	}
+}
+
+block cannon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 12 18
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Dealt + server_var(wcs_dmg) damage 
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 4 (END)
+	}
+}
+
+block beam
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xset wcs_dmg 5
+				es_xset wcs_tmp2 15
+				ifx true(wcs_ffa_enabled) do
+				{
+					es_xgetplayercount wcs_tmp3
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					es_getplayerteam wcs_team event_var(userid)
+					if (server_var(wcs_team) = 2) do
+					{
+						es_xgetplayercount wcs_tmp3 3
+					}
+					if (server_var(wcs_team) = 3) do
+					{
+						es_xgetplayercount wcs_tmp3 2
+					}
+				}
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) npc\strider\strider_minigun.wav .8
+					es_playsound event_var(attacker) npc\strider\strider_minigun.wav .5
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) physics\flesh\flesh_impact_bullet1.wav .8
+					es_playsound event_var(attacker) physics\flesh\flesh_impact_bullet1.wav .5
+				}
+				es_math wcs_tmp2 / server_var(wcs_tmp3)
+				es_math wcs_dmg + server_var(wcs_tmp2)
+				es wcs_decimal wcs_dmg server_var(wcs_dmg)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 80 1 5 50 30 159 0 255 255 15
+				es est_effect 10 #a 0 sprites/scanner.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 0 200 1.0 7 50 50 0 0 0 255 15
+				es est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 140 110 1 5 50 30 159 0 255 255 15
+				es est_effect 10 #a 0 sprites/scanner.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 0 1.0 7 50 50 0 0 0 255 15
+				es_delayed .6 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 110 0.5 5 50 30 0 0 0 255 15
+				es_delayed .6 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 110 80 0.5 5 50 30 0 0 0 255 15
+				es_delayed 1 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 110 140 0.25 5 50 30 159 0 255 255 15
+				es_delayed 1 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 50 0.25 5 50 30 159 0 255 255 15
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage onto you
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 5 (END)
+	}
+}
+
+block ultimate
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 6 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient\fire\mtov_flame2.wav .6
+		es_delayed .7 es_stopsound server_var(wcs_userid) ambient\fire\mtov_flame2.wav
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ui\freeze_cam.wav.5
+	}
+	es wcs_setfx speed server_var(wcs_userid) = 2 2
+	es wcs_centertell server_var(wcs_userid) Time travel pace increased your speed for 2 seconds
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.4 2 255
+	es est_effect 4 #a 0 sprites/plasmahalo.vmt server_var(wcs_userid) 0.5 5 5 1 159 0 255 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 6 (END)
+	}
+}

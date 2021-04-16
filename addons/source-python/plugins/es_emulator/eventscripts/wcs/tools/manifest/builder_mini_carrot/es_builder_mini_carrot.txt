@@ -1,0 +1,146 @@
+//////////////////////
+//Builders Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es playerset model event_var(userid) props\cs_office\snowman_nose
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_setmodel event_var(userid) models/props/cs_office/snowman_nose.mdl
+	}
+	es wcs_setfx health event_var(userid) = 1
+	es est_effect 4 #a 0 sprites/lgtning.vmt event_var(userid) 5 5 10 10 100 100 100 255
+	es wcsgroup set bconstruction event_var(userid) 25
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a small carrot
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] OnChange (START)
+	}
+	es wcsgroup set bconstruction server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] OnChange (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 1 (END)
+	}
+}
+
+block levitation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 2 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 2 (END)
+	}
+}
+
+block burn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+				ifx false(wcs_tmp3) do
+				{
+					es wcsgroup set is_burning event_var(userid) 1
+					es_delayed 3 wcsgroup set is_burning event_var(userid) 0
+					es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+					es wcs_setfx burn event_var(userid) = 1 3
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Burn - You were set on fire!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Burn - You set event_var(es_username) on fire for 3 seconds!
+					es_playsound event_var(userid) wcs/firecast.mp3 .9
+					es_playsound event_var(attacker) wcs/firecast.mp3 .7
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z2 + 10
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 40 10 0 255 255 255 255 8
+					es_xmath wcs_z2 + 30
+					es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 20 10 0 255 255 255 255 8
+					es_xmath wcs_z2 + 40
+					es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 3 (END)
+	}
+}
+
+block build
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
+	if (server_var(wcs_tmp11) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+	}
+	if (server_var(wcs_tmp11) => 1) do
+	{
+		es_xmath wcs_tmp11 - 1
+		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_create_prop server_var(wcs_userid) props_industrial\oil_storage.mdl 150
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_create_prop server_var(wcs_userid) models/props_industrial/wire_spool_01.mdl 175
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Mini Carrot - Builder Race - [Block] Skill: 4 (END)
+	}
+}

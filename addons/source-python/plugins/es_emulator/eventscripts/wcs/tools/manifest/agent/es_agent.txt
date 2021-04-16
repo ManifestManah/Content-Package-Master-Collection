@@ -1,0 +1,125 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Spawn (START)
+	}
+	es wcs_drop event_var(userid) 1
+	es_delayed .5 es_give event_var(userid) weapon_m4a1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 500 3 128 10 0 148 148 141 255 10
+	es est_effect 11 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 3 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen High speed - Your speed has been increased
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 1 (END)
+	}
+}
+
+block visible
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_already_colored wcs_tmp6 event_var(userid)
+				if (server_var(wcs_tmp6) == 0) do
+				{
+					es wcsgroup set is_already_colored event_var(userid) 1
+					es wcs_centertell event_var(userid) event_var(es_attackername) Has turned you pink for 3 seconds!
+					es wcs_centertell event_var(attacker) You've turned your target pink for 3 secons!
+					es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
+					es_delayed .1 wcs_color event_var(userid) 255 0 128 255 1
+					es_delayed 3 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 1
+					es_delayed 3 wcsgroup set is_already_colored event_var(userid) 0
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 25
+					es_xmath wcs_z2 + 25
+					es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 155 155 155 255
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 155 155 155 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 2 (END)
+	}
+}
+
+block disguise
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 4 (START)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		es_delayed .5 wcs_setfx disguiser event_var(userid) = 1 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Agent - You've disguised yourself as an enemy!
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 3 (END)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 4 (END)
+	}
+}
+
+block switch
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 5 (START)
+	}
+	es wcs_removeweapon server_var(wcs_userid) 1
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_give server_var(wcs_userid) weapon_scout
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_give server_var(wcs_userid) weapon_ssg08
+	}
+	es wcs_centertell server_var(wcs_userid) Switched to a scout for server_var(wcs_duration) seconds!
+	es_delayed server_var(wcs_duration) wcs_removeweapon server_var(wcs_userid) 1
+	es_delayed server_var(wcs_duration) es_give server_var(wcs_userid) weapon_m4a1
+	es_xmath wcs_duration - 1		
+	es_delayed server_var(wcs_duration) es wcs_centertell server_var(wcs_userid) Switching back to a m4a1 in 1 second!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Agent - [Block] Skill: 5 (END)
+	}
+}

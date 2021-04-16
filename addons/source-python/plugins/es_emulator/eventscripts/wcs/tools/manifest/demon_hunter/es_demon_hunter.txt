@@ -1,0 +1,447 @@
+////////////////////
+//Naiken Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Spawn (START)
+	}
+	es wcsgroup get dh_spirit_collect wcs_tmp event_var(userid)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Demon Spirit - You have server_var(wcs_tmp) spirits
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Death (START)
+	}
+	es wcsgroup get dh_spirit_collect wcs_tmp4 event_var(userid)
+	if (server_var(wcs_tmp4) > 1) do
+	{
+		es wcsgroup get dh_spirit_collect wcs_tmp4 event_var(userid)
+		es_xmath wcs_tmp4 - 1
+		es wcsgroup set dh_spirit_collect event_var(userid) server_var(wcs_tmp4)
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Demon Spirit - You have lost a demon spirit
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] OnChange (START)
+	}
+	es wcsgroup set dh_spirit_collect server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Demon Spirit - All your collected spirits has been released!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] OnChange (END)
+	}
+}
+
+block elemental_strike
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 8 14
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) You did + server_var(wcs_dmg) to an enemy
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 50
+				es_xrand wcs_rand 1 4
+				if (server_var(wcs_rand) = 1) do
+				{
+					es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+					ifx false(wcs_tmp3) do
+					{
+						es wcsgroup set is_burning event_var(userid) 1
+						es_delayed 2 wcsgroup set is_burning event_var(userid) 0
+						es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+						es wcs_setfx burn event_var(userid) = 1 2
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Burn - You were set on fire for 2 seconds!
+						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Burn - You set event_var(es_username) on fire for 2 seconds!
+						es_playsound event_var(attacker) wcs/firecast.mp3 .7
+						es_playsound event_var(userid) wcs/firecast.mp3 .9
+						es est_effect 3 #a 0 Sprites\laserbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 3 9 255 55 55 255
+						es est_effect 11 #a 0 Sprites\redglow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 2 155
+						es est_effect 10 #a 0 Sprites\redglow3.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 59 2 50 3 0 255 255 255 255 1
+					}
+				}
+				if (server_var(wcs_rand) = 2) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) - .5 2
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Frost Element - You've been slowed for 2 seconds
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Frost Element - Slowed event_var(es_username) for 2 seconds
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .7
+					es_playsound event_var(userid) skills/frostbolt.mp3 .9
+					es est_effect 3 #a 0 Sprites\laserbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 3 9 55 55 255 255
+					es est_effect 11 #a 0 Sprites\blueglow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 2 155
+					es est_effect 10 #a 0 Sprites\blueglow2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 59 2 50 3 0 255 255 255 255 1
+				}
+				if (server_var(wcs_rand) = 3) do
+				{
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound server_var(wcs_userid) ambient/atmosphere/cave_hit1.wav 1
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound server_var(wcs_userid) ambient\atmosphere\cs_cable_rattle02.wav 1
+					}
+					es wcs_pushed event_var(userid) 0 0 450
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wind Element - Dragged you into the air
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Wind Element - Dragged event_var(es_username) into the air
+					es est_effect 3 #a 0 Sprites\laserbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 3 9 255 255 255 255
+					es est_effect 11 #a 0 Sprites\glow01.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 2 155
+					es est_effect 10 #a 0 Sprites\glow02.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 59 2 50 3 0 255 255 255 255 1
+				}
+				if (server_var(wcs_rand) = 4) do
+				{
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) ambient/materials/rock1.wav 1
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) ambient\misc\rock1.wav 1
+					}
+					es wcs_shake event_var(userid) 25 15 2
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Earth Element - Caused the earth to tremble
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Earth Element - You caused an earthquake under event_var(es_username)
+					es est_effect 3 #a 0 Sprites\laserbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 3 9 55 255 55 255
+					es est_effect 11 #a 0 Sprites\greenglow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 2 155
+					es est_effect 10 #a 0 Sprites\greenspit1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 59 2 50 3 0 255 255 255 255 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 1 (END)
+	}
+}
+
+block entangle_shot
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed server_var(wcs_duration) wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 server_var(wcs_duration)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Entangling Shot - Captured you for server_var(wcs_duration) seconds
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Entangling Shot - Captured event_var(es_username) for server_var(wcs_duration) seconds
+					es_playsound event_var(attacker) physics\metal\metal_chainlink_impact_hard1.wav 1
+					es_playsound event_var(userid) physics\metal\metal_chainlink_impact_hard1.wav 1
+					es_playsound event_var(attacker) wcs/root.mp3 1
+					es_playsound event_var(userid) wcs/root.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_getplayerlocation wcs_x3 wcs_y3 wcs_z3 event_var(userid)
+					es_getplayerlocation wcs_x4 wcs_y4 wcs_z4 event_var(userid)
+					es_xmath wcs_y1 - 25
+					es_xmath wcs_y2 - 25
+					es_xmath wcs_y3 - 25
+					es_xmath wcs_y4 - 25
+					es_xmath wcs_x1 - 25
+					es_xmath wcs_x2 - 25
+					es_xmath wcs_x3 - 25
+					es_xmath wcs_x4 - 25
+					es_xmath wcs_z2 + 100
+					es_xmath wcs_z3 + 100
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es_xmath wcs_x2 + 50
+					es_xmath wcs_x1 + 50
+					es_xmath wcs_x2 - 25
+					es_xmath wcs_x1 - 25
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es_xmath wcs_x2 + 25
+					es_xmath wcs_x1 + 25
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es_xmath wcs_y2 + 50
+					es_xmath wcs_y1 + 50
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es_xmath wcs_y2 - 25
+					es_xmath wcs_y1 - 25
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es_xmath wcs_y2 + 25
+					es_xmath wcs_y1 + 25
+					es_xmath wcs_x2 - 50
+					es_xmath wcs_x1 - 50
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 2 2 5 255 158 255
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 10 2 2 5 255 158 255
+					es_xmath wcs_y4 + 50
+					es_xmath wcs_x4 + 50
+					es_xmath wcs_z4 + 100
+					es_xmath wcs_z1 + 100
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 10 2 2 5 255 158 255
+					es_xmath wcs_y1 - 50
+					es_xmath wcs_x1 + 50
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 10 2 2 5 255 158 255
+					es est_effect 3 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 2 2 5 255 158 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 2 (END)
+	}
+}
+
+block demon_spirit
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 1) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get dh_spirit_collect wcs_tmp event_var(attacker)
+				if (server_var(wcs_tmp) <= 9) do
+				{
+					es wcsgroup get dh_spirit_collect wcs_tmp event_var(attacker)
+					es_xmath wcs_tmp + 1
+					es wcsgroup set dh_spirit_collect event_var(attacker) server_var(wcs_tmp)
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Demon Spirit - You collected a spirit
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_14 #a 0 Effects\rollerglow.vmt server_var(vector2) server_var(vector2) 250 25 195
+					es est_effect_08 #a 0 Effects\rollerglow.vmt server_var(vector2) 20 400 1 1 90 400 0 128 64 12 255 255 1
+					es est_effect_06 #a 0 sprites/laserbeam.vmt server_var(vector2) server_var(vector1) 100 1 1 10 10 0 255 128 64 255 50
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 3 (END)
+	}
+}
+
+block demon_shredder
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get dh_spirit_collect wcs_tmp4 server_var(wcs_userid)
+	if (server_var(wcs_tmp4) < 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green[#lightgreenDemon Shredder#green] Not enough Spirit to cast Demon Shredder
+		es_xset wcs_ultinotexec 1
+		if (server_var(wcs_ultinotexec) = 1) do
+		{
+			es wcs_cancelulti server_var(wcs_userid)
+		}
+	}
+	else do 
+	{
+		ifx true(wcs_ffa_enabled) do
+		{
+			es_xset wcs_targetteam "#alive"
+			es_getlivingplayercount wcs_pcount
+			es_set wcs_ffa_userid server_var(wcs_userid)
+		}
+		ifx false(wcs_ffa_enabled) do
+		{
+			es_getplayerteam wcs_team server_var(wcs_userid)
+			if (server_var(wcs_team) = 2) do
+			{
+				es_xset wcs_targetteam "#ct,#alive"
+				es_getlivingplayercount wcs_pcount 3
+			}
+			if (server_var(wcs_team) = 3) do
+			{
+				es_xset wcs_targetteam "#t,#alive"
+				es_getlivingplayercount wcs_pcount 2
+			}
+		}
+		if (server_var(wcs_targetteam) != 0) do
+		{	
+			if (server_var(wcs_pcount) > 0) do
+			{
+				es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+				if (server_var(wcs_targetid) != 0) do
+				{
+					es_xdoblock wcs/tools/manifest/demon_hunter/ultimate_checks
+				}
+			}
+			else do
+			{
+				es_xset wcs_ultinotexec 1
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		}
+		if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+				if (server_var(wcs_tmp) != 1) do
+				{
+					es_xset wcs_ultinotexec 0
+					es_xdoblock wcs/tools/manifest/demon_hunter/ultimate_final
+				}
+				if (server_var(wcs_tmp) == 1) do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_emitsound player server_var(wcs_userid) ambient\voices\squeal1.wav 0.25 1
+		es_emitsound player server_var(wcs_targetid) ambient\voices\squeal1.wav 0.25 1
+		es_emitsound player server_var(wcs_targetid) ambient\creatures\town_scared_sob2.wav 1 1
+		es_emitsound player server_var(wcs_targetid) npc\fast_zombie\claw_strike1.wav 1 1
+		es_delayed 1 es_emitsound player server_var(wcs_targetid) npc\ichthyosaur\attack_growl1.wav 1 1
+		es_delayed 1 es_emitsound player server_var(wcs_targetid) npc\fast_zombie\claw_strike2.wav 1 1
+		es_delayed 2 es_emitsound player server_var(wcs_targetid) npc\fast_zombie\claw_strike3.wav 1 1
+	}
+	es wcsgroup get dh_spirit_collect wcs_tmp4 server_var(wcs_userid)
+	es_xmath wcs_tmp4 - 1
+	es wcsgroup set dh_spirit_collect server_var(wcs_userid) server_var(wcs_tmp4)
+	es wcs_setfx health server_var(wcs_userid) + 25 0
+	es wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
+	
+	es damage server_var(wcs_targetid) 10 1 server_var(wcs_userid)
+	es_delayed .5 damage server_var(wcs_targetid) 10 1 server_var(wcs_userid)
+	es_delayed 1 damage server_var(wcs_targetid) 10 1 server_var(wcs_userid)
+	es wcs_fade server_var(wcs_targetid) 255 0 0 255 2 2
+	es wcs_shake server_var(wcs_targetid) 25 15 2
+	es wcs_pushed server_var(wcs_targetid) 0 0 425
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Your target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es_delayed .5 wcs_setfx freeze server_var(wcs_targetid) = 1 .5
+		es_delayed .5 wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 1 wcsgroup set is_frozen server_var(wcs_targetid) 0
+	}
+	es_getplayername wcs_tmp2 server_var(wcs_targetid)
+	es_getplayername wcs_tmp3 server_var(wcs_userid)
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Demon Shredder - Ripped server_var(wcs_tmp2) to shreds!
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Demon Shredder - You were shredded by server_var(wcs_tmp3)'s ultimate
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_14 #a 0 Models\manhack\manhackblade001.vmt server_var(vector2) server_var(vector2) 250 25 195
+	es est_effect_08 #a 0 Effects\rollerglow.vmt server_var(vector2) 20 400 1 1 90 400 0 128 64 12 255 255 1
+	es_xmath wcs_smokestack_counter + 1
+	es_format coords "origin %1 %2 %3" server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_give server_var(wcs_targetid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_targetid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "basespread 0"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "spreadspeed 360"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "speed 32"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rate 32"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "startsize 5"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "endsize 7"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "twist 360"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "jetlength 64"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "angles 90 90 90"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_fire server_var(wcs_targetid) env_Smokestack addoutput server_var(coords)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "SmokeMaterial effects\mh_blood1.vmt"
+	es_fire server_var(wcs_targetid) server_var(ss_name) turnon
+	es_delayed 6 es_fire server_var(wcs_targetid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Demon Hunter - [Block] Skill: 4 (EXECUTED END)
+	}
+}

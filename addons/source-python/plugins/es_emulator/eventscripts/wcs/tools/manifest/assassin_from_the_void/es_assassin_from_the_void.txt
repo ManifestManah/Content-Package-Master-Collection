@@ -1,0 +1,436 @@
+	////////////////////
+//Teller Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;aug;sg550;awp;sg552;g3sg1;m249"
+		es_delayed .1 es_give event_var(userid) weapon_scout
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;m249;negev"
+		es_delayed .1 es_give event_var(userid) weapon_ssg08
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es_delayed .5 wcs_setfx 1stclip event_var(userid) = 90 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Assassin From The Void - Can only use Scout'n knives
+	es_delayed .5 wcs_color event_var(userid) 255 20 147 255 1
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire event_var(userid) server_var(ss_name) addoutput "basespread 145"
+	es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 100"
+	es_fire event_var(userid) server_var(ss_name) addoutput "speed 125"
+	es_fire event_var(userid) server_var(ss_name) addoutput "rate 100"
+	es_fire event_var(userid) server_var(ss_name) addoutput "startsize 20"
+	es_fire event_var(userid) server_var(ss_name) addoutput "endsize 20"
+	es_fire event_var(userid) server_var(ss_name) addoutput "twist 90"
+	es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 100"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 255 20 147"
+	es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 20 147"
+	es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle\fire.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+	es_delayed 3 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Spawn (END)
+	}
+}
+
+event player_jump
+{
+	es wcsgroup get voidsinjump wcs_tmp1 event_var(userid)
+	if (server_var(wcs_tmp1) = 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Assassin From The Void - [Block] Event Player_Jump (START)
+		}
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 10
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Assassin From The Void - [Block] Event Player_Jump (END)
+		}
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Death (START)
+	}
+	es wcsgroup set voidsinjump event_var(userid) 0
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] OnChange (START)
+	}
+	es wcsgroup set voidsinjump server_var(wcs_userid) 0
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] OnChange (END)
+	}
+}
+
+block longjump_gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 1 (START)
+	}
+	es wcsgroup set voidsinjump event_var(userid) 1
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Devilish Form - Allows you to jump further
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 1 (END)
+	}
+}
+
+block damage_instantkill
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) vo/npc/barney/ba_danger02.wav 1
+					es_delayed 2 es_playsound event_var(userid) ambient/levels/labs/electric_explosion4.wav 1
+				}
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death Shot - Detonating in 2 seconds, dealing 5000 damage!
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death Shot - You're in some deep shit!
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Death Shot - You've run out of detonating bullets
+				es_delayed 2 damage event_var(userid) 5000 1 event_var(attacker)
+				es_delayed 2 wcs_centertell event_var(attacker) Death Shot dealt 5000 damage to event_var(es_username)!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 50
+				es_xmath wcs_z2 + 50
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 80 1 4 2 2 10 255 20 147 255 100
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 1500 2 100 150 5 255 0 0 55 1
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1500 30 2 100 150 5 25 25 25 55 1
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 70 1000 2 150 150 5 255 0 0 65 1
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1000 70 2 150 150 5 25 25 25 65 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 2 (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(attacker) You froze event_var(es_username) for 1 second!
+					es wcs_centertell event_var(userid) for event_var(es_attackername) Froze you for 1 second!
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 50
+					es est_effect 11 #a 0 sprites/plasmaember.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 200
+					es_xmath wcs_z1 - 50
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 20
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 19
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 18
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 17
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 16
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 14
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 13
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 12
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 11
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 10
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 9
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 8
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 7
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 6
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 5
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 4
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 3
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 2
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+					es_xmath wcs_z1 + 1
+					es est_effect 10 #a 0 sprites/plasmahalo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 115 1 10 255 2.5 255 20 147 255 1.5
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 3 (END)
+	}
+}
+
+block evasion_shake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_fade event_var(attacker) 255 20 147 220 1 1
+				es wcsgroup set evasion event_var(userid) 1
+				es wcsgroup set evasion_chance event_var(userid) 33
+				es wcsgroup set evasion_count event_var(userid) 0
+			    es_delayed 1.5 wcsgroup get evasion_count wcs_tmp1 event_var(userid)
+			    es_delayed 1.5 es_tell event_var(userid) #multi #green [WCS]: #Voidish Armour - You evaded server_var(wcs_tmp1) attacks last round
+				es_delayed 1.5 wcsgroup set evasion event_var(userid) 0
+				es_delayed 1.5 wcsgroup set evasion_chance event_var(userid) 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Voidish Armour - Activated and affected event_var(es_attackername)
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 4 (END)
+	}
+}
+
+block teleport
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 5 (START)
+	}
+	es_xset wcs_range 1200
+    es_xset wcs_ok 1
+
+    es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+	es_delayed .2 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+	es_delayed .4 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+
+    es_xcopy wcs_x wcs_x1
+    es_xcopy wcs_y wcs_y1
+    es_xcopy wcs_z wcs_z1
+
+    es_math wcs_x - server_var(wcs_x2)
+    es_math wcs_y - server_var(wcs_y2)
+    es_math wcs_z - server_var(wcs_z2)
+
+    if (server_var(wcs_x) < 0) then es_xmath wcs_x * -1
+    if (server_var(wcs_y) < 0) then es_xmath wcs_y * -1
+    if (server_var(wcs_z) < 0) then es_xmath wcs_z * -1
+
+    if (server_var(wcs_range) < server_var(wcs_x)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_y)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_z)) do
+    {
+		es_xset wcs_ok 0
+    }
+    
+    ifx true(wcs_ok) do
+    {
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+ 	    ifx true(wcs_legacy_teleport_type) do
+	    {
+	    	//To Do: Improve this by finding an alternative teleportation method that prevent players from getting stuck in displacemnts and models
+	    	es playerset location server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    	es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    }
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
+	    }
+		es_delayed .2 wcs_color server_var(wcs_userid) 255 20 147 25 1
+		es_delayed 1.2 wcs_color server_var(wcs_userid) 255 20 147 255 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Boost Of The Void - Made you less visible for 1 second!
+		es_playsound server_var(wcs_userid) wcs/shadow.mp3 1
+    }
+    
+    else do
+    {
+        if (server_var(wcs_range) < server_var(wcs_x)) do
+        {
+            if (server_var(wcs_x2) >= 0) do
+            {
+                if (server_var(wcs_x1) >= 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_x1) < 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_x1 wcs_x2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_y)) do
+        {
+            if (server_var(wcs_y2) >= 0) do
+            {
+                if (server_var(wcs_y1) >= 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_y1) < 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_y1 wcs_y2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_z)) do
+        {
+            if (server_var(wcs_z2) >= 0) do
+            {
+                if (server_var(wcs_z1) >= 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_z1) < 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_z1 wcs_z2
+        }
+
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) .1
+	    }
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+	    es wcs_setcooldown server_var(wcs_userid) 0
+    }
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Assassin From The Void - [Block] Skill: 5 (END)
+	}
+}
