@@ -1,0 +1,26 @@
+////////////////////////////
+//TeacherCreatur Race Pack//
+//Version 1.0.0D          //
+////////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/drug_pusher
+	es_load wcs/tools/manifest/iceman
+	es_load wcs/tools/manifest/mr_electric
+	es_load wcs/tools/manifest/mummy
+	es_load wcs/tools/manifest/torch
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/drug_pusher
+	es_unload wcs/tools/manifest/iceman
+	es_unload wcs/tools/manifest/mr_electric
+	es_unload wcs/tools/manifest/mummy
+	es_unload wcs/tools/manifest/torch
+}

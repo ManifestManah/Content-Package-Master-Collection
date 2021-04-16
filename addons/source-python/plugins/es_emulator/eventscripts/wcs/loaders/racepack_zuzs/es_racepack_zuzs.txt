@@ -1,0 +1,26 @@
+//////////////////////
+//Zuzs GoW Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/gow_a_carmine
+	es_load wcs/tools/manifest/gow_berserker
+	es_load wcs/tools/manifest/gow_general_raam
+	es_load wcs/tools/manifest/gow_marcus_fenix
+	es_load wcs/tools/manifest/gow_theron_guard
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/gow_a_carmine
+	es_unload wcs/tools/manifest/gow_berserker
+	es_unload wcs/tools/manifest/gow_general_raam
+	es_unload wcs/tools/manifest/gow_marcus_fenix
+	es_unload wcs/tools/manifest/gow_theron_guard
+}

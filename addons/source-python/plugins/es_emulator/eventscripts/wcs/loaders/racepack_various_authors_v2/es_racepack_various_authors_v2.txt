@@ -1,0 +1,36 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/eradar_sorceror
+	es_load wcs/tools/manifest/fire_and_ice
+	es_load wcs/tools/manifest/firescout
+	es_load wcs/tools/manifest/juggernaut
+	es_load wcs/tools/manifest/mr_invisible
+	es_load wcs/tools/manifest/nadeandnade
+	es_load wcs/tools/manifest/night_thief
+	es_load wcs/tools/manifest/nightcrawler
+	es_load wcs/tools/manifest/princess_moon
+	es_load wcs/tools/manifest/venom
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/eradar_sorceror
+	es_unload wcs/tools/manifest/fire_and_ice
+	es_unload wcs/tools/manifest/firescout
+	es_unload wcs/tools/manifest/juggernaut
+	es_unload wcs/tools/manifest/mr_invisible
+	es_unload wcs/tools/manifest/nadeandnade
+	es_unload wcs/tools/manifest/night_thief
+	es_unload wcs/tools/manifest/nightcrawler
+	es_unload wcs/tools/manifest/princess_moon
+	es_unload wcs/tools/manifest/venom
+}

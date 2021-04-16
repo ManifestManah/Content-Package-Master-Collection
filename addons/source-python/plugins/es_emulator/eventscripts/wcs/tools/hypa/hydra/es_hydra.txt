@@ -1,0 +1,756 @@
+//////////////////
+//Hypa Race Pack//
+//Version 1.0.0D//
+//////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Spawn (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) npc/ichthyosaur/attack_growl1.wav 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Death (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] OnChange (START)
+	}
+	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] OnChange (END)
+	}
+}
+
+block aura
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .5 wcs_color event_var(userid) 255 80 0 255
+		ifx true(wcs_ffa_enabled) do
+		{
+			es_delayed .5 wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra - Granted you server_var(wcs_rand) health
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 20
+			es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 6.5 3 255
+		}
+		ifx false(wcs_ffa_enabled) do
+		{
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/hypa/hydra/aurae" 
+			if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/hypa/hydra/aurae"
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 1 (END)
+	}
+}
+
+block aurae
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 1 (EXECUTED START)
+	}
+	es_delayed .5 wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Hydra - Supported you with server_var(wcs_rand) health
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 6.5 3 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 1 (EXECUTED END)
+	}
+}
+
+block head
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice) <= 35) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				if (server_var(wcs_rand) = 1) then es_xdoblock wcs/tools/hypa/hydra/fire
+				if (server_var(wcs_rand) = 2) then es_xdoblock wcs/tools/hypa/hydra/ice
+				if (server_var(wcs_rand) = 3) then es_xdoblock wcs/tools/hypa/hydra/elec
+				if (server_var(wcs_rand) = 4) then es_xdoblock wcs/tools/hypa/hydra/water
+				if (server_var(wcs_rand) = 5) then es_xdoblock wcs/tools/hypa/hydra/fireice
+				if (server_var(wcs_rand) = 6) then es_xdoblock wcs/tools/hypa/hydra/fireelec
+				if (server_var(wcs_rand) = 7) then es_xdoblock wcs/tools/hypa/hydra/firewater
+				if (server_var(wcs_rand) = 8) then es_xdoblock wcs/tools/hypa/hydra/iceelec
+				if (server_var(wcs_rand) = 9) then es_xdoblock wcs/tools/hypa/hydra/icewater
+				if (server_var(wcs_rand) = 10) then es_xdoblock wcs/tools/hypa/hydra/elecwater
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (END)
+	}
+}
+
+block firea
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREA EXECUTED START)
+	}
+	es wcsgroup get is_burning wcs_tmp3 event_var(userid)
+	ifx false(wcs_tmp3) do
+	{
+		es wcsgroup set is_burning event_var(userid) 1
+		es_delayed 3 wcsgroup set is_burning event_var(userid) 0
+		es wcs_centertell event_var(userid) You've set the enemy on fire 
+		es wcsgroup set fire_owner event_var(userid) event_var(attacker)
+		es wcs_setfx burn event_var(userid) = 1 3
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 40 10 0 255 255 255 255 8
+		es_xmath wcs_z2 + 30
+		es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 200 1 20 10 0 255 255 255 255 8
+		es_xmath wcs_z2 + 40
+		es est_effect 11 #a 0 sprites/fire1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREA EXECUTED END)
+	}
+}
+
+block icea
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEA EXECUTED START)
+	}
+	es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen event_var(userid) 1
+		es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+		es wcs_setfx freeze event_var(userid) = 1 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEA EXECUTED END)
+	}
+}
+
+block eleca
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELECA EXECUTED START)
+	}
+	es wcs_fade event_var(userid) 255 255 255 155 1 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELECA EXECUTED END)
+	}
+}
+
+
+block watera
+{ 
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (WATERA EXECUTED START)
+	}
+	es wcs push event_var(userid) 0 0 325
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (WATERA EXECUTED END)
+	}
+}
+
+block fire
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIRE EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/firea
+	es wcs_color event_var(attacker) 255 80 0 255
+	es_tell event_var(userid) #multi #green 1 Head of the Hydra sets you on #lightgreenfire!
+	es_tell event_var(attacker) #multi #green One of your Heads sets the Enemy on #lightgreenfire!
+    es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 55"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 160"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 100"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 16"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 3"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 255"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 245"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 15 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/yellowflare.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIRE EXECUTED END)
+	}
+}
+
+block ice
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICE EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/icea
+	es wcs_color event_var(attacker) 75 75 255 255
+	es_tell event_var(userid) #multi #green 1 Head of the Hydra #lightgreenfreezes #greenyou!
+	es_tell event_var(attacker) #multi #green One of your Heads #lightgreenfreezes #greenthe Enemy!  
+	es es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 20  
+	es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 250 .5 25 10 25 0 10 255 255 1
+	es_delayed .5 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 200 .5 25 10 25 0 50 255 255 1
+	es_delayed 1 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 150 .5 25 10 25 0 90 255 255 1
+	es_delayed 1.5 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 100 .5 25 10 25 0 130 255 255 1
+	es_delayed 2 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 50 .5 25 10 25 0 170 255 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICE EXECUTED END)
+	}
+}
+
+block elec  
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELEC EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/eleca  
+	es wcs_color event_var(attacker) 180 180 180 180
+	es_playsound event_var(userid) ambient/energy/zap9.wav 0.9
+    es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+    es_xmath wcs_z1 + 50
+    es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 0 200 240 135
+	es_tell event_var(userid) #multi #green 1 Head of the Hydra #lightgreenelectrocuted #greenyou!
+	es_tell event_var(attacker) #multi #green One of your Heads #lightgreenelectrocuted #greenan Enemy!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELEC EXECUTED END)
+	}
+}
+
+block water
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (WATER EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/watera
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 250"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 110"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 200"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 15 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/splash3.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es wcs_color event_var(attacker) 0 0 255 255
+	es_playsound  event_var(userid) ambient/water_splash3.wav 0.9
+	es_tell event_var(userid) #multi #green 1 Head of the Hydra #lightgreenpushed #green you!
+	es_tell event_var(attacker) #multi #green One of your Heads #lightgreenpushed #greenan Enemy!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (WATER EXECUTED END)
+	}
+}
+
+block fireice
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREICE EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/firea
+	es_xdoblock wcs/tools/hypa/hydra/icea
+	es wcs_color event_var(attacker) 255 0 255 255
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 55"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 160"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 16"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 3"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 255"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 245"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 15 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/splash3.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenburn-frozen #green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenburn-freezed #greenan Enemy!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREICE EXECUTED END)
+	}
+}
+
+block fireelec
+{ 
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREELEC EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/firea
+	es_xdoblock wcs/tools/hypa/hydra/eleca
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 50
+	es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 75 0 255 135
+	es_xmath wcs_z1 - 20
+	es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 125 0 255 135
+	es_xmath wcs_z1 + 40
+	es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 80 0 200 135
+	es wcs_color event_var(attacker) 255 180 180 180
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenburn-blind #green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenburn-blinded #greenan Enemy!	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREELEC EXECUTED END)
+	}
+}
+
+block firewater
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREWATER EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/firea
+	es_xdoblock wcs/tools/hypa/hydra/watera
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 55"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 260"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 80"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 16"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 3"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 255"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 245"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 15 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/yellowflare.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 250"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 150"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 110"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 200"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 200 200 200"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/splash3.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es wcs_color event_var(attacker) 255 0 95 255
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenburn-pushed#green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenburn-pushed #greenan Enemy!
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (FIREWATER EXECUTED END)
+	}
+}
+
+block iceelec
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEELEC EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/eleca
+	es_xdoblock wcs/tools/hypa/hydra/icea
+	es_playsound event_var(userid) ambient/energy/zap9.wav 0.9
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 50
+	es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 0 200 240 135
+	es_xmath wcs_z2 + 20  
+	es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 250 0.5 25 25 25 0 10 255 255 1
+	es_delayed .5 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 200 0.5 25 25 25 0 50 255 255 1
+	es_delayed 1 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 150 0.5 25 25 25 0 90 255 255 1
+	es_delayed 1.5 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 100 0.5 25 25 25 0 130 255 255 1
+	es_delayed 2 est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 50 0.5 25 25 25 0 170 255 255 1 
+	es wcs_color event_var(attacker) 180 180 255 180
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenffreeze-flashed#green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenfreeze-flash #greenan Enemy!
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEELEC EXECUTED END)
+	}
+}
+
+block icewater
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEWATER EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/watera
+	es_xdelayed 0.1 es_xdoblock wcs/tools/hypa/hydra/icea
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 250"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 150"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 110"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 200"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 200 200 200"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/splash3.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es_delayed .2 es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)	 
+	es_xmath wcs_z2 + 20  
+	es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 250 0.5 25 25 25 0 10 255 255 1
+	es_delayed .5 es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 200 0.5 25 25 25 0 50 255 255 1
+	es_delayed 1 es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 150 0.5 25 25 25 0 90 255 255 1
+	es_delayed 1.5 es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 150 100 0.5 25 25 25 0 130 255 255 1
+	es_delayed 2 es est_effect 10 #a 0 effects/fluttercore_v2.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 50 0.5 25 25 25 0 170 255 255 1 
+	es wcs_color event_var(attacker) 35 150 255 255
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenpushfreeze#green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenpushfreezed #greenan Enemy!		
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ICEWATER EXECUTED END)
+	}
+}
+
+block elecwater
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELECWATER EXECUTED START)
+	}
+	es_xdoblock wcs/tools/hypa/hydra/watera
+	es_xdoblock wcs/tools/hypa/hydra/eleca
+	es_playsound event_var(userid) ambient/energy/zap9.wav 0.9
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 50
+	es est_effect 3 #a 0 sprites/lgtning_noz.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 100 1 0 200 240 135
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 60"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 250"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 150"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 110"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 200"
+	es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 200 200 200"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/splash3.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	es wcs_color event_var(attacker) 95 95 255 180
+	es_tell event_var(userid) #multi #green 2 Head's of the Hydra hit, you got #lightgreenblind-pushed#green!
+	es_tell event_var(attacker) #multi #green Two of your Heads hit, #lightgreenblind-pushed #greenan Enemy!		
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 2 (ELECWATER EXECUTED END)
+	}
+}
+
+block eva
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		es wcsgroup set headshot_immunity event_var(userid) 1
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra Heads - You won't take damage from headshots
+		es_xmath wcs_smokestack_counter + 1
+		es_give event_var(userid) env_smokestack
+		es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire event_var(userid) server_var(ss_name) addoutput "basespread 680"
+		es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 900"
+		es_fire event_var(userid) server_var(ss_name) addoutput "speed 5"
+		es_fire event_var(userid) server_var(ss_name) addoutput "rate 150"
+		es_fire event_var(userid) server_var(ss_name) addoutput "startsize 25"
+		es_fire event_var(userid) server_var(ss_name) addoutput "endsize 75"
+		es_fire event_var(userid) server_var(ss_name) addoutput "twist 150"
+		es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 166"
+		es_fire event_var(userid) server_var(ss_name) addoutput "angles 90 90 90"
+		es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 16 16 255"
+		es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/yellowflare.vmt"
+		es_fire event_var(userid) server_var(ss_name) turnon
+		es_delayed .2 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 32 32 225"
+		es_delayed .4 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 45 45 225"
+		es_delayed .6 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 54 54 225"
+		es_delayed .8 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 75 75 225"
+		es_delayed 1 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 92 92 225"
+		es_delayed 1.2 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 107 107 225"
+		es_delayed 1.4 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 115 115 225"
+		es_delayed 1.6 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 128 128 225"
+		es_delayed 1.8 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 140 140 225"
+		es_delayed 2.0 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 155 155 225"
+		es_delayed 3 es_fire event_var(userid) server_var(ss_name) kill
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 3 (END)
+	}
+}
+
+//DOES use max targets or radius variables
+block dehydrate
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/hypa/hydra/dehydrate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es wcs_fade event_var(userid) 240 240 240 140 1 4
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dehydrate affected server_var(wcs_count_players_actually_affected) Enemys
+				es wcs_centertell server_var(wcs_userid) Dehydrate dealt 25 damage to server_var(wcs_count_players_actually_affected) Enemys
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living Enemys!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby Enemys!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (END)
+	}
+}
+
+block dehydrate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= server_var(wcs_maxtargets)) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/hypa/hydra/dehydrate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) Enemys were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block dehydrate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (EXECUTED START)
+	}
+	es playerget health wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) > 250) do
+	{
+		es wcs_setfx health server_var(wcs_userid) = 250 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dehydrate - Can't exceed more than 250 health
+	}
+	if (server_var(wcs_tmp1) <= 250) do
+	{
+		es wcs_setfx health server_var(wcs_userid) + 25 0
+	}
+	es wcs_centertell server_var(wcs_targetid) You took 25 damage from Hydra's dehydrate
+	es_getplayerlocation wcs_x4 wcs_y4 wcs_z4 server_var(wcs_targetid)
+	es_xmath wcs_z4 + 120
+	es_xmath wcs_z4 - 20
+	es_delayed 0 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed 0 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 225 1
+	es_delayed 2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es_xmath wcs_z4 - 20
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 225 1
+	es_delayed 2.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es_xmath wcs_z4 - 20
+	es_delayed 1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed 1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 225 1
+	es_delayed 3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es_xmath wcs_z4 - 20
+	es_delayed 1.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed 1.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 225 1
+	es_delayed 3.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es_xmath wcs_z4 - 20
+	es_delayed 2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed 2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 255 1
+	es_delayed 4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es_xmath wcs_z4 - 20
+	es_delayed 2.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 400 3 25 600 13 25 25 230 95 1
+	es_delayed 2.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 25 400 1.5 25 600 13 25 25 230 255 1
+	es_delayed 4.5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 400 25 1.5 25 600 13 25 25 230 150 1
+	es damage server_var(wcs_targetid) 25 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hydra - [Block] Skill: 4 (EXECUTED END)
+	}
+}

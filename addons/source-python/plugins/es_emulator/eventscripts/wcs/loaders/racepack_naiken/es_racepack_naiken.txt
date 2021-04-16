@@ -1,0 +1,36 @@
+////////////////////
+//Naiken Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/akali
+	es_load wcs/tools/manifest/arcane_warrior
+	es_load wcs/tools/manifest/dark_templar
+	es_load wcs/tools/manifest/demon_hunter
+	es_load wcs/tools/manifest/dragonborn
+	es_load wcs/tools/manifest/ezreal
+	es_load wcs/tools/manifest/rift_walker
+	es_load wcs/tools/manifest/shadow_fiend
+	es_load wcs/tools/manifest/solid_snake
+	es_load wcs/tools/manifest/xenomorph
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/akali
+	es_unload wcs/tools/manifest/arcane_warrior
+	es_unload wcs/tools/manifest/dark_templar
+	es_unload wcs/tools/manifest/demon_hunter
+	es_unload wcs/tools/manifest/dragonborn
+	es_unload wcs/tools/manifest/ezreal
+	es_unload wcs/tools/manifest/rift_walker
+	es_unload wcs/tools/manifest/shadow_fiend
+	es_unload wcs/tools/manifest/solid_snake
+	es_unload wcs/tools/manifest/xenomorph
+}

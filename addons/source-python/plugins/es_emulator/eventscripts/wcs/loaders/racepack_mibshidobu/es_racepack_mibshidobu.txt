@@ -1,0 +1,38 @@
+////////////////////////
+//MiBShidobu Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/alien_sniper
+	es_load wcs/tools/manifest/bill_h_gates
+	es_load wcs/tools/manifest/condemned_bandit
+	es_load wcs/tools/manifest/cyborg
+	es_load wcs/tools/manifest/demon_warrior
+	es_load wcs/tools/manifest/feral_beast
+	es_load wcs/tools/manifest/ironman
+	es_load wcs/tools/manifest/jay_ninja
+	es_load wcs/tools/manifest/legendary_knight
+	es_load wcs/tools/manifest/sargent_gunner
+	es_load wcs/tools/manifest/sinmar
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/alien_sniper
+	es_unload wcs/tools/manifest/bill_h_gates
+	es_unload wcs/tools/manifest/condemned_bandit
+	es_unload wcs/tools/manifest/cyborg
+	es_unload wcs/tools/manifest/demon_warrior
+	es_unload wcs/tools/manifest/feral_beast
+	es_unload wcs/tools/manifest/ironman
+	es_unload wcs/tools/manifest/jay_ninja
+	es_unload wcs/tools/manifest/legendary_knight
+	es_unload wcs/tools/manifest/sargent_gunner
+	es_unload wcs/tools/manifest/sinmar
+}

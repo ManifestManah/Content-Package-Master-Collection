@@ -1,0 +1,22 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.0D     //
+///////////////////////
+
+//////////////////
+//Defensive Item//
+//////////////////
+
+//This event occurs when a player dies
+event player_death
+{
+	//Checks if the player who died had the wcsgroup set, and if they did then proceed
+	es wcsgroup get ability_immunity shop_tmp event_var(userid)
+	if (server_var(shop_tmp) == 1) do
+	{
+		//Changes the wcsgroup back to 0
+		es wcsgroup set ulti_immunity event_var(userid) 0
+		es wcsgroup set ability_immunity event_var(userid) 0
+		es wcsgroup set swardinvul event_var(userid) 0
+	}
+}

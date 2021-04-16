@@ -1,0 +1,22 @@
+//////////////////
+//Hypa Race Pack//
+//Version 1.0.0D//
+//////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/hypa/grass_chopper
+	es_load wcs/tools/hypa/hermes
+	es_load wcs/tools/hypa/hydra
+}
+
+block unload
+{
+	es_unload wcs/tools/hypa/grass_chopper
+	es_unload wcs/tools/hypa/hermes
+	es_unload wcs/tools/hypa/hydra
+}

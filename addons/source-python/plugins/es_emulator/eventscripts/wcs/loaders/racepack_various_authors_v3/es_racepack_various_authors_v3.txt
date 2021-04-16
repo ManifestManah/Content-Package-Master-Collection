@@ -1,0 +1,66 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/alex_mercer
+	es_load wcs/tools/manifest/anti_lord
+	es_load wcs/tools/manifest/blacksmith
+	es_load wcs/tools/manifest/confederate
+	es_load wcs/tools/manifest/diglett
+	es_load wcs/tools/manifest/drug_lord
+	es_load wcs/tools/manifest/fera
+	es_load wcs/tools/manifest/feral_terminator
+	es_load wcs/tools/manifest/fleshling
+	es_load wcs/tools/manifest/generator
+	es_load wcs/tools/manifest/hirako_shinji
+	es_load wcs/tools/manifest/king_of_air
+	es_load wcs/tools/manifest/kirby
+	es_load wcs/tools/manifest/lich
+	es_load wcs/tools/manifest/lordofgravity
+	es_load wcs/tools/manifest/mr_x
+	es_load wcs/tools/manifest/plasma
+	es_load wcs/tools/manifest/plutonium
+	es_load wcs/tools/manifest/rainbow_man
+	es_load wcs/tools/manifest/risen
+	es_load wcs/tools/manifest/roy_miller
+	es_load wcs/tools/manifest/screamer
+	es_load wcs/tools/manifest/shinigami
+	es_load wcs/tools/manifest/slot_machine
+	es_load wcs/tools/manifest/zstriker
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/alex_mercer
+	es_unload wcs/tools/manifest/anti_lord
+	es_unload wcs/tools/manifest/blacksmith
+	es_unload wcs/tools/manifest/confederate
+	es_unload wcs/tools/manifest/diglett
+	es_unload wcs/tools/manifest/drug_lord
+	es_unload wcs/tools/manifest/fera
+	es_unload wcs/tools/manifest/feral_terminator
+	es_unload wcs/tools/manifest/fleshling
+	es_unload wcs/tools/manifest/generator
+	es_unload wcs/tools/manifest/hirako_shinji
+	es_unload wcs/tools/manifest/king_of_air
+	es_unload wcs/tools/manifest/kirby
+	es_unload wcs/tools/manifest/lich
+	es_unload wcs/tools/manifest/lordofgravity
+	es_unload wcs/tools/manifest/mr_x
+	es_unload wcs/tools/manifest/plasma
+	es_unload wcs/tools/manifest/plutonium
+	es_unload wcs/tools/manifest/rainbow_man
+	es_unload wcs/tools/manifest/risen
+	es_unload wcs/tools/manifest/roy_miller
+	es_unload wcs/tools/manifest/screamer
+	es_unload wcs/tools/manifest/shinigami
+	es_unload wcs/tools/manifest/slot_machine
+	es_unload wcs/tools/manifest/zstriker
+}

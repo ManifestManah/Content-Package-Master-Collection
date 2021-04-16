@@ -1,0 +1,24 @@
+////////////////////
+//Teller Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/assassin_from_the_void
+	es_load wcs/tools/manifest/frozen_breath
+	es_load wcs/tools/manifest/nordic_viking
+	es_load wcs/tools/manifest/shadow_shinobi
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/assassin_from_the_void
+	es_unload wcs/tools/manifest/frozen_breath
+	es_unload wcs/tools/manifest/nordic_viking
+	es_unload wcs/tools/manifest/shadow_shinobi
+}

@@ -1,0 +1,24 @@
+/////////////////////////
+//Stormleader Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/bank_robber
+	es_load wcs/tools/manifest/leech_man
+	es_load wcs/tools/manifest/mental_power
+	es_load wcs/tools/manifest/ray_stunning
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/bank_robber
+	es_unload wcs/tools/manifest/leech_man
+	es_unload wcs/tools/manifest/mental_power
+	es_unload wcs/tools/manifest/ray_stunning
+}

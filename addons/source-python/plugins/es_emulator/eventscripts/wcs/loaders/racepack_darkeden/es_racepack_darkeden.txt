@@ -1,0 +1,24 @@
+//////////////////////
+//Darkeden Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/emissary
+	es_load wcs/tools/manifest/jin
+	es_load wcs/tools/manifest/lithered_man
+	es_load wcs/tools/manifest/son_gohan
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/emissary
+	es_unload wcs/tools/manifest/jin
+	es_unload wcs/tools/manifest/lithered_man
+	es_unload wcs/tools/manifest/son_gohan
+}

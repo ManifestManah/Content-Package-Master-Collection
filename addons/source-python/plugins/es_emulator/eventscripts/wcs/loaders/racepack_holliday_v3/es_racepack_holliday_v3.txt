@@ -1,0 +1,36 @@
+/////////////////////////
+//Holliday V3 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/holliday/blackout
+	es_load wcs/tools/manifest/bloodelf
+	es_load wcs/tools/manifest/devil_jin
+	es_load wcs/tools/manifest/dwarfen_warrior
+	es_load wcs/tools/manifest/goku
+	es_load wcs/tools/manifest/fire_harpi
+	es_load wcs/tools/manifest/highelf
+	es_load wcs/tools/manifest/pharaoh
+	es_load wcs/tools/manifest/troll_mercenary
+	es_load wcs/tools/manifest/wrath
+}
+
+block unload
+{
+	es_unload wcs/tools/holliday/blackout
+	es_unload wcs/tools/manifest/bloodelf
+	es_unload wcs/tools/manifest/devil_jin
+	es_unload wcs/tools/manifest/dwarfen_warrior
+	es_unload wcs/tools/manifest/goku
+	es_unload wcs/tools/manifest/fire_harpi
+	es_unload wcs/tools/manifest/highelf
+	es_unload wcs/tools/manifest/pharaoh
+	es_unload wcs/tools/manifest/troll_mercenary
+	es_unload wcs/tools/manifest/wrath
+}

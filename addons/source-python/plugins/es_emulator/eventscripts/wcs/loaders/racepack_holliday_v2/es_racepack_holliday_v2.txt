@@ -1,0 +1,54 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/agent
+	es_load wcs/tools/manifest/auramaster
+	es_load wcs/tools/manifest/dark_minion
+	es_load wcs/tools/manifest/doc	
+	es_load wcs/tools/manifest/earth_quake
+	es_load wcs/tools/manifest/eddie
+	es_load wcs/tools/manifest/flashfreeze
+	es_load wcs/tools/manifest/ghost
+	es_load wcs/tools/manifest/gmork
+	es_load wcs/tools/manifest/laser_light_show
+	es_load wcs/tools/manifest/lucky_strike
+	es_load wcs/tools/manifest/methane_man
+	es_load wcs/tools/manifest/raiden
+	es_load wcs/tools/manifest/shadow_shock
+	es_load wcs/tools/manifest/squirtle
+	es_load wcs/tools/manifest/static
+	es_load wcs/tools/manifest/unholy_entity
+	es_load wcs/tools/manifest/vortex
+	es_load wcs/tools/manifest/wizard
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/agent
+	es_unload wcs/tools/manifest/auramaster
+	es_unload wcs/tools/manifest/dark_minion
+	es_unload wcs/tools/manifest/doc	
+	es_unload wcs/tools/manifest/earth_quake
+	es_unload wcs/tools/manifest/eddie
+	es_unload wcs/tools/manifest/flashfreeze
+	es_unload wcs/tools/manifest/ghost
+	es_unload wcs/tools/manifest/gmork
+	es_unload wcs/tools/manifest/laser_light_show
+	es_unload wcs/tools/manifest/lucky_strike
+	es_unload wcs/tools/manifest/methane_man
+	es_unload wcs/tools/manifest/raiden
+	es_unload wcs/tools/manifest/shadow_shock
+	es_unload wcs/tools/manifest/squirtle
+	es_unload wcs/tools/manifest/static
+	es_unload wcs/tools/manifest/unholy_entity
+	es_unload wcs/tools/manifest/vortex
+	es_unload wcs/tools/manifest/wizard
+}

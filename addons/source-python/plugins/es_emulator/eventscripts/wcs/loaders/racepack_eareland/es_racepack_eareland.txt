@@ -1,0 +1,44 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/angel_of_deep_darkness
+	es_load wcs/tools/manifest/angel_of_light
+	es_load wcs/tools/manifest/avenger_of_lost_hearts
+	es_load wcs/tools/manifest/beautiful_actress
+	es_load wcs/tools/manifest/chaos_lord
+	es_load wcs/tools/manifest/darkness_hound
+	es_load wcs/tools/manifest/lethal_angel
+	es_load wcs/tools/manifest/ox_life
+	es_load wcs/tools/manifest/ppxp_master
+	es_load wcs/tools/manifest/psychological_striker
+	es_load wcs/tools/manifest/rage_leecher
+	es_load wcs/tools/manifest/sephard
+	es_load wcs/tools/manifest/shadow_the_hedgehog
+	es_load wcs/tools/manifest/sinner_revenant
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/angel_of_deep_darkness
+	es_unload wcs/tools/manifest/angel_of_light
+	es_unload wcs/tools/manifest/avenger_of_lost_hearts
+	es_unload wcs/tools/manifest/beautiful_actress
+	es_unload wcs/tools/manifest/chaos_lord
+	es_unload wcs/tools/manifest/darkness_hound
+	es_unload wcs/tools/manifest/lethal_angel
+	es_unload wcs/tools/manifest/ox_life
+	es_unload wcs/tools/manifest/ppxp_master
+	es_unload wcs/tools/manifest/psychological_striker
+	es_unload wcs/tools/manifest/rage_leecher
+	es_unload wcs/tools/manifest/sephard
+	es_unload wcs/tools/manifest/shadow_the_hedgehog
+	es_unload wcs/tools/manifest/sinner_revenant
+}

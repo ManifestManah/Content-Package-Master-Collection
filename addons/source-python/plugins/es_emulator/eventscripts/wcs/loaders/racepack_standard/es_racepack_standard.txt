@@ -1,0 +1,38 @@
+//////////////////////
+//Standard Race Pack//
+//Version 1.0.0D   //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/standard/archmage_proudmoore
+	es_load wcs/tools/standard/blood_mage
+	es_load wcs/tools/standard/crypt_lord
+	es_load wcs/tools/standard/flame_predator
+	es_load wcs/tools/standard/human_alliance
+	es_load wcs/tools/standard/night_elves
+	es_load wcs/tools/standard/orcish_horde
+	es_load wcs/tools/standard/shadow_hunter
+	es_load wcs/tools/standard/succubus_hunter
+	es_load wcs/tools/standard/undead_scourge
+	es_load wcs/tools/standard/warden
+}
+
+block unload
+{
+	es_unload wcs/tools/standard/archmage_proudmoore
+	es_unload wcs/tools/standard/blood_mage
+	es_unload wcs/tools/standard/crypt_lord
+	es_unload wcs/tools/standard/flame_predator
+	es_unload wcs/tools/standard/human_alliance
+	es_unload wcs/tools/standard/night_elves
+	es_unload wcs/tools/standard/orcish_horde
+	es_unload wcs/tools/standard/shadow_hunter
+	es_unload wcs/tools/standard/succubus_hunter
+	es_unload wcs/tools/standard/undead_scourge
+	es_unload wcs/tools/standard/warden
+}

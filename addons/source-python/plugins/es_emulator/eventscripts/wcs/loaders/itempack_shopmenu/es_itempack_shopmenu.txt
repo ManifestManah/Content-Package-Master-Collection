@@ -1,0 +1,54 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.0D     //
+///////////////////////
+
+//////////////////////
+//Item Loader Script//
+//////////////////////
+
+block load
+{
+	//Category - Defensive
+	es_load wcs/shopmenu/defensive/belt_of_vitality
+	es_load wcs/shopmenu/defensive/eye_of_visions
+	es_load wcs/shopmenu/defensive/mithril_armor
+	es_load wcs/shopmenu/defensive/ring_of_defense
+	es_load wcs/shopmenu/defensive/trinket_of_immunity
+
+	//Category - Enhancements
+	es_load wcs/shopmenu/enhancements/heart_of_the_phoenix
+
+	//Category - Experience & Levels
+	es_load wcs/shopmenu/experience/rune_of_wisdom
+	es_load wcs/shopmenu/experience/scroll_of_knowledge
+
+	//Category - Offensive 
+	es_load wcs/shopmenu/offensive/apparence_dust
+	es_load wcs/shopmenu/offensive/bottled_flame
+	es_load wcs/shopmenu/offensive/orb_of_frost
+	es_load wcs/shopmenu/offensive/razor_claws
+}
+
+block unload
+{
+	//Category - Defensive
+	es_unload wcs/shopmenu/defensive/belt_of_vitality
+	es_unload wcs/shopmenu/defensive/eye_of_visions
+	es_unload wcs/shopmenu/defensive/mithril_armor
+	es_unload wcs/shopmenu/defensive/ring_of_defense
+	es_unload wcs/shopmenu/defensive/trinket_of_immunity
+
+	//Category - Enhancements
+	es_unload wcs/shopmenu/enhancements/heart_of_the_phoenix
+
+	//Category - Experience & Levels
+	es_unload wcs/shopmenu/experience/rune_of_wisdom
+	es_unload wcs/shopmenu/experience/scroll_of_knowledge
+
+	//Category - Offensive 
+	es_unload wcs/shopmenu/offensive/apparence_dust
+	es_unload wcs/shopmenu/offensive/bottled_flame
+	es_unload wcs/shopmenu/offensive/orb_of_frost
+	es_unload wcs/shopmenu/offensive/razor_claws
+}

@@ -1,0 +1,15 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.0D     //
+///////////////////////
+
+//////////////////
+//Defensive Item//
+//////////////////
+
+//This event happens when the script is loadd
+block load
+{
+	//Sets the necessary variables for the item to work properly
+	es_xset shop_stored_maxhealth 0
+}

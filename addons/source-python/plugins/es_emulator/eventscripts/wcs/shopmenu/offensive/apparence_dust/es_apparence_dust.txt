@@ -1,0 +1,31 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.0D     //
+///////////////////////
+
+//////////////////
+//Offensive Item//
+//////////////////
+
+//This event happens when the script is loadd
+block load
+{
+	//Sets the necessary variables for the item to work properly
+	es_xset shop_tmp 0
+	es_xset shop_red 0
+	es_xset shop_green 0
+	es_xset shop_blue 0
+	es_xset shop_alpha 0
+}
+
+//This event occurs when a player dies
+event player_death
+{
+	//Checks if the player who died had the wcsgroup set, and if they did then proceed
+	es wcsgroup get is_already_colored shop_tmp event_var(userid)
+	if (server_var(shop_tmp) == 1) do
+	{
+		//Changes the wcsgroup back to 0
+		es wcsgroup set is_already_colored event_var(userid) 0
+	}
+}

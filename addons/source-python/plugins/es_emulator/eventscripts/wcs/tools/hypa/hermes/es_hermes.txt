@@ -1,0 +1,189 @@
+//////////////////
+//Hypa Race Pack//
+//Version 1.0.0D//
+//////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Spawn (START)
+	}
+	es wcs_setfx health event_var(userid) + 20
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 100"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 120"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 100"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 100"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 10"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 80"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 120"
+    es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 200 200 200"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/bluespark.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) HL1/ambience/des_wind2.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\wind\css15_wind_01.wav 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Spawn (END)
+	}
+}
+
+block feet
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Winged feet - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 1 (END)
+	}
+}
+
+block curse
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+			if (server_var(wcs_tmp3) == 0) do
+			{
+				es wcsgroup set is_slowed event_var(userid) 1
+				es_delayed 1.5 wcsgroup set is_slowed event_var(userid) 0
+				es wcs_setfx speed event_var(userid) + .5 0
+				es_delayed .5 wcs_setfx speed event_var(userid) - 1 0
+				es_delayed 1 wcs_setfx speed event_var(userid) + 1 0
+				es_delayed 1.5 wcs_setfx speed event_var(userid) - .5 0
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Walk curse - Changed your target speed
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Walk curse - Changed your speed
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) HL1/ambience/des_wind2.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient\wind\css15_wind_01.wav 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 2 (END)
+	}
+}
+
+block boost
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_setfx speed event_var(userid) + .75 1.5
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Airboost - Temporarily gave you 50% speed
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(userid) env_smokestack
+				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(userid) server_var(ss_name) addoutput "basespread 60"
+				es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+				es_fire event_var(userid) server_var(ss_name) addoutput "speed 250"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rate 65"
+				es_fire event_var(userid) server_var(ss_name) addoutput "startsize 35"
+				es_fire event_var(userid) server_var(ss_name) addoutput "endsize 1"
+				es_fire event_var(userid) server_var(ss_name) addoutput "twist 25"
+				es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 85"
+				es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 250 250 250"
+				es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/stunstick.vmt"
+				es_fire event_var(userid) server_var(ss_name) turnon
+				es_delayed 1.5 es_fire event_var(userid) server_var(ss_name) kill
+				es_delayed 1.5 es_tell event_var(userid) #multi #green Back to normal!	
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) HL1/ambience/des_wind2.wav .4
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) ambient\wind\css15_wind_01.wav .5
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 3 (END)
+	}
+}
+
+block tele
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 4 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) HL1/ambience/des_wind2.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient\wind\css15_wind_01.wav 1
+	}
+	es wcs_doteleport server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 1 5 2 15 20 245 245 245 255 .3
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 1 5 2 15 20 245 245 245 255 .3
+	es_xmath wcs_z1 + 25
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 1 5 2 15 20 245 245 245 255 .3
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 1 5 2 15 20 245 245 245 255 .3
+	es_xmath wcs_z1 + 25
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 1 5 2 15 20 245 245 245 255 .3
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 1 5 2 15 20 245 245 245 255 .3
+	es_xmath wcs_z1 + 25
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 1 5 2 15 20 245 245 245 255 .3
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 1 5 2 15 20 245 245 245 255 .3
+	es_xmath wcs_z1 + 25
+	es_xmath wcs_z2 + 25
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 1 5 2 15 20 245 245 245 255 .3
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 1 5 2 15 20 245 245 245 255 .3	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hermes - [Block] Skill: 4 (END)
+	}
+}

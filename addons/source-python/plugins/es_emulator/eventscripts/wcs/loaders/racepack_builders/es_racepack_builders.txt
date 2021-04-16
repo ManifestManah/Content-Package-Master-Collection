@@ -1,0 +1,32 @@
+//////////////////////
+//Builders Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/builder_bob_the_builde
+	es_load wcs/tools/manifest/builder_donkey_kong
+	es_load wcs/tools/manifest/builder_lego_man
+	es_load wcs/tools/manifest/builder_madcan
+	es_load wcs/tools/manifest/builder_mini_carrot
+	es_load wcs/tools/manifest/builder_mini_remote
+	es_load wcs/tools/manifest/builder_mini_stone
+	es_load wcs/tools/manifest/builder_trickster_assassin
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/builder_bob_the_builde
+	es_unload wcs/tools/manifest/builder_donkey_kong
+	es_unload wcs/tools/manifest/builder_lego_man
+	es_unload wcs/tools/manifest/builder_madcan
+	es_unload wcs/tools/manifest/builder_mini_carrot
+	es_unload wcs/tools/manifest/builder_mini_remote
+	es_unload wcs/tools/manifest/builder_mini_stone
+	es_unload wcs/tools/manifest/builder_trickster_assassin
+}

@@ -1,0 +1,50 @@
+//////////////////////
+//Holliday Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/holliday/athena
+	es_load wcs/tools/holliday/beast
+	es_load wcs/tools/holliday/eyera
+	es_load wcs/tools/holliday/genocide
+	es_load wcs/tools/holliday/molecule
+	es_load wcs/tools/holliday/nebula
+	es_load wcs/tools/holliday/ozzmosis
+	es_load wcs/tools/holliday/panorama
+	es_load wcs/tools/holliday/reptile
+	es_load wcs/tools/holliday/scorpion
+	es_load wcs/tools/holliday/sloth
+	es_load wcs/tools/holliday/spiderman
+	es_load wcs/tools/manifest/blood_demon
+	es_load wcs/tools/manifest/die_xonvert
+	es_load wcs/tools/manifest/jack
+	es_load wcs/tools/manifest/rapscallion
+	es_load wcs/tools/manifest/vagabond
+}
+
+block unload
+{
+	es_unload wcs/tools/holliday/athena
+	es_unload wcs/tools/holliday/beast
+	es_unload wcs/tools/holliday/eyera
+	es_unload wcs/tools/holliday/genocide
+	es_unload wcs/tools/holliday/molecule
+	es_unload wcs/tools/holliday/nebula
+	es_unload wcs/tools/holliday/ozzmosis
+	es_unload wcs/tools/holliday/panorama
+	es_unload wcs/tools/holliday/reptile
+	es_unload wcs/tools/holliday/scorpion
+	es_unload wcs/tools/holliday/sloth
+	es_unload wcs/tools/holliday/spiderman
+	es_unload wcs/tools/manifest/blood_demon
+	es_unload wcs/tools/manifest/die_xonvert
+	es_unload wcs/tools/manifest/jack
+	es_unload wcs/tools/manifest/rapscallion
+	es_unload wcs/tools/manifest/vagabond
+}

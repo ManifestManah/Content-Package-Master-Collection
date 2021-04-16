@@ -1,0 +1,26 @@
+////////////////////
+//Expert Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/blood_mage_expert
+	es_load wcs/tools/manifest/human_alliance_expert
+	es_load wcs/tools/manifest/night_elves_expert
+	es_load wcs/tools/manifest/orcish_horde_expert
+	es_load wcs/tools/manifest/undead_scourge_expert
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/blood_mage_expert
+	es_unload wcs/tools/manifest/human_alliance_expert
+	es_unload wcs/tools/manifest/night_elves_expert
+	es_unload wcs/tools/manifest/orcish_horde_expert
+	es_unload wcs/tools/manifest/undead_scourge_expert
+}

@@ -1,0 +1,30 @@
+/////////////////////
+//Damakex Race Pack//
+//Version 1.0.0D   //
+/////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/assassin
+	es_load wcs/tools/manifest/berzerker
+	es_load wcs/tools/manifest/blood_lord
+	es_load wcs/tools/manifest/mercenary
+	es_load wcs/tools/manifest/spy_hunter
+	es_load wcs/tools/manifest/support
+	es_load wcs/tools/manifest/terminator
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/assassin
+	es_unload wcs/tools/manifest/berzerker
+	es_unload wcs/tools/manifest/blood_lord
+	es_unload wcs/tools/manifest/mercenary
+	es_unload wcs/tools/manifest/spy_hunter
+	es_unload wcs/tools/manifest/support
+	es_unload wcs/tools/manifest/terminator
+}

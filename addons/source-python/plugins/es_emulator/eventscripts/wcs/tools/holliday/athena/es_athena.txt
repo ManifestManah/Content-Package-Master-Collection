@@ -1,0 +1,301 @@
+//////////////////////
+//Holliday Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient/materials/metal4.wav .8
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\misc\metal_str4.wav .9
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 effects/tp_eyefx/tpeye3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 490 3 65 10 0 255 255 255 255 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 500 3 100 10 0 255 105 155 255 8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Death (START)
+	}
+	es wcsgroup set headshot_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] OnChange (START)
+	}
+	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] OnChange (END)
+	}
+}
+
+block spear
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+			es wcs_centertell event_var(attacker) Athena's spear dealt + server_var(wcs_dmg) damage
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+			es_xmath wcs_z1 + 20
+			es_xmath wcs_z2 + 20
+			es est_effect 3 #a 0 sprites/glow.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 20 20 200 0 255 255
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 500 3 100 10 0 255 105 155 255 50
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 1 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Athena's enlightenment - Reduced your gravity
+		ifx true(wcs_race_debugging) do
+	}
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 2 (END)
+	}
+}
+
+block goldenhelmet
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set headshot_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Golden helmet - Renders Athena immune to headshots
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 3 (END)
+	}
+}
+
+//DOES use max targets or radius variables
+block shield
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/holliday/athena/shield_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es wcs_fade server_var(wcs_userid) 255 0 153 85 1 4
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Medusa's gaze - Turned server_var(wcs_counter) people to stone
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient/materials/metal4.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient\misc\metal_str4.wav 1
+				}
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (END)
+	}
+}
+
+block shield_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 10) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/holliday/athena/shield_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block shield_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient/materials/metal4.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient\misc\metal_str4.wav 1
+	}
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed 2 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es wcs_setfx freeze server_var(wcs_targetid) = 1 2
+	}
+	es wcs_fade server_var(wcs_targetid) 255 0 153 85 1 4
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Medusa's gaze - Turned you into stone for 2 seconds
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_xmath wcs_z1 + 30
+	es_xmath wcs_z2 + 30
+	es est_effect 10 #a 0 effects/tp_eyefx/tpeye3.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 59 10 2 66 1 0 255 255 255 255 1
+	es est_effect 3 #a 0 sprites/glow.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .5 5 5 200 0 255 255
+	es est_effect 3 #a 0 effects/tp_eyefx/tpeye3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 7 3 25 25 25 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Athena - [Block] Skill: 4 (EXECUTED END)
+	}
+}

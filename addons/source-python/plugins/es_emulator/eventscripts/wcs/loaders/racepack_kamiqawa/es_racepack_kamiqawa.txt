@@ -1,0 +1,30 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/awp_punisher
+	es_load wcs/tools/manifest/baron_granbound
+	es_load wcs/tools/manifest/bray_shaman
+	es_load wcs/tools/manifest/headcrab_classic
+	es_load wcs/tools/manifest/illyrian
+	es_load wcs/tools/manifest/rocketeer
+	es_load wcs/tools/manifest/soultmp
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/awp_punisher
+	es_unload wcs/tools/manifest/baron_granbound
+	es_unload wcs/tools/manifest/bray_shaman
+	es_unload wcs/tools/manifest/headcrab_classic
+	es_unload wcs/tools/manifest/illyrian
+	es_unload wcs/tools/manifest/rocketeer
+	es_unload wcs/tools/manifest/soultmp
+}

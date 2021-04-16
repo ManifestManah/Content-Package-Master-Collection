@@ -1,0 +1,16 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.0D     //
+///////////////////////
+
+//////////////////
+//Offensive Item//
+//////////////////
+
+//This event happens when the script is loadd
+block load
+{
+	//Sets the necessary variables for the item to work properly
+	es_xset shop_rand 0
+	es_xset shop_dmg_rand 0
+}

@@ -1,0 +1,181 @@
+//////////////////////
+//Holliday Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Spawn (START)
+	}
+	es_playsound event_var(userid) weapons\hegrenade\explode3.wav 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 100
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 100 3 5 5 10 0 228 228 228 255 30
+	es_xmath wcs_z1 + 60
+	es_xmath wcs_y1 - 40
+	es_xmath wcs_y2 - 40
+	es_xmath wcs_y2 + 80
+	es_xmath wcs_z2 - 40
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 100 3 5 5 10 0 228 228 228 255 30
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Spawn (END)
+	}
+}
+
+block slip
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_xrand wcs_rand 1 2
+			if (server_var(wcs_rand) = 1) do
+			{
+				es wcs_domole server_var(wcs_player) 2
+				es_playsound event_var(userid) wcs/mole.mp3 1
+			}
+			if (server_var(wcs_rand) = 2) do
+			{
+				es_xset wcs_player 0
+				ifx true(wcs_ffa_enabled) do
+				{
+					es getrandplayer wcs_player #alive
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					if (event_var(es_userteam) = 2) then getrandplayer wcs_player #ct
+					if (event_var(es_userteam) = 3) then getrandplayer wcs_player #t
+				}
+				es_exists wcs_exists userid server_var(wcs_player)
+				es wcs_domole server_var(wcs_player) 2
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen My Jekyll doesn't hide - An enemy will mole to your spawn after the freeze time
+				es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen My Jekyll doesn't hide - You'll become a mole after the freeze time
+				es_playsound server_var(wcs_player) wcs/mole.mp3 1
+			}	
+		}		
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 1 (END)
+	}
+}
+
+block mirror
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es wcs_teleport event_var(attacker) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_xmath wcs_z1 + 35
+				es_xmath wcs_z2 + 35
+				es playerset viewcoord event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es playerset viewcoord event_var(attacker) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 100
+				es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 1 255
+				es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 4 4 175 175 255 255
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .4 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .6 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .8 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed 1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z2 + 100
+				es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 1 255
+				es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 4 4 175 175 255 255
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .4 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .6 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed .8 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+				es_delayed 1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 10 0 75 75 255 255 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 2 (END)
+	}
+}
+
+block thunder
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es playerget health wcs_tmp3 event_var(userid)
+			if (server_var(wcs_tmp3) <= server_var(wcs_health)) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 900 .3 50 300 1.8 175 175 255 255 10
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 900 .3 100 300 3.8 255 75 25 255 50
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 900 .3 50 100 2 255 75 25 255 20
+				es_playsound event_var(userid) weapons/hegrenade/explode4.wav 1
+				es_playsound event_var(attacker) weapons/hegrenade/explode4.wav 1
+				es_delayed 2 es_playsound event_var(userid) weapons/hegrenade/explode4.wav 1
+				es_delayed 2 es_playsound event_var(attacker) weapons/hegrenade/explode4.wav 1
+				es_xmath wcs_z2 - 120
+				es_delayed 3 damage event_var(userid) server_var(wcs_health) 1 event_var(attacker)
+				es_delayed 3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 900 .3 50 10 1.8 175 175 255 255 10
+				es_delayed 3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 900 .3 100 10 3.8 255 75 25 255 50
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 3 (END)
+	}
+}
+
+block osmosis
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx longjump server_var(wcs_userid) + .25 server_var(wcs_duration)
+	es wcs_setfx speed server_var(wcs_userid) = 1.5 server_var(wcs_duration)
+	es wcs_setfx gravity server_var(wcs_userid) = .5 server_var(wcs_duration)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z2 + 45
+	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 255
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ozzmosis - Boosted your stats for server_var(wcs_duration) seconds
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Ozzmosis - [Block] Skill: 4 (END)
+	}
+}

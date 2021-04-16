@@ -1,0 +1,202 @@
+//////////////////
+//Hypa Race Pack//
+//Version 1.0.0D//
+//////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_delayed .2 es_give event_var(userid) weapon_knife
+	es wcs_setfx speed event_var(userid) = 1.5
+	es wcs_setfx health event_var(userid) + 35
+	es wcsgroup set gcplayer event_var(userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Death (START)
+	}
+	es wcsgroup set gcplayer event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] OnChange (START)
+	}
+	es wcs_unrestrict server_var(wcs_userid) all
+	es wcsgroup set gcplayer server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] OnChange (END)
+	}
+}
+
+event player_jump
+{
+	es wcsgroup get gcplayer wcs_tmp7 event_var(userid)
+	if (server_var(wcs_tmp7) != 0) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Grass Chopper - [Block] Event Player_Jump (START)
+		}
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 30
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 34 1 25 25 10 35 255 85 250 1
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Grass Chopper - [Block] Event Player_Jump (END)
+		}
+	}
+}
+
+block camo
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 1 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 35 240 35 server_var(wcs_invis) 1
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Camouflage - Reduced your visibility
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 1 (END)
+	}
+}
+
+block hopp
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 2 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hopper - Reduced your gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 2 (END)
+	}
+}
+
+block poison
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 3 (START)
+	}
+	if (event_var(weapon) == knife) do
+	{
+		if (server_var(wcs_dice) <= 33) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				es_cexec event_var(userid) r_screenoverlay effects/tp_eyefx/tp_eyefx.vmt
+				es_delayed server_var(wcs_duration) es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Force of nature - Poisoned the enemy for server_var(wcs_duration) seconds
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Force of nature - Poisoned you for server_var(wcs_duration) seconds
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 30
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 35 1 25 10 1 35 255 85 150 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 3 (END)
+	}
+}
+
+block chopper
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get gcplayer wcs_tmp7 server_var(wcs_userid)
+	if (server_var(wcs_tmp7) == 1) do
+	{
+		es wcs_setfx speed server_var(wcs_userid) = 2 server_var(wcs_tmp14)
+		es wcs_setfx attackspeed event_var(userid) = 5 server_var(wcs_tmp14)
+		es wcsgroup set gcplayer server_var(wcs_userid) 2
+		es wcs_centertell server_var(wcs_userid) Chopper mode activated! 
+		es_delayed server_var(wcs_tmp14) wcsgroup set gcplayer server_var(wcs_userid) 1
+		es_delayed server_var(wcs_tmp14) es wcs_centertell server_var(wcs_userid) Chopper mode deactivated!
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Grass Chopper - [Block] Skill: 4 (END)
+	}
+}
+
+event weapon_fire
+{
+	es wcsgroup get gcplayer wcs_tmp7 event_var(userid)
+	if (server_var(wcs_tmp7) == 2) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Grass Chopper - [Block] Event Weapon_Fire (START)
+		}
+		if (event_var(weapon) == knife) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
+			es_math server_var(wcs_z2) + 30
+			es est_effect 3 #a 0 sprites/dot.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 13 5 255 0 0 255
+		}
+		if (event_var(weapon) == knife_t) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
+			es_math server_var(wcs_z2) + 30
+			es est_effect 3 #a 0 sprites/dot.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 13 5 255 0 0 255
+		}
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Grass Chopper - [Block] Event Weapon_Fire (END)
+		}
+	}
+	if (server_var(wcs_tmp7) == 1) do
+	{
+		if (event_var(weapon) == knife) do
+		{
+			ifx true(wcs_race_debugging) do
+			{
+				wcs_log [Race]: Grass Chopper - [Block] Event Weapon_Fire (START)
+			}
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
+			es est_effect 3 #a 0 sprites/dot.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 3 3 35 245 35 255		
+			ifx true(wcs_race_debugging) do
+			{
+				wcs_log [Race]: Grass Chopper - [Block] Event Weapon_Fire (END)
+			}
+		}
+	}	
+}

@@ -1,0 +1,34 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/wow_deathknight
+	es_load wcs/tools/manifest/wow_druid
+	es_load wcs/tools/manifest/wow_mage
+	es_load wcs/tools/manifest/wow_paladin
+	es_load wcs/tools/manifest/wow_priest
+	es_load wcs/tools/manifest/wow_rogue
+	es_load wcs/tools/manifest/wow_shaman
+	es_load wcs/tools/manifest/wow_warlock
+	es_load wcs/tools/manifest/wow_warrior
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/wow_deathknight
+	es_unload wcs/tools/manifest/wow_druid
+	es_unload wcs/tools/manifest/wow_mage
+	es_unload wcs/tools/manifest/wow_paladin
+	es_unload wcs/tools/manifest/wow_priest
+	es_unload wcs/tools/manifest/wow_rogue
+	es_unload wcs/tools/manifest/wow_shaman
+	es_unload wcs/tools/manifest/wow_warlock
+	es_unload wcs/tools/manifest/wow_warrior
+}

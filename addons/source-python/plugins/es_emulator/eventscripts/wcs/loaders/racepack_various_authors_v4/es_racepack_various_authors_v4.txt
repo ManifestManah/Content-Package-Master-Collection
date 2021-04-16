@@ -1,0 +1,64 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+//////////////////////
+//Race Loader Script//
+//////////////////////
+
+block load
+{
+	es_load wcs/tools/manifest/1337_hax0r
+	es_load wcs/tools/manifest/bugs_bunny
+	es_load wcs/tools/manifest/burning_demon
+	es_load wcs/tools/manifest/cadian_sniper
+	es_load wcs/tools/manifest/diablo
+	es_load wcs/tools/manifest/electric_smoker
+	es_load wcs/tools/manifest/fbi_agent
+	es_load wcs/tools/manifest/illusion_power
+	es_load wcs/tools/manifest/invisible_kid
+	es_load wcs/tools/manifest/jumper_annie
+	es_load wcs/tools/manifest/killinator
+	es_load wcs/tools/manifest/king_kraken
+	es_load wcs/tools/manifest/kitteh_bink
+	es_load wcs/tools/manifest/le_wikk
+	es_load wcs/tools/manifest/make_my_day
+	es_load wcs/tools/manifest/pumped
+	es_load wcs/tools/manifest/shy_girl
+	es_load wcs/tools/manifest/sin_city
+	es_load wcs/tools/manifest/the_incredibles
+	es_load wcs/tools/manifest/thunderius
+	es_load wcs/tools/manifest/tornado_hell
+	es_load wcs/tools/manifest/vlade
+	es_load wcs/tools/manifest/yellow_mage
+	es_load wcs/tools/manifest/zombie
+}
+
+block unload
+{
+	es_unload wcs/tools/manifest/1337_hax0r
+	es_unload wcs/tools/manifest/bugs_bunny
+	es_unload wcs/tools/manifest/burning_demon
+	es_unload wcs/tools/manifest/cadian_sniper
+	es_unload wcs/tools/manifest/diablo
+	es_unload wcs/tools/manifest/electric_smoker
+	es_unload wcs/tools/manifest/fbi_agent
+	es_unload wcs/tools/manifest/illusion_power
+	es_unload wcs/tools/manifest/invisible_kid
+	es_unload wcs/tools/manifest/jumper_annie
+	es_unload wcs/tools/manifest/killinator
+	es_unload wcs/tools/manifest/king_kraken
+	es_unload wcs/tools/manifest/kitteh_bink
+	es_unload wcs/tools/manifest/le_wikk
+	es_unload wcs/tools/manifest/make_my_day
+	es_unload wcs/tools/manifest/pumped
+	es_unload wcs/tools/manifest/shy_girl
+	es_unload wcs/tools/manifest/sin_city
+	es_unload wcs/tools/manifest/the_incredibles
+	es_unload wcs/tools/manifest/thunderius
+	es_unload wcs/tools/manifest/tornado_hell
+	es_unload wcs/tools/manifest/vlade
+	es_unload wcs/tools/manifest/yellow_mage
+	es_unload wcs/tools/manifest/zombie
+}
