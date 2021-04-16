@@ -1,0 +1,261 @@
+////////////////////////////////
+//Various Authors V2 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 140 255 255 220 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 61 2.5 8 8 0 255 255 255 255 5
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 61 60 2.5 8 8 0 255 255 255 255 5
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 61 2.5 8 8 0 255 255 255 255 5
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 61 60 2.5 8 8 0 255 255 255 255 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Spawn (END)
+	}
+}
+
+block berserk
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Berserk - Your health and speed was increased by server_var(wcs_addhealth) %
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 8) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) True shot dealt server_var(wcs_dmg) extra damage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 74 0.8 30 10 0 255 255 255 255 2
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 44 45 0.8 10 10 0 255 255 255 255 2
+				es est_effect 3 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.8 10 10 255 255 255 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 2 (END)
+	}
+}
+
+block regen
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 3 (START)
+	}
+	es_xrand wcs_rand 3 15
+	es_xrand wcs_duration 5 8
+	es wcs_regeneration event_var(userid) server_var(wcs_rand) server_var(wcs_duration) 225 1000 server_var(wcs_radius)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 3 (END)
+	}
+}
+
+//DOES use max targets or radius variables
+block starfall
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/princess_moon/starfallpath"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Starfall affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Starfall dealt 25 damage to server_var(wcs_count_players_actually_affected) enemies
+				es_playsound server_var(wcs_userid) physics/glass/glass_largesheet_break1.wav 1
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (END)
+	}
+}
+
+block starfallpath 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= server_var(wcs_maxtargets)) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/princess_moon/starfall_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block starfall_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took 20 damage from starfall
+	es_playsound server_var(wcs_targetid) physics/glass/glass_largesheet_break1.wav 1
+	es wcs_pushed server_var(wcs_targetid) 0 0 600
+	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
+	if (server_var(wcs_tmp4) == 1) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+	}
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_targetid) 1
+		es_delayed .7 wcsgroup set is_frozen server_var(wcs_targetid) 0
+		es_delayed .2 wcs_setfx freeze server_var(wcs_targetid) = 1 .5
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 1000 2 80 10 0 255 255 255 85 5
+	es est_effect 10 #a 0 sprites/combineball_trail_blue_1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 21 22 2 15 10 2 200 200 200 150 3
+	es_xmath wcs_z1 + 8
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 200 2 20 10 0 255 255 255 85 5
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 200 2 20 10 0 255 255 255 85 5	
+	es_xmath wcs_z1 + 20
+	es_xmath wcs_z2 + 20
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/crystal_beam1.vmt server_var(vector1) server_var(vector2) 5 1 14 14 0 0 255 255 100 180 27
+	es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 5 1 10 10 0 0 153 217 234 210 5
+	es damage server_var(wcs_targetid) 25 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (EXECUTED END)
+	}
+}

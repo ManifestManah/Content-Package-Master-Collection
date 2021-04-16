@@ -1,0 +1,237 @@
+////////////////////
+//Naiken Race Pack//
+//Version 1.0.0D  //
+////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+		es wcs_removeweapon event_var(userid) 2
+		es_delayed .5 es_give event_var(userid) weapon_usp
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;p250;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+		es wcs_removeweapon event_var(userid) 2
+		es_delayed .5 es_give event_var(userid) weapon_usp_silencer
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es_delayed .1 es_give event_var(userid) weapon_famas
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Solid Snake - You can only USP, Famas, Knife & Nades
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Death (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] OnChange (START)
+	}
+	es wcsgroup set ulti_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] OnChange (END)
+	}
+}
+
+block extendedclips
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 1 (START)
+	}
+	es_delayed .5 wcs_setfx 1stclip event_var(userid) + server_var(wcs_gravity) 0
+	es_delayed .5 wcs_setfx 2ndclip event_var(userid) + server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ammo - Increased your ammo clips
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 1 (END)
+	}
+}
+
+block invisibility
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 2 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_playsound event_var(userid) wcs/invisibility.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 2 (END)
+	}
+}
+
+block ultimate_immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set ulti_immunity event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ultimate immunity - Renders you immune to enemy ultimates
+			es_playsound event_var(userid) wcs/divine.mp3 .8
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 3 (END)
+	}
+}
+
+block godmode_box
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get is_paralyzed wcs_tmp3 server_var(wcs_userid)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_paralyzed server_var(wcs_userid) 1
+		es wcsgroup set is_already_colored event_var(userid) 1
+		es wcs_setfx god server_var(wcs_userid) = 1 3
+		es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
+		es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
+		es wcs_color event_var(userid) 0 255 0 255 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Box Trick - Your hiding in a cardboard box for 3 seconds
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es playerset model server_var(wcs_userid) props/cs_office/Cardboard_box01
+			ifx true(wcs_ffa_enabled) do
+			{
+				es_delayed 3 playerset model server_var(wcs_userid) player/t_phoenix
+			}
+			ifx false(wcs_ffa_enabled) do
+			{
+				es_getplayerteam wcs_team server_var(wcs_userid)
+				if (server_var(wcs_team) = 2) then es_delayed 3 playerset model server_var(wcs_userid) player/t_phoenix
+				if (server_var(wcs_team) = 3) then es_delayed 3 playerset model server_var(wcs_userid) player/ct_sas
+			}
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_setmodel server_var(wcs_userid) models/props/cs_assault/cardboardbox_single.mdl
+			es_delayed 3 wcs_setmodel server_var(wcs_userid) 0
+		}
+		es_delayed 3 es wcsgroup set is_already_colored event_var(userid) 0
+		es_delayed 3 wcsgroup set is_paralyzed server_var(wcs_userid) 0
+		es_delayed 3 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
+		es_delayed 3 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 0
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Box Trick - Coast seems clear, you've exited the box
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es_xmath wcs_z2 + 85
+		es_xmath wcs_x1 + 25
+		es_xmath wcs_x2 + 25
+		es_xmath wcs_y1 + 25
+		es_xmath wcs_y2 + 25
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_x1 - 50
+		es_xmath wcs_x2 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_y1 - 50
+		es_xmath wcs_y2 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_x1 + 50
+		es_xmath wcs_x2 + 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_z1 + 85
+		es_xmath wcs_x2 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_x2 + 50
+		es_xmath wcs_y1 + 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_y2 + 50
+		es_xmath wcs_x1 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_y1 - 50
+		es_xmath wcs_x2 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_z1 - 85
+		es_xmath wcs_z2 - 85
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_y1 + 50
+		es_xmath wcs_x2 + 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_y2 - 50
+		es_xmath wcs_x1 + 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+		es_xmath wcs_x2 - 50
+		es_xmath wcs_y1 - 50
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/cbbl_smoke.vmt server_var(vector1) server_var(vector2) 1 2 3 3 0 0 255 255 255 255 100
+		es est_effect_06 #a 0 sprites/glow1.vmt server_var(vector1) server_var(vector2) 1 2 5 5 0 0 255 255 255 255 100
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solid Snake - [Block] Skill: 4 (END)
+	}
+}

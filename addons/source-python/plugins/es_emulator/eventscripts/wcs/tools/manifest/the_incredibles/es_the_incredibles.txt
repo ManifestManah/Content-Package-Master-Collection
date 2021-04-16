@@ -1,0 +1,122 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Critical strike did + server_var(wcs_dmg) damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 - 10
+				es_xmath wcs_z2 - 10
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 2 (END)
+	}
+}
+
+block push
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_pushed event_var(userid) 0 0 400
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Push - You pushed your enemy
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Push - You got pushed by an enemy
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .1 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .1 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .2 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .2 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .3 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .3 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .4 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .4 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .5 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .5 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .6 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .6 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+				es_xmath wcs_z2 + 10
+				es_delayed .7 est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
+				es_delayed .7 est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 3 (END)
+	}
+}
+
+block invisibility_temporary
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 4 (START)
+	}
+	es wcs_color server_var(wcs_userid) 255 255 255 50 0
+	es_delayed 2 wcs_color server_var(wcs_userid) 255 255 255 255 0
+	es wcs_centertell server_var(wcs_userid) You've cloaked yourself for 2 seconds, you're less visible
+	es_playsound server_var(wcs_userid) wcs/invisibility.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 70 3 30 100 0 255 100 100 255 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: The Incredibles - [Block] Skill: 4 (END)
+	}
+}

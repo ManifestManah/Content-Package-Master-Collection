@@ -1,0 +1,401 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 10
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 255	
+	es_xmath wcs_z1 - 5
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 25 10 0 215 215 215 255 8
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 28 10 0 215 98 113 255 2
+	es_xmath wcs_x1 + 75
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 86 85 1 10 10 0 215 98 113 255 1
+	es_xmath wcs_x1 - 150
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 86 85 1 10 10 0 215 98 113 255 1
+	es_xmath wcs_x1 + 75
+	es_xmath wcs_y1 + 75
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 86 85 1 10 10 0 215 98 113 255 1
+	es_xmath wcs_y1 - 150
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 86 85 1 10 10 0 215 98 113 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Spawn (END)
+	}
+}
+
+block warcry
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_attackerdead) = 0) do
+	{
+        es_xset wcs_targetteam 0
+        es_xset wcs_team_target 0
+        es_xset wcs_pcount 0
+        es_xset wcs_targetid 0
+        es_xset wcs_counter 0
+        es_getplayerteam wcs_team event_var(attacker)
+        if (server_var(wcs_team) = 2) do
+        {
+			es_xset wcs_targetteam "#t,#alive"
+			es_xset wcs_team_target 2
+        }
+        if (server_var(wcs_team) = 3) do
+        {
+			es_xset wcs_targetteam "#ct,#alive"
+			es_xset wcs_team_target 3
+        }
+        if (server_var(wcs_targetteam) != 0) do
+        {
+			es_getlivingplayercount wcs_pcount server_var(wcs_team_target)
+			if (server_var(wcs_pcount) > 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_exists ex userid server_var(wcs_targetid);if (server_var(ex) = 1) then es_xdoblock wcs/tools/manifest/oxiya/health"
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 1 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 1 (HEALTH EXECUTED START)
+	}
+	es_xrand wcs_addhealth 5 35
+	es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Motivational warcry - Granted you server_var(wcs_addhealth) health
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 25 10 0 215 215 215 255 8
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 28 10 0 215 98 113 255 2
+	es_xmath wcs_z1 - 5
+	es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 25 10 0 215 215 215 255 8
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 28 10 0 215 98 113 255 2
+	es_xmath wcs_z1 - 5
+	es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 25 10 0 215 215 215 255 8
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 28 10 0 215 98 113 255 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 1 (HEALTH EXECUTED END)
+	}
+}
+
+block prepared
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_getplayerteam wcs_team event_var(userid)
+		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/manifest/oxiya/preparedt" 
+		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/manifest/oxiya/preparedct"
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (START)
+	}
+}
+
+block preparedt
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (PREPAREDT EXECUTED START)
+	}
+	es_xrand wcs_rand 1 100
+	if (server_var(wcs_rand) <= server_var(wcs_chance)) do
+	{
+		es_delayed .1 es_give server_var(wcs_userid) weapon_ak47
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour and an ak47
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 60
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.1 215
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 60 1 30 10 1.5 215 98 113 255 1
+	}
+	if (server_var(wcs_rand) > server_var(wcs_chance)) do
+	{
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (PREPAREDT EXECUTED END)
+	}
+}
+
+block preparedct
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (PREPAREDCT EXECUTED START)
+	}
+	es_xrand wcs_rand 1 100
+	if (server_var(wcs_rand) <= server_var(wcs_chance)) do
+	{
+		es_delayed .1 es_give server_var(wcs_userid) weapon_m4a1
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour and a ak47
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 60
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.1 215
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 60 1 30 10 1.5 215 98 113 255 1
+	}
+	if (server_var(wcs_rand) > server_var(wcs_chance)) do
+	{
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 2 (PREPAREDCT EXECUTED END)
+	}
+}
+
+block bond
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 3 (START)
+	}
+	es_xrand wcs_tmp1 1 100
+	if (server_var(wcs_tmp1) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xset wcs_targetteam 0
+				es_xset wcs_team_target 0
+				es_xset wcs_pcount 0
+				es_xset wcs_targetid 0
+				es_getplayerteam wcs_team event_var(userid)
+				if (server_var(wcs_team) = 2) do
+				{
+						es_xset wcs_targetteam "#t,#alive"
+						es_xset wcs_team_target 2
+				}
+				if (server_var(wcs_team) = 3) do
+				{
+						es_xset wcs_targetteam "#ct,#alive"
+						es_xset wcs_team_target 3
+				}
+				if (server_var(wcs_targetteam) != 0) do
+				{
+					es_getlivingplayercount wcs_pcount server_var(wcs_team_target)
+					if (server_var(wcs_pcount) > 0) do
+					{
+						es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+						if (server_var(wcs_targetid) != 0) do
+						{
+							es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+							es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+							es wcs_teleport event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+							es wcs_centertell event_var(userid) The bond of brothers got you away from the fight!
+							es_xmath wcs_z1 + 60
+							es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+							es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .3 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+							es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z1 - 10
+							es_delayed .6 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.2 255
+							es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 300 1 40 10 0 215 98 113 255 1
+							es_xmath wcs_z2 + 60
+							es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1.2 255
+							es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .3 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1.2 255
+							es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 10 10 0 215 98 113 255 1
+							es_xmath wcs_z2 - 10
+							es_delayed .6 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1.2 255
+							es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 15 300 1 40 10 0 215 98 113 255 1
+						}
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 3 (END)
+	}
+}
+
+block victory
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es_xdoblock wcs/tools/manifest/oxiya/victoryt" 
+			if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es_xdoblock wcs/tools/manifest/oxiya/victoryct"
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 10
+			es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 1 25 10 0 215 215 215 255 8
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 1 28 10 0 215 98 113 255 2
+			es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 1 25 10 0 215 215 215 255 8
+			es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 1 28 10 0 215 98 113 255 2
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (END)
+	}
+}
+
+block victoryt
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYT EXECUTED START)
+	}
+	es_delayed .1 es_give server_var(wcs_player) weapon_c4
+	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Victory in focus - Gave you a C4 explosive
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYT EXECUTED END)
+	}
+}
+
+block victoryct
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYCT EXECUTED START)
+	}
+	es_delayed .1 es_give server_var(wcs_player) item_defuser
+	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Victory in focus - Gave you a defuse kit
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYCT EXECUTED END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 5 (START)
+	}
+	es_xset wcs_targetteam 0
+	es_xset wcs_team_target 0
+	es_xset wcs_pcount 0
+	es_xset wcs_targetid 0
+	es_xset wcs_counter 0
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+			es_xset wcs_targetteam #t
+			es_xset wcs_team_target 2
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+			es_xset wcs_targetteam #ct
+			es_xset wcs_team_target 3
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{
+			es_getlivingplayercount wcs_pcount server_var(wcs_team_target)
+			if (server_var(wcs_pcount) > 0) do
+			{
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+					es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_exists ex userid server_var(wcs_targetid);if (server_var(ex) = 1) then es_xdoblock wcs/tools/manifest/oxiya/sentence"
+					if (server_var(wcs_counter) > 0) do
+					{
+						
+					}
+					else do
+					{
+							es_xset wcs_ultinotexec 1
+					}
+			}
+			else do
+			{
+					es_xset wcs_ultinotexec 1
+			}
+	}
+	else do
+	{
+			es_xset wcs_ultinotexec 1
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Death sentence - Failed, no nearby allies
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 5 (END)
+	}
+}
+
+block sentence
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 5 (SENTENCE EXECUTED START)
+	}
+	es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+	es playerset viewcoord server_var(wcs_targetid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es wcs_centertell server_var(wcs_userid) You've requested backup from nearby allies backup!
+	es wcs_centertell server_var(wcs_targetid) Oxiya requests your backup!
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) radio/ct_backup.wav .9
+		es_playsound server_var(wcs_userid) radio/ct_backup.wav .7
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) player\vo\anarchist\radio_needbackup04.wav .9
+		es_playsound server_var(wcs_userid) player\vo\anarchist\radio_needbackup04.wav .7
+	}
+	es_xmath wcs_z1 + 50
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 .8 255
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 60 1 14 10 0 215 215 215 205 8
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 60 1 18 10 0 215 98 113 210 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 5 (SENTENCE EXECUTED END)
+	}
+}

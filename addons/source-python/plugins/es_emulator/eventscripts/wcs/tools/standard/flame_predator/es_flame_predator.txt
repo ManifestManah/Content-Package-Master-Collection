@@ -1,0 +1,334 @@
+//////////////////////
+//Standard Race Pack//
+//Version 1.0.0D   //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es wcs_getlanguage wcs_lng "player_spawn" 0 "flame_predator"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 80 70 2 5 15 0 255 255 255 255 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Spawn (END)
+	}
+}
+
+block berserk
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_xmath wcs_speed * 100
+	es wcs_decimal wcs_speed server_var(wcs_speed)
+	es wcs_getlanguage wcs_lng "player_skill1" 0 "flame_predator"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_addhealth) value2 server_var(wcs_speed)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 1 (END)
+	}
+}
+
+block cloak
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 2 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+ 	es_xmath wcs_invis / -2.55
+	es_xmath wcs_invis + 100
+    es wcs_decimal wcs_invis server_var(wcs_invis)
+	es wcs_getlanguage wcs_lng "player_skill2" 0 "flame_predator"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_invis)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 2 (END)
+	}
+
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 3 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es wcs_decimal wcs_gravity server_var(wcs_gravity)
+	es wcs_getlanguage wcs_lng "player_skill3" 0 "flame_predator"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_gravity)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 3 (END)
+	}
+}
+
+block claw
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 4 (START)
+	}
+	if (event_var(weapon) == knife) do
+	{
+		if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+		{
+			if (event_var(es_userdead) = 0) do 
+			{
+				if (event_var(es_attackerdead) = 0) do
+				{
+					es wcs_drop event_var(userid) 1
+					es wcs_getlanguage wcs_lng "target_skill4" 0 "flame_predator"
+					es wcs_xcentertell event_var(userid) server_var(wcs_lng)
+					es_delayed .1 wcs_getlanguage wcs_lng "player_skill4" 0 "flame_predator"
+					es_xdelayed 0.1 es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 4 (END)
+	}
+}
+
+block blade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 5 (START)
+	}
+	if (event_var(weapon) == knife) do
+	{
+		if (event_var(es_userdead) = 0) do 
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_getlanguage wcs_lng "player_skill5" 0 "flame_predator"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 1 10 10 0 255 255 255 255 2
+				es_xmath wcs_z1 + 8
+				es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 1 10 10 0 255 255 255 255 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 5 (END)
+	}
+}
+
+block bomb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (START)
+	}
+	if (server_var(wcs_dice6) <= 50) do
+	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 35
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+		ifx true(wcs_ffa_enabled) do
+		{
+			es_xset wcs_targetteam "#alive"
+			es_getlivingplayercount wcs_pcount
+		}
+		ifx false(wcs_ffa_enabled) do
+		{
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) do
+			{
+				es_xset wcs_targetteam "#ct,#alive"
+				es_getlivingplayercount wcs_pcount 3
+			}	
+			if (server_var(wcs_team) = 3) do
+			{
+				es_xset wcs_targetteam "#t,#alive"
+				es_getlivingplayercount wcs_pcount 2
+			}
+		}
+		if (server_var(wcs_targetteam) != 0) do
+		{
+			if (server_var(wcs_pcount) > 0) do
+			{
+				es_xset wcs_counter 0
+				es_xset wcs_initial_players_struck 0
+				es_xset wcs_count_players_ultimate_immunity 0
+				es_xset wcs_count_players_actually_affected 0
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 255 "es_xdoblock wcs/tools/standard/flame_predator/wcs_ulti_suicide_checks"
+				if (server_var(wcs_execute_ultimate) == 1) do
+				{
+					//No matter how many targets are affected, this section will only be executed once.
+					//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
+				    es wcs_getlanguage wcs_lng "player_skill6_centertell" 0 "flame_predator"
+				    es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected) value2 server_var(wcs_magnitude)
+				    es wcs_getlanguage wcs_lng "player_skill6_tell" 0 "flame_predator"
+				    es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
+					es_xrand wcs_rand 1 3
+					if (server_var(wcs_rand) == 1) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+					}
+					if (server_var(wcs_rand) == 2) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+					}
+					if (server_var(wcs_rand) == 3) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+					}
+				}
+			}
+			else do
+			{
+			    es wcs_getlanguage wcs_lng "check_skill6_failed_living" 0 "flame_predator"
+			    es wcs_xtell event_var(userid) server_var(wcs_lng)
+			}
+			if (server_var(wcs_counter) = 0) do
+			{
+			    es wcs_getlanguage wcs_lng "check_skill6_failed_nearby" 0 "flame_predator"
+			    es wcs_xtell event_var(userid) server_var(wcs_lng)
+			}
+		}
+		else do
+		{
+		    es wcs_getlanguage wcs_lng "check_skill6_failed_targeting" 0 "flame_predator"
+		    es wcs_xtell event_var(userid) server_var(wcs_lng)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/standard/flame_predator/wcs_ulti_suicide_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es wcs_getlanguage wcs_lng "check_skill6_failed_target_is_immune" 0 "flame_predator"
+				    		es wcs_xtell server_var(wcs_targetid) server_var(wcs_lng)
+							es wcs_getlanguage wcs_lng "check_skill6_failed_some_are_immune" 0 "flame_predator"
+				    		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_ultimate_immunity)
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es wcs_getlanguage wcs_lng "check_skill6_failed_all_are_immune" 0 "flame_predator"
+				    		es wcs_xtell event_var(userid) server_var(wcs_lng)
+						}
+					}
+				}
+				else do
+				{
+					es wcs_getlanguage wcs_lng "check_skill6_failed_too_many_targets" 0 "flame_predator"
+		    		es wcs_xtell event_var(userid) server_var(wcs_lng)
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (EXECUTED START)
+	}
+    es wcs_getlanguage wcs_lng "target_skill6_centertell" 0 "flame_predator"
+    es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_magnitude)
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Flame Predator - [Block] Skill: 6 (EXECUTED END)
+	}
+}

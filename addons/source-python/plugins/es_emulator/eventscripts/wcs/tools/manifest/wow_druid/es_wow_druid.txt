@@ -1,0 +1,138 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Spawn (START)
+	}
+	es wcsgroup set wow_druid_fly event_var(userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] OnChange (START)
+	}
+	es wcsgroup set wow_druid_fly server_var(wcs_userid) 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] OnChange (END)
+	}
+}
+
+block mark
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed 1 wcs_setfx armor event_var(userid) + server_var(wcs_addhealth) 0
+	es wcs_setfx speed event_var(userid) + .10 0
+	es_delayed .2 wcs_setfx gravity event_var(userid) = .8 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mark of the wild - Increased your attributes
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 135
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 1 175
+	es est_effect 10 #a 0 sprites/purplelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 20 10 1 64 0 64 255 1
+	es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 10 10 1 160 160 160 150 2
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 20 10 1 128 0 128 205 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 1 (END)
+	}
+}
+
+block mirror
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es damage event_var(attacker) server_var(wcs_rand) 1 event_var(userid)
+			es wcs_centertell event_var(userid) Thorns aura did server_var(wcs_rand) mirror damage
+			es wcs_centertell event_var(attacker) Took server_var(wcs_rand) mirror damage from thorns aura
+			es_xrand wcs_rand 1 2
+			if (server_var(wcs_rand) = 1) then es_xset wcs_gravity sprites/purplelaser1.vmt
+			if (server_var(wcs_rand) = 2) then es_xset wcs_gravity sprites/bluelight1.vmt
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 35
+			es_xmath wcs_z1 + 15
+			es est_effect 10 #a 0 server_var(wcs_gravity) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 20 10 1 64 0 64 255 1
+			es est_effect 10 #a 0 server_var(wcs_gravity) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 10 10 1 160 160 160 150 2
+			es_xmath wcs_z1 + 30
+			es est_effect 10 #a 0 server_var(wcs_gravity) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 20 10 1 64 0 64 255 1
+			es est_effect 10 #a 0 server_var(wcs_gravity) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 51 50 2 10 10 1 160 160 160 150 2
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 2 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Travel form - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 3 (END)
+	}
+}
+
+block fly
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 4 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get wow_druid_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set wow_druid_fly server_var(wcs_userid) 2
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_setfx speed server_var(wcs_userid) + .3 0
+			es wcs_centertell server_var(wcs_userid) You are now flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 55 1 10 10 0 0 197 0 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 60 1 10 10 0 10 217 10 200 1
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set wow_druid_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_setfx speed server_var(wcs_userid) - .3 0
+			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 55 5 1 10 10 0 0 197 0 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 5 1 10 10 0 10 217 10 200 1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Druid - [Block] Skill: 4 (END)
+	}
+}

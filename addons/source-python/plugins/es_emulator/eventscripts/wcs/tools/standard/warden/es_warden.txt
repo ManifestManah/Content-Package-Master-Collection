@@ -1,0 +1,439 @@
+//////////////////////
+//Standard Race Pack//
+//Version 1.0.0D   //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Spawn (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Death (START)
+	}
+	es wcsgroup set ulti_immunity event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] OnChange (START)
+	}
+	es wcsgroup set ulti_immunity server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] OnChange (END)
+	}
+}
+
+block knives
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				ifx true(wcs_ffa_enabled) do
+				{
+					es_xset wcs_targetteam #alive
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					es_getplayerteam wcs_team event_var(attacker)
+					if (server_var(wcs_team) = 2) then es_xset wcs_targetteam #ct
+					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam #t
+				}
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 225 "es_xdoblock wcs/tools/standard/warden/knivesdamage"
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 1 (END)
+	}
+}
+
+block knivesdamage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 1 (EXECUTED START)
+	}
+	es_xrand wcs_dmg 8 19
+	es damage server_var(wcs_player) server_var(wcs_dmg) 1 event_var(attacker)
+	es wcs_getlanguage wcs_lng "player_skill1" 0 "warden"
+	es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
+	es wcs_getlanguage wcs_lng "target_skill1" 0 "warden"
+	es wcs_xcentertell server_var(wcs_player) server_var(wcs_lng) value1 server_var(wcs_dmg)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+	es_xmath wcs_z2 + 25
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 50 225 10 .5 30 10 2 255 255 255 180 5 1
+	es_delayed .1 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 50 225 10 .5 30 10 2 255 255 255 160 8 1
+	es_delayed .2 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 50 225 10 .5 30 10 2 255 255 255 140 10 1
+	es_delayed .3 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 50 225 10 .5 30 10 2 255 255 255 120 13 1
+	es_delayed .4 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 50 225 10 .5 30 10 2 255 255 255 100 13 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 1 (EXECUTED END)
+	}
+}
+
+block immunity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set ulti_immunity event_var(userid) 1
+			es wcs_getlanguage wcs_lng "player_skill2" 0 "warden"
+			es wcs_xtell event_var(userid) server_var(wcs_lng)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_delayed 1 damage event_var(userid) 4 1 event_var(attacker)
+				es_delayed 2 damage event_var(userid) 4 1 event_var(attacker)
+				es_delayed 3 damage event_var(userid) 4 1 event_var(attacker)
+				es_delayed 4 damage event_var(userid) 4 1 event_var(attacker)
+				es wcs_getlanguage wcs_lng "player_skill3" 0 "warden"
+				es wcs_xtell event_var(attacker) server_var(wcs_lng)
+				es wcs_getlanguage wcs_lng "target_skill3" 0 "warden"
+				es wcs_xtell event_var(userid) server_var(wcs_lng)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 1 .5 10 10 0 0 25 255 20 130 5
+				es est_effect_06 #a 0 models/manhack/blur01.vmt server_var(vector1) server_var(vector2) 1 .5 4 4 0 0 255 255 255 180 5
+				es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 1 .5 10 10 0 0 25 255 20 130 5
+				es est_effect_06 #a 0 models/manhack/blur01.vmt server_var(vector1) server_var(vector2) 1 .5 4 4 0 0 255 255 255 180 5
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 3 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 4 (START)
+	}
+	es playerget health wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) >= 175) do
+	{
+		es wcs_cancelulti server_var(wcs_userid)
+		es wcs_getlanguage wcs_lng "player_skill4_max" 0 "warden"
+		es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+	}
+	if (server_var(wcs_tmp1) < 175) do
+	{
+		if (server_var(wcs_tmp1) >= 150) do
+		{
+			es_xrand wcs_addhealth 2 8
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 150) do
+	{
+		if (server_var(wcs_tmp1) >= 140) do
+		{
+			es_xrand wcs_addhealth 5 10
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 140) do
+	{
+		if (server_var(wcs_tmp1) >= 130) do
+		{
+			es_xrand wcs_addhealth 6 12
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 130) do
+	{
+		if (server_var(wcs_tmp1) >= 120) do
+		{
+			es_xrand wcs_addhealth 8 14
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 120) do
+	{
+		if (server_var(wcs_tmp1) >= 110) do
+		{
+			es_xrand wcs_addhealth 9 19
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 110) do
+	{
+		if (server_var(wcs_tmp1) >= 100) do
+		{
+			es_xrand wcs_addhealth 10 20
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 100) do
+	{
+		if (server_var(wcs_tmp1) >= 90) do
+		{
+			es_xrand wcs_addhealth 12 22
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 90) do
+	{
+		if (server_var(wcs_tmp1) >= 80) do
+		{
+			es_xrand wcs_addhealth 14 24
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 80) do
+	{
+		if (server_var(wcs_tmp1) >= 70) do
+		{
+			es_xrand wcs_addhealth 15 30
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 70) do
+	{
+		if (server_var(wcs_tmp1) >= 60) do
+		{
+			es_xrand wcs_addhealth 20 40
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 60) do
+	{
+		if (server_var(wcs_tmp1) >= 50) do
+		{
+			es_xrand wcs_addhealth 25 50
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 50) do
+	{
+		if (server_var(wcs_tmp1) >= 40) do
+		{
+			es_xrand wcs_addhealth 30 60
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 40) do
+	{
+		if (server_var(wcs_tmp1) >= 30) do
+		{
+			es_xrand wcs_addhealth 35 70
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 30) do
+	{
+		if (server_var(wcs_tmp1) >= 20) do
+		{
+			es_xrand wcs_addhealth 40 80
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 20) do
+	{
+		if (server_var(wcs_tmp1) >= 10) do
+		{
+			es_xrand wcs_addhealth 45 90
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 5
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+			es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+		}
+	}
+	if (server_var(wcs_tmp1) < 10) do
+	{
+		if (server_var(wcs_tmp1) >= 1) do
+		{
+			es_xrand wcs_addhealth 50 100
+			es playerget health wcs_tmp2 server_var(wcs_userid)
+			es_xmath wcs_addhealth + server_var(wcs_tmp2)
+			if (server_var(wcs_addhealth) >= 100) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 100 0
+				es wcs_getlanguage wcs_lng "player_skill4_health100" 0 "warden"
+				es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+				es_xmath wcs_z1 + 5
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 575 2 .5 60 10 2 255 255 255 200 5 1
+				es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 575 10 2 40 10 2 255 255 255 110 1 1
+				es_delayed .2 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 575 2 .5 60 10 2 255 255 255 200 5 1
+				es_delayed .2 est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 575 10 2 40 10 2 255 255 255 110 1 1
+			}
+			if (server_var(wcs_addhealth) <= 100) do
+			{
+				es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+				es wcs_getlanguage wcs_lng "player_skill4" 0 "warden"
+				es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+				es_xmath wcs_z1 + 5
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector1) 50 375 2 .5 60 10 2 255 255 255 200 5 1
+				es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector1) 50 375 10 2 40 10 2 255 255 255 110 1 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Warden - [Block] Skill: 4 (END)
+	}
+}

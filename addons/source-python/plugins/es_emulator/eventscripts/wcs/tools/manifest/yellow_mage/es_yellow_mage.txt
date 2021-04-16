@@ -1,0 +1,236 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 0 255 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 120
+	es est_effect 3 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 20 20 255 255 0 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Spawn (END)
+	}
+}
+
+block thundara
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) You unleashed a devastating bolt of thunder
+				es wcs_centertell event_var(userid) You got hit by a devastating bolt of thunder
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 120
+				es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 10 0.5
+				es_delayed .2 es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.2 40 40 255 255 0 200
+				es_delayed .4 es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 65 2.2 60 100 4 255 255 0 155 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 1 (END)
+	}
+}
+
+block jolt
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx health event_var(userid) - server_var(wcs_addhealth) 0
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_tell event_var(userid) #multi #lightgreen Electric Jolt - Gave up server_var(wcs_addhealth) health to gain server_var(wcs_speed)% speed.
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 2 (END)
+	}
+}
+
+block blast
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 3 (START)
+	}
+	es_xset wcs_range 1750
+	es damage server_var(wcs_userid) 2 1 server_var(wcs_userid)
+
+    es_xset wcs_ok 1
+
+    es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 425 2 90 200 0 255 255 0 155 2
+
+    es_xcopy wcs_x wcs_x1
+    es_xcopy wcs_y wcs_y1
+    es_xcopy wcs_z wcs_z1
+
+    es_math wcs_x - server_var(wcs_x2)
+    es_math wcs_y - server_var(wcs_y2)
+    es_math wcs_z - server_var(wcs_z2)
+
+    if (server_var(wcs_x) < 0) then es_xmath wcs_x * -1
+    if (server_var(wcs_y) < 0) then es_xmath wcs_y * -1
+    if (server_var(wcs_z) < 0) then es_xmath wcs_z * -1
+
+    if (server_var(wcs_range) < server_var(wcs_x)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_y)) do
+    {
+		es_xset wcs_ok 0
+    }
+    if (server_var(wcs_range) < server_var(wcs_z)) do
+    {
+		es_xset wcs_ok 0
+    }
+    
+    ifx true(wcs_ok) do
+    {
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+ 	    ifx true(wcs_legacy_teleport_type) do
+	    {
+	    	//To Do: Improve this by finding an alternative teleportation method that prevent players from getting stuck in displacemnts and models
+	    	es playerset location server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    	es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	    }
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
+	    }
+        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenElectric Blast - Blasted you in to the distance!
+        es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
+    }
+    
+    else do
+    {
+        if (server_var(wcs_range) < server_var(wcs_x)) do
+        {
+            if (server_var(wcs_x2) >= 0) do
+            {
+                if (server_var(wcs_x1) >= 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_x1) < 0) do
+                {
+                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
+                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_x2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_x1 wcs_x2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_y)) do
+        {
+            if (server_var(wcs_y2) >= 0) do
+            {
+                if (server_var(wcs_y1) >= 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_y1) < 0) do
+                {
+                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
+                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_y2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_y1 wcs_y2
+        }
+        
+        if (server_var(wcs_range) < server_var(wcs_z)) do
+        {
+            if (server_var(wcs_z2) >= 0) do
+            {
+                if (server_var(wcs_z1) >= 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 - server_var(wcs_range)
+                }
+            }
+            else do
+            {
+                if (server_var(wcs_z1) < 0) do
+                {
+                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
+                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
+                }
+                else do
+                {
+                    es_math wcs_z2 + server_var(wcs_range)
+                }
+            }
+            es_xcopy wcs_z1 wcs_z2
+        }
+
+	    ifx false(wcs_legacy_teleport_type) do
+	    {
+	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) .1
+	    }
+ 	    ifx true(wcs_legacy_teleport_fade) do
+	    {
+	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
+	    }
+        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenElectric Blast - Cannot blast you that far!
+	    es wcs_setcooldown server_var(wcs_userid) 0
+    }
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Yellow Mage - [Block] Skill: 3 (END)
+	}
+}

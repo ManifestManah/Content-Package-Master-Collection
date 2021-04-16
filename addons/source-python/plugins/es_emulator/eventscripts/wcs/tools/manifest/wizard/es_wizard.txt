@@ -1,0 +1,298 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es wcs_setfx 1stclip event_var(attacker) + 1 0
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 5
+				es_xmath wcs_z2 + 5
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 13 12 3 215 11 167 255
+				es_xmath wcs_y1 + 25
+				es_delayed .5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+				es_xmath wcs_y1 + 50
+				es_delayed 1 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_x1 + 150
+				es_delayed 3.5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 13 12 3 215 111 167 255
+				es_xmath wcs_y1 + 175
+				es_delayed 4 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 111 167 255
+				es_xmath wcs_x1 + 200
+				es_delayed 4.5 est_effect 0 #a 4.5 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 111 167 255
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_y1 + 75
+				es_delayed 1.5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 13 12 3 215 11 167 255
+				es_xmath wcs_y1 + 100
+				es_delayed 2.5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+				es_xmath wcs_x1 + 125
+				es_delayed 3 est_effect 0 #a 3 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) >= 300) do
+				{
+					es_xrand wcs_addhealth 10 18
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Gained server_var(wcs_addhealth) health and recovered 1 ammo
+				}
+				if (server_var(wcs_tmp2) < 300) do
+				{
+					es wcs_setfx health event_var(attacker) = 300 0
+					es wcs_centertell event_var(attacker) You have reached the 300 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 1 (END)
+	}
+}
+
+block mirror
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 5 16
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Wizardry mirage - Received server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wizardry mirage - You dealt server_var(wcs_dmg) mirror damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 3 50 100 0 255 160 130 255 2
+				es_xmath wcs_z1 + 50
+				es est_effect 11 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 255
+				es_xmath wcs_z1 + 40
+				es_xmath wcs_z2 + 40
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 255 160 130 255
+				es_xmath wcs_y1 + 170
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 255 160 130 255
+				es_xmath wcs_x1 + 70
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 255 160 130 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 2 (END)
+	}
+}
+
+block respawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen The crow - Respawning where you died in 2 seconds!
+		es wcs_centertell event_var(userid) Respawning where you died in 2 seconds
+		es_delayed 1 es wcs_centertell event_var(userid) Respawning where you died in 1 second
+		es_delayed 2 es wcs_centertell event_var(userid) You've been respawned! 
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_delayed 2 es_emitsound player event_var(userid) wcs/resurrect.mp3 .6 .3
+		es_delayed 2 wcs_spawn event_var(userid) 1
+		es_delayed 2.1 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_delayed 2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 100 2 100 10 0 255 160 130 255 5
+		es_delayed 2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 100 3 50 10 0 255 160 130 255 2
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 3 (END)
+	}
+}
+
+block spell
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/wizard/ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es wcs_centertell server_var(wcs_userid) Spellcraft dealt server_var(wcs_dmg) damage to server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Spell craft - Did server_var(wcs_dmg) damage to server_var(wcs_count_players_actually_affected) enemies
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient/levels/citadel/portal_beam_shoot6.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) weapons\taser\taser_hit.wav 1
+				}
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/wizard/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient/levels/citadel/portal_beam_shoot6.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\taser\taser_hit.wav 1
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 server_var(wcs_radius) 2 80 10 .8 255 160 130 255 5
+	es_xmath wcs_z1 + 50
+	es est_effect 11 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 1.9 100
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 30 50 2 50 10 0 255 160 130 255 2
+	es_xmath wcs_z1 - 25
+	es_xmath wcs_z2 + 25
+	es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 13 16 255 160 130 255
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Spell craft - You took server_var(wcs_dmg) damage
+	es_xrand wcs_dmg 15 30
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Wizard - [Block] Skill: 4 (EXECUTED END)
+	}
+}

@@ -1,0 +1,282 @@
+/////////////////////////
+//Eareland V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Spawn (START)
+	}
+	es wcsgroup set seventh_soldier_player event_var(userid) 1
+	es wcsgroup set hegrenade_resupply event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 8
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 200 200 255 255 1
+	es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .4 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .2 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .2 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .4 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	es_xmath wcs_z1 + 10
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+	es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Death (START)
+	}
+	es wcsgroup set seventh_soldier_player event_var(userid) 0
+	es wcsgroup set hegrenade_resupply event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] OnChange (START)
+	}
+	es wcsgroup set seventh_soldier_player server_var(wcs_userid) 0
+	es wcsgroup set hegrenade_resupply server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] OnChange (END)
+	}
+}
+
+block invis
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 1 (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_speed) 0
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Terrain expert - Increased your speed and jump length by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 2 (END)
+	}
+}
+
+block nades
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 3 (START)
+	}
+	es wcsgroup set hegrenade_resupply event_var(userid) server_var(wcs_tmp2)
+	es_delayed .5 es_give event_var(userid) weapon_hegrenade
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bag of hand grenades - Gave you server_var(wcs_tmp2) high explosive grenades
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 3 (END)
+	}
+}
+
+event weapon_fire
+{
+	if (event_var(es_userweapon) == weapon_hegrenade) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Seventh Soldier - [Block] Event Weapon_Fire (START)
+		}
+		es wcsgroup get seventh_soldier_player wcs_tmp3 event_var(userid)
+		if (server_var(wcs_tmp3) == 1) do
+		{
+			es wcsgroup get hegrenade_resupply wcs_tmp event_var(userid)
+			if (server_var(wcs_tmp) => 1) do
+			{
+				es_xmath wcs_tmp - 1
+				es wcsgroup set hegrenade_resupply event_var(userid) server_var(wcs_tmp)
+				es_delayed .5 es_give event_var(userid) weapon_hegrenade
+			}
+			if (server_var(wcs_tmp) > 1) do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have server_var(wcs_tmp) grenades left!
+			}
+			if (server_var(wcs_tmp) == 1) do 
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen This is your last grenade!
+			}
+			if (server_var(wcs_tmp) == 0) do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have no more grenades!
+			}
+		}
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Seventh Soldier - [Block] Event Weapon_Fire (END)
+		}
+	}
+}
+
+block upgrade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 4 (START)
+	}
+	es playerget primary wcs_tmp1 server_var(wcs_userid)
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		if (server_var(wcs_tmp1) != weapon_scout) do
+		{
+			es_give server_var(wcs_userid) weapon_scout
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - You've upgraded your weapon to a scout!
+			es_xrand wcs_ammo 5 15
+			if (server_var(wcs_ammo) < 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Downgraded your weapon to a poor scout
+			}
+			if (server_var(wcs_ammo) = 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
+			}
+			if (server_var(wcs_ammo) > 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Upgraded your weapon to a refined scout
+			}
+			es wcs_removeweapon server_var(wcs_userid) 1
+			es wcs_setfx 1stammo server_var(wcs_userid) = server_var(wcs_ammo) 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 8
+			es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+		}
+		if (server_var(wcs_tmp1) == weapon_scout) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon is already a scout!
+			es wcs_cancelulti server_var(wcs_userid)
+		}
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		if (server_var(wcs_tmp1) != weapon_ssg08) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - You've upgraded your weapon to a SSG08!
+			es_give server_var(wcs_userid) weapon_ssg08
+			es_xrand wcs_ammo 5 15
+			if (server_var(wcs_ammo) < 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Downgraded your weapon to a poor scout
+			}
+			if (server_var(wcs_ammo) = 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
+			}
+			if (server_var(wcs_ammo) > 10) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Upgraded your weapon to a refined scout
+			}
+			es wcs_removeweapon server_var(wcs_userid) 1
+			es wcs_setfx 1stammo server_var(wcs_userid) = server_var(wcs_ammo) 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es_xmath wcs_z1 + 8
+			es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .1 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .3 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+			es_xmath wcs_z1 + 10
+			es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 400 1 6 10 0 100 100 255 255 1
+			es_xmath wcs_z1 + 10
+			es_delayed .5 est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 1 10 10 0 255 120 120 150 1
+		}
+		if (server_var(wcs_tmp1) == weapon_ssg08) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon is already a SSG08!
+			es wcs_cancelulti server_var(wcs_userid)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Seventh Soldier - [Block] Skill: 4 (END)
+	}
+}

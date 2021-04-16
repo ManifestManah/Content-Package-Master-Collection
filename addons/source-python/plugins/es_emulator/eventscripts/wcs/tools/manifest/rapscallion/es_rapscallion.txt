@@ -1,0 +1,215 @@
+//////////////////////
+//Holliday Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Spawn (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_removeweapon event_var(userid) 1
+		es wcs_removeweapon event_var(userid) 2
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+			es_playsound event_var(userid) ambient/atmosphere/cave_hit6.wav .7
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+			es_playsound event_var(userid) ambient\atmosphere\cs_cable_rattle02.wav 1
+		}
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 40
+		es est_effect 10 #a 0 effects/com_shield003a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 190 3 120 100 0 155 115 100 200 1
+		es wcsgroup set rapscallion event_var(userid) 1
+		es wcsgroup set is_frozen event_var(userid) 0
+		es_delayed .1 es_give event_var(userid) weapon_knife
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Death (START)
+	}
+	es wcsgroup set rapscallion event_var(userid) 0
+	es wcsgroup set is_frozen event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] OnChange (START)
+	}
+	es wcsgroup set rapscallion server_var(wcs_userid) 0
+	es wcsgroup set is_frozen server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] OnChange (END)
+	}
+}
+
+block shadows
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_fire event_var(userid) !self addoutput "renderfx 13"
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flickering shadows - Made you flickering invisible
+			es wcsgroup set raps_shadows event_var(userid) 1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 1 (END)
+	}
+}
+
+block adrenaline
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Adrenaline - Increased your movement
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 2 (END)
+	}
+}
+
+block blade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 3 (START)
+	}
+	if (event_var(weapon) == knife) do
+	{
+		if (event_var(es_userdead) = 0) do 
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) npc/roller/mine/rmine_blades_out1.wav 1.0
+					es_playsound event_var(attacker) npc/roller/mine/rmine_blades_out1.wav 1.0
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_delayed .3 es_playsound event_var(userid) weapons\knife\knife_slash2.wav 1
+					es_delayed .3 es_playsound event_var(attacker) weapons\knife\knife_slash2.wav 1
+					es_playsound event_var(userid) weapons\knife\knife_slash1.wav 1
+					es_playsound event_var(attacker) weapons\knife\knife_slash1.wav 1 
+				}
+				es wcs_centertell event_var(userid) Took + server_var(wcs_dmg) damage from a sharpened blade
+				es wcs_centertell event_var(attacker) Sharpened blade did + server_var(wcs_dmg) damage
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/laser.vmt server_var(vector1) 50 51 1 1 20 10 7 255 255 255 255 5 1
+				es_xmath wcs_z1 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_08 #a 0 sprites/laser.vmt server_var(vector1) 50 51 1 1 20 10 7 255 255 255 255 5 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 3 (END)
+	}
+}
+
+block levitation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 4 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Has reduced your gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 4 (END)
+	}
+}
+
+block invisible
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 5 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) npc/scanner/scanner_nearmiss2.wav .4
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) weapons\fx\nearmiss\bulletltor13.wav .7
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 40
+	es est_effect 10 #a 0 sprites/crosshairs.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 90 0.5 50 30 0 155 115 100 200 1
+	es wcsgroup get rapscallion wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 1) do
+	{
+		es wcs_cancelulti server_var(wcs_userid)
+		es wcsgroup set is_frozen server_var(wcs_userid) 1
+		es wcsgroup set rapscallion server_var(wcs_userid) 2
+		es wcsgroup get raps_shadows wcs_tmp6 server_var(wcs_userid)
+		if (server_var(wcs_tmp6) = 1) do
+		{
+			es_fire server_var(wcs_userid) !self addoutput "renderfx 0"
+		}
+		es wcs_setfx freeze server_var(wcs_userid) = 1 0
+		es wcs_color server_var(wcs_userid) 255 255 255 0 1
+		es wcs_centertell server_var(wcs_userid) You're completly invisible but frozen in place!
+		es_delayed .1 wcs_setcooldown server_var(wcs_userid) 0
+	}
+	if (server_var(wcs_tmp1) = 2) do
+	{
+		es wcsgroup set is_frozen server_var(wcs_userid) 0
+		es wcsgroup set rapscallion server_var(wcs_userid) 1
+		es wcs_setfx freeze server_var(wcs_userid) = 0 0
+		es wcs_color server_var(wcs_userid) 255 255 255 255 1
+		es wcs_centertell server_var(wcs_userid) You're no longer frozen or invisible!
+		es wcsgroup get raps_shadows wcs_tmp6 server_var(wcs_userid)
+		if (server_var(wcs_tmp6) = 1) do
+		{
+			es_fire server_var(wcs_userid) !self addoutput "renderfx 13"
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rapscallion - [Block] Skill: 5 (END)
+	}
+}

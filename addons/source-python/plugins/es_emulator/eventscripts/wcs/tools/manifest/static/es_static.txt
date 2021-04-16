@@ -1,0 +1,287 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 125 175 102 255 1
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient/levels/streetwar/gunship_distant2.wav 1.0
+		es_delayed 3 es_stopsound event_var(userid) ambient/levels/streetwar/gunship_distant2.wav
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5_distant.wav 1
+		es_playsound server_var(wcs_userid) weapons\hegrenade\explode5_distant.wav 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Spawn (END)
+	}
+}
+
+block flash
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		es_fire event_var(userid) !self addoutput "renderfx 13"
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Static flash - You're now flickering invisible!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 50
+		es est_effect 10 #a 0 decals/offexitlightns.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 20 100 1 255 150 70 100 10
+		es_xmath wcs_z1 + 30
+		es est_effect 10 #a 0 dev/ocean.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 20 100 1 255 150 70 100 10
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 1 (END)
+	}
+}
+
+block shock
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) Static shock dealt + server_var(wcs_dmg) damage to you!
+				es wcs_centertell event_var(attacker) Static Shock dealt server_var(wcs_dmg) extra damage!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 1620
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 20 30 255 10 25 255
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 50
+				es est_effect 10 #a 0 decals/offexitlightns.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 20 100 1 255 150 70 100 10
+				es_xmath wcs_z1 + 50
+				es est_effect 10 #a 0 dev/ocean.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)  20 60 1 20 100 1 255 150 70 100 10
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 2 (END)
+	}
+}
+
+block wave
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(attacker) 10 1 event_var(userid)
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shock wave - Reflected 10 damage to event_var(es_attackername)!
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shock wave - event_var(es_username) damaged you 10 damage with a shock wave!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 50
+				es est_effect 10 #a 0 decals/offexitlightns.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 20 100 1 255 150 70 100 10
+				es_xmath wcs_z1 + 50
+				es est_effect 10 #a 0 dev/ocean.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 20 100 1 255 150 70 100 10
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 3 (END)
+	}
+}
+
+block charge
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/static/ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) weapons/underwater_explode4.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) weapons\hegrenade\explode5_distant.wav 1
+				}
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Static Charge affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) You released a Static charge!
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/static/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) weapons/underwater_explode4.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5_distant.wav 1
+	}
+	es wcs_centertell server_var(wcs_targetid) You were caught up in a static charge!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_delayed .2 wcs_pushed server_var(wcs_userid) 0 300 375
+	es_delayed .2 wcs_pushed server_var(wcs_targetid) 0 300 300
+	es_delayed 1 wcs_teleport server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_delayed 1 wcs_teleport server_var(wcs_targetid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 80
+	es est_effect 10 #a 0 decals/offexitlightns.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 80 1 40 100 1 255 150 70 100 10
+	es_xmath wcs_z1 + 50
+	es est_effect 10 #a 0 dev/ocean.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 1 40 100 1 255 150 70 100 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Static - [Block] Skill: 4 (EXECUTED END)
+	}
+}

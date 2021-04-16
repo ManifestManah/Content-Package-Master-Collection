@@ -1,0 +1,324 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 80 2.6 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .1 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 2.4 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .2 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 120 2.2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .3 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 140 2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .4 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 160 1.8 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .5 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 120 180 1.6 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .6 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 140 200 1.4 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .7 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 160 220 1.2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .8 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 240 1 20 500 0 54 66 120 100 10
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) HL1/ambience/des_wind2.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\wind\css15_wind_01.wav 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Spawn (END)
+	}
+}
+
+block wind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 1 (START)
+	}
+	es wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 1
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reduced gravity and you became harder to see 
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 1 (END)
+	}
+}
+
+block whirlwind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_already_colored wcs_tmp6 event_var(userid)
+				if (server_var(wcs_tmp6) == 0) do
+				{
+					es wcsgroup set is_already_colored event_var(userid) 1
+					es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
+					es wcs_color event_var(userid) 255 255 255 0 1
+					es_delayed 1.5 es wcsgroup set is_already_colored event_var(userid) 0
+					es_delayed 1.5 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 1
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Whirlwind - Completely invisible for 1.5 second!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 80 2.6 20 500 0 54 66 120 100 10
+					es_xmath wcs_z2 + 20
+					es_delayed .1 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 2.4 20 500 0 54 66 120 100 10
+					es_xmath wcs_z2 + 20
+					es_delayed .2 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 120 2.2 20 500 0 54 66 120 100 10
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 2 (END)
+	}
+}
+
+block deathvortex
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es wcs_pushed event_var(attacker) 0 0 420
+			es_delayed .2 wcs_pushed event_var(attacker) 125 0 0
+			es_delayed .3 wcs_pushed event_var(attacker) 0 125 0
+			es_delayed .4 wcs_pushed event_var(attacker) 0 -75 330
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death vortex - Caught event_var(es_attackername)!
+			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Death vortex - You got stuck in a vortex!
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 80 2.6 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 2.4 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 120 2.2 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 140 2 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 160 1.8 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 120 180 1.6 20 500 0 54 66 120 100 10
+			es_xmath wcs_z2 + 20
+			es_delayed 0 es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 140 200 1.4 20 500 0 54 66 120 100 10
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 3 (END)
+	}
+}
+
+block vortex
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 175 "es_xdoblock wcs/tools/manifest/vortex/ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				//everything related to the wcs_userid
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Vortex affected server_var(wcs_count_players_actually_affected) people
+				es wcs_centertell server_var(wcs_userid) Your vortex picked up server_var(wcs_count_players_actually_affected) players dealing server_var(wcs_dmg) damage
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_delayed 1.2 es_stopsound server_var(wcs_targetid) HL1/ambience/des_wind2.wav
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_delayed 1.2 es_stopsound server_var(wcs_targetid) ambient\wind\css15_wind_01.wav
+				}
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/vortex/ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) HL1/ambience/des_wind2.wav 1
+		es_delayed 1.2 es_stopsound server_var(wcs_targetid) HL1/ambience/des_wind2.wav
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient\wind\css15_wind_01.wav 1
+		es_delayed 1.2 es_stopsound server_var(wcs_targetid) ambient\wind\css15_wind_01.wav
+	}
+	es wcs_pushed server_var(wcs_targetid) 0 0 525
+	es_delayed .25 wcs_pushed server_var(wcs_targetid) 100 -45 125
+	es_delayed .5 wcs_pushed server_var(wcs_targetid) -25 100 100
+	es_delayed .75 wcs_pushed server_var(wcs_targetid) -100 30 100
+	es_delayed 1 wcs_pushed server_var(wcs_targetid) 50 -100 100
+	es_delayed 1.25 wcs_pushed server_var(wcs_targetid) -50 65 100
+	es wcs_centertell server_var(wcs_targetid) You've been sucked in to a vortex!
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Vortex - Made you airborne and dealt server_var(wcs_dmg)
+	es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
+	es_xmath wcs_z2 + 20
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 2.4 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .15 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 120 2.2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 140 2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .25 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 160 1.8 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 120 180 1.6 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .35 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 140 200 1.4 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 160 220 1.2 20 500 0 54 66 120 100 10
+	es_xmath wcs_z2 + 20
+	es_delayed .45 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 180 240 1 20 500 0 54 66 120 100 10
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Vortex - [Block] Skill: 4 (EXECUTED END)
+	}
+}

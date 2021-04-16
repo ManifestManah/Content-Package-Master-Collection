@@ -1,0 +1,287 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es es_playsound event_var(userid) ambient/levels/prison/inside_battle_antlion4.wav 0.6
+		es es_playsound event_var(userid) ambient/levels/streetwar/city_battle6.wav 0.5
+		es_delayed 1.5 es_playsound event_var(userid) ambient/levels/streetwar/city_battle6.wav 0.5
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) weapons\smokegrenade\sg_explode_distant.wav 1.0
+	}
+	es_delayed .5 wcs_color event_var(userid) 110 0 0 255 1
+´	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 60 1.5 15 10 0 50 0 0 255 0
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 60 1.5 10 10 0 50 0 0 255 0
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 60 1.5 5 10 0 50 0 0 255 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Spawn (END)
+	}
+}
+
+block leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 50
+				es_xmath wcs_z2 + 50
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 8 8 125 0 0 255
+				es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 10 1 25 10 0 125 0 0 255 0
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_addhealth 12 20
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 1 (END)
+	}
+}
+
+block blood
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 2 (END)
+	}
+}
+
+block bomb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 35
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+		ifx true(wcs_ffa_enabled) do
+		{
+			es_xset wcs_targetteam "#alive"
+			es_getlivingplayercount wcs_pcount
+		}
+		ifx false(wcs_ffa_enabled) do
+		{
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) do
+			{
+				es_xset wcs_targetteam "#ct,#alive"
+				es_getlivingplayercount wcs_pcount 3
+			}	
+			if (server_var(wcs_team) = 3) do
+			{
+				es_xset wcs_targetteam "#t,#alive"
+				es_getlivingplayercount wcs_pcount 2
+			}
+		}
+		if (server_var(wcs_targetteam) != 0) do
+		{
+			if (server_var(wcs_pcount) > 0) do
+			{
+				es_xset wcs_counter 0
+				es_xset wcs_initial_players_struck 0
+				es_xset wcs_count_players_ultimate_immunity 0
+				es_xset wcs_count_players_actually_affected 0
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/shinigami/wcs_ulti_suicide_checks"
+				if (server_var(wcs_execute_ultimate) == 1) do
+				{
+					//No matter how many targets are affected, this section will only be executed once.
+					//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
+					
+					es wcs_centertell event_var(userid) The Explosion damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
+					es_xrand wcs_rand 1 3
+					if (server_var(wcs_rand) == 1) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+					}
+					if (server_var(wcs_rand) == 2) do
+					{
+						es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+					}
+					if (server_var(wcs_rand) == 3) do
+					{
+					es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+					}
+				}
+			}
+			else do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, there are no living enemies!
+			}
+			if (server_var(wcs_counter) = 0) do
+			{
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, no nearby enemies!
+			}
+		}
+		else do
+		{
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Could not target an enemy team
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/shinigami/wcs_ulti_suicide_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, all nearby enemy targets were immune!
+						}
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, you can't hit that many targets at once!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_magnitude) damage from an Explosion
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 3 (EXECUTED END)
+	}
+}
+
+block eternal
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 4 (START)
+	}
+	es wcs_color server_var(wcs_userid) 255 255 255 0 1
+	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 110 0 0 255 1
+	es wcs_centertell server_var(wcs_userid) You dissappeared into the red smoke!
+	es_delayed server_var(wcs_duration) es wcs_centertell server_var(wcs_userid) You're visible again!
+	es_playsound server_var(wcs_userid) weapons/smokegrenade/sg_explode.wav 1.0
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_steam
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 10"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 65"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 40"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 42"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 64"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 150"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rollspeed 10"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 255 0 0"
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+	es_fire server_var(wcs_userid) server_var(ss_name) setparent !activator
+	es_delayed server_var(wcs_duration) es_fire server_var(wcs_userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shinigami - [Block] Skill: 4 (END)
+	}
+}

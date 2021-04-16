@@ -1,0 +1,150 @@
+////////////////////////
+//MiBShidobu Race Pack//
+//Version 1.0.0D      //
+////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Spawn (START)
+	}
+	es wcsgroup set sargent_zoom event_var(userid) 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 30 100 1 2.5 20 10 0 200 200 200 200 4 5
+	es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 50 200 1 2.5 20 10 0 200 200 200 200 3 5
+	es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 70 300 1 2.5 20 10 0 200 200 200 200 2 5
+	es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 90 400 1 2.5 20 10 0 200 200 200 200 1 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] OnChange (START)
+	}
+	es wcsgroup set sargent_zoom server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] OnChange (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es_xrand wcs_dmg 2 6
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(attacker) Steady aim did + server_var(wcs_dmg) damage and immobilized the enemy for 1 second!
+					es wcs_centertell event_var(userid) Steady aim did + server_var(wcs_dmg) damage and immobilized you for 1 second!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 25
+					es_xmath wcs_z2 + 25
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) server_var(vector2) 5 1 35 35 0 0 255 0 0 180 12
+					es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 5 1 14 14 0 0 255 128 64 255 5
+					es est_effect_08 #a 0 sprites/combineball_glow_red_1.vmt server_var(vector1) 60 250 1 1 35 10 0 255 0 0 180 12 5
+					es est_effect_08 #a 0 sprites/tp_beam001.vmt server_var(vector1) 60 250 1 1 15 10 0 255 128 64 255 1 5
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 1 (END)
+	}
+}
+
+block m4a1
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcs_removeweapon event_var(userid) 1
+			es_delayed .1 es_give event_var(userid) weapon_m4a1
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Backup supplies - Received an m4a1
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 3 (START)
+	}
+	es_delayed 1 wcs_setfx armor event_var(userid) = 100 0
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Standard equipment - Gave you 100 armour and server_var(wcs_addhealth) health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 3 (END)
+	}
+}
+
+block zoom
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 4 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) weapons\zoom.wav .6
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) weapons\awp\zoom.wav 1
+	}
+	es wcsgroup get sargent_zoom wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 1) do
+	{
+		es wcsgroup set sargent_zoom server_var(wcs_userid) 2
+		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_idefaultfov 50
+		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_ifov 50
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Hawk eye - You zoomed in
+	}
+	if (server_var(wcs_tmp1) = 2) do
+	{
+		es wcsgroup set sargent_zoom server_var(wcs_userid) 1
+		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_idefaultfov 90
+		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_ifov 90
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Hawk eye - You zoomed out
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sargent Gunner - [Block] Skill: 4 (END)
+	}
+}

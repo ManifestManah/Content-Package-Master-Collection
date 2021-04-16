@@ -1,0 +1,136 @@
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es wcsgroup set bconstruction event_var(userid) 15
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+		es playerset model event_var(userid) models/props_c17/oildrum001
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_setmodel event_var(userid) models/props/coop_cementplant/exloding_barrel/exploding_barrel.mdl
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es_delayed .5 es_give event_var(userid) weapon_hegrenade
+	es_delayed .6 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" 5
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Detonators - You received 5 barrel detonators
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 1.5 11 5 0 100 0 0 255 1
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 1.5 6 5 0 100 0 0 255 2
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 46 1.5 3 5 0 100 0 0 255 3
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Death (START)
+	}
+	es wcsgroup set bconstruction event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] OnChange (START)
+	}
+	es wcsgroup set bconstruction server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] OnChange (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Throw it - Has increased your jump length
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rolling - Your speed has been increased
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 2 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 3 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Empty the barrel - Reduced your gravity
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 3 (END)
+	}
+}
+
+block prop
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
+	if (server_var(wcs_tmp11) == 0) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+	}
+	if (server_var(wcs_tmp11) => 1) do
+	{
+		es_xmath wcs_tmp11 - 1
+		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_prop_physics_create server_var(wcs_userid) props_c17/oildrum001_explosive.mdl
+		}
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+		{
+			es wcs_explosive_barrel server_var(wcs_userid)
+		}
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Trixies Barrel - [Block] Skill: 4 (END)
+	}
+}

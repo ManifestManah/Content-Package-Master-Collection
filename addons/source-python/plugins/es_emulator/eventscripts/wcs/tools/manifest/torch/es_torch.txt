@@ -1,0 +1,142 @@
+////////////////////////////
+//TeacherCreatur Race Pack//
+//Version 1.0.0D          //
+////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 235 54 1 220 1
+	es wcs_setfx jetpack event_var(userid) = 0 0
+	es wcsgroup set torch_fly event_var(userid) 1
+	es wcsgroup set absorb event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] OnChange (START)
+	}
+	es wcsgroup set absorb server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] OnChange (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Fireball dealt server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 25
+				es_xmath wcs_z2 + 25
+				es est_effect 3 #a 0 sprites/flatflame.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 20 80 100 255 55 255
+				es est_effect 10 #a 0 sprites/flatflame.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 350 2 90 200 0 155 155 155 155 2
+				es est_effect 11 #a 0 sprites/flatflame.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 3 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 1 (END)
+	}
+}
+
+block armor
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 2 (START)
+	}
+	es wcsgroup set absorb event_var(userid) server_var(wcs_dmg)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fire armour - Your damage taken is reduced
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 128
+	es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 60 255 255 255 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 2 (END)
+	}
+}
+
+block streak
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fire streak - Granted you additional speed and health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 3 (END)
+	}
+}
+
+block fly
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 4 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get torch_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set torch_fly server_var(wcs_userid) 2
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_centertell server_var(wcs_userid) You are now flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 55 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 60 1 10 10 0 153 217 234 200 1
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set torch_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 55 5 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 5 1 10 10 0 153 217 234 200 1
+			es playerget health wcs_tmp1 server_var(wcs_userid)
+			if (server_var(wcs_tmp1) >= server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+			}
+			if (server_var(wcs_tmp1) < server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 1 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Torch - [Block] Skill: 4 (END)
+	}
+}

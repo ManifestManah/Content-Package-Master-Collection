@@ -1,0 +1,286 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient/atmosphere/cave_hit5.wav 0.9
+	}
+	es_delayed .1 wcs_setcooldown event_var(userid) 15
+	es_delayed .5 wcs_color event_var(userid) 192 152 220 245 1
+	es wcs_setcooldown event_var(userid) 10
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 40
+	es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 350 125 2 120 10 0 215 11 167 255 5
+	es est_effect 10 #a 0 sprites/fire.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 350 125 2 120 10 0 255 255 255 255 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Spawn (END)
+	}
+}
+
+block swift
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Swift - Increased your speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 1 (END)
+	}
+}
+
+block bury
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_buried wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_buried event_var(userid) 1
+					es_delayed server_var(wcs_duration) wcsgroup set is_buried event_var(userid) 0
+					es_getplayerlocation wcs_x4 wcs_y4 wcs_z4 event_var(userid)
+					es_xmath wcs_z4 - 35
+					es playerset location event_var(userid) server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4)
+					es_xmath wcs_z4 + 35
+					es_delayed server_var(wcs_duration) playerset location event_var(userid) server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bury - You've been buried for server_var(wcs_duration) second!
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Bury - Buried event_var(es_username) for server_var(wcs_duration) second!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z2 + 40
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_y1 + 70
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_x1 + 70
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_y1 - 70
+					es_xmath wcs_x1 - 70
+					es_xmath wcs_y1 + 50
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_x1 + 50
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_x1 - 50
+					es_xmath wcs_y1 - 50
+					es_xmath wcs_z1 + 100
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_y1 + 170
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_x1 + 170
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_y1 - 170
+					es_xmath wcs_x1 - 170
+					es_xmath wcs_z1 + 114
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 13 12 3 215 11 167 255
+					es_xmath wcs_y1 + 5
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+					es_xmath wcs_x1 + 3
+					es est_effect 3 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 5 215 11 167 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 2 (END)
+	}
+}
+
+block vampire
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 128
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 10 50 128 0 128 255
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_addhealth 8 18
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 3 (END)
+	}
+}
+
+block possessor
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+			if (server_var(wcs_targetid) != 0) do
+			{
+				es_xdoblock wcs/tools/manifest/unholy_entity/ultimate_checks
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+				if (server_var(wcs_tmp) != 1) do
+				{
+					es_xset wcs_ultinotexec 0
+					es_xdoblock wcs/tools/manifest/unholy_entity/ultimate_final
+				}
+				if (server_var(wcs_tmp) == 1) do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient/atmosphere/cave_hit5.wav 1
+		es_playsound server_var(wcs_userid) ambient/atmosphere/cave_hit5.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient\atmosphere\outdoor2.wav 1
+		es_playsound server_var(wcs_userid) ambient\atmosphere\outdoor2.wav 1
+	}
+	es_getplayerlocation wcs_x3 wcs_y3 wcs_z3 server_var(wcs_userid)
+	es_getplayerlocation wcs_x5 wcs_y5 wcs_z5 server_var(wcs_targetid)
+	es_delayed 3 wcs_teleport server_var(wcs_targetid) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
+	es_delayed 3 wcs_teleport server_var(wcs_userid) server_var(wcs_x5) server_var(wcs_y5) server_var(wcs_z5)
+	es wcs_centertell server_var(wcs_targetid) You will trade places with an Unholy Entity in 3 seconds!
+	es_delayed 1 wcs_centertell server_var(wcs_targetid) You will trade places with an Unholy Entity in 2 seconds!
+	es_delayed 2 wcs_centertell server_var(wcs_targetid) You will trade places with an Unholy Entity in 1 seconds!
+	es_delayed 3 wcs_centertell server_var(wcs_targetid) You've traded places with an Unholy Entity!
+	es wcs_centertell server_var(wcs_userid) You will trade places with an enemy in 3 seconds!
+	es_delayed 1 wcs_centertell server_var(wcs_userid) You will trade places with an enemy in 2 seconds!
+	es_delayed 2 wcs_centertell server_var(wcs_userid) You will trade places with an enemy in 1 seconds!
+	es_delayed 3 wcs_centertell server_var(wcs_userid) You've traded places with an enemy!
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Possessor - You will trade places with an enemy in 3 seconds!
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Possessor - You will trade places with an unholy entity in 3 seconds
+	es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Possessor - You've swapped places with an unholy entity!
+	es_delayed 3 es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Possessor - You've swapped places with an unholy entity!
+	es_xmath wcs_z3 + 20
+	es_xmath wcs_z5 + 20
+	es est_effect 10 #a 0 sprites/fireburst.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 20 2000 2 100 300 1.8 0 153 255 255 1
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 20 200 2 100 300 0.8 0 153 255 255 1
+	es_delayed 1 est_effect 10 #a 0 sprites/fireburst.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 20 2000 2 100 300 1.8 175 175 255 255 1
+	es est_effect 10 #a 0 sprites/fireburst.vmt server_var(wcs_x5) server_var(wcs_y5) server_var(wcs_z5) 20 2000 2 100 300 1.8 0 153 255 255 1
+	es est_effect 10 #a 0 sprites/bubble.vmt server_var(wcs_x5) server_var(wcs_y5) server_var(wcs_z5) 20 200 2 100 300 0.8 0 153 255 255 1
+	es_delayed 1 est_effect 10 #a 0 sprites/fireburst.vmt server_var(wcs_x5) server_var(wcs_y5) server_var(wcs_z5) 20 2000 2 100 300 1.8 175 175 255 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Unholy Entity - [Block] Skill: 4 (EXECUTED END)
+	}
+}

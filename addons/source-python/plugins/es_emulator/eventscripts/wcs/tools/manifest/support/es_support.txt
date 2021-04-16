@@ -1,0 +1,164 @@
+/////////////////////
+//Damakex Race Pack//
+//Version 1.0.0D   //
+/////////////////////
+
+block invisibility
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hide - You've become less visible
+		es_playsound event_var(userid) wcs/invisibility.mp3 .8
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es est_effect 10 #a 0 sprites/hydragutbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 150 2 30 10 .8 0 20 220 215 1
+		es_xmath wcs_z1 + 30
+		es est_effect 10 #a 0 sprites/hydragutbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 150 2 12 10 0 0 20 185 215 0
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 1 (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - Your jump length is increased
+		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 5
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 255	
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 25 10 0 100 100 225 200 8
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 28 10 0 150 150 150 210 1
+		es_xmath wcs_z1 + 15
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 25 10 0 100 100 225 200 8
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 201 200 1 28 10 0 150 150 150 210 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 14 23
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Final strike dealt + server_var(wcs_dmg) damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_playsound event_var(userid) wcs/zeal.mp3 .8
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/light_glow01.vmt server_var(vector1) server_var(vector2) 1 1 30 30 0 0 255 255 255 200 50
+				es est_effect_06 #a 0 sprites/light_glow01.vmt server_var(vector1) server_var(vector2) 1 1 30 30 0 0 0 255 255 200 50
+				es est_effect 10 #a 0 sprites/light_glow01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 126 1 35 10 0 255 255 255 175 55
+				es est_effect 10 #a 0 sprites/light_glow01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 126 .8 35 10 0 0 255 255 175 40
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 3 (END)
+	}
+}
+
+block gravity
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 4 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+		es_xmath wcs_gravity * 100
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen High jumping - Reduced your gravity to server_var(wcs_gravity)%
+		es_playsound event_var(userid) skills/hymn.mp3 .8
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 410 411 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 400 401 2 15 10 0 0 255 230 200 2
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 310 311 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 301 2 15 10 0 0 255 230 200 2
+		es_xmath wcs_z2 + 5
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 210 211 2 15 10 0 0 162 232 200 1
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 200 201 2 15 10 0 0 255 230 200 2
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 4 (END)
+	}
+}
+
+block cash_to_health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 5 (START)
+	}
+	es playerget cash wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) < 225) do
+	{
+		es_xset wcs_ultinotexec 1
+		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Transfusion - Failed, you don't have enough cash
+        if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	}
+	if (server_var(wcs_tmp1) => 225) do
+	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 100
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 180 180 200 255 2
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1 255
+		es_xmath wcs_z1 - 25
+		es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 180 180 200 255 2
+		es_delayed .1 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1 255
+		es_xmath wcs_z1 - 25
+		es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 180 180 200 255 2
+		es_delayed .2 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1 255
+		es_xmath wcs_z1 - 25
+		es_delayed .3 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 700 1 50 10 0 180 180 200 255 2
+		es_delayed .3 est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1 255
+		es playerget health wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) => 175) do
+		{
+			es wcs_setfx health server_var(wcs_userid) = 175 0
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Health Boost - Your health has reached the cap
+		}
+		if (server_var(wcs_tmp2) <= 150) do
+		{
+			es wcs_setfx cash server_var(wcs_userid) - 250 0
+			es wcs_setfx health server_var(wcs_userid) + 25 0	
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Health Boost - Granted you 25 extra health
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Support - [Block] Skill: 5 (END)
+	}
+}

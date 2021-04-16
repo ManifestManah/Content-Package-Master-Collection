@@ -1,0 +1,150 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+		es playerset model event_var(userid) models/zombie/classic
+		es_playsound event_var(userid) npz/zombie/zombie_alert1.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+		es playerset model event_var(userid) models/player/zombie
+	}
+	es_delayed .1 es_give event_var(userid) weapon_knife
+	es_delayed .5 wcs_color event_var(userid) 75 37 37 255 1
+	es wcs_setfx speed event_var(userid) = 0.65 0
+	es_tell event_var(userid) Your body is decaying - Moving slower than the living ones
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 250 2.5 50 20 5 51 51 204 255 2
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 20 2.5 50 20 2.5 51 51 204 255 6
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 350 20 2.5 50 20 0 51 51 204 255 12
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Spawn (END)
+	}
+}
+
+block flesh
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Your calloused flesh granted you server_var(wcs_addhealth) bonus health
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
+	es_delayed .2 es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
+	es_xmath wcs_x1 + 15
+	es_delayed .6 es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
+	es_delayed .8 es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 1 (END)
+	}
+}
+
+block bite
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 2 (START)
+	}
+	if (event_var(weapon) == knife) do
+	{
+		if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				if (event_var(es_attackerdead) = 0) do
+				{
+					es damage event_var(userid) 10000 1 event_var(attacker)
+					es wcs_centertell event_var(userid) You've died because of event_var(es_usernames)'s infected bite!
+					es wcs_centertell event_var(attacker) You've killed event_var(es_username) with your infected bite!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 2 (END)
+	}
+}
+
+block hunger
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You've gained server_var(wcs_addhealth) HP from feasting on event_var(es_username)!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_xmath wcs_z1 + 15
+	es est_effect 11 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 3 150
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 3 (END)
+	}
+}
+
+block rise
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen You'll rise from your grave where you died in 1.5 seconds!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_delayed 1.5 wcs_spawn event_var(userid) 1
+		es_delayed 1.6 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 4 (END)
+	}
+}
+
+block dash
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 5 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_emitsound player server_var(wcs_userid) npc/fast_zombie/fz_scream1.wav 1.0 0.2
+	}
+	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_speed) 3
+	es wcs_centertell server_var(wcs_userid) Ferocious dash activated!
+	es_delayed 1 wcs_centertell server_var(wcs_userid) Ferocious dash ending in 2
+	es_delayed 2 wcs_centertell server_var(wcs_userid) Ferocious dash ending in 1
+	es_delayed 3 wcs_centertell server_var(wcs_userid) Ferocious dash has ended!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 11 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 4 2 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Risen - [Block] Skill: 5 (END)
+	}
+}

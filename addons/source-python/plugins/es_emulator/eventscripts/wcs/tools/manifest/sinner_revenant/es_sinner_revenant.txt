@@ -1,0 +1,207 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Spawn (START)
+	}
+	es_delayed .5 wcs_color event_var(userid) 10 10 10 255 1
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 25
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 sprites/halo.vmt server_var(vector2) 50 300 10 3 50 10 2 141 63 141 185 10 1
+	es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 400 60 10 3 50 10 2 255 255 255 80 5 1
+	es_delayed 1 est_effect_08 #a 0 sprites/halo.vmt server_var(vector2) 50 300 10 3 50 10 2 141 63 141 185 10 1
+	es_delayed 1 est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 400 60 10 3 50 10 2 255 255 255 80 5 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Running from death - Received server_var(wcs_speed)% speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 1 (END)
+	}
+}
+
+block leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_xmath wcs_z2 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/halo.vmt server_var(vector1) server_var(vector2) 1 0.3 14 14 0 0 141 63 141 185 10
+				es est_effect_06 #a 0 models/manhack/blur01.vmt server_var(vector1) server_var(vector2) 1 0.3 8 8 0 0 255 255 255 80 5
+				es est_effect_08 #a 0 sprites/halo.vmt server_var(vector2) 50 300 10 .3 50 10 2 141 63 141 185 10 1
+				es est_effect_08 #a 0 models/manhack/blur01.vmt server_var(vector2) 400 60 10 .3 50 10 2 255 255 255 80 5 1
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_armor 4 17
+					es wcs_setfx armor event_var(attacker) + server_var(wcs_armor) 0
+					es wcs_setfx health event_var(attacker) + server_var(wcs_armor) 0
+					es wcs_centertell event_var(attacker) Soul trade leeched server_var(wcs_armor) health and armor
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 2 (END)
+	}
+}
+
+block blind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 10
+				es est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 3 40 10 0 255 0 0 200 5
+				es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 3 2 0 5 5 0 0 5 1
+				es_xmath wcs_z1 + 60
+				es est_effect 10 #a 0 models/manhack/blur01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 3 40 10 0 255 0 0 200 5
+				es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 3 2 0 5 5 0 0 5 1
+				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+				es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen White sight - Blinded you for 1 second
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen White sight - Blinded your target for 1 second
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 3 (END)
+	}
+}
+
+block creation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 4 (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 20
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+    es est_effect_14 #a 0 models\manhack\blur01.vmt server_var(vector1) server_var(vector1) 300 20 600
+    es_delayed .2 est_effect_14 #a 0 models\manhack\blur01.vmt server_var(vector1) server_var(vector1) 300 20 600
+    es_delayed .4 est_effect_14 #a 0 models\manhack\blur01.vmt server_var(vector1) server_var(vector1) 300 20 600
+	es_xrand wcs_tmp3 1 12
+    if (server_var(wcs_tmp3) = 1) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_ak47
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an AK47 
+	}
+    if (server_var(wcs_tmp3) = 2) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_famas
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Famas 
+	}
+    if (server_var(wcs_tmp3) = 3) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_m4a1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an M4a1 
+	}
+    if (server_var(wcs_tmp3) = 4) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_aug
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an Aug 
+	}
+    if (server_var(wcs_tmp3) = 5) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 2
+		es_delayed .2 es_give server_var(wcs_userid) weapon_elite
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created some Dual elites 
+	}
+    if (server_var(wcs_tmp3) = 6) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 2
+		es_delayed .2 es_give server_var(wcs_userid) weapon_fiveseven
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Fiveseven 
+	}
+    if (server_var(wcs_tmp3) = 7) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_xm1014
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Xm1014 
+	}
+    if (server_var(wcs_tmp3) = 8) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_mac10
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a mac10 
+	}
+    if (server_var(wcs_tmp3) = 9) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_ump45
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an Ump45 
+	}
+    if (server_var(wcs_tmp3) = 10) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_p90
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a P90 
+	}
+    if (server_var(wcs_tmp3) = 11) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 es_give server_var(wcs_userid) weapon_m249
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a M249 
+	}	
+    if (server_var(wcs_tmp3) = 12) do
+	{
+		es wcs_removeweapon server_var(wcs_userid) 2
+		es_delayed .2 es_give server_var(wcs_userid) weapon_deagle
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a deagle 
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sinner Revenant - [Block] Skill: 4 (END)
+	}	
+}

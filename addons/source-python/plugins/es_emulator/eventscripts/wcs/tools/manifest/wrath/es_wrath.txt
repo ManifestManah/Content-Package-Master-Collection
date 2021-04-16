@@ -1,0 +1,556 @@
+/////////////////////////
+//Holliday V3 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Spawn (START)
+	}
+	es wcs_setcooldown event_var(userid) 5
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient/levels/prison/inside_battle_zombie1.wav 1
+		es_playsound event_var(userid) ambient/levels/citadel/strange_talk1.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient\animal\dog_growl_behind_wall_1.wav 1
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 60
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+	es_delayed .2 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+	es_delayed .3 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Spawn (END)
+	}
+}
+
+block wrath
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do 
+		{
+			es playerget health wcs_tmp2 event_var(userid)
+			if (server_var(wcs_tmp2) <= server_var(wcs_addhealth)) do
+			{
+				es wcs_centertell event_var(userid) event_var(es_attackername)'s Wrath destroyed your body!
+				es wcs_centertell event_var(attacker) Your wrath destroyed event_var(es_username)'s body!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				es_delayed .3 est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				es_delayed .6 est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				es_delayed 1 est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 60
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .2 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .4 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .7 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .8 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) ambient/levels/streetwar/city_battle10.wav 1
+					es_playsound event_var(userid) ambient/levels/streetwar/city_battle10.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(attacker) weapons\sensorgrenade\sensor_explode.wav 1
+					es_playsound event_var(userid) weapons\sensorgrenade\sensor_explode.wav 1
+				}
+				es damage event_var(userid) 10 1 event_var(attacker)
+			}
+			else do
+			{
+				if (server_var(wcs_dice) <= 25) do
+				{
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 60
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+					es_delayed .2 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+					es_delayed .4 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+					es_delayed .7 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+					es_delayed .8 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) ambient/levels/streetwar/city_battle10.wav 1
+						es_playsound event_var(userid) ambient/levels/streetwar/city_battle10.wav 1
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_xrand wcs_rand 1 6
+						if (server_var(wcs_rand) == 1) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_01.wav .6
+							es_playsound event_var(userid) survival\missile_land_01.wav .6
+						}
+						if (server_var(wcs_rand) == 2) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_02.wav .6
+							es_playsound event_var(userid) survival\missile_land_02.wav .6
+						}
+						if (server_var(wcs_rand) == 3) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_03.wav .6
+							es_playsound event_var(userid) survival\missile_land_03.wav .6
+						}
+						if (server_var(wcs_rand) == 4) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_04.wav .6
+							es_playsound event_var(userid) survival\missile_land_04.wav .6
+						}
+						if (server_var(wcs_rand) == 5) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_05.wav .6
+							es_playsound event_var(userid) survival\missile_land_05.wav .6
+						}
+						if (server_var(wcs_rand) == 6) do
+						{
+							es_playsound event_var(attacker) survival\missile_land_06.wav .6
+							es_playsound event_var(userid) survival\missile_land_06.wav .6
+						}
+					}
+					es_xrand wcs_speed 4 15
+					es wcs_centertell event_var(userid) Wrath dealt server_var(wcs_speed) bonus damage!
+					es damage event_var(userid) server_var(wcs_speed) 1 event_var(attacker)
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 1 (END)
+	}
+}
+
+block explosive_bomb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do 
+		{
+			es playerget health wcs_tmp3 event_var(userid)
+			if (server_var(wcs_tmp3) <= server_var(wcs_health)) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 35
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				ifx true(wcs_ffa_enabled) do
+				{
+					es_xset wcs_targetteam "#alive"
+					es_getlivingplayercount wcs_pcount
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					es_getplayerteam wcs_team event_var(userid)
+					if (server_var(wcs_team) = 2) do
+					{
+						es_xset wcs_targetteam "#ct,#alive"
+						es_getlivingplayercount wcs_pcount 3
+					}	
+					if (server_var(wcs_team) = 3) do
+					{
+						es_xset wcs_targetteam "#t,#alive"
+						es_getlivingplayercount wcs_pcount 2
+					}
+				}
+				if (server_var(wcs_targetteam) != 0) do
+				{	
+					if (server_var(wcs_pcount) > 0) do
+					{
+						es_xset wcs_counter 0
+						es_xset wcs_initial_players_struck 0
+						es_xset wcs_count_players_ultimate_immunity 0
+						es_xset wcs_count_players_actually_affected 0
+						es_xrand wcs_magnitude 75 150
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/wrath/wcs_ulti_suicide_checks"
+						if (server_var(wcs_execute_ultimate) == 1) do
+						{
+							//No matter how many targets are affected, this section will only be executed once.
+							//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
+							
+							es wcs_centertell event_var(userid) Explosive Bomb damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb affected server_var(wcs_count_players_actually_affected) enemies
+							es_xrand wcs_rand 1 3
+							if (server_var(wcs_rand) == 1) do
+							{
+								es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+							}
+							if (server_var(wcs_rand) == 2) do
+							{
+								es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+							}
+							if (server_var(wcs_rand) == 3) do
+							{
+								es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+							}
+						}
+					}
+					else do
+					{
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - Failed, there are no living enemies!
+					}
+					if (server_var(wcs_counter) = 0) do
+					{
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - Failed, no nearby enemies!
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - Could not target an enemy team
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/wrath/wcs_ulti_suicide_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - Failed, all nearby enemy targets were immune!
+						}
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive Bomb - Failed, you can't hit that many targets at once!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_magnitude) damage from an Explosion
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 2 (EXECUTED END)
+	}
+}
+
+block dismembering
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 60
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_14 #a 0 effects/mh_blood3.vmt server_var(vector2) server_var(vector1) 100 1000 1000
+				es_delayed .1 es est_effect_14 #a 0 effects/mh_blood1.vmt server_var(vector2) server_var(vector1) 100 100 500
+				es_delayed .2 es est_effect_14 #a 0 decals/Blood4.vmt server_var(vector2) server_var(vector1) 300 100 100
+				es_delayed .3 es est_effect_14 #a 0 decals/bloodstain_002.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(attacker) env_blood
+				es_format ss_name "my_ss_%1%2" event_var(attacker) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(attacker) server_var(ss_name) addoutput "amount 50"
+				es_fire event_var(attacker) server_var(ss_name) addoutput "spawnflags 100"
+				es_fire event_var(attacker) server_var(ss_name) emitblood
+				es_delayed .3 es_fire event_var(attacker) server_var(ss_name) emitblood
+				es_delayed .6 es_fire event_var(attacker) server_var(ss_name) emitblood
+				es_delayed 1.5 es_fire event_var(attacker) server_var(ss_name) kill
+				es wcs_centertell event_var(userid) Dismembering returned server_var(wcs_dmg) damage to event_var(es_attackername)!
+				es wcs_centertell event_var(attacker) Dismembering dealt server_var(wcs_dmg) to you!
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 3 (END)
+	}
+}
+
+block hellwrath
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 35
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+	es_xset wcs_execute_ultimate 0
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_xrand wcs_magnitude 100 200 
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_range) "es_xdoblock wcs/tools/manifest/wrath/wcs_ulti_suicide_ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Your Wrath affected server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) You released your Wrath killing all nearby enemies
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+				es_xmath wcs_z1 + 30
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .1 es est_effect_14 #a 0 effects/mh_blood1.vmt server_var(vector2) server_var(vector1) 100 100 500
+				es_delayed .2 es est_effect_14 #a 0 decals/Blood4.vmt server_var(vector2) server_var(vector1) 300 100 100
+				es_delayed .2 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .3 es est_effect_14 #a 0 decals/bloodstain_002.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .4 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_delayed .6 es est_effect_14 #a 0 effects/fire_cloud2.vmt server_var(vector2) server_var(vector1) 100 100 1000
+				es_xmath wcs_smokestack_counter + 1
+				es_give server_var(wcs_userid) env_blood
+				es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire server_var(wcs_userid) server_var(ss_name) addoutput "amount 50"
+				es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spawnflags 100"
+				es_fire server_var(wcs_userid) server_var(ss_name) emitblood
+				es_delayed .3 es_fire server_var(wcs_userid) server_var(ss_name) emitblood
+				es_delayed .6 es_fire server_var(wcs_userid) server_var(ss_name) emitblood
+				es_delayed 1.5 es_fire server_var(wcs_userid) server_var(ss_name) kill
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient/levels/streetwar/city_battle10.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) weapons\c4\c4_explode1.wav 1
+				}
+				es damage server_var(wcs_userid) 1500 1 server_var(wcs_userid)
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (END)
+	}
+}
+
+block wcs_ulti_suicide_ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_ultinotexec 0
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/wrath/wcs_ulti_suicide_ultimate_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_xset wcs_ultinotexec 1
+							}
+						}
+					}
+					else do
+					{
+						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_xset wcs_ultinotexec 1
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_magnitude) damage from someone's Wrath
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Hell Wrath - [Block] Skill: 4 (EXECUTED END)
+	}
+}

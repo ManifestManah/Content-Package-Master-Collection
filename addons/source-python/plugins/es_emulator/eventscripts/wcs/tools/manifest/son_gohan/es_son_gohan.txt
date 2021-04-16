@@ -1,0 +1,201 @@
+//////////////////////
+//Darkeden Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Spawn (START)
+	}
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 20
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 effects/redflare_v2.vmt server_var(vector2) 500 600 10 5 60 10 1 100 100 255 200 6 1
+	es_delayed .6 est_effect_08 #a 0 effects/redflare_v2.vmt server_var(vector2) 500 600 10 4.4 60 10 1 100 100 255 200 6 1
+	es_delayed 1.2 est_effect_08 #a 0 effects/redflare_v2.vmt server_var(vector2) 500 600 10 3.8 60 10 1 100 100 255 200 6 1
+	es_delayed 1.8 est_effect_08 #a 0 effects/redflare_v2.vmt server_var(vector2) 500 600 10 3.2 60 10 1 100 100 255 200 6 1
+	es_delayed 2.4 est_effect_08 #a 0 effects/redflare_v2.vmt server_var(vector2) 500 600 10 2.6 60 10 1 100 100 255 200 6 1
+    es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 275"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 25"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 90"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 400"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 24"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 31"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 90"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 45"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 100 100 220"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/redflare_v2.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Spawn (END)
+	}
+}
+
+block armour
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 1 (START)
+	}
+	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Saiyan armour - Granted you server_var(wcs_armor) armor
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 1 (END)
+	}
+}
+
+block ki
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ki collecting - Increased your health by server_var(wcs_addhealth)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 5 18
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Kamehameha dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 25
+				es_xmath wcs_z2 + 25
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect 11 #a 0 sprites/combineball_glow_blue_1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1.5 175
+				es est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 35 36 1 20 10 1 255 255 255 145 1
+				es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 1 1 35 35 0 0 100 100 100 120 3
+				es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 1 1 45 45 0 0 255 255 255 200 5
+				es est_effect 11 #a 0 sprites/combineball_glow_blue_1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.5 175
+				es est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 46 1 25 10 1 255 255 255 145 1
+				es_xmath wcs_z1 + 10
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 600 .5 70 10 2 255 255 255 145 4
+				es_delayed .25 est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 600 .5 70 10 2 255 255 255 145 4
+				es_delayed .5 est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 600 .5 70 10 2 255 255 255 145 4
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 3 (END)
+	}
+}
+
+block regen
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_set wcs_multiplier event_var(dmg_health)
+				es_xmath wcs_multiplier / 3
+				es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
+				if (event_var(es_userdead) = 0) do
+				{
+					es_delayed .7 wcs_setfx health event_var(userid) + event_var(wcs_multiplier) 0
+					es_delayed 1.4 wcs_setfx health event_var(userid) + event_var(wcs_multiplier) 0
+					es_delayed 2 wcs_setfx health event_var(userid) + event_var(wcs_multiplier) 0
+				}
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ki regeneration - Slowly regenerating lost health
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 10
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 600 60 10 2 60 10 .5 255 50 50 255 6 1
+				es_delayed .5 est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 600 60 10 .5 60 10 2 255 50 50 255 6 1
+				es_delayed 1 est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 600 60 10 .5 60 10 2 255 50 50 255 6 1
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(userid) env_smokestack
+				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(userid) server_var(ss_name) addoutput "basespread 50"
+				es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 75"
+				es_fire event_var(userid) server_var(ss_name) addoutput "speed 500"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rate 200"
+				es_fire event_var(userid) server_var(ss_name) addoutput "startsize 24"
+				es_fire event_var(userid) server_var(ss_name) addoutput "endsize 31"
+				es_fire event_var(userid) server_var(ss_name) addoutput "twist 5"
+				es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 350"
+				es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 100 100 220"
+				es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects\redflare_v2.vmt"
+				es_fire event_var(userid) server_var(ss_name) turnon
+				es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 4 (END)
+	}
+}
+
+block boost
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 5 (START)
+	}
+	es_xrand wcs_addhealth 15 40
+	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) server_var(wcs_duration)
+	es wcs_setfx speed server_var(wcs_userid) + 0.75 server_var(wcs_duration)
+	es wcs_centertell server_var(wcs_userid) Turned super saiyan for server_var(wcs_duration) seconds
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	es_xmath wcs_z2 + 15
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 75 600 10 .3 60 10 1 255 168 45 100 8 1
+	es_delayed .1 est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 75 800 10 .3 60 10 1 255 168 45 100 6 1
+	es_delayed .2 est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 75 800 10 .3 60 10 1 255 168 45 100 4 1
+	es_delayed .3 est_effect_08 #a 0 sprites/laser.vmt server_var(vector2) 75 800 10 .3 60 10 1 255 168 45 100 2 1
+    es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 46"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 117"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 225"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 100"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 21"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 24"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 9"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 90"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 225 168 45"
+    es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle\fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+    es_delayed server_var(wcs_duration) es_fire server_var(wcs_userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Son Gohan - [Block] Skill: 5 (END)
+	}
+}

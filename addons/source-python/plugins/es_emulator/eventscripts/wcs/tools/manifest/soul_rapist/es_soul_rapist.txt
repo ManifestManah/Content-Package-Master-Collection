@@ -1,0 +1,270 @@
+/////////////////////////
+//Eareland V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block healthsfx
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= 10) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Critical strike did + server_var(wcs_dmg) damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 - 10
+				es_xmath wcs_z2 - 10
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 2 (END)
+	}
+}
+
+block damage_based_on_hp
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) >= 1) do
+				{
+					if (server_var(wcs_tmp2) <= 15) do
+					{
+						es_xrand wcs_dmg 45 55
+					}
+				}
+				if (server_var(wcs_tmp2) >= 16) do
+				{
+					if (server_var(wcs_tmp2) <= 40) do
+					{
+						es_xrand wcs_dmg 40 50
+					}
+				}
+				if (server_var(wcs_tmp2) >= 41) do
+				{
+
+					if (server_var(wcs_tmp2) <= 60) do
+					{
+						es_xrand wcs_dmg 35 45
+					}
+				}
+				if (server_var(wcs_tmp2) >= 61) do
+				{
+					if (server_var(wcs_tmp2) <= 80) do
+					{
+						es_xrand wcs_dmg 30 40
+					}
+				}
+				if (server_var(wcs_tmp2) >= 81) do
+				{
+					if (server_var(wcs_tmp2) <= 95) do
+					{
+						es_xrand wcs_dmg 25 35
+					}
+				}
+				if (server_var(wcs_tmp2) >= 96) do
+				{
+					if (server_var(wcs_tmp2) <= 100) do
+					{
+						es_xrand wcs_dmg 20 30
+					}
+				}
+				if (server_var(wcs_tmp2) => 101) do
+				{
+					es_xrand wcs_dmg 15 25
+				}
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) extra damage!
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 3 (END)
+	}
+}
+
+block state_swap
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+			if (server_var(wcs_targetid) != 0) do
+			{
+				es_xdoblock wcs/tools/manifest/soul_rapist/ultimate_checks_stateswap
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks_stateswap 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+				if (server_var(wcs_tmp) != 1) do
+				{
+					es_xset wcs_ultinotexec 0
+					es_xdoblock wcs/tools/manifest/soul_rapist/ultimate_final_stateswap
+				}
+				if (server_var(wcs_tmp) == 1) do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final_stateswap
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_setplayerprop server_var(wcs_targetid) "CCSPlayer.m_bIsScoped" 0
+	es_setplayerprop server_var(wcs_targetid) "CCSPlayer.baseclass.m_iFOV" 0
+
+	es_setplayerprop server_var(wcs_userid) "CCSPlayer.m_bIsScoped" 0
+	es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iFOV" 0
+
+	es playerget health wcs_tmp1 server_var(wcs_targetid)
+	es playerget health wcs_tmp2 server_var(wcs_userid)
+	es wcs_setfx health server_var(wcs_userid) = server_var(wcs_tmp1) 0
+	es wcs_setfx health server_var(wcs_targetid) = server_var(wcs_tmp2) 0
+	
+	es playerget armor wcs_tmp1 server_var(wcs_targetid)
+	es playerget armor wcs_tmp2 server_var(wcs_userid)
+	es wcs_setfx armor server_var(wcs_userid) = server_var(wcs_tmp1) 0
+	es wcs_setfx armor server_var(wcs_targetid) = server_var(wcs_tmp2) 0
+	
+	es playerget speed wcs_tmp1 server_var(wcs_targetid)
+	es playerget speed wcs_tmp2 server_var(wcs_userid)
+	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_tmp1) 0
+	es wcs_setfx speed server_var(wcs_targetid) = server_var(wcs_tmp2) 0
+	
+//- Removed the cash section due to players using their money on experience
+//- and sometimes players would lose almost the money cap (50.000) which lead to
+//- people not particularly enjoying the game.
+//	es playerget cash wcs_tmp1 server_var(wcs_targetid)
+//	es playerget cash wcs_tmp2 server_var(wcs_userid)
+//	es wcs_setfx cash server_var(wcs_userid) = server_var(wcs_tmp1) 0
+//	es wcs_setfx cash server_var(wcs_targetid) = server_var(wcs_tmp2) 0
+	
+	es_getplayername wcs_tmp1 server_var(wcs_targetid)
+	es_getplayername wcs_tmp2 server_var(wcs_userid)
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Major Changes - You swapped attributes with server_var(wcs_tmp1)
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Major Changes - You swapped attributes with server_var(wcs_tmp2)
+	es_playsound server_var(wcs_userid) ambient\creatures\flies4.wav .7
+	es_playsound server_var(wcs_targetid) ambient\creatures\flies4.wav 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Soul Rapist - [Block] Skill: 4 (EXECUTED END)
+	}
+}

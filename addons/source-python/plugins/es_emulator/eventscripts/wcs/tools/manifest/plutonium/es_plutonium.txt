@@ -1,0 +1,152 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Spawn (START)
+	}
+	es wcsgroup set ability_count event_var(userid) 3
+	es_delayed .5 wcs_color event_var(userid) 105 105 105 255 0
+	es_xmath wcs_z1 + 15
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_delayed .2 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 1.8 51 234 249 255 255
+	es_delayed .4 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5 232 68 194 255 255
+	es_delayed .6 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5 63 237 115 255 255
+	es_delayed .8 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 239 235 61 255 255
+	es_delayed 1 est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 255 45 45 255 255
+	es_delayed 1.2 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 185 115 117 255 255
+	es_delayed 1.4 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 187 185 113 255 255
+	es_delayed 1.6 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 149 149 149 255 255
+	es_delayed 1.8 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 45 255 102 255 255
+	es_delayed 2.0 es est_effect 10 #a 0 sprites\halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 255 255 255 255 255
+	es_delayed 2.2 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 1.8 51 234 249 255 255
+	es_delayed 2.4 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5 232 68 194 255 255
+	es_delayed 2.6 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5 63 237 115 255 255
+	es_delayed 2.8 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 239 235 61 255 255
+	es_delayed 3.0 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 255 45 45 255 255
+	es_delayed 3.2 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 185 115 117 255 255
+	es_delayed 3.4 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 187 185 113 255 255
+	es_delayed 3.6 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 149 149 149 255 255
+	es_delayed 3.8 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 45 255 102 255 255
+	es_delayed 4.0 es est_effect 10 #a 0 sprites\plasmabeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 420 2.15 40 60 5.8 255 255 255 255 255
+	es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 2 255
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] OnChange (START)
+	}
+	es wcsgroup set ability_count server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] OnChange (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) Radioactive bullet did + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 25
+				es_xmath wcs_z2 + 25
+				es est_effect 3 #a 0 sprites/halo01.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 40 40 50 20 255 255
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 15 15 50 20 255 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 1 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thick metal skin - Gave you server_var(wcs_addhealth) more health
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 2 (END)
+	}
+}
+
+block buff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 3 (START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth)
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - You recieved server_var(wcs_addhealth) health
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team event_var(userid)
+		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health" 
+		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health"
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 3 (END)
+	}
+}
+
+block ward
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get ability_count wcs_count server_var(wcs_userid)
+	if (server_var(wcs_count) => 1) do
+	{
+		es_xmath wcs_count - 1
+		es wcsgroup set ability_count server_var(wcs_userid) server_var(wcs_count)
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You have server_var(wcs_count) wards left.
+		es_xset wcs_warden_x2 0
+		es_xset wcs_warden_y2 0
+		es_xset wcs_warden_z2 0
+		es_xset wcs_tmp16 0
+		es_xset wcs_tmp17 5
+		es_getplayerteam wcs_tmp16 server_var(wcs_userid)
+		es_math wcs_tmp17 - server_var(wcs_tmp16)
+		es_getplayerlocation wcs_warden_x2 wcs_warden_y2 wcs_warden_z2 server_var(wcs_userid)
+		es wcs_warden server_var(wcs_userid) server_var(wcs_duration) server_var(wcs_dmg) server_var(wcs_range) server_var(wcs_tmp17) 0 server_var(wcs_warden_x2) server_var(wcs_warden_y2) server_var(wcs_warden_z2) 0
+	}
+	else do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You don't have any wards left.
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Plutonium - [Block] Skill: 4 (END)
+	}
+}

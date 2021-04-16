@@ -1,0 +1,317 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Spawn (START)
+	}
+	es_playsound event_var(userid) wcs/shamanisticrage.mp3 .7
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 10 10 230 7
+	es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+	es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 10 10 230 7
+	es_delayed .4 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+	es_delayed .4 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 10 10 230 7
+	es_delayed .6 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+	es_delayed .6 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 10 10 230 7
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Spawn (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ghost wolf - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 1 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 9 14
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Rockbiter weapon dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 255 128 60 210 2
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 10 250 10 230 7
+				es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 255 128 60 210 2
+				es_delayed .2 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 10 250 10 230 7
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 2 (END)
+	}	
+}
+
+block slow
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				ifx true(wcs_ffa_enabled) do
+				{
+					es_xset wcs_targetteam #alive
+				}
+				ifx false(wcs_ffa_enabled) do
+				{
+					es_getplayerteam wcs_team event_var(userid)
+					if (server_var(wcs_team) = 2) then es_xset wcs_targetteam #ct
+					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam #t
+				}
+				es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 325 "es_xdoblock wcs/tools/manifest/wow_shaman/earthbind"
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Earth binding totem - Temporarily slowed nearby enemies
+				es_playsound event_var(userid) wcs/tidetotem.mp3 .7
+				es_delayed .8 es_playsound event_var(userid) wcs/tidetotem.mp3 .7
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 160 160 160 210 2
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 90 90 250 230 4
+				es_delayed .75 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 160 160 160 210 2
+				es_delayed .75 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 90 90 250 230 4
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 3 (END)
+	}
+}
+
+block earthbind
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get is_slowed wcs_tmp3 server_var(wcs_player)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_slowed server_var(wcs_player) 1
+		es_delayed 1.5 wcsgroup set is_slowed server_var(wcs_player) 0
+		es wcs_setfx speed server_var(wcs_player) = .8 1.5
+		es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Earth binding totem - Temporarily slowed you 
+		es_playsound server_var(wcs_player) wcs/tidetotem.mp3 .9
+		es_delayed .8 es_playsound server_var(wcs_player) wcs/tidetotem.mp3 .9
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 4 (END)
+	}
+}
+
+block explode
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (START)
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 35
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_targetteam "#alive"
+		es_getlivingplayercount wcs_pcount
+		es_set wcs_ffa_userid server_var(wcs_userid)
+	}
+	ifx false(wcs_ffa_enabled) do
+	{
+		es_getplayerteam wcs_team server_var(wcs_userid)
+		if (server_var(wcs_team) = 2) do
+		{
+			es_xset wcs_targetteam "#ct,#alive"
+			es_getlivingplayercount wcs_pcount 3
+		}
+		if (server_var(wcs_team) = 3) do
+		{
+			es_xset wcs_targetteam "#t,#alive"
+			es_getlivingplayercount wcs_pcount 2
+		}
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 "es_xdoblock wcs/tools/manifest/wow_shaman/wcs_ulti_suicide_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				//No matter how many targets are affected, this section will only be executed once.
+				//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
+				es_xrand wcs_magnitude 75 125
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 85 10 0 210 50 15 175 4
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 85 10 0 255 20 30 120 3
+				es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 65 10 0 210 50 15 175 4
+				es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 65 10 0 255 20 30 120 3
+				es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 65 10 0 210 50 15 175 4
+				es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 65 10 0 255 20 30 120 3
+				
+				es wcs_centertell event_var(userid) Inferno Totem damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem affected server_var(wcs_count_players_actually_affected) enemies
+				es_xrand wcs_rand 1 3
+				if (server_var(wcs_rand) == 1) do
+				{
+					es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+				}
+				if (server_var(wcs_rand) == 2) do
+				{
+					es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+				}
+				if (server_var(wcs_rand) == 3) do
+				{
+				es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+				}
+			}
+		}
+		else do
+		{
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, no nearby enemies!
+		}
+	}
+	else do
+	{
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Could not target an enemy team
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (CHECKS START)
+	}
+	ifx true(wcs_ffa_enabled) do
+	{
+		es_xset wcs_execute_ultimate_ffa 1
+		if (server_var(wcs_targetid) != server_var(wcs_ffa_userid)) do
+		{
+			es_xset wcs_execute_ultimate_ffa 0
+		}
+	}
+	ifx false(wcs_execute_ultimate_ffa) do
+	{
+		es_exists ex userid server_var(wcs_targetid)
+		if (server_var(ex) = 1) do
+		{
+			es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+			if (server_var(wcs_alive) = 0) do
+			{
+				es_xmath wcs_counter + 1
+				if (server_var(wcs_counter) > 0) do
+				{
+					if (server_var(wcs_counter) <= 20) do
+					{
+						es_set wcs_initial_players_struck server_var(wcs_counter)
+						es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+						if (server_var(wcs_tmp) != 1) do
+						{
+							es_xset wcs_execute_ultimate 1
+							es_xmath wcs_count_players_actually_affected + 1
+							es_xdoblock wcs/tools/manifest/wow_shaman/wcs_ulti_suicide_final
+						}
+						if (server_var(wcs_tmp) == 1) do
+						{
+							es_xmath wcs_count_players_ultimate_immunity + 1
+							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+							{
+								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's Inferno Totem
+								es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							}
+							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+							{
+								es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, all nearby enemy targets were immune!
+							}
+						}
+					}
+					else do
+					{
+						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, you can't hit that many targets at once!
+					}
+				}
+			}
+		}	
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_magnitude) damage from an Inferno Totem
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_magnitude) 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Shaman - [Block] Skill: 5 (EXECUTED END)
+	}
+}

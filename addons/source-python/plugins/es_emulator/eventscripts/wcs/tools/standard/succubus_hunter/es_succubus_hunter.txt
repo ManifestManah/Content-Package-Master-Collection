@@ -1,0 +1,213 @@
+//////////////////////
+//Standard Race Pack//
+//Version 1.0.0D   //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Spawn (START)
+	}
+	es wcsgroup get succubuss_skull wcs_tmp3 event_var(userid)
+	es wcs_getlanguage wcs_lng "player_spawn" 0 "succubuss_hunter"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_tmp3)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Death (START)
+	}
+	es_xrand wcs_rand 0 2
+	ifx false(wcs_rand) do
+	{
+		es wcsgroup get succubuss_skull wcs_tmp3 event_var(userid)
+		if (server_var(wcs_tmp3) => 1) do
+		{
+			es_xmath wcs_tmp3 - 1
+			es wcsgroup set succubuss_skull event_var(userid) server_var(wcs_tmp3)
+			es wcs_getlanguage wcs_lng "player_skill1" 0 "succubuss_hunter"
+			es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_tmp3)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Death (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 9 15
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_getlanguage wcs_lng "player_skill1_centertell" 0 "succubuss_hunter"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_14 #a 0 effects/muzzleflashx.vmt server_var(vector2) server_var(vector2) 175 22 100
+				es est_effect_14 #a 0 effects/muzzleflashx.vmt server_var(vector2) server_var(vector2) 175 22 110
+				es est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 20 400 1 1 90 400 0 128 64 12 255 10 1
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 5 1 1 7 7 0 255 255 255 220 20
+				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 5 1 1 18 18 0 255 128 50 200 50
+				es wcsgroup get succubuss_skull wcs_tmp3 event_var(attacker)
+				if (server_var(wcs_tmp3) <= 4) do
+				{
+					es wcsgroup get succubuss_skull wcs_tmp3 event_var(attacker)
+					es_xmath wcs_tmp3 + 1
+					es wcsgroup set succubuss_skull event_var(attacker) server_var(wcs_tmp3)
+					es wcs_getlanguage wcs_lng "player_skill1_tell" 0 "succubuss_hunter"
+					es wcs_xtell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_tmp3)
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 1 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+		es_xmath wcs_z1 + 20
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 95 550 1 2 90 10 0 255 128 30 200 20 1
+		es_delayed .2 est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 95 550 1 2 90 10 0 255 128 30 200 10 1
+		es wcsgroup get succubuss_skull wcs_tmp3 event_var(userid)
+		if (server_var(wcs_tmp3) == 1) do
+		{
+			es_xset wcs_money 150
+			es_xset wcs_addhealth 10
+		}
+		if (server_var(wcs_tmp3) == 2) do
+		{
+			es_xset wcs_money 300
+			es_xset wcs_addhealth 20
+		}
+		if (server_var(wcs_tmp3) == 3) do
+		{
+			es_xset wcs_money 450
+			es_xset wcs_addhealth 30
+		}
+		if (server_var(wcs_tmp3) == 4) do
+		{
+			es_xset wcs_money 600
+			es_xset wcs_addhealth 40
+		}
+		if (server_var(wcs_tmp3) == 5) do
+		{
+			es_xset wcs_money 750
+			es_xset wcs_addhealth 50
+		}
+		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
+		es wcs_getlanguage wcs_lng "player_skill2" 0 "succubuss_hunter"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_money) value2 server_var(wcs_addhealth)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 2 (END)
+	}
+}
+
+block longjump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_xmath wcs_multiplier * 100
+	es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
+	es wcs_getlanguage wcs_lng "player_skill3" 0 "succubuss_hunter"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_multiplier)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 3 (END)
+	}
+}
+
+block buff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get succubuss_skull wcs_tmp4 server_var(wcs_userid)
+	if (server_var(wcs_tmp4) == 0) do
+	{
+		es wcs_getlanguage wcs_lng "check_skill4_failed_no_skulls" 0 "succubuss_hunter"
+		es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+	}
+	if (server_var(wcs_tmp4) <= 1) do
+	{
+		es_xmath wcs_tmp4 - 1
+		es wcsgroup set succubuss_skull server_var(wcs_userid) server_var(wcs_tmp4)
+		es wcs_getlanguage wcs_lng "check_skill4_cost" 0 "succubuss_hunter"
+		es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_tmp4)
+		es_playsound server_var(wcs_userid) wcs/shamanisticrage.mp3 .8
+		es wcs_setfx gravity server_var(wcs_userid) = .75 0
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 95 550 1 .5 90 10 0 255 128 30 200 20 1
+		es_delayed .1 est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 95 550 1 .5 90 10 0 255 128 30 200 10 1
+		es_delayed .2 est_effect_08 #a 0 effects/muzzleflashx.vmt server_var(vector2) 95 550 1 .5 90 10 0 255 128 30 200 10 1
+		es playerget health wcs_tmp1 server_var(wcs_userid)
+		if (server_var(wcs_tmp1) >= 200) do
+		{
+			es wcs_setfx health server_var(wcs_userid) = 200 0
+			es wcs_getlanguage wcs_lng "check_skill4_health_max" 0 "succubuss_hunter"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+		}
+		if (server_var(wcs_tmp1) < 200) do
+		{
+			es wcs_setfx health server_var(wcs_userid) + 25 0
+			es wcs_getlanguage wcs_lng "check_skill4_health" 0 "succubuss_hunter"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+		}
+		es playerget speed wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) >= 2) do
+		{
+			es wcs_setfx speed server_var(wcs_userid) = 2 0
+			es wcs_getlanguage wcs_lng "check_skill4_speed_max" 0 "succubuss_hunter"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+		}
+		if (server_var(wcs_tmp2) < 200) do
+		{
+			es wcs_setfx speed server_var(wcs_userid) + .25 0
+			es wcs_getlanguage wcs_lng "check_skill4_speed" 0 "succubuss_hunter"
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Succubus Hunter - [Block] Skill: 4 (END)
+	}
+}

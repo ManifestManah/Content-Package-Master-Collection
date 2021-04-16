@@ -1,0 +1,171 @@
+//////////////////////
+//Standard Race Pack//
+//Version 1.0.0D   //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Spawn (START)
+	}
+	es wcs_setfx jetpack event_var(userid) = 0 0
+	es wcsgroup set archmage_fly event_var(userid) 1
+    es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 180"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 5"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 800"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 12"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 8"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 150"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 100"
+    es_fire event_var(userid) server_var(ss_name) addoutput "angles 90 90 90"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/redflare_v2.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+    es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Spawn (END)
+	}
+}
+
+block shake
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do 
+			{
+				es wcs_shake event_var(userid) 15 13 3
+				es wcs_getlanguage wcs_lng "player_skill1" 0 "archmage_proudmoore"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
+				es wcs_getlanguage wcs_lng "target_skill1" 0 "archmage_proudmoore"
+				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 event_var(es_attackername)				
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_math wcs_z1 + 20
+				es_math wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1.5 15 15 251 255 100 255
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1.5 20 20 163 73 164 200
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 1 (END)
+	}
+}
+
+block broom
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 2 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es wcs_decimal wcs_speed server_var(wcs_speed)
+		es wcs_getlanguage wcs_lng "player_skill2" 0 "archmage_proudmoore"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_speed)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 2 (END)
+	}
+}
+
+block weapon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_delayed .2 wcs_removeweapon event_var(userid) 1
+			es_delayed .2 wcs_removeweapon event_var(userid) 2
+			es_delayed .5 es_give event_var(userid) weapon_deagle
+			es_delayed .5 es_give event_var(userid) weapon_m4a1
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es wcs_getlanguage wcs_lng "player_skill3_css" 0 "archmage_proudmoore"
+				es wcs_xtell event_var(userid) server_var(wcs_lng)
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es wcs_getlanguage wcs_lng "player_skill3_csgo" 0 "archmage_proudmoore"
+				es wcs_xtell event_var(userid) server_var(wcs_lng)
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 3 (END)
+	}
+}
+
+block liftoff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 4 (START)
+	}
+	es_isbot wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) = 0) do
+	{
+		es wcsgroup get archmage_fly wcs_tmp2 server_var(wcs_userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es wcsgroup set archmage_fly server_var(wcs_userid) 2
+			es wcs_cancelulti server_var(wcs_userid)
+			es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
+			es wcs_getlanguage wcs_lng "player_skill4_activated" 0 "archmage_proudmoore"
+			es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 55 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 60 1 10 10 0 153 217 234 200 1
+		}
+		if (server_var(wcs_tmp2) == 2) do
+		{
+			es wcsgroup set archmage_fly server_var(wcs_userid) 1
+			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
+			es wcs_getlanguage wcs_lng "player_skill4_deactivated" 0 "archmage_proudmoore"
+			es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 55 5 1 10 10 0 97 197 222 165 1
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 60 5 1 10 10 0 153 217 234 200 1
+			es playerget health wcs_tmp1 server_var(wcs_userid)
+			if (server_var(wcs_tmp1) >= server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+			}
+			if (server_var(wcs_tmp1) < server_var(wcs_addhealth)) do
+			{
+				es wcs_setfx health server_var(wcs_userid) = 1 0
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Archmage Proudmoore - [Block] Skill: 4 (END)
+	}
+}

@@ -1,0 +1,174 @@
+/////////////////////////
+//Holliday V2 Race Pack//
+//Version 1.0.0D       //
+/////////////////////////
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 9 12
+
+				es wcs_shake event_var(userid) 5 11 3
+				es wcs_shake event_var(attacker) 5 11 3
+				es wcs_setfx speed event_var(attacker) = 1.75 1.5
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Tackle did + server_var(wcs_dmg) damage and increased your movement
+				es_tell event_var(userid) #multi #lightgreen:you have been #greenCharged #lightgreenby a #greenfull body tackle
+				es_tell event_var(attacker)  #multi #lightgreen:you have #greenCharged #lightgreenthe foe with a #greenfull body tackle	
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/purplelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 5 10 0 0 255 255
+				es_xmath wcs_x1 + 40
+				es_xmath wcs_x2 - 40
+				es est_effect 3 #a 0 sprites/purplelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 5 10 20 5 5 250 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 1 (END)
+	}
+}
+
+block slow
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(attacker) = .75 2
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Tail whip - Slowed down the attacker
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Tail whip - Slowed you down for 2 seconds
+					es est_effect 4 #a 0 models/effects/comball_sphere.vmt event_var(userid) 3 3 3 5 53 181 255 255
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 2 (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) weapons\underwater_explode3.wav .2
+						es_delayed .2 es_playsound event_var(attacker) weapons\underwater_explode4.wav .5
+						es_delayed .3 es_playsound event_var(attacker) weapons\underwater_explode4.wav .3
+						es_playsound event_var(userid) weapons\underwater_explode3.wav .2
+						es_delayed .2 es_playsound event_var(userid) weapons\underwater_explode4.wav .5
+						es_delayed .3 es_playsound event_var(userid) weapons\underwater_explode4.wav .3
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) weapons\hegrenade\explode5_distant.wav .2
+						es_delayed .2 es_playsound event_var(attacker) weapons\hegrenade\explode5_distant.wav .5
+						es_delayed .3 es_playsound event_var(attacker) weapons\hegrenade\explode5_distant.wav .3
+						es_playsound event_var(userid) weapons\hegrenade\explode5_distant.wav .2
+						es_delayed .2 es_playsound event_var(userid) weapons\hegrenade\explode5_distant.wav .5
+						es_delayed .3 es_playsound event_var(userid) weapons\hegrenade\explode5_distant.wav .3
+					}
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bubble - Impaired your movement for 1 second
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Bubble - Impaired your movement for 1 second
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(userid) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(userid) server_var(ss_name) addoutput "basespread 25"
+					es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 27"
+					es_fire event_var(userid) server_var(ss_name) addoutput "speed 78"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rate 95"
+					es_fire event_var(userid) server_var(ss_name) addoutput "startsize 1"
+					es_fire event_var(userid) server_var(ss_name) addoutput "endsize 4"
+					es_fire event_var(userid) server_var(ss_name) addoutput "twist 40"
+					es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 104"
+					es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 150 150 252"
+					es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/bubble.vmt"
+					es_fire event_var(userid) server_var(ss_name) turnon
+					es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 3 (END)
+	}
+}
+
+block godmode
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 4 (START)
+	}
+	es wcsgroup get is_paralyzed wcs_tmp3 server_var(wcs_userid)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_paralyzed server_var(wcs_userid) 1
+		es_delayed 2 wcsgroup set is_paralyzed server_var(wcs_userid) 0
+		es wcs_setfx god server_var(wcs_userid) = 1 2
+		es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
+		es_delayed 2 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Withdraw - You're hiding in your shell for 2 seconds!
+		es_delayed 2 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Withdraw - You've come out of your shell!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 15
+		es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 1.3 255
+		es_xmath wcs_y1 + 150
+		es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 .5 255
+		es_xmath wcs_y1 - 300
+		es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 .5 255
+		es_xmath wcs_y1 + 150
+		es_xmath wcs_x1 + 150
+		es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 .5 255
+		es_xmath wcs_x1 - 300
+		es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 .5 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Squirtle - [Block] Skill: 4 (END)
+	}
+}

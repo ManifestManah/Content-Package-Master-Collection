@@ -1,0 +1,105 @@
+////////////////////////////////
+//Various Authors V3 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block suit
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es playerget armor wcs_tmp3 event_var(userid)
+	if (server_var(wcs_tmp3) >= 150) do
+	{
+		es_delayed 1 wcs_setfx armor event_var(userid) = 250 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and set your armor to 250
+	}
+	else do
+	{
+		es_delayed 1 wcs_setfx armor event_var(userid) + server_var(wcs_armor) 0
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and server_var(wcs_armor) armor
+	}
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 20
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 3 10 10 0 0 20 250 255 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 1 (END)
+	}
+}
+
+block bullet
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 9 14
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) A Z-Bullet did server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z1 + 20
+				es est_effect 3 #a 0 sprites/yellowflare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 8 8 255 255 255 255
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 2 (END)
+	}
+}
+
+block nade
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 3 (START)
+	}
+	if (event_var(weapon) = hegrenade) do
+	{
+		if (event_var(es_userdead) = 0) do 
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+				es wcs_centertell event_var(attacker) Z-Striker grenade did + server_var(wcs_dmg) damage!
+				es wcs_centertell event_var(userid) Recieved + server_var(wcs_dmg) from a Z-Striker grenade!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es est_effect 11 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 0.8 2 200
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 3 (END)
+	}
+}
+
+block weapon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 4 (START)
+	}
+	es wcs_removeweapon server_var(wcs_userid) 1
+	es_delayed .1 es_give server_var(wcs_userid) weapon_ak47
+	es_delayed .1 wcs_setfx 1stclip server_var(wcs_userid) = server_var(wcs_ammo) 0
+	es wcs_centertell server_var(wcs_userid) You've recieved a Z-Striker weapon!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 60 2 20 10 1 10 255 0 255 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Zstriker - [Block] Skill: 4 (END)
+	}
+}

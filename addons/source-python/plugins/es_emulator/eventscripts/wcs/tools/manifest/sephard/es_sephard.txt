@@ -1,0 +1,121 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Spawn (START)
+	}
+	es wcs_removeweapon event_var(userid) 1
+	es wcs_removeweapon event_var(userid) 2
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event	_var(userid) "glock;usp;p228;deagle;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+	}	
+	es_delayed .1 es_give event_var(userid) weapon_elite
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z2 + 8
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 275 50 2 40 10 0 64 0 64 255 15
+	es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 275 50 2 32 10 0 128 0 128 255 20
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 275 50 1 40 10 0 64 0 64 255 15
+	es_delayed .5 est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 275 50 1 32 10 0 128 0 128 255 20
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Spawn (END)
+	}
+}
+
+block accuracy
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 6 11
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_setfx norecoil event_var(attacker) = 1 1
+				es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage and your accuracy was improved for 1 second!
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Exercise - Increased your speed by server_var(wcs_speed)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 2 (END)
+	}
+}
+
+block jump
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Overqualified - Your jump length is increased
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 3 (END)
+	}
+}
+
+block reload
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 4 (START)
+	}
+	es wcs_setfx 2ndclip server_var(wcs_userid) = 30 0
+	es wcs_centertell server_var(wcs_userid) You quickly reloaded your Dual elites
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 200"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 20"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 125"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 250"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 12"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 23"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 140"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 50"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "angles 0 0 0"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 70 0 70"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle\fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+	es_fire server_var(wcs_userid) server_var(ss_name) setparent !activator
+	es_delayed 3 es_fire server_var(wcs_userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sephard - [Block] Skill: 4 (END)
+	}
+}

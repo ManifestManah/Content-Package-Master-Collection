@@ -1,0 +1,94 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= 15) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) You dealt + server_var(wcs_dmg) lightning damage!
+				es_playsound event_var(userid) ambient/weather/thunder2.wav .9
+				es_playsound event_var(attacker) ambient/weather/thunder2.wav .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 200
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es_delayed .1 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector2) server_var(vector1) 100 1 5 15 10 8 255 255 255 255 100
+				es_delayed .1 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector2) server_var(vector1) 100 1 5 15 10 8 255 255 255 255 100
+				es_delayed .2 est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector2) server_var(vector1) 100 1 5 15 10 8 255 255 255 255 100
+				es est_effect_08 #a 0 sprites/bluelight1.vmt server_var(vector2) 520 40 1 1 90 400 0 255 255 255 255 20 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 2 (END)
+	}
+}
+
+block freeze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup set is_frozen event_var(userid) 1
+					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
+					es wcs_setfx freeze event_var(userid) = 1 1
+					es wcs_centertell event_var(attacker) You froze event_var(es_username) for 1 second!
+					es wcs_centertell event_var(userid) for event_var(es_attackername) Froze you for 1 second!
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es est_effect 3 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 10 10 0 0 255 255
+					es_xmath wcs_z2 + 5
+					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 45 0.5 25 10 0 0 0 255 255 0
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Thunderius - [Block] Skill: 3 (END)
+	}
+}

@@ -1,0 +1,191 @@
+//////////////////////
+//Eareland Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Spawn (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_xmath wcs_z1 + 5
+	es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 350 1.5 20 50 1 155 0 0 255 4
+	es_delayed .2 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 340 1.5 20 50 2 155 0 155 255 2
+	es_delayed .3 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 330 1.5 20 50 1 155 0 0 255 4
+	es_delayed .4 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 320 1.5 20 50 2 155 0 155 255 2
+	es_delayed .5 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 310 1.5 20 50 1 155 0 0 255 4
+	es_delayed .6 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 300 1.5 20 50 2 155 0 155 255 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Death (START)
+	}
+	es wcsgroup set evasion event_var(userid) 0
+	es wcsgroup set evasion_chance event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Death (START)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] OnChange (START)
+	}
+	es wcsgroup set evasion server_var(wcs_userid) 0
+	es wcsgroup set evasion_chance server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] OnChange (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+				es wcs_color event_var(userid) 255 83 148 150 1
+				es_delayed 2 wcs_color event_var(userid) 255 255 255 255 1
+				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Draconian counter - Restored server_var(wcs_addhealth) health
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es_delayed .1 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 40 .5 10 10 1 155 0 0 255 4
+				es_xmath wcs_z1 + 20
+				es_delayed .3 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 60 .5 10 10 1 155 0 0 255 4
+				es_xmath wcs_z1 + 20
+				es_delayed .5 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 80 .5 10 10 1 155 0 0 255 4
+				if (event_var(weapon) == knife) do 
+				{
+					es_xrand wcs_dmg 6 17
+					es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Draconian counter - Reflected server_var(wcs_dmg) damage to event_var(es_attackername)
+					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Draconian counter - Reflected server_var(wcs_dmg) damage to you
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 15
+					es_delayed .2 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 50 .5 10 10 4 155 0 155 255 2
+					es_xmath wcs_z1 + 20
+					es_delayed .4 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 70 .5 10 10 4 155 0 155 255 2
+					es_xmath wcs_z1 + 20
+					es_delayed .6 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 90 .5 10 10 4 155 0 155 255 2
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 1 (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 2 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Chase strategy - Gained server_var(wcs_speed)% speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 3 13
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Warlike shot did + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 15
+				es_delayed .1 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 350 .5 45 10 3 155 0 0 255 4
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 340 .5 45 10 2 155 0 155 255 2
+				es_delayed .3 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 330 .5 45 10 3 155 0 0 255 4
+				es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 320 .5 45 10 2 155 0 155 255 2
+				es_delayed .5 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 310 .5 45 10 3 155 0 0 255 4
+				es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 300 .5 45 10 2 155 0 155 255 2
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 3 (END)
+	}
+}
+
+block immortal
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 4 (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) ambient/atmosphere/city_skypass1.wav 1.0
+		es_delayed server_var(wcs_duration) es_stopsound ambient/atmosphere/city_skypass1.wav
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_userid) player/halloween/ghostmode_on.wav 1.0
+	}
+	es wcs_color server_var(wcs_userid) 255 83 148 150 1
+	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 255 255 255 255 1
+	es wcsgroup set evasion server_var(wcs_userid) 1
+	es wcsgroup set evasion_chance server_var(wcs_userid) 60
+	es wcsgroup set evasion_count server_var(wcs_userid) 0
+    es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
+    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Fracture of domination - You dodged server_var(wcs_tmp1) attacks
+	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
+	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
+	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Fracture of domination - You have 60% to dodge for server_var(wcs_duration) seconds
+	es wcs_centertell server_var(wcs_userid) Your dodge chance has been increased for server_var(wcs_duration) seconds!
+	es_xmath wcs_duration - 1
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Fracture of domination - Your dodge is fading...
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 25
+	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 350 .5 40 10 3 155 0 0 255 4
+	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 340 .5 45 10 2 155 0 155 255 2
+	es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 330 .5 40 10 3 155 0 0 255 4
+	es_delayed .4 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 320 .5 45 10 2 155 0 155 255 2
+	es_delayed .5 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 310 .5 40 10 3 155 0 0 255 4
+	es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 300 .5 45 10 2 155 0 155 255 2
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Psychological Striker - [Block] Skill: 4 (END)
+	}
+}

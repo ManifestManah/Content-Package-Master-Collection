@@ -1,0 +1,489 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) ambient/atmosphere/city_skypass1.wav .7
+	}
+	es wcsgroup set solariswalk event_var(userid) 1
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Solaris the Sunfang - Arrived with you sol stone
+	es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) point_tesla
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire event_var(userid) server_var(ss_name) addoutput "m_Color 255 110 110"
+	es_fire event_var(userid) server_var(ss_name) addoutput "m_flRadius 175"
+	es_fire event_var(userid) server_var(ss_name) addoutput "beamcount_min 50"
+	es_fire event_var(userid) server_var(ss_name) addoutput "beamcount_max 60"
+	es_fire event_var(userid) server_var(ss_name) addoutput "thick_min 15"
+	es_fire event_var(userid) server_var(ss_name) addoutput "thick_max 50"
+	es_fire event_var(userid) server_var(ss_name) addoutput "lifetime_min 5"
+	es_fire event_var(userid) server_var(ss_name) addoutput "lifetime_max 20"
+	es_fire event_var(userid) server_var(ss_name) addoutput "interval_min 10"
+	es_fire event_var(userid) server_var(ss_name) addoutput "interval_max 50"
+	es_fire event_var(userid) server_var(ss_name) addoutput "texture sprites/lgtning.vmt"
+	es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed .3 es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed .6 es_fire event_var(userid) server_var(ss_name) DoSpark
+	es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Spawn (END)
+	}
+}
+
+event player_footstep
+{
+	es wcsgroup get solariswalk wcs_tmp7 event_var(userid)
+	if (server_var(wcs_tmp7) == 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Solaris - The Sunfang - [Block] Event Player_Footstep (START)
+		}
+		es_playsound event_var(userid) weapons/fx/nearmiss/bulletltor06.wav .02
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 5
+		es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 20 3 13 1 0 255 55 25 255 10
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Solaris - The Sunfang - [Block] Event Player_Footstep (END)
+		}
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Death (START)
+	}
+	es wcsgroup set solariswalk event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] OnChange (START)
+	}
+	es wcsgroup set solariswalk server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] OnChange (END)
+	}
+}
+
+block sunlance
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) npc/strider/fire.wav .8
+					es_playsound event_var(attacker) npc/strider/fire.wav .8
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound event_var(userid) weapons\molotov\fire_ignite_1.wav .8
+					es_playsound event_var(attacker) weapons\molotov\fire_ignite_1.wav .8
+				}
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) Took + server_var(wcs_dmg) damage from Solaris' sun lance
+				es wcs_centertell event_var(attacker) Sun lance dealt + server_var(wcs_dmg) damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 100 .3 15 1 10 1 255 0 0 255 100
+				es_xmath wcs_y1 + 40
+				es_xmath wcs_x1 + 40
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 100 .3 15 1 10 1 255 55 15 255 100
+				es_xmath wcs_y1 - 80
+				es_xmath wcs_x1 - 80
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es est_effect_06 #a 0 sprites/bluelaser1.vmt server_var(vector1) server_var(vector2) 100 .3 15 1 10 1 255 55 15 255 100
+				es_xmath wcs_y1 + 40
+				es_xmath wcs_x1 + 40	
+				es_xmath wcs_z2 + 5
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 19 190 3 13 1 0 25 25 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 29 190 3 13 1 0 255 125 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 39 290 3 13 1 0 25 25 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 49 290 3 13 1 0 255 125 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 59 390 3 13 1 0 25 25 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 69 390 3 13 1 0 255 125 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 79 490 3 13 1 0 25 25 25 255 9
+				es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 89 490 3 13 1 0 255 125 25 255 9
+				es_xmath wcs_z1 + 50
+				es_xmath wcs_z2 + 55
+				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				es est_effect_06 #a 0 sprites/plasma.vmt server_var(vector2) server_var(vector1) 100 .3 1 1 10 0 255 255 1 1 255
+				es_delayed .4 est_effect_06 #a 0 sprites/plasma.vmt server_var(vector2) server_var(vector1) 100 .3 1 1 10 0 255 255 1 1 160
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 1 (END)
+	}
+}
+
+block sunglaive
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerteam wcs_team event_var(attacker)
+				if (server_var(wcs_team) = 2) do
+				{
+					es_xset wcs_targetteam #ct
+					es_xset wcs_team_target 3
+				}
+				if (server_var(wcs_team) = 3) do
+				{
+					es_xset wcs_targetteam #t
+					es_xset wcs_team_target 2
+				}
+					if (server_var(wcs_targetteam) != 0) do
+				{
+					es_getlivingplayercount wcs_pcount server_var(wcs_team_target)
+					if (server_var(wcs_pcount) > 0) do
+					{
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_exists ex userid server_var(wcs_targetid);if (server_var(ex) = 1) then es_xdoblock wcs/tools/manifest/solaris/sundamage"
+						if (server_var(wcs_counter) > 0) do
+						{
+							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Fire glaive - Dealt server_var(wcs_dmg) damage to server_var(wcs_counter) enemies
+						}
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 2 (END)
+	}
+}
+
+block sundamage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 2 (SUNDAMAGE EXECUTED START)
+	}
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 event_var(attacker)
+	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Fire glaive - Took server_var(wcs_dmg) from a fire glaive
+	es wcs_fade event_var(attacker) 255 20 20 120 1 2
+	es wcs_fade server_var(wcs_targetid) 255 20 20 120 1 2	
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_xmath wcs_z1 + 50
+	es_xmath wcs_z2 + 60
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/plasma.vmt server_var(vector2) server_var(vector1) 100 .3 1 1 10 0 255 255 1 1 255
+	es_delayed .4 est_effect_06 #a 0 sprites/plasma.vmt server_var(vector2) server_var(vector1) 100 .3 1 1 10 0 255 255 1 1 160
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 2 (SUNDAMAGE EXECUTED END)
+	}
+}
+
+block incendium
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice2) <= 33) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerteam wcs_team event_var(userid)
+				if (server_var(wcs_team) = 2) do
+				{
+					es_xset wcs_targetteam "#ct,#alive"
+					es_getlivingplayercount wcs_pcount 3
+				}
+				if (server_var(wcs_team) = 3) do
+				{
+					es_xset wcs_targetteam "#t,#alive"
+					es_getlivingplayercount wcs_pcount 2
+				}
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_range) "es_xdoblock wcs/tools/manifest/solaris/incendium_part2"
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 3 (END)
+	}
+}
+		
+block incendium_part2
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 3 (INCENDIUM_PART2 EXECUTED START)
+	}
+	es wcsgroup get is_burning wcs_tmp3 server_var(wcs_targetid)
+	ifx false(wcs_tmp3) do
+	{
+		es wcsgroup set is_burning server_var(wcs_targetid) 1
+		es_delayed 2 wcsgroup set is_burning server_var(wcs_targetid) 0
+		es wcsgroup set fire_owner server_var(wcs_targetid) event_var(attacker)
+		es wcs_setfx burn server_var(wcs_targetid) = 1 2
+		es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_2.wav .8
+		es_delayed .2 es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_2.wav .8
+		es_delayed .3 es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_1.wav .8
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Incendium - Dealt server_var(wcs_dmg) fire damage and set you on fire!
+		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Incendium - Lit nearby enemies on fire and inflicted server_var(wcs_dmg) fire damage 
+		es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
+		es_delayed .2 es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
+		es_delayed .3 es_playsound event_var(userid) weapons\molotov\fire_ignite_1.wav .8
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 12
+		es est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_range) 1 20 10 0 255 255 255 255 10
+		es_xmath wcs_z1 + 12
+		es_delayed .1 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_range) 1 20 10 0 255 255 255 255 10
+		es_xmath wcs_z1 + 12
+		es_delayed .2 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_range) 1 20 10 0 255 255 255 255 10
+		es_xmath wcs_z1 + 12
+		es_delayed .3 est_effect 10 #a 0 sprites/fire1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_range) 1 20 10 0 255 255 255 255 10
+		es_xrand wcs_rand 8 16
+		es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 event_var(userid)
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 3 (INCENDIUM_PART2 EXECUTED END)
+	}
+}
+
+
+block solrider
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (START)
+	}
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+			if (server_var(wcs_targetid) != 0) do
+			{
+				es_xdoblock wcs/tools/manifest/solaris/ultimate_checks
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+			if (server_var(wcs_tmp) != 1) do
+			{
+				es_xset wcs_ultinotexec 0
+				es_xdoblock wcs/tools/manifest/solaris/ultimate_final
+			}
+			if (server_var(wcs_tmp) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+				es_xset wcs_ultinotexec 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (EXECUTED START)
+	}
+	es wcsgroup get is_burning wcs_tmp3 server_var(wcs_targetid)
+	ifx false(wcs_tmp3) do
+	{
+		es wcsgroup set is_burning server_var(wcs_targetid) 1
+		es_delayed 3 wcsgroup set is_burning server_var(wcs_targetid) 0
+		es wcs_fade server_var(wcs_userid) 240 120 120 180 2 4
+		es wcs_fade server_var(wcs_targetid) 240 120 120 180 2 4
+		es wcsgroup set fire_owner server_var(wcs_targetid) server_var(wcs_userid)
+		es wcs_setfx burn server_var(wcs_targetid) = 1 3
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sun Glaive - Set engulfed you in vicious flames
+		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Sun Glaive - Engulfed you in event_var(es_username) vicious flames
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+		es_xmath wcs_z1 + 40
+		es_xmath wcs_z2 + 40
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 80 1 8 1 5 4 255 255 255 255 50
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_xmath wcs_z1 + 460
+		es_xmath wcs_z2 + 20
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es est_effect_14 #a 0 particle/fire.vmt server_var(vector2) server_var(vector1) 1000 500 100
+		es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 80 3 15 1 10 10 255 255 255 255 100
+		es est_effect 10 #a 0 sprites/flamelet5.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2000 20 5 20 5 10 255 55 25 255 40
+		es_format coords "origin %1 %2 %3" server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_xmath wcs_smokestack_counter + 1
+		es_give server_var(wcs_userid) env_smokestack
+		es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 80"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 0"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "initial 0"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 50"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 200"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 30"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 1"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 5000"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 100"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "angles 25 50 100"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendermode 18"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "renderamt 100"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 25 50 100"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial sprites/light_glow02_add_noz.vmt"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput server_var(coords)
+		es_fire server_var(wcs_userid) server_var(ss_name) turnon
+		es_delayed 16 es_fire server_var(wcs_userid) server_var(ss_name) turnoff
+		es_delayed 20 es_fire server_var(wcs_userid) server_var(ss_name) kill
+		es_xmath wcs_smokestack_counter + 1
+		es_give server_var(wcs_userid) env_smokestack
+		es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 4"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 20"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "initial 0"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 10"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 350"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 5"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 1"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 0"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 40"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendermode 18"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "renderamt 100"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 255 110 110"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial effects/gunshiptracer.vmt"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput server_var(coords)
+		es_fire server_var(wcs_userid) server_var(ss_name) turnon
+		es_delayed 16 es_fire server_var(wcs_userid) server_var(ss_name) turnoff
+		es_delayed 20 es_fire server_var(wcs_userid) server_var(ss_name) kill
+		es_xmath wcs_smokestack_counter + 1
+		es_give server_var(wcs_userid) env_smokestack
+		es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 1200"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 600"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 200"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 500"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 20"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 10"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 80"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 600"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "renderamt 200"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 200 86 86"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle\fire.vmt"
+		es_fire server_var(wcs_userid) server_var(ss_name) addoutput server_var(coords)
+		es_fire server_var(wcs_userid) server_var(ss_name) turnon
+		es_delayed 18 es_fire server_var(wcs_userid) server_var(ss_name) turnoff
+		es_delayed 30 es_fire server_var(wcs_userid) server_var(ss_name) kill
+
+//This function causes crashes on CS:GO
+//		es_xmath wcs_smokestack_counter + 1
+//		es_give server_var(wcs_userid) point_push
+//		es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+//		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+//		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "radius 150"
+//		es_fire server_var(wcs_userid) server_var(ss_name) addoutput "magnitude -5000"
+//		es_fire server_var(wcs_userid) server_var(ss_name) enable:3
+//		es_delayed 16 es_fire server_var(wcs_userid) server_var(ss_name) kill
+	}
+	ifx true(wcs_tmp3) do
+	{
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was already on fire!
+		es_xset wcs_ultinotexec 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 4 (EXECUTED END)
+	}
+}

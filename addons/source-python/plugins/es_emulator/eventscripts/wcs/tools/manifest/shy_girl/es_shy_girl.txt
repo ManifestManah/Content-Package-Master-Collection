@@ -1,0 +1,127 @@
+////////////////////////////////
+//Various Authors V4 Race Pack//
+//Version 1.0.0D              //
+////////////////////////////////
+
+block vampire
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_playsound event_var(attacker) wcs/vampiricstrike.mp3 .8
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/shellchrome.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 10 10 255 0 0 255
+				es est_effect 3 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 10 10 255 0 0 255
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 2 2 255 255 255 255
+				es_xmath wcs_z2 + 8
+				es est_effect 10 #a 0 sprites/shellchrome.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 10 0.5 40 500 255 255 0 0 100 255
+				es playerget health wcs_tmp2 event_var(attacker)
+				if (server_var(wcs_tmp2) < 260) do
+				{
+					es_xrand wcs_addhealth 12 20
+					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+				}
+				if (server_var(wcs_tmp2) => 260) do
+				{
+					es wcs_setfx health event_var(attacker) = 260 0
+					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 1 (END)
+	}
+}
+
+block mirror
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
+				es wcs_centertell event_var(attacker) You took server_var(wcs_dmg) mirror damage from event_var(es_username)!
+				es wcs_centertell event_var(userid) Mirror damage did server_var(wcs_dmg) damage to event_var(es_attackername)!
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 15
+				es_xmath wcs_z2 + 15
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 8 8 175 175 255 155
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 15 15 175 175 200 155
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 2 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 3 (START)
+	}
+	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 3 (END)
+	}
+}
+
+block sacrifice
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 4 (START)
+	}
+	es playerget cash wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) < server_var(wcs_money)) do
+	{
+		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sacrifice - Failed; not enough cash
+		if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	}
+	if (server_var(wcs_tmp1) >= server_var(wcs_money)) do
+	{
+		es wcs_setfx cash server_var(wcs_userid) - server_var(wcs_money) 0
+		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+		es_playsound server_var(wcs_userid) wcs/clearcast.mp3 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sacrifice - Received server_var(wcs_addhealth) health for server_var(wcs_money) gold
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_xmath wcs_z2 + 8
+		es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 600 1 55 10 1 255 25 25 255 8
+		es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 600 80 1 55 10 1 255 25 25 255 8
+		es_delayed .2 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 600 1 55 10 1 255 25 25 255 8
+		es_delayed .2 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 600 80 1 55 10 1 255 25 25 255 8
+		es_delayed .4 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 600 1 55 10 1 255 25 25 255 8
+		es_delayed .4 est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 600 80 1 55 10 1 255 25 25 255 8
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Shy Girl - [Block] Skill: 4 (END)
+	}
+}

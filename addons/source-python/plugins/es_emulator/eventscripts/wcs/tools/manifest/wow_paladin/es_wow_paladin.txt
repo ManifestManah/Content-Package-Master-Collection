@@ -1,0 +1,150 @@
+//////////////////////
+//Kamiqawa Race Pack//
+//Version 1.0.0D    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Spawn (START)
+	}
+	es wcsgroup set absorb event_var(userid) 0
+	es_playsound event_var(userid) wcs/holyshock.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] OnChange (START)
+	}
+	es wcsgroup set absorb server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] OnChange (END)
+	}
+}
+
+block absorb
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcsgroup set absorb event_var(userid) server_var(wcs_duration)
+		es_xmath wcs_duration * 100
+		es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shield - server_var(wcs_duration)% of damage taken is absorbed
+		es_playsound event_var(userid) wcs/divine.mp3 .8
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 1 (END)
+	}
+}
+
+block mirror
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_rand 6 15
+				es damage event_var(attacker) server_var(wcs_rand) 1 event_var(userid)
+				es wcs_centertell event_var(userid) Retribution did server_var(wcs_rand) mirror damage
+				es wcs_centertell event_var(attacker) Retribution reflected server_var(wcs_rand) damage upon you
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 180 60 200 7
+				es_xmath wcs_z1 + 20
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 180 60 200 7
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 2 (END)
+	}
+}	
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_dmg 8 13
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_setfx speed event_var(attacker) + .35 3
+				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Judgement - Did server_var(wcs_dmg) holy damage, and temporarily increased your speed
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 180 60 200 7
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_xmath wcs_z1 + 5
+				es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 180 180 200 255 2
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 325 .75 35 10 0 250 180 60 200 7
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 3 (END)
+	}	
+}
+
+block heal
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 4 (START)
+	}
+	es playerget health wcs_tmp1 server_var(wcs_userid)
+	if (server_var(wcs_tmp1) > 300) do
+	{
+		es wcs_setfx health server_var(wcs_userid) = 300 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Heal - Can't be used when above 300 health
+	}
+	if (server_var(wcs_tmp1) <= 300) do
+	{
+		es_xrand wcs_rand 5 40
+		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Heal - You healed yourself for server_var(wcs_rand) health
+		es_playsound server_var(wcs_userid) wcs/heal.mp3 .9
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 5
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 180 180 200 255 2
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 250 180 60 200 7
+		es_xmath wcs_z1 + 15
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 180 180 200 255 2
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 250 180 60 200 7
+		es_xmath wcs_z1 + 15
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 180 180 200 255 2
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 80 .75 12 10 0 250 180 60 200 7
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: WoW - Paladin - [Block] Skill: 4 (END)
+	}
+}
