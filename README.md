@@ -1,4 +1,4 @@
-# [Content Package] Races & Items Master Collection - Version: (1.0.0D)
+# [Content Package] Races & Items Master Collection
 This is an all-in-one and easy-to-install content package for Tha Pwned's version of the Warcraft-Source modification which can be found and downloaded [here](https://github.com/ThaPwned/WCS).
 
 
