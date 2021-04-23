@@ -1,6 +1,6 @@
 /////////////////////////
 //Eareland V2 Race Pack//
-//Version 1.0.0D       //
+//Version 1.0.1D       //
 /////////////////////////
 
 block spawn
@@ -23,6 +23,8 @@ block spawn
 	es_delayed .1 es_give event_var(userid) weapon_knife
 	es_delayed .1 es_give event_var(userid) weapon_flashbang
 	es_delayed .1 es_give event_var(userid) weapon_hegrenade
+	es_delayed .1 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" 5
+	es_delayed .1 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.015" 5
 	es wcsgroup set flasher_returnhighexplosive event_var(userid) 1
 	es wcsgroup set flasher_returnflashbangs event_var(userid) 1
 	es wcsgroup set noflash event_var(userid) 0
@@ -71,7 +73,7 @@ event hegrenade_detonate
 		{
 			wcs_log [Race]: Flashknifer - [Block] Event Hegrenade_Detonate (START)
 		}
-		es_delayed .5 es_give event_var(userid) weapon_hegrenade
+		es_delayed .1 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" 5
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log [Race]: Flashknifer - [Block] Event Hegrenade_Detonate (END)
@@ -88,7 +90,7 @@ event flashbang_detonate
 		{
 			wcs_log [Race]: Flashknifer - [Block] Event Flashbang_Detonate (START)
 		}
-		es_delayed .5 es_give event_var(userid) weapon_flashbang
+		es_delayed .1 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.015" 5
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log [Race]: Flashknifer - [Block] Event Flashbang_Detonate (END)
