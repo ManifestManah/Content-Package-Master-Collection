@@ -1,6 +1,6 @@
 /////////////////////////////
 //Various Authors Race Pack//
-//Version 1.0.0D           //
+//Version 1.0.1D           //
 /////////////////////////////
 
 block spawn
@@ -234,22 +234,26 @@ event bullet_impact
 		{
 			wcs_log  [Race]: Son Goku - [Block] Event Bullet_Impact (START)
 		}
-		es_getgame wcs_gamecheck
-		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		es_xrand wcs_rand 1 4
+		if (server_var(wcs_rand) = 1) do
 		{
-			es_playsound event_var(userid) weapons/explode3.wav 1
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound event_var(userid) weapons/explode3.wav 1
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound event_var(userid) weapons\hegrenade\explode3.wav 1
+			}
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
+			es_xmath wcs_z1 + 20
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+			es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector2) server_var(vector1) 100 1 10 10 10 0 255 25 25 255 100
+			es est_effect 11 #a 0 sprites/redglow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
 		}
-		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
-		{
-			es_playsound event_var(userid) weapons\hegrenade\explode3.wav 1
-		}
-		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
-		es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
-		es_xmath wcs_z1 + 20
-		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
-		es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector2) server_var(vector1) 100 1 10 10 10 0 255 25 25 255 100
-		es est_effect 11 #a 0 sprites/redglow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 1 255
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log  [Race]: Son Goku - [Block] Event Bullet_Impact (END)
