@@ -1,6 +1,6 @@
 //////////////////////
 //Holliday Race Pack//
-//Version 1.0.0D    //
+//Version 1.0.1D    //
 //////////////////////
 
 block spawn
@@ -223,7 +223,8 @@ block blooddemon_reset
 	}
 	if (server_var(wcs_tmp3) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You can't reset before you've killed someone!
+		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You must kill someone first before you can reset!
+		es wcs_setcooldown server_var(wcs_userid) 0
 	}	
 	ifx true(wcs_race_debugging) do
 	{
