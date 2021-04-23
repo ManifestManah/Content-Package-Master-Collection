@@ -1,6 +1,6 @@
 ////////////////////
 //Naiken Race Pack//
-//Version 1.0.0D  //
+//Version 1.0.1D  //
 ////////////////////
 
 block spawn
@@ -34,7 +34,7 @@ block death
 	{
 		wcs_log [Race]: Akali - [Block] Death (START)
 	}
-	es wcsgroup set ulti_immunity event_var(userid) 1
+	es wcsgroup set ulti_immunity event_var(userid) 0
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Akali - [Block] Death (END)
