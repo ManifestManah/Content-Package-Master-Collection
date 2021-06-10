@@ -9,7 +9,7 @@
 
 block load
 {
-	es_load wcs/tools/manifest/builder_bob_the_builde
+	es_load wcs/tools/manifest/builder_bob_the_builder
 	es_load wcs/tools/manifest/builder_donkey_kong
 	es_load wcs/tools/manifest/builder_lego_man
 	es_load wcs/tools/manifest/builder_madcan
@@ -21,7 +21,7 @@ block load
 
 block unload
 {
-	es_unload wcs/tools/manifest/builder_bob_the_builde
+	es_unload wcs/tools/manifest/builder_bob_the_builder
 	es_unload wcs/tools/manifest/builder_donkey_kong
 	es_unload wcs/tools/manifest/builder_lego_man
 	es_unload wcs/tools/manifest/builder_madcan
