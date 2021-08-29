@@ -1,0 +1,79 @@
+///////////////////////
+//Manifest's Shopmenu//
+//Version 1.0.1D     //
+///////////////////////
+
+////////////////////
+//Enhancement Item//
+////////////////////
+
+//This event happens when the script is loadd
+block load
+{
+	//Sets the necessary variables for the item to work properly
+	es_xset shop_mole_loop_active 0
+}
+
+event round_start
+{
+	// Loops through all living players and executes the block playerismole for every living player in the loop
+	es_delayed .2 wcs_foreach player wcs_targetid #alive "wcs/shopmenu/enhancements/mole/playerismole"
+}
+
+block playerismole
+{
+	// Obtains the WCSGroup named shop_ismole from our player and store it within our variable shop_tmp
+	es wcsgroup get shop_ismole shop_tmp server_var(wcs_targetid)
+
+	// If the player's shop_tmp variable is set to 1 then execute this section
+	if (server_var(shop_tmp) == 1) do
+	{
+		// Changes the player's mole status to 0
+		es wcsgroup set shop_ismole server_var(wcs_targetid) 0
+
+		// Sends a message to the player informing the player that he'll become a mole
+		es_tell server_var(wcs_targetid) #multi #green[WCS] #lightgreenYou're a #greenmole#lightgreen. You'll be teleported to the enemy spawn in 3 seconds!
+
+		// Obtains the information about which team our player is on, and store the data within our variable wcs_team
+		es_getplayerteam wcs_team server_var(wcs_targetid)
+
+		// If the player's wcs_team variable value was 2 it means he is on the terrorist team, so this section is executed only if our player is a terrorist
+		if (server_var(wcs_team) = 2) do
+		{
+			// After 3 seconds has passed we'll teleport our player to the counter-terrorist spawn (The used coordinate variables are built in to the normal wcs_domole command)
+			es_delayed 2.8 playerset location server_var(wcs_targetid) server_var(wcs_mole_x2) server_var(wcs_mole_y2) server_var(wcs_mole_z2)
+		}
+
+		// If the player's wcs_team variable value was 3 it means he is on the counter-terrorist team, so this section is executed only if our player is a counter-terrorist
+		if (server_var(wcs_team) = 3) do
+		{
+			// After 3 seconds has passed we'll teleport our player to the counter-terrorist spawn (The used coordinate variables are built in to the normal wcs_domole command)
+			es_delayed 2.8 playerset location server_var(wcs_targetid) server_var(wcs_mole_x1) server_var(wcs_mole_y1) server_var(wcs_mole_z1)
+		}
+
+		// Changes the player's appearence to look like one of the enemy models after 0.5 seconds has passed (We do this to overwrite any possibly already assigned models)
+		es_delayed .3 wcs_setfx disguiser server_var(wcs_targetid) = 1 0
+
+		// After 3 seconds has passed we'll send yet another message to the player informing him that he became a mole
+		es_delayed 2.8 es_tell server_var(wcs_targetid) #multi #green[WCS] #lightgreenYou became a #greenmole#lightgreen!
+
+		// If the global variable shop_mole_loop_active is equals to 0 then continue
+		ifx false(shop_mole_loop_active) do
+		{
+			// Changes the global variable shop_mole_loop_active to 1
+			es_xset shop_mole_loop_active 1
+
+			// Obtains the value of the server's mp_freezetime setting and store that value within our wcs_mole_collision_timer variable
+			es_set wcs_mole_collision_timer server_var(mp_freezetime)
+
+			// Add 3 to our wcs_mole_collision_timer variable
+			es_xmath wcs_mole_collision_timer + 3
+
+			// Removes the player collission from all living players for the first 3 seconds after the freeze time ends
+			es wcs_foreach player wcs_userid #alive "es wcs_setfx noblock server_var(wcs_userid) = 1 server_var(wcs_mole_collision_timer)"
+
+			// After 1 second has passed we change the global variable shop_mole_loop_active back to 0
+			es_delayed 1 es_xset shop_mole_loop_active 0
+		}
+	}
+}
