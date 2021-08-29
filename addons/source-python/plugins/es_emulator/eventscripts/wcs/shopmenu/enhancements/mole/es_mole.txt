@@ -17,7 +17,7 @@ block load
 event round_start
 {
 	// Loops through all living players and executes the block playerismole for every living player in the loop
-	es_delayed .2 wcs_foreach player wcs_targetid #alive "wcs/shopmenu/enhancements/mole/playerismole"
+	es_delayed .2 wcs_foreach player wcs_targetid #alive "es_xdoblock wcs/shopmenu/enhancements/mole/playerismole"
 }
 
 block playerismole
