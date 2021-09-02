@@ -1,13 +1,13 @@
 //////////////////////
 //Manifest Race Pack//
-//Version 1.0.1B    //
+//Version 1.0.2B    //
 //////////////////////
 
 block spawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Spawn (START)
+		wcs_log [Race]: Sand Raider - [Block] Spawn (START)
 	}
 	es wcs_removeweapon event_var(userid) 1
 	es wcs_removeweapon event_var(userid) 2
@@ -36,7 +36,7 @@ block spawn
 	es_delayed 2.2 est_effect_08 #a 0 particle/smokesprites_0013.vmt server_var(vector1) 15 80 1 .5 40 10 .2 190 147 118 50 7 5
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Spawn (END)
+		wcs_log [Race]: Sand Raider - [Block] Spawn (END)
 	}
 }
 
@@ -44,13 +44,13 @@ block death
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Death (START)
+		wcs_log [Race]: Sand Raider - [Block] Death (START)
 	}
 	es wcsgroup set is_attackspeed_altered event_var(userid) 0
 	es wcsgroup set resist_knife event_var(userid) 0.0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Death (END)
+		wcs_log [Race]: Sand Raider - [Block] Death (END)
 	}
 }
 
@@ -58,13 +58,13 @@ block onchange
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] OnChange (START)
+		wcs_log [Race]: Sand Raider - [Block] OnChange (START)
 	}
 	es wcsgroup set resist_knife server_var(wcs_userid) 0.0
 	es wcsgroup set is_attackspeed_altered server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] OnChange (END)
+		wcs_log [Race]: Sand Raider - [Block] OnChange (END)
 	}
 }
 
@@ -72,13 +72,13 @@ block swords
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 1 (START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx attackspeed event_var(userid) = server_var(wcs_speed) 0
 	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wielding 4 swords - Increased your attackspeed!
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 1 (END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 1 (END)
 	}
 }
 
@@ -86,7 +86,7 @@ block blocking
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 2 (START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 2 (START)
 	}
 	if (event_var(es_userdead) = 0) do
 	{
@@ -104,7 +104,7 @@ block blocking
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 2 (END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 2 (END)
 	}
 }
 
@@ -112,7 +112,7 @@ block poison
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 3 (START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 3 (START)
 	}
 	if (event_var(weapon) = knife) do
 	{
@@ -146,7 +146,7 @@ block poison
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 3 (END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 3 (END)
 	}
 }
 
@@ -154,7 +154,7 @@ block sandwave
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 4 (START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 5
 	es wcs_centertell server_var(wcs_userid) You're now riding on a wave of sand!
@@ -179,7 +179,7 @@ block sandwave
 	es_delayed 5 es_fire server_var(wcs_userid) server_var(ss_name) kill
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 4 (END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 4 (END)
 	}
 }
 
@@ -187,7 +187,7 @@ block sandfury
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (START)
 	}
 	es_xset wcs_execute_ultimate 0
 	es_getplayerteam wcs_team server_var(wcs_userid)
@@ -251,7 +251,7 @@ block sandfury
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (END)
 	}
 }
 
@@ -259,7 +259,7 @@ block ultimate_checks
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (CHECKS START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (CHECKS START)
 	}
 	es_exists ex userid server_var(wcs_targetid)
 	if (server_var(ex) = 1) do
@@ -306,7 +306,7 @@ block ultimate_checks
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (CHECKS END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (CHECKS END)
 	}
 }
 
@@ -314,7 +314,7 @@ block ultimate_final
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (EXECUTED START)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (EXECUTED START)
 	}
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -335,6 +335,6 @@ block ultimate_final
 	es est_effect_08 #a 0 particle/smokesprites_0013.vmt server_var(vector2) 15 80 1 1.5 60 10 .2 190 147 118 50 7 5
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Undead Scourge - [Block] Skill: 5 (EXECUTED END)
+		wcs_log [Race]: Sand Raider - [Block] Skill: 5 (EXECUTED END)
 	}
 }
