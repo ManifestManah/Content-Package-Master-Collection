@@ -51,7 +51,7 @@ block feet
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Winged feet - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Winged feet - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hermes - [Block] Skill: 1 (END)
@@ -77,8 +77,8 @@ block curse
 				es_delayed .5 wcs_setfx speed event_var(userid) - 1 0
 				es_delayed 1 wcs_setfx speed event_var(userid) + 1 0
 				es_delayed 1.5 wcs_setfx speed event_var(userid) - .5 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Walk curse - Changed your target speed
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Walk curse - Changed your speed
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Walk curse - Changed your target speed
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Walk curse - Changed your speed
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 				{
@@ -110,7 +110,7 @@ block boost
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es wcs_setfx speed event_var(userid) + .75 1.5
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Airboost - Temporarily gave you 50% speed
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Airboost - Temporarily gave you 50% speed
 				es_xmath wcs_smokestack_counter + 1
 				es_give event_var(userid) env_smokestack
 				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)

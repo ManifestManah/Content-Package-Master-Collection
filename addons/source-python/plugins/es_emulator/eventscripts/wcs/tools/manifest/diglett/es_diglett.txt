@@ -70,8 +70,8 @@ block rock
 					es wcsgroup set is_slowed event_var(userid) 1
 					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
 					es wcs_setfx speed event_var(userid) = .7 2
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rocktomb - Slowed you down for 2 seconds!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Rocktomb - You slowed the enemy for 2 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Rocktomb - Slowed you down for 2 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Rocktomb - You slowed the enemy for 2 seconds!
 				}
 			}
 		}
@@ -96,8 +96,8 @@ block sand
 			{
 				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 				es_delayed 1.5 es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sand attack - event_var(es_attackername) blinded you for 1.5 seconds
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Sand attack - Blinded event_var(es_username) for 1.5 seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Sand attack - event_var(es_attackername) blinded you for 1.5 seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Sand attack - Blinded event_var(es_username) for 1.5 seconds
 			}
 		}
 	}
@@ -157,13 +157,13 @@ block dig
 	es wcs_setfx freeze server_var(wcs_userid) = 1 server_var(wcs_duration)
 	es wcsgroup set is_frozen server_var(wcs_userid) 1
 	es_delayed server_var(wcs_duration) wcsgroup set is_frozen server_var(wcs_userid) 0
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dig - You buried yourself for server_var(wcs_duration) seconds!
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dig - You buried yourself for server_var(wcs_duration) seconds!
 	es_delayed server_var(wcs_duration) playerset location server_var(wcs_userid) server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12)
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 80 1 10 10 0 90 56 37 255 0
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 95 1 10 10 0 90 56 37 255 0
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 110 1 10 10 0 90 56 37 255 0
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12) 20 125 1 10 10 0 90 56 37 255 0
-	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dig - You went above ground!
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dig - You went above ground!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Diglett - [Block] Skill: 4 (END)

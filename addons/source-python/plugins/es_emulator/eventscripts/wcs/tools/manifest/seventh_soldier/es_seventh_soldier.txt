@@ -86,7 +86,7 @@ block invis
 		wcs_log [Race]: Seventh Soldier - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Seventh Soldier - [Block] Skill: 1 (END)
@@ -103,7 +103,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Terrain expert - Increased your speed and jump length by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Terrain expert - Increased your speed and jump length by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Seventh Soldier - [Block] Skill: 2 (END)
@@ -118,7 +118,7 @@ block nades
 	}
 	es wcsgroup set hegrenade_resupply event_var(userid) server_var(wcs_tmp2)
 	es_delayed .5 es_give event_var(userid) weapon_hegrenade
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bag of hand grenades - Gave you server_var(wcs_tmp2) high explosive grenades
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Bag of hand grenades - Gave you server_var(wcs_tmp2) high explosive grenades
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Seventh Soldier - [Block] Skill: 3 (END)
@@ -145,15 +145,15 @@ event weapon_fire
 			}
 			if (server_var(wcs_tmp) > 1) do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have server_var(wcs_tmp) grenades left!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen You have server_var(wcs_tmp) grenades left!
 			}
 			if (server_var(wcs_tmp) == 1) do 
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen This is your last grenade!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen This is your last grenade!
 			}
 			if (server_var(wcs_tmp) == 0) do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have no more grenades!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen You have no more grenades!
 			}
 		}
 		ifx true(wcs_race_debugging) do
@@ -176,19 +176,19 @@ block upgrade
 		if (server_var(wcs_tmp1) != weapon_scout) do
 		{
 			es_give server_var(wcs_userid) weapon_scout
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - You've upgraded your weapon to a scout!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - You've upgraded your weapon to a scout!
 			es_xrand wcs_ammo 5 15
 			if (server_var(wcs_ammo) < 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Downgraded your weapon to a poor scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Downgraded your weapon to a poor scout
 			}
 			if (server_var(wcs_ammo) = 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
 			}
 			if (server_var(wcs_ammo) > 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Upgraded your weapon to a refined scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Upgraded your weapon to a refined scout
 			}
 			es wcs_removeweapon server_var(wcs_userid) 1
 			es wcs_setfx 1stammo server_var(wcs_userid) = server_var(wcs_ammo) 0
@@ -219,7 +219,7 @@ block upgrade
 		}
 		if (server_var(wcs_tmp1) == weapon_scout) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon is already a scout!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Your weapon is already a scout!
 			es wcs_cancelulti server_var(wcs_userid)
 		}
 	}
@@ -227,20 +227,20 @@ block upgrade
 	{
 		if (server_var(wcs_tmp1) != weapon_ssg08) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - You've upgraded your weapon to a SSG08!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - You've upgraded your weapon to a SSG08!
 			es_give server_var(wcs_userid) weapon_ssg08
 			es_xrand wcs_ammo 5 15
 			if (server_var(wcs_ammo) < 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Downgraded your weapon to a poor scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Downgraded your weapon to a poor scout
 			}
 			if (server_var(wcs_ammo) = 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Your weapon was upgraded to a standard scout
 			}
 			if (server_var(wcs_ammo) > 10) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Upgraded your weapon to a refined scout
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Upgraded your weapon to a refined scout
 			}
 			es wcs_removeweapon server_var(wcs_userid) 1
 			es wcs_setfx 1stammo server_var(wcs_userid) = server_var(wcs_ammo) 0
@@ -271,7 +271,7 @@ block upgrade
 		}
 		if (server_var(wcs_tmp1) == weapon_ssg08) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Scout upgrade - Your weapon is already a SSG08!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Scout upgrade - Your weapon is already a SSG08!
 			es wcs_cancelulti server_var(wcs_userid)
 		}
 	}

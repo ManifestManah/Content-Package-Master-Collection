@@ -80,8 +80,8 @@ block grenade
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es_tell event_var(attacker) #multi #green[WCS]#lightgreen Critical grenade - Dealt#green server_var(wcs_dmg) #lightgreenadditional damage
-				es_tell event_var(userid) #multi #green[WCS]#lightgreen Critical grenade - Recieved#green server_var(wcs_dmg) #lightgreenadditional damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Critical grenade - Dealt#green server_var(wcs_dmg) #lightgreenadditional damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Critical grenade - Recieved#green server_var(wcs_dmg) #lightgreenadditional damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 15
 				es est_effect 10 #a 0 sprites\lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 26 0.75 8 5 0 255 71 36 255 0
@@ -108,7 +108,7 @@ block respawn
 	{
 		if (event_var(es_userdead) = 1) do
 		{
-			es_tell event_var(userid) #multi #green[WCS]#lightgreen Reincarnation - Respawning in #green3 #lightgreenseconds!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Reincarnation - Respawning in #green3 #lightgreenseconds!
 			es wcs_centertell event_var(userid) Respawning in 3 seconds!
 			es_delayed 1 es wcs_centertell event_var(userid) Respawning in 2 seconds!
 			es_delayed 2 es wcs_centertell event_var(userid) Respawning in 1 seconds!
@@ -172,18 +172,18 @@ block wcs_ulti_chain
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -233,19 +233,19 @@ block ultimate_checks_chain
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}

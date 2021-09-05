@@ -54,7 +54,7 @@ block longjump_footstep
 		es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize 128
 		es_xmath wcs_multiplier * 100
 		es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unruly - Your jump length is increased by server_var(wcs_multiplier)% and you walk over small obstacles with ease
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Unruly - Your jump length is increased by server_var(wcs_multiplier)% and you walk over small obstacles with ease
 		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 8
@@ -174,7 +174,7 @@ block chain_heal
 		es playerget health wcs_tmp1 server_var(wcs_userid)
 		if (server_var(wcs_tmp1) >= 250) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
 		}
 		if (server_var(wcs_tmp1) < 250) do
 		{
@@ -235,7 +235,7 @@ block chain_healexe
 	es playerget health wcs_tmp1 server_var(wcs_targetid)
 	if (server_var(wcs_tmp1) >= 250) do
 	{
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Chain Heal - Bray Shaman's Chain Heal couldn't heal you because you already had 250 health
 	}
 	if (server_var(wcs_tmp1) < 250) do
 	{

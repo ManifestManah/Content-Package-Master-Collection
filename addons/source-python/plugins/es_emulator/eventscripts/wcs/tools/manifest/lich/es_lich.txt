@@ -26,7 +26,7 @@ block gravity
 		wcs_log [Race]: Lich - [Block] Skill: 1 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Has reduced your gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Has reduced your gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Lich - [Block] Skill: 1 (END)
@@ -83,7 +83,7 @@ block dod
 			es wcs_drop event_var(userid) 1
 			es_delayed .5 es_give event_var(userid) weapon_ak47
 			es_delayed 1 wcs_setfx 1stclip event_var(userid) + server_var(wcs_ammo) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death and decay - Granted you an AK with server_var(wcs_ammo) extra ammo
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Death and decay - Granted you an AK with server_var(wcs_ammo) extra ammo
 		}
 	}
 	ifx true(wcs_race_debugging) do

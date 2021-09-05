@@ -40,7 +40,7 @@ block ward
 	{
 		es_xmath wcs_count - 1
 		es wcsgroup set ability_count server_var(wcs_userid) server_var(wcs_count)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Interceptors - You have server_var(wcs_count) Interceptors left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Interceptors - You have server_var(wcs_count) Interceptors left.
 		es_xset wcs_warden_x2 0
 		es_xset wcs_warden_y2 0
 		es_xset wcs_warden_z2 0
@@ -53,7 +53,7 @@ block ward
 	}
 	else do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Interceptors - You don't have any Interceptors left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Interceptors - You don't have any Interceptors left.
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -71,7 +71,7 @@ block gravity
 	{
 		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Gravitic thrusters - Reduced your gravity to server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravitic thrusters - Reduced your gravity to server_var(wcs_gravity)%
 		es_playsound event_var(userid) skills/hymn.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 50 1 15 10 0 80 80 225 255 0
@@ -166,25 +166,25 @@ block roots
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 "es_xdoblock wcs/tools/manifest/protoss_carrier/roots_path"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Argus talisman affected server_var(wcs_counter) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Argus talisman affected server_var(wcs_counter) enemies
 				es wcs_centertell server_var(wcs_userid) Argus talisman immobilized the nearby enemies!
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -234,19 +234,19 @@ block roots_path
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -268,14 +268,14 @@ block roots_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
 		es wcsgroup set is_frozen server_var(wcs_targetid) 1
 		es_delayed 2 wcsgroup set is_frozen server_var(wcs_targetid) 0
 		es wcs_setfx freeze server_var(wcs_targetid) = 1 2
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Argus Talisman immobilized you for 2 seconds
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Argus Talisman immobilized you for 2 seconds
 		es wcs_centertell server_var(wcs_targetid) You've been immobilized for 2 seconds!
 	}
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)

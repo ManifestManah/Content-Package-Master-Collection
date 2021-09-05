@@ -61,7 +61,7 @@ block invis
 		wcs_log [Race]: Iceman - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 51 193 255 server_var(wcs_invis) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Clear ice - Made you more transparent
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Clear ice - Made you more transparent
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iceman - [Block] Skill: 1 (END)
@@ -131,8 +131,8 @@ block freeze
 					es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
 					es wcs_color event_var(userid) 51 106 208 160 1
 					es_delayed 1.5 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Deep freeze - Froze your enemy for 1.5 second
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Deep freeze - You've been frozen for 1.5 second
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Deep freeze - Froze your enemy for 1.5 second
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Deep freeze - You've been frozen for 1.5 second
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 6
 					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -163,7 +163,7 @@ block armour
 	}
 	es_delayed 1 wcs_setfx armor event_var(userid) = 50 0
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Icy armour armour - Granted you server_var(wcs_addhealth) health and 50 armour
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Icy armour armour - Granted you server_var(wcs_addhealth) health and 50 armour
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iceman - [Block] Skill: 4 (END)

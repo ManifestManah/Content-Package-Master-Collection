@@ -75,8 +75,8 @@ block paralyze
 			es_delayed .5 wcsgroup set is_paralyzed event_var(userid) 0
 			es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
 			es_delayed .5 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Paralyze - You are paralyzed for a half second
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Paralyze - You paralyzed the enemy for a half second
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Paralyze - You are paralyzed for a half second
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Paralyze - You paralyzed the enemy for a half second
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 			es_xmath wcs_z1 + 500
@@ -207,7 +207,7 @@ block sloth
 	    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
-	        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleporter - You turned invisible and teleported!
+	        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleporter - You turned invisible and teleported!
 	        es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
 	    }
 	    
@@ -299,7 +299,7 @@ block sloth
 	            }
 	            es_xcopy wcs_z1 wcs_z2
 	        }
-	        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleporter - You turned invisible but cannot teleport that far!
+	        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleporter - You turned invisible but cannot teleport that far!
 	    }
 	}
 	if (server_var(wcs_tmp3) == 2) do
@@ -318,7 +318,7 @@ block sloth
 			es_give server_var(wcs_userid) weapon_sg556
 			es_playsound server_var(wcs_userid) wcs/shadow.mp3 .8
 		}
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleporter - You've turned visible again!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleporter - You've turned visible again!
 		es_give server_var(wcs_userid) weapon_knife
 		es wcs_setfx speed server_var(wcs_userid) - server_var(wcs_speed) 0
 		es wcsgroup set hell_sloth server_var(wcs_userid) 1

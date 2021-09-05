@@ -68,8 +68,8 @@ block slash
 			{
 				if (event_var(es_attackerdead) = 0) do 
 				{
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen event_var(es_attackername)'s #greenCresent slash #lightgreenmade you bleed for 3 seconds!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Your Cresent slash made event_var(es_username) bleed for 3 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen event_var(es_attackername)'s #greenCresent slash #lightgreenmade you bleed for 3 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Your Cresent slash made event_var(es_username) bleed for 3 seconds!
 					es_delayed 1 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
 					es_delayed 2 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
 					es_delayed 3 damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
@@ -132,7 +132,7 @@ block shroud
 				es wcs_setfx speed event_var(attacker) = .75 server_var(wcs_duration)
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 0 1
 				es_cexec event_var(userid) r_screenoverlay effects\flicker_256.vmt
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Twillight Shroud made you invisible and slowed your enemy for server_var(wcs_duration) seconds!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Twillight Shroud made you invisible and slowed your enemy for server_var(wcs_duration) seconds!
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 				{

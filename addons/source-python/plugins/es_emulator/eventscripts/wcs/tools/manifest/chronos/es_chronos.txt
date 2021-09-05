@@ -43,8 +43,8 @@ block curse
 				es_delayed 4 wcsgroup set is_slowed event_var(userid) 0	
 				es wcs_setfx speed event_var(attacker) = server_var(wcs_speed) 4
 				es_xmath wcs_speed * 100
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Chronos curse - Your speed has been set to server_var(wcs_speed)% for 4 seconds
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Chronos curse - You slowed event_var(es_attackername) for 4 seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Chronos curse - Your speed has been set to server_var(wcs_speed)% for 4 seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Chronos curse - You slowed event_var(es_attackername) for 4 seconds
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 5
 				es_xmath wcs_x1 + 100
@@ -98,7 +98,7 @@ block blessing
 block blessing_block
 {
 	es_delayed .5 wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
-	es_delayed .5 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blessing of quickening - Chronos increased your speed
+	es_delayed .5 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blessing of quickening - Chronos increased your speed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 5
 	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -124,8 +124,8 @@ block flashback
 					es_delayed 2.1 wcsgroup set flashback1 event_var(userid) 0
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_delayed 2 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flashback - Chronos sends you back in time in 2 seconds!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Flashback - You send your enemy back in time in 2 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flashback - Chronos sends you back in time in 2 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Flashback - You send your enemy back in time in 2 seconds!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/combineball_glow_blue_1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 85 86 2 5 10 3 100 100 200 185 1
 					es_xmath wcs_z1 + 10

@@ -39,7 +39,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -54,7 +54,7 @@ block ammo_primary
 		wcs_log [Race]: A. Carmine (Gears of War) - [Block] Skill: 2 (START)
 	}
 	es_delayed 2 wcs_setfx 1stclip event_var(userid) + server_var(wcs_ammo) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ammo - Your clip contains server_var(wcs_ammo) more bullets
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Ammo - Your clip contains server_var(wcs_ammo) more bullets
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: A. Carmine (Gears of War) - [Block] Skill: 2 (END)
@@ -69,7 +69,7 @@ block cog_armor
 	}
 	es_delayed 1 wcs_setfx armor event_var(userid) = 110 0
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen COG Armor - Your received armor and became less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen COG Armor - Your received armor and became less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -93,14 +93,14 @@ block equip_sniper
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .1 es_give server_var(wcs_userid) weapon_xm1014
 		es_delayed .3 wcs_setfx 1stclip event_var(userid) + 12 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Deaths Revenge - You switched back to your shotgun and reloaded
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Deaths Revenge - You switched back to your shotgun and reloaded
 	}
 	if (server_var(wcs_tmp) == 0) do
 	{
 		es wcsgroup set carmine_equipped server_var(wcs_userid) 1
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .1 es_give server_var(wcs_userid) weapon_awp
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Deaths Revenge - You equipped your sniper rifle
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Deaths Revenge - You equipped your sniper rifle
 	}
 	ifx true(wcs_race_debugging) do
 	{

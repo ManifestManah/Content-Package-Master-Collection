@@ -83,7 +83,7 @@ block camo
 		wcs_log [Race]: Grass Chopper - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 35 240 35 server_var(wcs_invis) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Camouflage - Reduced your visibility
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Camouflage - Reduced your visibility
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Grass Chopper - [Block] Skill: 1 (END)
@@ -97,7 +97,7 @@ block hopp
 		wcs_log [Race]: Grass Chopper - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hopper - Reduced your gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Hopper - Reduced your gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Grass Chopper - [Block] Skill: 2 (END)
@@ -118,8 +118,8 @@ block poison
 			{
 				es_cexec event_var(userid) r_screenoverlay effects/tp_eyefx/tp_eyefx.vmt
 				es_delayed server_var(wcs_duration) es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Force of nature - Poisoned the enemy for server_var(wcs_duration) seconds
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Force of nature - Poisoned you for server_var(wcs_duration) seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Force of nature - Poisoned the enemy for server_var(wcs_duration) seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Force of nature - Poisoned you for server_var(wcs_duration) seconds
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 30
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 35 1 25 10 1 35 255 85 150 2

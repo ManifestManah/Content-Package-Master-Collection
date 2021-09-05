@@ -102,7 +102,7 @@ block health_when_struck
 			{
 				es_xrand wcs_addhealth 7 25
 				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Recovery - You recovered server_var(wcs_addhealth) health
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Recovery - You recovered server_var(wcs_addhealth) health
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 .7 36 10 0 180 0 0 200 12
 				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 85 250 .7 28 10 0 180 0 0 200 12
@@ -122,7 +122,7 @@ block health
 		wcs_log [Race]: Theron Guard (Gears of War) - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -147,10 +147,10 @@ block immortality
 	es wcsgroup set evasion_chance server_var(wcs_userid) 60
 	es wcsgroup set evasion_count server_var(wcs_userid) 0
 	es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
-	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Retreat - You dodged server_var(wcs_tmp1) attacks
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Retreat - You dodged server_var(wcs_tmp1) attacks
 	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
 	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Retreat - 60% chance to dodge for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Retreat - 60% chance to dodge for server_var(wcs_duration) seconds
 	es wcs_centertell server_var(wcs_userid) You hope to make it out alive!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 150 0.5 40 50 8 255 255 255 255 5

@@ -159,7 +159,7 @@ block speed_health
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dark Infusion - You received more HP and speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Dark Infusion - You received more HP and speed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 Effects\strider_dark_flare.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 0 3 10 10 5 255 255 0 125 1
 	es_xmath wcs_z1 + 25

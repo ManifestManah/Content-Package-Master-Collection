@@ -24,7 +24,7 @@ block spawn
 	}
 	es wcs_setfx speed event_var(userid) = .6 0
 	es_delayed .1 es_give event_var(userid) weapon_knife
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zombie - Wait... Where are my legs???
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Zombie - Wait... Where are my legs???
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Zombie - [Block] Spawn (END)
@@ -38,7 +38,7 @@ block speed
 		wcs_log [Race]: Zombie - [Block] Skill: 1 (START)
 	}
 	es_delayed .1 wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Slowly crawling closer - Increased your speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Slowly crawling closer - Increased your speed
 	es_delayed .5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -53,7 +53,7 @@ block health
 		wcs_log [Race]: Zombie - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -71,7 +71,7 @@ block respawn
 	}
 	if (server_var(wcs_dice) <= 20) do
 	{
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Respawn - Respawning where you died in 3 seconds!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Respawn - Respawning where you died in 3 seconds!
 		es wcs_centertell event_var(userid) Respawning where you died in 3
 		es_delayed 1 es wcs_centertell event_var(userid) Respawning where you died in 2
 		es_delayed 2 es wcs_centertell event_var(userid) Respawning where you died in 1

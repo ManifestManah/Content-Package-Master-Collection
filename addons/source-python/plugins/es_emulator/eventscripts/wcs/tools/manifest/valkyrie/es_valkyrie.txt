@@ -79,7 +79,7 @@ block soul
 	{
 		es wcs_setfx health event_var(attacker) + server_var(wcs_tmp2) 0
 		es wcs_setfx armor event_var(attacker) + 20 0
-		es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Souls of warriors - Someone died and you gained 20 armour and server_var(wcs_tmp2) health for bringing him to Valhalla
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Souls of warriors - Someone died and you gained 20 armour and server_var(wcs_tmp2) health for bringing him to Valhalla
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 450 125 2 60 10 0.8 255 200 200 185 10
 	    es_xmath wcs_smokestack_counter + 1
@@ -258,25 +258,25 @@ block gaze
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				//everything related to the wcs_userid
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Valkyrie's Gaze affected server_var(wcs_count_players_actually_affected) people
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Valkyrie's Gaze affected server_var(wcs_count_players_actually_affected) people
 				es wcs_centertell server_var(wcs_userid) Your gaze distorted your server_var(wcs_count_players_actually_affected) enemies' view
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -316,19 +316,19 @@ block ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}

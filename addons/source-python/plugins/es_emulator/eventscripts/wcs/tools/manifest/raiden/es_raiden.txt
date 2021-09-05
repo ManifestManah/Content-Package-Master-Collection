@@ -125,8 +125,8 @@ block thundergod
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es wcs_shake event_var(userid) 20 15 3
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Thundergod shaked #green event_var(es_username)'s!
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've been shaked by #green event_var(es_attackername)'s #lightgreen thunder god!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Thundergod shaked #green event_var(es_username)'s!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen You've been shaked by #green event_var(es_attackername)'s #lightgreen thunder god!
 			}
 		}
 	}
@@ -147,7 +147,7 @@ block ward
 	{
 		es_xmath wcs_count - 1
 		es wcsgroup set ability_count server_var(wcs_userid) server_var(wcs_count)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You have server_var(wcs_count) wards left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Serpent Ward - You have server_var(wcs_count) wards left.
 		es_xset wcs_warden_x2 0
 		es_xset wcs_warden_y2 0
 		es_xset wcs_warden_z2 0
@@ -160,7 +160,7 @@ block ward
 	}
 	else do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You don't have any wards left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Serpent Ward - You don't have any wards left.
 	}
 	ifx true(wcs_race_debugging) do
 	{

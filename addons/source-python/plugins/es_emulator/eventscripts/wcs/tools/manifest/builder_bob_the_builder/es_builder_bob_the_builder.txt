@@ -46,7 +46,7 @@ block regen
 	}
 	es_xrand wcs_duration 5 15
 	es wcs_regeneration event_var(userid) server_var(wcs_rand) server_var(wcs_duration) 175 1000 250
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen First aid - Heals you and your team when below serveer_var(wcs_maxhealth) health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen First aid - Heals you and your team when below serveer_var(wcs_maxhealth) health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 1 (END)
@@ -60,7 +60,7 @@ block speed
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Quick and mobile - Granted you additional speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Quick and mobile - Granted you additional speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 2 (END)
@@ -74,7 +74,7 @@ block health
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Working suit - Gave you + server_var(wcs_addhealth) health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Working suit - Gave you + server_var(wcs_addhealth) health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 3 (END)
@@ -90,14 +90,14 @@ block build
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - You don't have any props left
 	}
 	if (server_var(wcs_tmp11) => 1) do
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
 		es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 	}
 	ifx true(wcs_race_debugging) do
 	{

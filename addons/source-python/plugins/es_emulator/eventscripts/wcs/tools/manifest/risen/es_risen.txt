@@ -47,7 +47,7 @@ block flesh
 		wcs_log [Race]: Risen - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Your calloused flesh granted you server_var(wcs_addhealth) bonus health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Your calloused flesh granted you server_var(wcs_addhealth) bonus health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 15
 	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 10
@@ -95,7 +95,7 @@ block hunger
 		wcs_log [Race]: Risen - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You've gained server_var(wcs_addhealth) HP from feasting on event_var(es_username)!
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen You've gained server_var(wcs_addhealth) HP from feasting on event_var(es_username)!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 	es_xmath wcs_z1 + 15
 	es est_effect 11 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 3 150
@@ -113,7 +113,7 @@ block rise
 	}
 	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
 	{
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen You'll rise from your grave where you died in 1.5 seconds!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen You'll rise from your grave where you died in 1.5 seconds!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_delayed 1.5 wcs_spawn event_var(userid) 1
 		es_delayed 1.6 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)

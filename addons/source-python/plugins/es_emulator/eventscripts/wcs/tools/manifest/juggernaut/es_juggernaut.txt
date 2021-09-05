@@ -14,7 +14,7 @@ block health
 		es wcs_setfx health event_var(userid) + 40 0
 		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_xmath wcs_addhealth + 40
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thick skinned - Increased your health by server_var(wcs_addhealth)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Thick skinned - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 100
@@ -66,7 +66,7 @@ block weapon_primary
 			es_delayed .2 wcs_drop event_var(userid) 1
 			es_delayed .5 es_give event_var(userid) weapon_xm1014
 			es_delayed .8 wcs_setfx 1stclip event_var(userid) = 50 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Armaments - You received a xm1014 with 50 bullets
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Armaments - You received a xm1014 with 50 bullets
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 35 120 2 20 10 1 10 255 0 255 1
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 135 220 2 20 10 1 10 255 0 255 1
@@ -119,7 +119,7 @@ block temporary_speed
 		wcs_log [Race]: Juggernaut - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx speed server_var(wcs_userid) = 2.25 3
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Rhino charge - Your speed was increased to 225% for 3 seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Rhino charge - Your speed was increased to 225% for 3 seconds
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 10
 	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 400 1 50 10 0 180 180 200 255 2

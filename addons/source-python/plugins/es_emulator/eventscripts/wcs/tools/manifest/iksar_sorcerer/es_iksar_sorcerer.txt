@@ -38,7 +38,7 @@ block spirit
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flaming spirit - Granted you server_var(wcs_addhealth) more health and server_var(wcs_speed)% extra speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Flaming spirit - Granted you server_var(wcs_addhealth) more health and server_var(wcs_speed)% extra speed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 40
 	es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 45 2 60 100 4 155 0 0 155 2
@@ -122,7 +122,7 @@ block time
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				es wcs_centertell server_var(wcs_userid) Time Rift slowed down server_var(wcs_count_players_actually_affected) enemies for 2 seconds
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Time rift - Slowed all enemies down to 75% movement speed for 2 seconds
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Time rift - Slowed all enemies down to 75% movement speed for 2 seconds
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 				es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 350 2 90 200 0 155 155 155 155 2
 			}
@@ -130,18 +130,18 @@ block time
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -191,19 +191,19 @@ block ultimate_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -228,7 +228,7 @@ block ultimate_final
 		es wcsgroup set is_slowed server_var(wcs_targetid) 1
 		es_delayed 2 wcsgroup set is_slowed server_var(wcs_targetid) 0
 		es wcs_setfx speed server_var(wcs_targetid) = .75 2
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Time rift - An Iksar Sorcerer slowed down the time for 2 seconds
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Time rift - An Iksar Sorcerer slowed down the time for 2 seconds
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
 		es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 350 2 90 200 0 155 155 155 155 2
 	}

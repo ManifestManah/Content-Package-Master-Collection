@@ -10,7 +10,7 @@ block cloak
 		wcs_log [Race]: Nightcrawler - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Night soul - You've become harder to see
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Night soul - You've become harder to see
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 40
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 250 190 3 128 100 1 155 115 100 200 3;es es_xgetplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -29,7 +29,7 @@ block longjump
 		wcs_log [Race]: Nightcrawler - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Night jump - Increased your jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Night jump - Increased your jump length
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 1 60 100 0.8 0 255 255 255 1
 	ifx true(wcs_race_debugging) do
@@ -83,7 +83,7 @@ block health
 		wcs_log [Race]: Nightcrawler - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Night pray - Your health was increased by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Night pray - Your health was increased by server_var(wcs_addhealth)
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 150
@@ -149,7 +149,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleporter - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleporter - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -251,7 +251,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleporter - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleporter - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

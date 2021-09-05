@@ -47,7 +47,7 @@ block regen
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_regeneration event_var(userid) 4 3 175 1000 1
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Penance - You'll heal yourself for 4 every third second when below 175 health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Penance - You'll heal yourself for 4 every third second when below 175 health
 	}
 	ifx true(wcs_race_debugging) do
 	{

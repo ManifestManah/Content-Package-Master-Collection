@@ -21,7 +21,7 @@ block spawn
 	es wcs_setfx health event_var(userid) = 1
 	es est_effect 4 #a 0 sprites/lgtning.vmt event_var(userid) 5 5 10 10 100 100 100 255
 	es wcsgroup set bconstruction event_var(userid) 25
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a small stone
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like a small stone
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Mini Stone - Builder Race - [Block] Spawn (END)
@@ -50,7 +50,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -66,7 +66,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Mini Stone - Builder Race - [Block] Skill: 2 (END)
@@ -86,8 +86,8 @@ block push
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es wcs_pushed event_var(userid) 0 0 400
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Push - You pushed your enemy
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Push - You got pushed by an enemy
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Push - You pushed your enemy
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Push - You got pushed by an enemy
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 				es est_effect 10 #a 0 effects/gunshiptracer.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 225 22
 				es est_effect 10 #a 0 effects/bluespark.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 .7 10 10 0 0 255 255 120 11
@@ -130,13 +130,13 @@ block build
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - You don't have any props left
 	}
 	if (server_var(wcs_tmp11) => 1) do	
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{

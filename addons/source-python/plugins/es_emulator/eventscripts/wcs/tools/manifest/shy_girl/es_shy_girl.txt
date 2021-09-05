@@ -83,7 +83,7 @@ block health
 		wcs_log [Race]: Shy Girl - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -102,7 +102,7 @@ block sacrifice
 	es playerget cash wcs_tmp1 server_var(wcs_userid)
 	if (server_var(wcs_tmp1) < server_var(wcs_money)) do
 	{
-		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sacrifice - Failed; not enough cash
+		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Sacrifice - Failed; not enough cash
 		if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	}
 	if (server_var(wcs_tmp1) >= server_var(wcs_money)) do
@@ -110,7 +110,7 @@ block sacrifice
 		es wcs_setfx cash server_var(wcs_userid) - server_var(wcs_money) 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
 		es_playsound server_var(wcs_userid) wcs/clearcast.mp3 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sacrifice - Received server_var(wcs_addhealth) health for server_var(wcs_money) gold
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Sacrifice - Received server_var(wcs_addhealth) health for server_var(wcs_money) gold
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 		es_xmath wcs_z2 + 8
 		es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 600 1 55 10 1 255 25 25 255 8

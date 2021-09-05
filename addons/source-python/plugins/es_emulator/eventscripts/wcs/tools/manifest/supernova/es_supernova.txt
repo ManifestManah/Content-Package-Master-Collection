@@ -264,7 +264,7 @@ block explosion
 	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
 	{
 		es_xrand wcs_dmg 15 50
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cosmic Explosion - Dealt server_var(wcs_dmg) to event_var(es_attackername)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Cosmic Explosion - Dealt server_var(wcs_dmg) to event_var(es_attackername)
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 60
 		es est_effect 11 #a 0 sprites/orangecore2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) .75 1 200
@@ -291,7 +291,7 @@ block health
 		wcs_log [Race]: Supernova - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Extended life cycle - Increased your health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Extended life cycle - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Supernova - [Block] Skill: 3 (END)

@@ -47,8 +47,8 @@ block lifeforce_exe
 	es_xrand wcs_addhealth 5 15
 	es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth) 0
 	es wcs_setfx health event_var(userid) - server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Life Force - You've channeled server_var(wcs_addhealth) health into your allies
-	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Life Force - You've channeled server_var(wcs_addhealth) health into your allies
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Life Force - You've channeled server_var(wcs_addhealth) health into your allies
+	es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Life Force - You've channeled server_var(wcs_addhealth) health into your allies
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -99,8 +99,8 @@ block revitalize_exe
 	}
 	es_xrand wcs_tmp1 75 150
 	es wcs_setfx health server_var(wcs_player) + server_var(wcs_tmp1) 3
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Revitalize - You've granted your team server_var(wcs_tmp1) health for 3 seconds
-	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Revitalize - You've received server_var(wcs_tmp1) health for 3 seconds!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Revitalize - You've granted your team server_var(wcs_tmp1) health for 3 seconds
+	es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Revitalize - You've received server_var(wcs_tmp1) health for 3 seconds!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_player)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_player)
 	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -127,7 +127,7 @@ block limbo
 		es_xmath wcs_phoenix + 1
 		es wcsgroup set phoenix event_var(attacker) server_var(wcs_phoenix) event_var(es_userteam)
 		es wcs_centertell event_var(attacker) You've dragged a soul out of Limbo!
-		es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Limbo - The first ally who dies will come back to life
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Limbo - The first ally who dies will come back to life
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -162,7 +162,7 @@ block drainsoul
 				es wcs_setfx longjump event_var(attacker) + server_var(wcs_tmp2) 0
 				es wcs_setfx speed event_var(attacker) + .04 0
 				es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_tmp2) 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Drain soul - Improved your vitality, speed, longjump & gravity
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Drain soul - Improved your vitality, speed, longjump & gravity
 				es playerget health wcs_tmp2 event_var(attacker)
 				if (server_var(wcs_tmp2) < 250) do
 				{
@@ -193,7 +193,7 @@ block deathpact
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xrand wcs_dmg 1 5
 	es damage server_var(wcs_userid) server_var(wcs_dmg) 1 server_var(wcs_userid)
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Death Pact - Consumed server_var(wcs_dmg) of your health!
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Death Pact - Consumed server_var(wcs_dmg) of your health!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z1 + 15

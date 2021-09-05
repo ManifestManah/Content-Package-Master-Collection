@@ -127,7 +127,7 @@ block bandage
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set resist_hegrenade event_var(userid) 1.0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bandage wrap - You cannot take damage from grenades	
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Bandage wrap - You cannot take damage from grenades	
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -147,7 +147,7 @@ block embalmed
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set resist_knife event_var(userid) 1.0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Embalmed skin - You are immune to knife damage
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Embalmed skin - You are immune to knife damage
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -226,13 +226,13 @@ block plague
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -271,7 +271,7 @@ block ultimate_checks
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}

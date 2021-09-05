@@ -56,7 +56,7 @@ block blooddemon_p90
 		es wcs_removeweapon event_var(userid) 1
 		es_delayed .2 es_give event_var(userid) weapon_p90
 		es_delayed .5 wcs_setfx 1stclip event_var(userid) + server_var(wcs_ammo) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen P90 - You received a P90 with server_var(wcs_ammo) more ammo
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen P90 - You received a P90 with server_var(wcs_ammo) more ammo
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -136,14 +136,14 @@ event player_death
 				{
 					es_xrand wcs_addhealth 30 40
 					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Upgrade - You received server_var(wcs_addhealth) bonus health
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Upgrade - You received server_var(wcs_addhealth) bonus health
 				}
 				else do
 				{
 					es_xrand wcs_speed 20 30
 					es_xmath wcs_speed / 100
 					es wcs_setfx speed event_var(attacker) + server_var(wcs_speed) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Upgrade - You gained some more speed!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Upgrade - You gained some more speed!
 				}
 			}
 			if (server_var(wcs_tmp3) == 1) do
@@ -153,7 +153,7 @@ event player_death
 				es_delayed .5 es_give event_var(attacker) weapon_m4a1
 				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
 				es wcs_drop event_var(attacker) 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Upgrade - You received a m4a1 with server_var(wcs_ammo) more ammo
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Upgrade - You received a m4a1 with server_var(wcs_ammo) more ammo
 			}
 			if (server_var(wcs_tmp3) == 0) do
 			{
@@ -162,7 +162,7 @@ event player_death
 				es_delayed .5 es_give event_var(attacker) weapon_ak47
 				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
 				es wcs_drop event_var(attacker) 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Upgrade - You received an AK47 with server_var(wcs_ammo) more ammo
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Upgrade - You received an AK47 with server_var(wcs_ammo) more ammo
 			}
 		}
 		ifx true(wcs_race_debugging) do
@@ -184,7 +184,7 @@ block mole
 		{
 			es wcs_domole event_var(userid) 4
 			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
 			es wcs_centertell event_var(userid) Warping to enemy spawn in 4 seconds!
 		}
 	}
@@ -206,7 +206,7 @@ block blooddemon_reset
 		es wcsgroup set blooddemon_upgraded server_var(wcs_userid) 0
 		es_delayed .2 wcs_spawn server_var(wcs_userid) 1
 		es_delayed .4 wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You have used reset!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Reset - You have used reset!
 		es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
@@ -223,7 +223,7 @@ block blooddemon_reset
 	}
 	if (server_var(wcs_tmp3) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Reset - You must kill someone first before you can reset!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Reset - You must kill someone first before you can reset!
 		es wcs_setcooldown server_var(wcs_userid) 0
 	}	
 	ifx true(wcs_race_debugging) do

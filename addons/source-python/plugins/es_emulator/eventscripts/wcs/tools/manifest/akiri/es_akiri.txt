@@ -82,7 +82,7 @@ block damage
 	{
 		es wcs_setfx attackspeed event_var(userid) = 2.2 0
 		es wcsgroup set is_attackspeed_altered event_var(userid) 1
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Katars - Your damage and attackspeed has been increased
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Katars - Your damage and attackspeed has been increased
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -97,7 +97,7 @@ block speed
 		wcs_log [Race]: Akiri - The Traitor - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen On the run - Gained server_var(wcs_speed)% speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen On the run - Gained server_var(wcs_speed)% speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Akiri - The Traitor - [Block] Skill: 2 (END)
@@ -124,13 +124,13 @@ block invis
 		ifx false(wcs_falldamage_compensation) do
 		{
 			es_delayed .5 wcsgroup set falldamage event_var(userid) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sneaky and agile - You've became harder to see and cannot take damage from falling
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Sneaky and agile - You've became harder to see and cannot take damage from falling
 		}
 		ifx true(wcs_falldamage_compensation) do
 		{
 			es_delayed .5 wcs_setfx health event_var(userid) + 25 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sneaky and agile - You've became harder to see
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Sneaky and agile - You've became harder to see
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 25 extra health
 		}
 	}
 	ifx true(wcs_race_debugging) do

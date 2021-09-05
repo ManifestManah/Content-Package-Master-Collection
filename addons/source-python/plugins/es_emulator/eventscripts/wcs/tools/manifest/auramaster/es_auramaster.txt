@@ -25,7 +25,7 @@ block unholy
 		wcs_log [Race]: Aura Master - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unholy Aura - Increased your speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Unholy Aura - Increased your speed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 10
 	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 4 2 0 255 100 0 255 0
@@ -42,7 +42,7 @@ block gravity
 		wcs_log [Race]: Aura Master - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Gravity Aura - Reduced your gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravity Aura - Reduced your gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Aura Master - [Block] Skill: 2 (END)

@@ -65,7 +65,7 @@ block invis
 		wcs_log [Race]: Dark Templar - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cloaking field - Became harder to see
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Cloaking field - Became harder to see
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Dark Templar - [Block] Skill: 2 (END)
@@ -79,7 +79,7 @@ block speed
 		wcs_log [Race]: Dark Templar - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Templar Achieves - Has increased your speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Templar Achieves - Has increased your speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Dark Templar - [Block] Skill: 3 (END)
@@ -125,13 +125,13 @@ block storm
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -170,7 +170,7 @@ block ultimate_checks
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -194,8 +194,8 @@ block ultimate_final
 		es_playsound server_var(wcs_targetid) ambient\explosions\explode_6.wav .7
 		es_playsound server_var(wcs_userid) ambient\explosions\explode_6.wav .7
 	}
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Psionic storm - Dealt server_var(wcs_dmg) damage to an enemy
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Psionic storm - Dealt server_var(wcs_dmg) damage to you	
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Psionic storm - Dealt server_var(wcs_dmg) damage to an enemy
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Psionic storm - Dealt server_var(wcs_dmg) damage to you	
 	es wcs_fade server_var(wcs_targetid) 0 0 220 180 1 1
 	es wcs_shake server_var(wcs_targetid) 10 25 1
 	es_playsound server_var(wcs_targetid) ambient\energy\zap9.wav 1

@@ -54,7 +54,7 @@ block speed
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Swift feet - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Swift feet - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Condemned Bandit - [Block] Skill: 1 (END)
@@ -68,7 +68,7 @@ block invis
 		wcs_log [Race]: Condemned Bandit - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 51 193 255 server_var(wcs_invis) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cunning movement - Made you less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Cunning movement - Made you less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Condemned Bandit - [Block] Skill: 2 (END)
@@ -210,7 +210,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenLeap of Faith - You leaped forward!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenLeap of Faith - You leaped forward!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -312,7 +312,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenLeap of Faith - You cannot leap that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenLeap of Faith - You cannot leap that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

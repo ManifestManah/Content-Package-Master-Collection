@@ -58,7 +58,7 @@ block wallclimb
 		wcs_log [Race]: Panorama - [Block] Skill: 1 (START)
 	}
 	es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize server_var(wcs_range)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wall climb - You can now climb over tall objects
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Wall climb - You can now climb over tall objects
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Panorama - [Block] Skill: 1 (END)
@@ -125,8 +125,8 @@ block rematch
 			es_delayed 1.5 wcs_spawn event_var(attacker) 1
 			es_delayed 1.5 wcs_teleport event_var(userid) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
 			es_delayed 1.5 wcs_teleport event_var(attacker) server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4)
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rematch - You called for a rematch
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Rematch - Panorama called for a rematch
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Rematch - You called for a rematch
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Rematch - Panorama called for a rematch
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -148,7 +148,7 @@ block zoom
 		es wcsgroup set panorama_zoom server_var(wcs_userid) 2
 		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_ifov server_var(wcs_duration)
 		es_cexec server_var(wcs_userid) r_screenoverlay sprites/reticle.vmt
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Zoom - You zoomed in
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Zoom - You zoomed in
 		es_playsound server_var(wcs_userid) items\nvg_on.wav .5
 		es_delayed .1 wcs_setcooldown server_var(wcs_userid) 0
 	}
@@ -157,7 +157,7 @@ block zoom
 		es wcsgroup set panorama_zoom server_var(wcs_userid) 1
 		es_setplayerprop server_var(wcs_userid) cbaseplayer.m_ifov 0
 		es_cexec server_var(wcs_userid) r_screenoverlay 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Zoom - You zoomed out
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Zoom - You zoomed out
 		es_playsound server_var(wcs_userid) items\nvg_off.wav .5	
 	}
 	ifx true(wcs_race_debugging) do

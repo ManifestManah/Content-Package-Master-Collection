@@ -35,7 +35,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ghost wolf - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Ghost wolf - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: WoW - Shaman - [Block] Skill: 1 (END)
@@ -96,7 +96,7 @@ block slow
 					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam #t
 				}
 				es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 325 "es_xdoblock wcs/tools/manifest/wow_shaman/earthbind"
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Earth binding totem - Temporarily slowed nearby enemies
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Earth binding totem - Temporarily slowed nearby enemies
 				es_playsound event_var(userid) wcs/tidetotem.mp3 .7
 				es_delayed .8 es_playsound event_var(userid) wcs/tidetotem.mp3 .7
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -126,7 +126,7 @@ block earthbind
 		es wcsgroup set is_slowed server_var(wcs_player) 1
 		es_delayed 1.5 wcsgroup set is_slowed server_var(wcs_player) 0
 		es wcs_setfx speed server_var(wcs_player) = .8 1.5
-		es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Earth binding totem - Temporarily slowed you 
+		es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Earth binding totem - Temporarily slowed you 
 		es_playsound server_var(wcs_player) wcs/tidetotem.mp3 .9
 		es_delayed .8 es_playsound server_var(wcs_player) wcs/tidetotem.mp3 .9
 	}
@@ -191,7 +191,7 @@ block explode
 				es_delayed .6 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 425 .5 65 10 0 255 20 30 120 3
 				
 				es wcs_centertell event_var(userid) Inferno Totem damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem affected server_var(wcs_count_players_actually_affected) enemies
 				es_xrand wcs_rand 1 3
 				if (server_var(wcs_rand) == 1) do
 				{
@@ -209,16 +209,16 @@ block explode
 		}
 		else do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, there are no living enemies!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, no nearby enemies!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - Failed, no nearby enemies!
 		}
 	}
 	else do
 	{
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Could not target an enemy team
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - Could not target an enemy team
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -266,18 +266,18 @@ block wcs_ulti_suicide_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's Inferno Totem
-								es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's Inferno Totem
+								es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, all nearby enemy targets were immune!
+								es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - Failed, all nearby enemy targets were immune!
 							}
 						}
 					}
 					else do
 					{
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Inferno Totem - Failed, you can't hit that many targets at once!
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Inferno Totem - Failed, you can't hit that many targets at once!
 					}
 				}
 			}

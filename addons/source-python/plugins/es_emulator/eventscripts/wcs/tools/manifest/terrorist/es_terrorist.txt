@@ -42,7 +42,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Training by Al-Qaeda - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Training by Al-Qaeda - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Terrorist - [Block] Skill: 1 (END)
@@ -168,7 +168,7 @@ block regen
 		wcs_log [Race]: Terrorist - [Block] Skill: 3 (START)
 	}
 	es_delayed 1.5 wcs_regeneration event_var(userid) server_var(wcs_gravity) 3 175 1000 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Stolen medical supplies - Recovering server_var(wcs_gravity) health every third second
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Stolen medical supplies - Recovering server_var(wcs_gravity) health every third second
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Terrorist - [Block] Skill: 3 (END)
@@ -182,7 +182,7 @@ block longjump
 		wcs_log [Race]: Terrorist - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Jumping exercises - Your jump length is increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Jumping exercises - Your jump length is increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Terrorist - [Block] Skill: 4 (END)
@@ -224,7 +224,7 @@ block bomb
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 325 "es_xdoblock wcs/tools/manifest/terrorist/wcs_ulti_suicide_ultimate_checks"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) You blew yourself up with your hidden C4 bomb
 				es_playsound server_var(wcs_userid) weapons\c4\c4_explode1.wav 1.0
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
@@ -238,18 +238,18 @@ block bomb
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -289,19 +289,19 @@ block wcs_ulti_suicide_ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}

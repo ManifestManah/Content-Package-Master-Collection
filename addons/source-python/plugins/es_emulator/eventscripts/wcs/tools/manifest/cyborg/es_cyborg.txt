@@ -51,7 +51,7 @@ block health
 		wcs_log [Race]: Cyborg - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -119,8 +119,8 @@ block anti_invisibility
 						if (event_var(es_userteam) = 3) then es_delayed .1 wcs_color event_var(userid) 0 255 0 255 1
 					}
 					es_delayed 2 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 1
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Anti-Invisibility - Turned you completely visible!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Anti-Invisibility - Made your enemy completely visible!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Anti-Invisibility - Turned you completely visible!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Anti-Invisibility - Made your enemy completely visible!
 					es_playsound event_var(userid) wcs/tidetotem.mp3 1
 					es_playsound event_var(attacker) wcs/tidetotem.mp3 .8
 				}
@@ -179,7 +179,7 @@ block cyborg_ultimate
 				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 225 "es_xdoblock wcs/tools/manifest/cyborg/wcs_ulti_suicide_ultimate_checks"
 				if (server_var(wcs_execute_ultimate) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
 					es wcs_centertell server_var(wcs_userid) The Explosion dealt 125 damage to server_var(wcs_count_players_actually_affected) enemies
 					es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .7
 					es_delayed .2 es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .6
@@ -190,24 +190,24 @@ block cyborg_ultimate
 			else do
 			{
 				es_xset wcs_ultinotexec 1
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 			}
 			if (server_var(wcs_counter) = 0) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 				es_xset wcs_ultinotexec 1
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 		}
 		if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	}
 	if (server_var(wcs_dice4) > server_var(wcs_chance)) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Overloading yourself failed!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Overloading yourself failed!
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -256,19 +256,19 @@ block wcs_ulti_suicide_ultimate_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}

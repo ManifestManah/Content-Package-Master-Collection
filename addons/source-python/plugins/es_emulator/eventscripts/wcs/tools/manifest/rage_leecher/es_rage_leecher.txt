@@ -55,7 +55,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -76,8 +76,8 @@ block anti_gravity
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es_delayed .2 wcs_setfx gravity event_var(userid) + 1.25 3
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Anti-Gravity - Turned your gravity up!
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Anti-Gravity - Turned up event_var(es_username)'s gravity!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Anti-Gravity - Turned your gravity up!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Anti-Gravity - Turned up event_var(es_username)'s gravity!
 				es_playsound event_var(userid) wcs/tidetotem.mp3 1
 				es_playsound event_var(attacker) wcs/tidetotem.mp3 .8
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -140,7 +140,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Rage Leecher - [Block] Skill: 4 (END)

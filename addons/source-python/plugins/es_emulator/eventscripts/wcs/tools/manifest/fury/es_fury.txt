@@ -160,7 +160,7 @@ block tremble
 		{
 			es wcsgroup set tremblingnade event_var(userid) 1
 			es_delayed .1 es_give event_var(userid) weapon_hegrenade
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Trembling earth - Throw the grenade to cause trembling in the earth
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Trembling earth - Throw the grenade to cause trembling in the earth
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -200,25 +200,25 @@ block embrace
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				//everything related to the wcs_userid
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Fury's Embrace affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Fury's Embrace affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Fury's Embrace caught server_var(wcs_count_players_actually_affected) enemies
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -258,19 +258,19 @@ block ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -296,7 +296,7 @@ block ultimate_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
@@ -379,7 +379,7 @@ event hegrenade_detonate
 		{
 			es_playsound event_var(userid) ambient\misc\rock2.wav 1
 		}
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Trembling earth - The earth is trembling beneath every enemy
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Trembling earth - The earth is trembling beneath every enemy
 		es_getplayerteam wcs_team event_var(userid)
 		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/manifest/fury/trembling" 
 		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/manifest/fury/trembling"

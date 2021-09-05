@@ -201,8 +201,8 @@ block evade
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion - Gives you server_var(wcs_chance)% chance to dodge incoming attacks
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion - You dodged server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion - Gives you server_var(wcs_chance)% chance to dodge incoming attacks
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Flame Dragon - [Block] Skill: 3 (END)
@@ -216,7 +216,7 @@ block health
 		wcs_log  [Race]: Flame Dragon - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 - 10
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 90 100 2 10 0 5 255 69 0 255 0
@@ -361,7 +361,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -463,7 +463,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

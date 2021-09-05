@@ -13,14 +13,14 @@ block spawn
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - You evaded server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Granted you server_var(wcs_tmp9) chance to evade
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion strategy - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion strategy - Granted you server_var(wcs_tmp9) chance to evade
 	es wcsgroup get killing_speed wcs_tmp8 event_var(userid)
 	es_xmath wcs_tmp8 / 50
 	es_xmath wcs_tmp8 + 1	
 	es wcs_setfx speed event_var(userid) = server_var(wcs_tmp8) 0
 	es_xmath wcs_tmp8 * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Adrenaline - Increased your speed by server_var(wcs_tmp8)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Adrenaline - Increased your speed by server_var(wcs_tmp8)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Killing Machine - [Block] Spawn (END)
@@ -77,7 +77,7 @@ block damage_increasing
 					es_math wcs_dmg + server_var(wcs_tmp10)
 					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
 					es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Platinium Bullets - Upgraded, now dealing 1 more damage.
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Platinium Bullets - Upgraded, now dealing 1 more damage.
 				}
 				if (server_var(wcs_tmp10) => 40) do
 				{
@@ -86,7 +86,7 @@ block damage_increasing
 					es_math wcs_dmg + server_var(wcs_tmp10)
 					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
 					es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Platinium Bullets - Cannot be upgraded any further.
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Platinium Bullets - Cannot be upgraded any further.
 				}
 			}
 		}
@@ -117,14 +117,14 @@ block evasion_increasing
 					es wcsgroup set killing_evading event_var(userid) server_var(wcs_tmp9)
 					es wcsgroup set evasion event_var(userid) 1
 					es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Increased your chance to dodge by 1%.
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion strategy - Increased your chance to dodge by 1%.
 				}
 				if (server_var(wcs_tmp9) => 20) do
 				{
 					es wcsgroup get killing_evading wcs_tmp9 event_var(userid)
 					es wcsgroup set evasion event_var(userid) 1
 					es wcsgroup set evasion_chance event_var(userid) server_var(wcs_tmp9)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion strategy - Cannot be upgraded any further.
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion strategy - Cannot be upgraded any further.
 				}
 			}
 		}
@@ -156,7 +156,7 @@ block speed_increasing
 					es_xmath wcs_tmp8 / 50
 					es_xmath wcs_tmp8 + 1
 					es wcs_setfx speed event_var(attacker) = server_var(wcs_tmp8) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Adrenaline - Increased your speed by 2%.
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Adrenaline - Increased your speed by 2%.
 				}
 				if (server_var(wcs_tmp8) => 40) do
 				{
@@ -164,7 +164,7 @@ block speed_increasing
 					es_xmath wcs_tmp8 / 50
 					es_xmath wcs_tmp8 + 1
 					es wcs_setfx speed event_var(attacker) = server_var(wcs_tmp8) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Adrenaline - Cannot be upgraded any further.
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Adrenaline - Cannot be upgraded any further.
 				}
 			}
 		}

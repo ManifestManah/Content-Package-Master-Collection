@@ -67,7 +67,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Quick steps - Set your speed to server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Quick steps - Set your speed to server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Cazzie - The Marksman - [Block] Skill: 1 (END)
@@ -91,8 +91,8 @@ block piercer
 				{
 					es wcsgroup set fleshripperbullet event_var(attacker) 0
 					es damage event_var(userid) 35 1 event_var(attacker)
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Flesh ripper - Dealt 35 additional damage
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flesh ripper - Took 35 additional damage
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Flesh ripper - Dealt 35 additional damage
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flesh ripper - Took 35 additional damage
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 25
@@ -175,8 +175,8 @@ block impairing
 							es wcsgroup set is_slowed event_var(userid) 1
 							es_delayed 1.5 wcsgroup set is_slowed event_var(userid) 0
 							es wcs_setfx speed event_var(userid) = .8 1.5
-							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You slowed down your target
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were slowed down by an enemy
+							es_tell event_var(attacker) #multi #green [WCS]#lightgreen Impairing bullet - You slowed down your target
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen Impairing bullet - You were slowed down by an enemy
 						}
 					}
 					if (server_var(wcs_rand) == 2) do
@@ -187,8 +187,8 @@ block impairing
 							es wcsgroup set is_frozen event_var(userid) 1
 							es_delayed .5 wcsgroup set is_frozen event_var(userid) 0
 							es wcs_setfx freeze event_var(userid) = 1 .5
-							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You briefly froze target
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were briefly frozen by an enemy
+							es_tell event_var(attacker) #multi #green [WCS]#lightgreen Impairing bullet - You briefly froze target
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen Impairing bullet - You were briefly frozen by an enemy
 						}
 					}
 				}
@@ -202,8 +202,8 @@ block impairing
 					if (server_var(wcs_rand) == 1) do
 					{
 						es wcs_setfx speed event_var(userid) = .8 1.5
-						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You slowed down your target
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were slowed down by an enemy
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Impairing bullet - You slowed down your target
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Impairing bullet - You were slowed down by an enemy
 					}
 					if (server_var(wcs_rand) == 2) do
 					{
@@ -213,8 +213,8 @@ block impairing
 							es wcsgroup set is_frozen event_var(userid) 1
 							es_delayed .5 wcsgroup set is_frozen event_var(userid) 0
 							es wcs_setfx freeze event_var(userid) = 1 .5
-							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Impairing bullet - You briefly froze target
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen Impairing bullet - You were briefly frozen by an enemy
+							es_tell event_var(attacker) #multi #green [WCS]#lightgreen Impairing bullet - You briefly froze target
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen Impairing bullet - You were briefly frozen by an enemy
 						}
 					}
 				}
@@ -247,7 +247,7 @@ block nofall
 			{
 				es_delayed .5 wcs_setfx health event_var(userid) + 25 0
 				es_tell event_var(userid) #lightgreen Gravitational device - Reduced your gravity
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 25 extra health
 			}
 		}
 	}
@@ -272,7 +272,7 @@ block fleshripper
 	{
 		es wcsgroup set fleshripperbullet server_var(wcs_userid) 1
 		es_delayed 2 wcsgroup set fleshripperbullet server_var(wcs_userid) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Flesh ripper - Shoot at an enemy to rip their flesh
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Flesh ripper - Shoot at an enemy to rip their flesh
 	}
 	ifx true(wcs_race_debugging) do
 	{

@@ -153,7 +153,7 @@ block teleflashbangs
 		es_log [Race]: Hell Hunter - [Block] Skill: 2 (START)
 	}
 	es wcsgroup set hellhunter_flashbangs event_var(userid) server_var(wcs_ammo)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Teleport flashbangs - You've received server_var(wcs_ammo) flashbangs
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Teleport flashbangs - You've received server_var(wcs_ammo) flashbangs
 	es_delayed .1 es_give event_var(userid) weapon_flashbang
 	ifx true(wcs_race_debugging) do
 	{
@@ -171,7 +171,7 @@ event flashbang_detonate
 			es_log [Race]: Hell Hunter - [Block] Event Flashbang_Detonate (START)
 		}
 		es_delayed .05 wcs_teleport event_var(userid) event_var(x) event_var(y) event_var(z)
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Teleport flashbangs - You've teleported
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Teleport flashbangs - You've teleported
 		es_give event_var(userid) weapon_flashbang
 		ifx true(wcs_race_debugging) do
 		{
@@ -193,12 +193,12 @@ block antifalldamage
 			ifx false(wcs_falldamage_compensation) do
 			{
 				es_delayed .5 wcsgroup set falldamage event_var(userid) 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Anti-falldamage - You wont take damage when falling
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Anti-falldamage - You wont take damage when falling
 			}
 			ifx true(wcs_falldamage_compensation) do
 			{
 				es_delayed .5 wcs_setfx health event_var(userid) + 25 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 25 extra health
 			}
 		}
 	}
@@ -225,7 +225,7 @@ block dualrapidfire
 		es_xmath wcs_z10 + 2
 		es_give server_var(wcs_userid) weapon_flashbang
 		es wcsgroup set hellhunter_flashbangs server_var(wcs_userid) server_var(wcs_z10)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dual rapid fire - Granted you two teleport flashbang
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dual rapid fire - Granted you two teleport flashbang
 	}
 	ifx true(wcs_race_debugging) do
 	{

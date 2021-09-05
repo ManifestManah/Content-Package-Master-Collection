@@ -26,7 +26,7 @@ block spawn
 	es_delayed .1 es_give event_var(userid) weapon_knife
 	es_delayed .1 es_cexec event_var(userid) r_screenoverlay r_screenoverlay effects/flicker_256.vmt
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .6 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Xenomorph - The Matriarch demands you: Defeat your enemies!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Xenomorph - The Matriarch demands you: Defeat your enemies!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Xenomorph - [Block] Spawn (END)
@@ -68,7 +68,7 @@ block armour_health
 	}
 	es_delayed 1 wcs_setfx armor event_var(userid) = 110 0
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hardened Carapace - Increased your armor and health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Hardened Carapace - Increased your armor and health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Xenomorph - [Block] Skill: 1 (END)
@@ -82,7 +82,7 @@ block leech_health_on_kill
 		wcs_log [Race]: Xenomorph - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Devour - Gave you server_var(wcs_addhealth) health
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Devour - Gave you server_var(wcs_addhealth) health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 15
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 320 65 1 30 10 0 128 0 0 175 15
@@ -102,7 +102,7 @@ block speed
 	es_delayed .2 wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Serpent agility - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Serpent agility - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Xenomorph - [Block] Skill: 3 (END)
@@ -210,7 +210,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenLeap - You leaped!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenLeap - You leaped!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -312,7 +312,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenLeap - You cannot leap that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenLeap - You cannot leap that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

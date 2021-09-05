@@ -32,7 +32,7 @@ block invisibility
  	es_xmath wcs_invis / -2.55
 	es_xmath wcs_invis + 100
     es wcs_decimal wcs_invis server_var(wcs_invis)
-    es_tell event_var(userid) #multi #green[WCS]#lightgreen Invisibility - You spawned with server_var(wcs_invis)% invisibility
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You spawned with server_var(wcs_invis)% invisibility
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Human Alliance Expert - [Block] Skill: 1 (END)
@@ -46,7 +46,7 @@ block devotion
 		wcs_log [Race]: Human Alliance Expert - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green[WCS]#lightgreen Devotion aura - Increased your health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Devotion aura - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Human Alliance Expert - [Block] Skill: 2 (END)
@@ -151,7 +151,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -253,7 +253,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

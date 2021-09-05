@@ -41,7 +41,7 @@ block shift
 				}
 				es_xrand wcs_dmg 20 30
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Arcane shift - Dealt server_var(wcs_dmg) extra damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Arcane shift - Dealt server_var(wcs_dmg) extra damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 50
@@ -99,8 +99,8 @@ block petrify
 					es_delayed .5 wcsgroup set is_paralyzed event_var(userid) 0
 					es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
 					es_delayed .5 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Petrify - Paralysed event_var(es_username) for a half second
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Petrify - Paralysed you for a half second
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Petrify - Paralysed event_var(es_username) for a half second
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Petrify - Paralysed you for a half second
 					es_getgame wcs_gamecheck
 					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 					{
@@ -128,7 +128,7 @@ block health
 		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Chaos waves - Increased your health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Chaos waves - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Chaos Lord Iadoa - [Block] Skill: 3 (END)
@@ -215,8 +215,8 @@ block beam
 				es_delayed .6 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 110 80 0.5 5 50 30 0 0 0 255 15
 				es_delayed 1 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 110 140 0.25 5 50 30 159 0 255 255 15
 				es_delayed 1 est_effect 10 #a 0 effects/blood_core.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 50 0.25 5 50 30 159 0 255 255 15
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage onto you
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Devastating beam - Reflected server_var(wcs_dmg) damage onto you
 				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
 			}
 		}

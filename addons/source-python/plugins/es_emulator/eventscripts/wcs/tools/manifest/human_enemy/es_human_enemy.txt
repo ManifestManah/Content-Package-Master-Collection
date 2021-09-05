@@ -14,7 +14,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Usain bolt speed - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Usain bolt speed - Increased your speed by server_var(wcs_speed)%
 		es_playsound event_var(userid) wcs/speed.mp3 .7
 		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt 50 0 900 10 1400 2 60 10 1.8 51 234 249 200 2
 		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt 100 0 900 10 1400 2 60 10 5 232 68 194 200 2
@@ -152,8 +152,8 @@ block fire_damage
 					es_delayed 2 wcsgroup set is_burning event_var(userid) 0
 					es wcsgroup set fire_owner event_var(userid) event_var(attacker)
 					es wcs_setfx burn event_var(userid) = 1 2
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Belgian Summer Burn - Burnt you for 2 seconds
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Belgian Summer Burn - Burnt your enemy for 2 seconds
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Belgian Summer Burn - Burnt you for 2 seconds
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Belgian Summer Burn - Burnt your enemy for 2 seconds
 					es_playsound event_var(attacker) skills/breathfire.mp3 .7
 					es_playsound event_var(userid) skills/breathfire.mp3 .9
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -258,7 +258,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenX-Teleport - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -360,7 +360,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenX-Teleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

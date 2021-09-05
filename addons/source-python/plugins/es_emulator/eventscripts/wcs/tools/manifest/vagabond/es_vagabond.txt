@@ -73,7 +73,7 @@ block speed
 		wcs_log [Race]: Vagabond - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Adrenaline - Has increased your speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Adrenaline - Has increased your speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Vagabond - [Block] Skill: 1 (END)
@@ -87,7 +87,7 @@ block gravity
 		wcs_log [Race]: Vagabond - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Vagabond - [Block] Skill: 2 (END)
@@ -104,7 +104,7 @@ block flicker
 	{
 		es_fire event_var(userid) !self addoutput "renderfx 13"
 		es wcsgroup set vaga_shadows event_var(userid) 1
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fading shadows - Made you flickering invisible
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Fading shadows - Made you flickering invisible
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -245,7 +245,7 @@ block ultimate
 		es wcs_color server_var(wcs_userid) 255 255 255 0 0
 		es_delayed 1 wcs_setfx freeze server_var(wcs_userid) = 1 0
 		es wcs_setcooldown server_var(wcs_userid) 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frozen Invisible - You're now frozen invisible
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're now frozen invisible
 
 	    es_xset wcs_ok 1
 
@@ -433,7 +433,7 @@ block ultimate
 		es wcsgroup set vaga server_var(wcs_userid) 1
 		es wcs_color server_var(wcs_userid) 255 255 255 255 1
 		es wcs_setfx freeze server_var(wcs_userid) = 0 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frozen Invisible - You're no longer frozen invisible
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're no longer frozen invisible
 		es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
 		if (server_var(wcs_tmp6) = 1) do
 		{

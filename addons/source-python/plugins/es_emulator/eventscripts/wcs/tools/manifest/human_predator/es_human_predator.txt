@@ -13,7 +13,7 @@ block speed_health
 	es wcs_setfx health event_var(userid) + 30 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Conditioning - Increased your speed and health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Conditioning - Increased your speed and health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Human Predator - [Block] Skill: 1 (END)
@@ -37,8 +37,8 @@ block drug
 				es_delayed 1 wcs_fade event_var(userid) 0 0 255 175 1 1
 				es_delayed 1.5 wcs_fade event_var(userid) 150 0 155 155 1 1
 				es_delayed 2 wcs_fade event_var(userid) 0 155 155 155 1 1
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Drug - You drugged your enemy
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Drug - You have been drugged
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Drug - You drugged your enemy
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Drug - You have been drugged
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z2 + 15
 				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 175 20 1 14 10 .3 255 0 255 250 3
@@ -71,8 +71,8 @@ block anti_invisibility
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es wcs_color event_var(userid) 255 255 255 255 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reflex - You made the attacker visible!
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Reflex - A Human Predator turned you visible!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Reflex - You made the attacker visible!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Reflex - A Human Predator turned you visible!
 				es_playsound event_var(userid) wcs/tidetotem.mp3 1
 				es_playsound event_var(attacker) wcs/tidetotem.mp3 .8
 			}
@@ -146,7 +146,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -248,7 +248,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

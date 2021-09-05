@@ -45,8 +45,8 @@ block blind
 			{
 				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 				es_delayed .75 es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Dark Void - Made your enemy fall asleep for 0.75 seconds
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dark Void - Put you to sleep for 0.75 seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Dark Void - Made your enemy fall asleep for 0.75 seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Dark Void - Put you to sleep for 0.75 seconds
 			}
 		}
 	}
@@ -106,8 +106,8 @@ block evade
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Team - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Team - Grants you server_var(wcs_chance)% chance to dodge an attack
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Double Team - You dodged server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Double Team - Grants you server_var(wcs_chance)% chance to dodge an attack
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Darkrai - [Block] Skill: 3 (END)

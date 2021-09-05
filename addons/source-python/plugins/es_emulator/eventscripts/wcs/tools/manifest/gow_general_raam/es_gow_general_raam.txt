@@ -54,8 +54,8 @@ block evade
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evasion - Gives you server_var(wcs_chance)% chance to dodge incoming attacks
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion - You dodged server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Evasion - Gives you server_var(wcs_chance)% chance to dodge incoming attacks
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: General RAAM (Gears of War) - [Block] Skill: 1 (END)
@@ -217,13 +217,13 @@ block kryll_swarm
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -262,7 +262,7 @@ block ultimate_checks_kryll_swarm
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -284,23 +284,23 @@ block ultimate_kryll_swarm_final
 	if (server_var(wcs_tmp1) >= 125) do
 	{
 		es wcs_setfx health server_var(wcs_userid) = 125 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Kryll swarm - Your health has reached the cap
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Kryll swarm - Your health has reached the cap
 	}
 	if (server_var(wcs_tmp1) < 125) do
 	{
 		es wcs_setfx health server_var(wcs_userid) + 25 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Kryll swarm - ranted you 25 extra health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Kryll swarm - ranted you 25 extra health
 	}
 	es playerget armor wcs_tmp2 server_var(wcs_userid)
 	if (server_var(wcs_tmp2) >= 250) do
 	{
 		es wcs_setfx armor server_var(wcs_userid) = 250 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Kryll swarm - Your armor has reached the cap
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Kryll swarm - Your armor has reached the cap
 	}
 	if (server_var(wcs_tmp2) < 250) do
 	{
 		es wcs_setfx armor server_var(wcs_userid) + 25 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Kryll swarm - Granted you 25 extra armour
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Kryll swarm - Granted you 25 extra armour
 	}
 	es damage server_var(wcs_targetid) 25 1 server_var(wcs_userid)
 	es wcs_centertell server_var(wcs_userid) You've released a Kryll swarm onto an enemy!

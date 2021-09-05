@@ -109,7 +109,7 @@ block armor
 		es wcsgroup set evasion event_var(userid) 1
 		es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
 	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-	    es_tell event_var(userid) #multi #green [WCS]: #lightgreenEvasion - You evaded server_var(wcs_tmp1) attacks last round
+	    es_tell event_var(userid) #multi #green [WCS]#lightgreenEvasion - You evaded server_var(wcs_tmp1) attacks last round
 		es wcs_fade event_var(userid) 55 55 155 200 1 1
 	}
 	ifx true(wcs_race_debugging) do
@@ -135,8 +135,8 @@ block pull
 				es_xmath wcs_z1 + 5
 				es_createvectorstring wcs_tmp server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es wcs_pushto event_var(attacker) server_var(wcs_tmp) 2
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Singularity - Pulled you towards event_var(es_username)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Singularity - Pulled event_var(es_attackername) towards you
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Singularity - Pulled you towards event_var(es_username)
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Singularity - Pulled event_var(es_attackername) towards you
 				es wcs_fade event_var(attacker) 155 25 255 200 1 1
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do

@@ -121,8 +121,8 @@ stunned
 		es_setplayerprop server_var(wcs_player) CBasePlayer.m_fFlags 64
 		es_delayed .5 es_setplayerprop server_var(wcs_player) CBasePlayer.m_fFlags 131329
 		es wcs_centertell server_var(wcs_player) Storm bolt stunned you for 0.5 second!
-		es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Storm bolt - Stunned your targets for 0.5 seconds
-		es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Storm bolt - You were stunned for 0.5 second
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Storm bolt - Stunned your targets for 0.5 seconds
+		es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Storm bolt - You were stunned for 0.5 second
 		es_playsound event_var(attacker) wcs/lightning.mp3 .7
 		es_playsound server_var(wcs_player) wcs/lightning.mp3 .9
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -181,8 +181,8 @@ block damaged
 	es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
 	es_xrand wcs_dmg 8 16
 	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 event_var(attacker)
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Great cleave - You dealt + server_var(wcs_dmg) damage
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Great cleave - You received server_var(wcs_dmg) damage
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Great cleave - You dealt + server_var(wcs_dmg) damage
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Great cleave - You received server_var(wcs_dmg) damage
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hammerstorm - [Block] Skill: 2 (DAMAGED EXECUTED END)
@@ -199,7 +199,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Warcry - Granted you 50 armor and server_var(wcs_speed)% more speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Warcry - Granted you 50 armor and server_var(wcs_speed)% more speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hammerstorm - [Block] Skill: 3 (END)

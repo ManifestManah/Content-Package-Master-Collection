@@ -64,7 +64,7 @@ block bounce
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier)
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Electricity bounce reduced your gravity and increased your jump lenght! 
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Electricity bounce reduced your gravity and increased your jump lenght! 
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 61 2 60 100 0.8 0 20 100 255 1
 	ifx true(wcs_race_debugging) do
@@ -98,8 +98,8 @@ block unstable
 				}
 				es wcs_pushed event_var(attacker) 0 0 80
 				es_delayed .2 wcs_pushed event_var(attacker) 100 0 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen event_var(es_username)'s Unstable electric armor electrified you!
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unstable electric armor electrified event_var(es_attackername)!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen event_var(es_username)'s Unstable electric armor electrified you!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Unstable electric armor electrified event_var(es_attackername)!
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 40
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 230 130 1 128 100 0 155 115 100 200 5
@@ -152,7 +152,7 @@ block strike
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				//everything related to the wcs_userid
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Lightning Strike struck server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Lightning Strike struck server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Your Lightning Strike dealt server_var(wcs_dmg) damage
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -168,18 +168,18 @@ block strike
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -229,19 +229,19 @@ block ultimate_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}

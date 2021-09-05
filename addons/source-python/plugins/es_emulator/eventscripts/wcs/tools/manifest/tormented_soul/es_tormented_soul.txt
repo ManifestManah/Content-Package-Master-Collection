@@ -171,7 +171,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dead man walking - Able to climb objects and server_var(wcs_speed)% increased speed
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Dead man walking - Able to climb objects and server_var(wcs_speed)% increased speed
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -227,7 +227,7 @@ block immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set ulti_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Uncontrollable - Granted immunity to ultimates
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Uncontrollable - Granted immunity to ultimates
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -247,7 +247,7 @@ block lust
 	es wcs_setfx gravity server_var(wcs_userid) = server_var(wcs_gravity) 3
 	es_xmath wcs_gravity * 100
 	es_xmath wcs_speed * 100
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Lust of the damned - Granted server_var(wcs_speed)% speed and server_var(wcs_gravity)% less gravity for 3 seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Lust of the damned - Granted server_var(wcs_speed)% speed and server_var(wcs_gravity)% less gravity for 3 seconds
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 15 .3 18 10 0 255 255 255 255 1
 	es_delayed .1 est_effect 10 #a 0 cs_italy/black.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 250 15 .3 18 10 1 255 255 255 255 1

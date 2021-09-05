@@ -71,8 +71,8 @@ block evade
 		es wcsgroup set evasion event_var(userid) 1
 		es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
 	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-	    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wild card - You evaded server_var(wcs_tmp1) attacks last round
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wild card - You have server_var(wcs_chance)% chance to evade
+	    es_tell event_var(userid) #multi #green [WCS]#lightgreen Wild card - You evaded server_var(wcs_tmp1) attacks last round
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Wild card - You have server_var(wcs_chance)% chance to evade
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 130
@@ -104,14 +104,14 @@ block leech_cash
 				es playerget cash wcs_tmp1 event_var(userid)
 				if (server_var(wcs_tmp1) < server_var(wcs_money)) do
 				{
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Striking luck - Failed, the target doesn't have enough cash
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Striking luck - Failed, the target doesn't have enough cash
 				}
 				if (server_var(wcs_tmp1) >= server_var(wcs_money)) do
 				{
 					es wcs_setfx cash event_var(userid) - server_var(wcs_money) 0
 					es wcs_setfx cash event_var(attacker) + server_var(wcs_money) 0
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Striking luck - You stole server_var(wcs_money) from event_var(es_username)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Striking luck - Lucky Strike stole server_var(wcs_money)$ from you
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Striking luck - You stole server_var(wcs_money) from event_var(es_username)
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Striking luck - Lucky Strike stole server_var(wcs_money)$ from you
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 40
@@ -138,7 +138,7 @@ block ultimate_immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set ulti_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Joker - Renders you immune to enemy ultimates
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Joker - Renders you immune to enemy ultimates
 			es_playsound event_var(userid) wcs/divine.mp3 .8
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 7 225

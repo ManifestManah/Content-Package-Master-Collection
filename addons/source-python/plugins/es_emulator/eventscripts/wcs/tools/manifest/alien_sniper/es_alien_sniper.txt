@@ -71,7 +71,7 @@ block longjump
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Jumonian boosters - Made you able to jump further
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Jumonian boosters - Made you able to jump further
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 2 (END)
@@ -85,7 +85,7 @@ block invis
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 3 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 3 (END)
@@ -135,8 +135,8 @@ block secdrop
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 4 (SECDROP EXECUTED START)
 	}
 	es wcs_drop event_var(userid) 2
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zona blaster - You were forced to drop your secondary weapon
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Zona blaster - You forced the target to drop his secondary weapon
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Zona blaster - You were forced to drop your secondary weapon
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Zona blaster - You forced the target to drop his secondary weapon
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 4 (SECDROP EXECUTED END)
@@ -150,8 +150,8 @@ block pdrop
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 4 (PDROP EXECUTED START)
 	}
 	es wcs_drop event_var(userid) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zona blaster - You were forced to drop your primary weapon
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Zona blaster - You forced the target to drop his primary weapon
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Zona blaster - You were forced to drop your primary weapon
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Zona blaster - You forced the target to drop his primary weapon
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 4 (PDROP EXECUTED END)
@@ -166,8 +166,8 @@ block doubledrop
 	}
 	es wcs_drop event_var(userid) 1
 	es wcs_drop event_var(userid) 2
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zona blaster - You were forced to drop both of your guns
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Zona blaster - You've forced the target to drop his guns
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Zona blaster - You were forced to drop both of your guns
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Zona blaster - You've forced the target to drop his guns
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Alien Sniper - [Block] Skill: 4 (DOUBLEDROP EXECUTED END)
@@ -236,7 +236,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenHookian sling - Pulled you through the air!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenHookian sling - Pulled you through the air!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -338,7 +338,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenHookian sling - Pulld you through the air!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenHookian sling - Pulld you through the air!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

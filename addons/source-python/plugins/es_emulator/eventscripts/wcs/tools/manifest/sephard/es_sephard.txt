@@ -67,7 +67,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Exercise - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Exercise - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Sephard - [Block] Skill: 2 (END)
@@ -81,7 +81,7 @@ block jump
 		wcs_log [Race]: Sephard - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Overqualified - Your jump length is increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Overqualified - Your jump length is increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Sephard - [Block] Skill: 3 (END)

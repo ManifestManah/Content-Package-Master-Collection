@@ -16,13 +16,13 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
 		es_delayed .1 es_give event_var(userid) weapon_tmp
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weaponry - You received a TMP and you cannot use other firearms.
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Weaponry - You received a TMP and you cannot use other firearms.
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 		es_delayed .1 es_give event_var(userid) weapon_mp7
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weaponry - You received a Mp7 and you cannot use other firearms.
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Weaponry - You received a Mp7 and you cannot use other firearms.
 	}
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 120 1 60 10 8 170 102 51 75 3
@@ -44,7 +44,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Move quickly - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Move quickly - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Soul - [Block] Skill: 1 (END)
@@ -61,7 +61,7 @@ block invis
  	es_xmath wcs_invis / -2.55
 	es_xmath wcs_invis + 100
     es wcs_decimal wcs_invis server_var(wcs_invis)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Stealth - You've become server_var(wcs_invis)% invisible!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Stealth - You've become server_var(wcs_invis)% invisible!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Soul - [Block] Skill: 2 (END)
@@ -168,7 +168,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -270,7 +270,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

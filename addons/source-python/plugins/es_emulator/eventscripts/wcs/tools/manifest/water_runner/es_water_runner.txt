@@ -79,7 +79,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Water running - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Water running - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -103,7 +103,7 @@ block debuff
 				es wcsgroup set waterrunner_user event_var(userid) 1
 			}
 			es wcsgroup set is_slowed event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Aquaplaning - Reduces or remove, all slow buffs from yourself while running
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Aquaplaning - Reduces or remove, all slow buffs from yourself while running
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -213,8 +213,8 @@ block mark
 				{
 					es_xmath wcs_tmp6 + 1
 					es wcsgroup set wcs_tmp6 event_var(userid) server_var(wcs_tmp6)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Water mark - A water runner applied a water mark onto you
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Water mark - You applied a water mark onto your target
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Water mark - A water runner applied a water mark onto you
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Water mark - You applied a water mark onto your target
 					es_xrand wcs_rand 1 2
 					if (server_var(wcs_rand) == 1) then es_playsound event_var(userid) ambient\water\water_splash2.wav .6
 					if (server_var(wcs_rand) == 2) then es_playsound event_var(userid) ambient\water\water_splash3.wav .7
@@ -264,7 +264,7 @@ block wave
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/water_runner/ultimate_checks"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Waves of desolation hit server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Waves of desolation hit server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Waves of desolation did server_var(wcs_dmg) damage to server_var(wcs_count_players_actually_affected) enemies
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -283,18 +283,18 @@ block wave
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -334,19 +334,19 @@ block ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -457,7 +457,7 @@ event player_spawn
 			wcs_log [Race]: Uteri - The Water Runner - [Block] Event Player_Spawn (START)
 		}
 		es wcsgroup set waterrunner_mark event_var(userid) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Water Mark - All applied water marks has been removed from you
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Water Mark - All applied water marks has been removed from you
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 128
 		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.5 2 175

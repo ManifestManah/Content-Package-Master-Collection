@@ -25,7 +25,7 @@ block spawn
 	es wcsgroup set ulti_immunity event_var(userid) 0
 	es_delayed .1 es_give event_var(userid) weapon_knife
 	es_delayed .1 es_give event_var(userid) weapon_famas
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Solid Snake - You can only USP, Famas, Knife & Nades
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Solid Snake - You can only USP, Famas, Knife & Nades
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Solid Snake - [Block] Spawn (END)
@@ -66,7 +66,7 @@ block extendedclips
 	}
 	es_delayed .5 wcs_setfx 1stclip event_var(userid) + server_var(wcs_gravity) 0
 	es_delayed .5 wcs_setfx 2ndclip event_var(userid) + server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ammo - Increased your ammo clips
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Ammo - Increased your ammo clips
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Solid Snake - [Block] Skill: 1 (END)
@@ -80,7 +80,7 @@ block invisibility
 		wcs_log [Race]: Solid Snake - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -99,7 +99,7 @@ block ultimate_immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set ulti_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ultimate immunity - Renders you immune to enemy ultimates
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Ultimate immunity - Renders you immune to enemy ultimates
 			es_playsound event_var(userid) wcs/divine.mp3 .8
 		}
 	}
@@ -124,7 +124,7 @@ block godmode_box
 		es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
 		es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
 		es wcs_color event_var(userid) 0 255 0 255 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Box Trick - Your hiding in a cardboard box for 3 seconds
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Box Trick - Your hiding in a cardboard box for 3 seconds
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{
@@ -149,7 +149,7 @@ block godmode_box
 		es_delayed 3 wcsgroup set is_paralyzed server_var(wcs_userid) 0
 		es_delayed 3 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
 		es_delayed 3 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 0
-		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Box Trick - Coast seems clear, you've exited the box
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Box Trick - Coast seems clear, you've exited the box
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)

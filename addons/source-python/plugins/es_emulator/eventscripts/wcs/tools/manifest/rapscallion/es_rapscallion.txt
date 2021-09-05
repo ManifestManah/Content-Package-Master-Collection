@@ -76,7 +76,7 @@ block shadows
 		if (event_var(es_userdead) = 0) do
 		{
 			es_fire event_var(userid) !self addoutput "renderfx 13"
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Flickering shadows - Made you flickering invisible
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Flickering shadows - Made you flickering invisible
 			es wcsgroup set raps_shadows event_var(userid) 1
 		}
 	}
@@ -95,7 +95,7 @@ block adrenaline
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Adrenaline - Increased your movement
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Adrenaline - Increased your movement
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -154,7 +154,7 @@ block levitation
 		wcs_log [Race]: Rapscallion - [Block] Skill: 4 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Has reduced your gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Has reduced your gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Rapscallion - [Block] Skill: 4 (END)

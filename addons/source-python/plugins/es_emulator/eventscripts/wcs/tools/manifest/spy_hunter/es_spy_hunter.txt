@@ -70,7 +70,7 @@ block tree
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreenTree hugger - Granted you server_var(wcs_addhealth) more HP
+	es_tell event_var(userid) #multi #green [WCS]#lightgreenTree hugger - Granted you server_var(wcs_addhealth) more HP
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 2 (END)
@@ -86,8 +86,8 @@ block dodge
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreenMega Dodge - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreenMega Dodge - You have server_var(wcs_chance)% chance to dodge enemy attacks
+    es_tell event_var(userid) #multi #green [WCS]#lightgreenMega Dodge - You dodged server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreenMega Dodge - You have server_var(wcs_chance)% chance to dodge enemy attacks
 	es wcs_centertell event_var(userid) Evading all bullets for a short duration!
 	ifx true(wcs_race_debugging) do
 	{

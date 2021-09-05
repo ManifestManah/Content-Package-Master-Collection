@@ -58,8 +58,8 @@ block push
 				if (event_var(es_attackerdead) = 0) do
 				{
 					es wcs_pushed event_var(userid) 0 0 400
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Bubbles - You pushed your enemy
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bubbles - You got pushed by an enemy
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Bubbles - You pushed your enemy
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Bubbles - You got pushed by an enemy
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/hydragutbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 150 2 95 10 1 255 255 0 255 5
 				}
@@ -80,7 +80,7 @@ block speed_grav
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mobility - You can run faster and jump higher
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Mobility - You can run faster and jump higher
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/hydragutbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 150 2 120 100 1 255 255 0 255 5
 	ifx true(wcs_race_debugging) do

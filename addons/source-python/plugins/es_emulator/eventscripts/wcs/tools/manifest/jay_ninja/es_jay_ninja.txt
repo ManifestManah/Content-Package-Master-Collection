@@ -35,7 +35,7 @@ block speed_gravity
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mobility - You can run faster and jump higher
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Mobility - You can run faster and jump higher
 	es_playsound event_var(userid) skills/hymn.mp3 .8
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_delayed .2 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 255 255 255 255 5
@@ -56,7 +56,7 @@ block invisibility
 		wcs_log [Race]: Jay Ninja - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -71,7 +71,7 @@ block armor
 		wcs_log [Race]: Jay Ninja - [Block] Skill: 3 (START)
 	}
 	es_delayed 1 wcs_setfx armor event_var(userid) = 50 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Armor - Increased your armor
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Armor - Increased your armor
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Jay Ninja - [Block] Skill: 3 (END)
@@ -140,7 +140,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSoul of the Dragon - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSoul of the Dragon - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -242,7 +242,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSoul of the Dragon - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSoul of the Dragon - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

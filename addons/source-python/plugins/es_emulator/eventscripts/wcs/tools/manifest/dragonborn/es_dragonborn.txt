@@ -50,7 +50,7 @@ block blood
 		{
 			es_xrand wcs_addhealth 40 60
 			es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dragon blood - Gave you server_var(wcs_addhealth) extra health
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Dragon blood - Gave you server_var(wcs_addhealth) extra health
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -104,8 +104,8 @@ block evade
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Become Ethereal - You evaded server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Become Ethereal - You have server_var(wcs_chance)% chance to evade incoming attacks
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Become Ethereal - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Become Ethereal - You have server_var(wcs_chance)% chance to evade incoming attacks
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Dragonborn - [Block] Skill: 3 (END)
@@ -151,7 +151,7 @@ block fusrohdah
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/dragonborn/fusrohdah_path"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Fusrodah affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Fusrodah affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Fusrodah 35 damage to server_var(wcs_count_players_actually_affected) enemies
 				es wcs_fade server_var(wcs_userid) 10 55 5 200 2 4
 			}
@@ -159,18 +159,18 @@ block fusrohdah
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -220,19 +220,19 @@ block fusrohdah_path
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}

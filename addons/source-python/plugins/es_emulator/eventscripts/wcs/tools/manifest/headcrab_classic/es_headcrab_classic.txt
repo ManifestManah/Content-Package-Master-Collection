@@ -15,13 +15,13 @@ block spawn
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 	{
 		es playerset model event_var(userid) headcrabclassic
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a classic headcrab!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like a classic headcrab!
 		es wcs_restrict event_var(userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;sg552;g3sg1;m249"
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
 		es wcs_setmodel event_var(userid) models/chicken/chicken_zombie.mdl
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a zombie chicken!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like a zombie chicken!
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 	}
 	es wcs_setfx jetpack event_var(userid) = 0 0
@@ -82,7 +82,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Four Legs - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Four Legs - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -98,7 +98,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Pounce - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Pounce - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Headcrab Classic - [Block] Skill: 2 (END)
@@ -114,7 +114,7 @@ block longjump
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
 	es_xmath wcs_multiplier * 100
 	es wcs_decimal wcs_multiplier server_var(wcs_multiplier)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Crab attack - You have had your jump length increased by server_var(wcs_multiplier)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Crab attack - You have had your jump length increased by server_var(wcs_multiplier)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Headcrab Classic - [Block] Skill: 3 (END)

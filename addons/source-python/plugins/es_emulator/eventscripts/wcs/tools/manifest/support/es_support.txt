@@ -12,7 +12,7 @@ block invisibility
 	if (event_var(es_userdead) = 0) do
 	{
 		es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hide - You've become less visible
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Hide - You've become less visible
 		es_playsound event_var(userid) wcs/invisibility.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es est_effect 10 #a 0 sprites/hydragutbeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 150 2 30 10 .8 0 20 220 215 1
@@ -34,7 +34,7 @@ block longjump
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - Your jump length is increased
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - Your jump length is increased
 		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 5
@@ -97,7 +97,7 @@ block gravity
 	{
 		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen High jumping - Reduced your gravity to server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen High jumping - Reduced your gravity to server_var(wcs_gravity)%
 		es_playsound event_var(userid) skills/hymn.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 5
@@ -126,7 +126,7 @@ block cash_to_health
 	if (server_var(wcs_tmp1) < 225) do
 	{
 		es_xset wcs_ultinotexec 1
-		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Transfusion - Failed, you don't have enough cash
+		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Transfusion - Failed, you don't have enough cash
         if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	}
 	if (server_var(wcs_tmp1) => 225) do
@@ -148,13 +148,13 @@ block cash_to_health
 		if (server_var(wcs_tmp2) => 175) do
 		{
 			es wcs_setfx health server_var(wcs_userid) = 175 0
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Health Boost - Your health has reached the cap
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Health Boost - Your health has reached the cap
 		}
 		if (server_var(wcs_tmp2) <= 150) do
 		{
 			es wcs_setfx cash server_var(wcs_userid) - 250 0
 			es wcs_setfx health server_var(wcs_userid) + 25 0	
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Health Boost - Granted you 25 extra health
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Health Boost - Granted you 25 extra health
 		}
 	}
 	ifx true(wcs_race_debugging) do

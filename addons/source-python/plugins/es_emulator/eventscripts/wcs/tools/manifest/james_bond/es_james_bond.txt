@@ -77,7 +77,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fast cars - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Fast cars - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -96,10 +96,10 @@ block armor
 		es_delayed .5 wcs_setfx 2ndclip event_var(userid) = server_var(wcs_ammo) 0
 		es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
 		es_xmath wcs_ammo - 20
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Suit up - Increased armor by server_var(wcs_armor) and clip size by server_var(wcs_ammo)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Suit up - Increased armor by server_var(wcs_armor) and clip size by server_var(wcs_ammo)
 		if (server_var(wcs_dice2) <= 10) do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Suit up - You're undercover and disguised as an enemy
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Suit up - You're undercover and disguised as an enemy
 			es wcs_setfx disguise event_var(userid) = 1 0
 		}
 	}
@@ -139,8 +139,8 @@ block damage
 					es_setplayerprop event_var(userid) CBasePlayer.m_iFOV 160
 					es_delayed 2 es_setplayerprop event_var(userid) CBasePlayer.m_iDefaultFOV 90
 					es_delayed 2 es_setplayerprop event_var(userid) CBasePlayer.m_iFOV 90
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Martini - Your enemy got drunk from the Martini
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Martini - James bond served you a Martini, making you drunk
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Martini - Your enemy got drunk from the Martini
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Martini - James bond served you a Martini, making you drunk
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 15
 					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 225 1 8 10 0 175 175 175 220 0
@@ -229,7 +229,7 @@ block attackspeed
 			es_playsound server_var(wcs_userid) player\vo\idf\coveringfriend02.wav 1
 		}
 		es wcsgroup set bondultimate server_var(wcs_userid) 2
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Trigger finger - Increased your attack speed for 3 seconds
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Trigger finger - Increased your attack speed for 3 seconds
 		es wcs_setfx attackspeed event_var(userid) = server_var(wcs_speed) 3
 		es_delayed 3 wcsgroup set bondultimate server_var(wcs_userid) 1
 		es wcsgroup set is_attackspeed_altered server_var(wcs_userid) 1

@@ -53,7 +53,7 @@ block invisibility
 		wcs_log [Race]: Sinmar - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{

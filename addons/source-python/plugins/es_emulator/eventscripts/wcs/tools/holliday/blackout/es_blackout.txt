@@ -107,13 +107,13 @@ block jump
 	ifx false(wcs_falldamage_compensation) do
 	{
 		es_delayed .5 wcsgroup set falldamage event_var(userid) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen High jump - Boosted your jump height and removed fall damage
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen High jump - Boosted your jump height and removed fall damage
 	}
 	ifx true(wcs_falldamage_compensation) do
 	{
 		es_delayed .5 wcs_setfx health event_var(userid) + 25 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen High jump - Boosted your jump height
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen High jump - Boosted your jump height
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -170,7 +170,7 @@ block maximum
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Maximum strength - Increased your armor by server_var(wcs_armor) and health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Maximum strength - Increased your armor by server_var(wcs_armor) and health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Blackout - [Block] Skill: 2 (END)
@@ -188,7 +188,7 @@ block rotor
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set rotor event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rotor - Increased attack speed on your knife
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Rotor - Increased attack speed on your knife
 		}
 	}
 	ifx true(wcs_race_debugging) do

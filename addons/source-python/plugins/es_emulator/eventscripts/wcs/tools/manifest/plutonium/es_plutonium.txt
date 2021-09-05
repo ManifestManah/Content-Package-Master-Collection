@@ -89,7 +89,7 @@ block health
 		wcs_log [Race]: Plutonium - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thick metal skin - Gave you server_var(wcs_addhealth) more health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Thick metal skin - Gave you server_var(wcs_addhealth) more health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Plutonium - [Block] Skill: 2 (END)
@@ -105,13 +105,13 @@ block buff
 	ifx true(wcs_ffa_enabled) do
 	{
 		es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth)
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - You recieved server_var(wcs_addhealth) health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Sharing the secret - You recieved server_var(wcs_addhealth) health
 	}
 	ifx false(wcs_ffa_enabled) do
 	{
 		es_getplayerteam wcs_team event_var(userid)
-		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health" 
-		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]: #lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health"
+		if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]#lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health" 
+		if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell event_var(userid) #multi #green [WCS]#lightgreen Sharing the secret - Recieved + server_var(wcs_addhealth) health"
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -130,7 +130,7 @@ block ward
 	{
 		es_xmath wcs_count - 1
 		es wcsgroup set ability_count server_var(wcs_userid) server_var(wcs_count)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You have server_var(wcs_count) wards left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Serpent Ward - You have server_var(wcs_count) wards left.
 		es_xset wcs_warden_x2 0
 		es_xset wcs_warden_y2 0
 		es_xset wcs_warden_z2 0
@@ -143,7 +143,7 @@ block ward
 	}
 	else do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Serpent Ward - You don't have any wards left.
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Serpent Ward - You don't have any wards left.
 	}
 	ifx true(wcs_race_debugging) do
 	{

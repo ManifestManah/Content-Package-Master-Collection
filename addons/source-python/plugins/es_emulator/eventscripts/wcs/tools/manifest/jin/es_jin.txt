@@ -39,7 +39,7 @@ block counter
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Counter - Granted you additional speed and health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Counter - Granted you additional speed and health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Jin - [Block] Skill: 1 (END)
@@ -96,8 +96,8 @@ block gravel
 				es wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es_xrand wcs_dmg 10 18
 				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Gravel Strike - Swapped places and did server_var(wcs_dmg) mirror damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 100
 				es_delayed .2 est_effect 10 #a 0 sprites/physring1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 300 2 10 10 0 75 75 255 255 1
@@ -130,8 +130,8 @@ block evade
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreenSide winder - You evaded server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Side winder - Gives you server_var(wcs_chance)% chance to evade incoming attacks
+    es_tell event_var(userid) #multi #green [WCS]#lightgreenSide winder - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Side winder - Gives you server_var(wcs_chance)% chance to evade incoming attacks
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Jin - [Block] Skill: 4 (END)
@@ -177,7 +177,7 @@ block jin_froststorm
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 "es_xdoblock wcs/tools/manifest/jin/froststorm_checks"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Frost storm affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frost storm affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Frost storm dealt 20 damage to server_var(wcs_count_players_actually_affected) enemies
 				es_playsound server_var(wcs_userid) ambient\wind\css15_wind_10.wav 1
 			}
@@ -185,18 +185,18 @@ block jin_froststorm
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -246,19 +246,19 @@ block froststorm_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -282,7 +282,7 @@ block froststorm_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
@@ -290,7 +290,7 @@ block froststorm_final
 		es_delayed 2 wcsgroup set is_frozen server_var(wcs_targetid) 0
 		es wcs_setfx freeze server_var(wcs_targetid) = 1 2
 	}
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Jin trapped you in a frost storm and dealt 20 damage to you
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Jin trapped you in a frost storm and dealt 20 damage to you
 	es wcs_centertell server_var(wcs_targetid) You took 20 damage from the Jin's Froststorm
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)

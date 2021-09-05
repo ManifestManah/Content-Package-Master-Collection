@@ -37,7 +37,7 @@ block invisibility
 		es_log [Race]: Shinobi - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.wav .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -119,7 +119,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		es_log [Race]: Shinobi - [Block] Skill: 4 (END)

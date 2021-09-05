@@ -54,8 +54,8 @@ block flux
 					es wcsgroup set is_slowed event_var(userid) 1
 					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
 					es wcs_setfx speed event_var(userid) = .8 2
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Slow - Been slowed for 2 seconds by event_var(es_attackername)!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Slow - You slowed event_var(es_username) for 2 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Slow - Been slowed for 2 seconds by event_var(es_attackername)!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Slow - You slowed event_var(es_username) for 2 seconds!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 6
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 45 1 10 0 5 255 255 204 255 1

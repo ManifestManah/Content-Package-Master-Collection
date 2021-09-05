@@ -10,7 +10,7 @@ block invisibility
 		wcs_log [Race]: Avenger Of Lost Hearts - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -25,7 +25,7 @@ block health
 		wcs_log [Race]: Avenger Of Lost Hearts - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -54,8 +54,8 @@ block burn
 					es_delayed 3 wcsgroup set is_burning event_var(userid) 0
 					es wcsgroup set fire_owner event_var(userid) event_var(attacker)
 					es wcs_setfx burn event_var(userid) = 1 3
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Burn - You've been set on fire by event_var(es_attackername) 
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Burn - You burnt event_var(es_username)
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Burn - You've been set on fire by event_var(es_attackername) 
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Burn - You burnt event_var(es_username)
 					es_playsound event_var(userid) wcs/firecast.mp3 .9
 					es_playsound event_var(attacker) wcs/firecast.mp3 .7
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
@@ -88,8 +88,8 @@ block anti_invisibility
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es wcs_color event_var(userid) 255 255 255 255 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Anti-Invisibility - Turned you completely visible!
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Anti-Invisibility - Made your enemy completely visible!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Anti-Invisibility - Turned you completely visible!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Anti-Invisibility - Made your enemy completely visible!
 				es_playsound event_var(userid) wcs/tidetotem.mp3 1
 				es_playsound event_var(attacker) wcs/tidetotem.mp3 .8
 			}

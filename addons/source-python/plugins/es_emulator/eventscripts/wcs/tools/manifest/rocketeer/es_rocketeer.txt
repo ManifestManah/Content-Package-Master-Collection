@@ -65,12 +65,12 @@ block armour
 		ifx false(wcs_falldamage_compensation) do
 		{
 			es_delayed .5 wcsgroup set falldamage event_var(userid) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Seismic armour - Gave you 10 health and made you immune to fall damage!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Seismic armour - Gave you 10 health and made you immune to fall damage!
 		}
 		ifx true(wcs_falldamage_compensation) do
 		{
 			es_delayed .5 wcs_setfx health event_var(userid) + 25 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Falldamage Compensation - You've been compensated with 25 extra health
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 25 extra health
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -89,7 +89,7 @@ block jump
 	{
 		es wcsgroup set rocketeerjump event_var(userid) 1
 		es_delayed .2 wcs_setfx gravity event_var(userid) = .8 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Rocket jump - Allows you to jump higher
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Rocket jump - Allows you to jump higher
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -244,7 +244,7 @@ block boost
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenRocket charge - Riding on a launched rocket
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenRocket charge - Riding on a launched rocket
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -346,7 +346,7 @@ block boost
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenRocket charge - You can't rocket charge that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenRocket charge - You can't rocket charge that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

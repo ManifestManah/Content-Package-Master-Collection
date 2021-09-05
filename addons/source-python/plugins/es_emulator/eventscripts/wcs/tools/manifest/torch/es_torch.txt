@@ -69,7 +69,7 @@ block armor
 		wcs_log [Race]: Torch - [Block] Skill: 2 (START)
 	}
 	es wcsgroup set absorb event_var(userid) server_var(wcs_dmg)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fire armour - Your damage taken is reduced
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Fire armour - Your damage taken is reduced
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z1 + 128
@@ -87,7 +87,7 @@ block streak
 		wcs_log [Race]: Torch - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fire streak - Granted you additional speed and health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Fire streak - Granted you additional speed and health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Torch - [Block] Skill: 3 (END)

@@ -10,7 +10,7 @@ block spawn
 		wcs_log  [Race]: Arcane Mage - [Block] Spawn (START)
 	}
 	es wcsgroup get arcanepower wcs_tmp4 event_var(userid)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Arcane power - You have accumulated server_var(wcs_tmp4) arcane power
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Arcane power - You have accumulated server_var(wcs_tmp4) arcane power
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Arcane Mage - [Block] Spawn (END)
@@ -32,7 +32,7 @@ block arcane_power
 			{
 				es_xmath wcs_tmp2 + 1
 				es wcsgroup set arcanepower event_var(userid) server_var(wcs_tmp2)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Arcane power - You acquired 1 arcane power
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Arcane power - You acquired 1 arcane power
 			}
 		}
 	}
@@ -94,7 +94,7 @@ block redemption
 				{
 					es_xmath wcs_tmp3 - 2
 					es wcsgroup set arcanepower event_var(userid) server_var(wcs_tmp3)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Redemption - You'll revive in your spawn in 2 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Redemption - You'll revive in your spawn in 2 seconds!
 					es wcs_centertell event_var(userid) You'll be revived in your spawn in 2 seconds
 					es_delayed 1 wcs_centertell event_var(userid) You'll be revived in your spawn in 1 seconds
 					es_delayed 2 wcs_centertell event_var(userid) You have been revived, but lost 2 arcane power!

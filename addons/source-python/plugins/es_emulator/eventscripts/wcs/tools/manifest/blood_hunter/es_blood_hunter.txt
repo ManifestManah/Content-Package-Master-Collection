@@ -96,7 +96,7 @@ block leech
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set bloodhunter_feast event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feast - You'll receive health upon killing an enemy
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Feast - You'll receive health upon killing an enemy
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -119,7 +119,7 @@ event player_death
 			es_xrand wcs_addhealth 10 35
 			es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
 			es wcs_centertell event_var(attacker) Feast granted you server_var(wcs_addhealth) health
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Feast - You received server_var(wcs_addhealth) health as you killed your enemy
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Feast - You received server_var(wcs_addhealth) health as you killed your enemy
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 			es_xmath wcs_z1 + 20
@@ -150,7 +150,7 @@ block damage
 			{
 				es_xrand wcs_dmg 15 20
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Wounded fatality - You caused server_var(wcs_dmg) extra damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Wounded fatality - You caused server_var(wcs_dmg) extra damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 15
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 15 10 0 128 0 0 175 15
@@ -209,13 +209,13 @@ block hunt
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -244,7 +244,7 @@ block ultimate_checks
 			}
 			if (server_var(wcs_tmp) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 				es_xset wcs_ultinotexec 1
 			}
 		}
@@ -295,12 +295,12 @@ block ultimate_final
 		if (server_var(wcs_tmp3) < 2.25) do
 		{
 			es wcs_setfx speed server_var(wcs_userid) + .35 0
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blood scent - Increased your speed by 35%
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood scent - Increased your speed by 35%
 		}
 		if (server_var(wcs_tmp3) >= 2.25) do
 		{
 			es wcs_setfx speed server_var(wcs_userid) = 2.25 0
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blood scent - Your speed is capped at 225%
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood scent - Your speed is capped at 225%
 		}
 	}
 	ifx true(wcs_race_debugging) do

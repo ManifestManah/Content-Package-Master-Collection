@@ -68,7 +68,7 @@ block points
 				{
 					es_xmath wcs_tmp3 + 1
 					es wcsgroup set houndpoints event_var(attacker) server_var(wcs_tmp3)
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Hunter points - You now have Granted you server_var(wcs_tmp3) points
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Hunter points - You now have Granted you server_var(wcs_tmp3) points
 				}
 			}
 		}
@@ -93,77 +93,77 @@ block invis
 			if (server_var(wcs_tmp3) == 1) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 230 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 2) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 217 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 3) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 204 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 4) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 191 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 5) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 179 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 6) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 166 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 7) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 153 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 8) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 140 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 9) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 135 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 10) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 130 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 11) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 120 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 12) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 110 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 13) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 100 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 14) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 90 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 			if (server_var(wcs_tmp3) == 15) do
 			{
 				es_delayed .5 wcs_color event_var(userid) 255 255 255 80 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shade of the beast - Made you less visible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shade of the beast - Made you less visible
 			}
 		}
 	}
@@ -293,105 +293,105 @@ block speed
 	{
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 2) do
 	{
 		es_xmath wcs_speed * 2
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 3) do
 	{
 		es_xmath wcs_speed * 3
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 4) do
 	{
 		es_xmath wcs_speed * 4
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 5) do
 	{
 		es_xmath wcs_speed * 5
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 6) do
 	{
 		es_xmath wcs_speed * 6
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 7) do
 	{
 		es_xmath wcs_speed * 7
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 8) do
 	{
 		es_xmath wcs_speed * 8
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 9) do
 	{
 		es_xmath wcs_speed * 9
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 10) do
 	{
 		es_xmath wcs_speed * 10
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 11) do
 	{
 		es_xmath wcs_speed * 11
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 12) do
 	{
 		es_xmath wcs_speed * 12
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 13) do
 	{
 		es_xmath wcs_speed * 13
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 14) do
 	{
 		es_xmath wcs_speed * 14
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	if (server_var(wcs_tmp3) == 15) do
 	{
 		es_xmath wcs_speed * 15
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Feral velocity - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -410,105 +410,105 @@ block gravity
 	{
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 2) do
 	{
 		es_xmath wcs_gravity * 2
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 3) do
 	{
 		es_xmath wcs_gravity * 3
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 4) do
 	{
 		es_xmath wcs_gravity * 4
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 5) do
 	{
 		es_xmath wcs_gravity * 5
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 6) do
 	{
 		es_xmath wcs_gravity * 6
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 7) do
 	{
 		es_xmath wcs_gravity * 7
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 8) do
 	{
 		es_xmath wcs_gravity * 8
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 9) do
 	{
 		es_xmath wcs_gravity * 9
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 10) do
 	{
 		es_xmath wcs_gravity * 10
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 11) do
 	{
 		es_xmath wcs_gravity * 11
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 12) do
 	{
 		es_xmath wcs_gravity * 12
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 13) do
 	{
 		es_xmath wcs_gravity * 13
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 14) do
 	{
 		es_xmath wcs_gravity * 14
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	if (server_var(wcs_tmp3) == 15) do
 	{
 		es_xmath wcs_gravity * 15
 		es_delayed .2 wcs_setfx gravity event_var(userid) - server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Beasts burden - Reduced your gravity by server_var(wcs_gravity)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -525,7 +525,7 @@ block sacrifice
 	es wcsgroup get houndpoints wcs_tmp3 server_var(wcs_userid)
 	if (server_var(wcs_tmp3) <= 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Resistance - Failed, you don't have any hunter points
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Resistance - Failed, you don't have any hunter points
 	}
 	if (server_var(wcs_tmp3) => 1) do
 	{
@@ -535,7 +535,7 @@ block sacrifice
 		if (server_var(wcs_rand) == 2) then es_xmath wcs_tmp3 - 2
 		es wcsgroup set houndpoints server_var(wcs_userid) server_var(wcs_tmp3)
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Resistance - Sacrificed server_var(wcs_rand) hunter points to gain server_var(wcs_addhealth) health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Resistance - Sacrificed server_var(wcs_rand) hunter points to gain server_var(wcs_addhealth) health
 		es wcs_centertell server_var(wcs_userid) Received server_var(wcs_addhealth) more health
 	}
 	ifx true(wcs_race_debugging) do

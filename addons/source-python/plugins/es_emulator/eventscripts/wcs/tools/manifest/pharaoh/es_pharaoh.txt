@@ -107,7 +107,7 @@ block gravity
 		wcs_log [Race]: Pharaoh - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS] #lightgreenLightened body - Increased your jump height
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Lightened body - Increased your jump height
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Pharaoh - [Block] Skill: 2 (END)
@@ -156,8 +156,8 @@ block freeze
 					es wcsgroup set is_frozen event_var(userid) 1
 					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
 					es wcs_setfx freeze event_var(userid) = 1 1
-					es_tell event_var(attacker) #multi #green [WCS] #lightgreenIce-cold breath - Froze your target for 1 second
-					es_tell event_var(userid) #multi #green [WCS] #lightgreenIce-cold breath - Froze you in place for 1 second
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Ice-cold breath - Froze your target for 1 second
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice-cold breath - Froze you in place for 1 second
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 40
@@ -209,8 +209,8 @@ block immortal
 	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
 	es wcsgroup set evasion_count server_var(wcs_userid) 0
     es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
-    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenAncient seal - You evaded server_var(wcs_tmp1) attacks
-	es_tell server_var(wcs_userid) #multi #green [WCS] #lightgreenAncient seal - You have 55% chance of evading for server_var(wcs_duration) seconds
+    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenAncient seal - You evaded server_var(wcs_tmp1) attacks
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ancient seal - You have 55% chance of evading for server_var(wcs_duration) seconds
 	es wcs_centertell server_var(wcs_userid) You're evasion chance has increased for server_var(wcs_duration) seconds!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
@@ -230,7 +230,7 @@ block immortal
 	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 	es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector1) server_var(vector2) 1 server_var(wcs_duration) 2 2 10 2 255 248 254 255 140
 	es_xmath wcs_duration - 1
-	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS] #lightgreenAncient seal - Your invulnerability is fading...
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ancient seal - Your invulnerability is fading...
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Pharaoh - [Block] Skill: 5 (END)

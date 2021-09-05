@@ -10,7 +10,7 @@ block money
 		wcs_log [Race]: Warrior - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Your money pack gave you server_var(wcs_money) dollars!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Your money pack gave you server_var(wcs_money) dollars!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 125
@@ -29,7 +29,7 @@ block aura
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Your #green Holy aura #lightgreenmade you lighter and gave you server_var(wcs_addhealth) more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Your #green Holy aura #lightgreenmade you lighter and gave you server_var(wcs_addhealth) more health!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 150
@@ -78,7 +78,7 @@ block surrender
 	{
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es est_effect 11 #a 0 sprites/yelflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 4 180
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Never surrender! - Respawning where you died!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Never surrender! - Respawning where you died!
 		es wcs_centertell event_var(userid) You'll respawn in 2 seconds!
 		es_delayed 1 wcs_centertell event_var(userid) You'll respawn in 1 seconds!
 		es_delayed 2 wcs_centertell event_var(userid) You've been respawned! Fight!

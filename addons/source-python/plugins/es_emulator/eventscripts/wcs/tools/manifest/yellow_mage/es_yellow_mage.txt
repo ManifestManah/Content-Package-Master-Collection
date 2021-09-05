@@ -124,7 +124,7 @@ block blast
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenElectric Blast - Blasted you in to the distance!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenElectric Blast - Blasted you in to the distance!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -226,7 +226,7 @@ block blast
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenElectric Blast - Cannot blast you that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenElectric Blast - Cannot blast you that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

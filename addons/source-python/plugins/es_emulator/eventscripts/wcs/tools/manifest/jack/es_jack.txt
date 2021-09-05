@@ -120,7 +120,7 @@ block longjump
 		wcs_log [Race]: Jack - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hard exercise - Increased your jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Hard exercise - Increased your jump length
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Jack - [Block] Skill: 2 (END)
@@ -142,8 +142,8 @@ block push
 				es_xrand wcs_tmp3 0 250
 				es_xrand wcs_tmp4 0 250
 				es wcs_pushed event_var(userid) server_var(wcs_tmp3) server_var(wcs_tmp4) 485
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shook - You were shook and launched into the air
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shook - You shook and launched your enemy into the air
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shook - You were shook and launched into the air
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Shook - You shook and launched your enemy into the air
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 70
 				es_delayed .1 est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 99 5 2 3 11 0 255 255 0 255 90
@@ -201,7 +201,7 @@ block swap
 		}
 		es_delayed .2 es_give server_var(wcs_userid) weapon_deagle
 		es wcsgroup set jack server_var(wcs_userid) 2
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Weapon changer - Switched to an AWP & Deagle
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Weapon changer - Switched to an AWP & Deagle
 	}
 	if (server_var(wcs_tmp2) = 2) do
 	{
@@ -209,7 +209,7 @@ block swap
 		es wcs_removeweapon server_var(wcs_userid) 2
 		es_give server_var(wcs_userid) weapon_ak47
 		es wcsgroup set jack server_var(wcs_userid) 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Weapon changer - Switched to an AK47
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Weapon changer - Switched to an AK47
 	}
 	ifx true(wcs_race_debugging) do
 	{

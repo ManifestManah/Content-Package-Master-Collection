@@ -28,7 +28,7 @@ block speed
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Unholy Aura - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Unholy Aura - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Electric Smoker - [Block] Skill: 1 (END)
@@ -89,10 +89,10 @@ block thunder
 			{
 				es_xrand wcs_rand 1 2
 				es wcs_drop event_var(userid) server_var(wcs_rand)
-				if (server_var(wcs_rand) == 1) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thunder wave - Caused you to drop your primary weapon
-				if (server_var(wcs_rand) == 2) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Thunder wave - Caused you to drop your secondary weapon
-				if (server_var(wcs_rand) == 1) then es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Thunder wave - Made your enemy drop his primary weapon
-				if (server_var(wcs_rand) == 2) then es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Thunder wave - Made your enemy drop his secondary weapon
+				if (server_var(wcs_rand) == 1) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Thunder wave - Caused you to drop your primary weapon
+				if (server_var(wcs_rand) == 2) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Thunder wave - Caused you to drop your secondary weapon
+				if (server_var(wcs_rand) == 1) then es_tell event_var(attacker) #multi #green [WCS]#lightgreen Thunder wave - Made your enemy drop his primary weapon
+				if (server_var(wcs_rand) == 2) then es_tell event_var(attacker) #multi #green [WCS]#lightgreen Thunder wave - Made your enemy drop his secondary weapon
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 				es_xmath wcs_z1 + 30
@@ -170,7 +170,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSmoke Teleportation - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSmoke Teleportation - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -272,7 +272,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSmoke Teleportation - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSmoke Teleportation - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

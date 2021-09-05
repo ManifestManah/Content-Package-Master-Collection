@@ -54,7 +54,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive speed - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Illusive speed - Increased your speed by server_var(wcs_speed)%
 		es_playsound event_var(userid) wcs/speed.mp3 .7
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 125 425 1.5 25 10 0 200 110 55 240 3
@@ -79,7 +79,7 @@ block gravity
 	{
 		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 		es_xmath wcs_gravity * 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive gravity - Reduced your gravity to server_var(wcs_gravity)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Illusive gravity - Reduced your gravity to server_var(wcs_gravity)%
 		es_playsound event_var(userid) skills/hymn.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 5
@@ -107,7 +107,7 @@ block longjump
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive longjump - Your jump length is increased
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Illusive longjump - Your jump length is increased
 		es_playsound event_var(userid) skills/stancehealmonk.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 5
@@ -133,7 +133,7 @@ block health
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Illusive health - Increased your health by server_var(wcs_addhealth)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Illusive health - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 5
@@ -155,14 +155,14 @@ block illusion
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Illusive mirage - You don't have any mirages left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Illusive mirage - You don't have any mirages left
 	}
 	if (server_var(wcs_tmp11) => 1) do
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
 		es_prop_physics_create server_var(wcs_userid) props_c17/oildrum001.mdl
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Illusive mirage - server_var(wcs_tmp11) mirages left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Illusive mirage - server_var(wcs_tmp11) mirages left
 	}
 	ifx true(wcs_race_debugging) do
 	{

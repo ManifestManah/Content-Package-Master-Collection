@@ -52,7 +52,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hasty movement - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Hasty movement - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -74,8 +74,8 @@ block fiery
 			{
 				es_cexec event_var(userid) r_screenoverlay effects/tp_eyefx/tp_eyefx.vmt
 				es_delayed server_var(wcs_duration) es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Fiery enchantment - Distorted your view for server_var(wcs_duration) seconds
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Fiery enchantment - Distorted your enemy's view for server_var(wcs_duration) seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Fiery enchantment - Distorted your view for server_var(wcs_duration) seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Fiery enchantment - Distorted your enemy's view for server_var(wcs_duration) seconds
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 15
 				es est_effect 11 #a 0 sprites/xfireball3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.2 1 200
@@ -134,7 +134,7 @@ block ammo
 	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_ammo)
 	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.015" server_var(wcs_ammo)
 	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.016" server_var(wcs_ammo)
-	es_tell server_var(wcs_userid) #multi #green[WCS]: #lightgreenYou've received server_var(wcs_ammo) flashbangs, smoke and HE grenades!
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen You've received server_var(wcs_ammo) flashbangs, smoke and HE grenades!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_math wcs_z1 + 15
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 100 1 30 10 1 200 100 50 200 6

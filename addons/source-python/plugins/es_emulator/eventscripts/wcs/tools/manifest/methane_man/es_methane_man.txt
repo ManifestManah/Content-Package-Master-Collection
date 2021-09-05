@@ -25,7 +25,7 @@ block speed
 		wcs_log [Race]: Methane Man - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_speed)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your movement speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your movement speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Methane Man - [Block] Skill: 1 (END)
@@ -102,7 +102,7 @@ block noclip
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z1 + 45
 	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 255
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Environmental boost - Boosted your stats for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Environmental boost - Boosted your stats for server_var(wcs_duration) seconds
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Methane Man - [Block] Skill: 4 (END)

@@ -44,7 +44,7 @@ block respawn
 		es_xmath wcs_z3 + 15
 		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 750 100 3 75 10 0 55 155 255 150 1
 		es_xmath wcs_z3 - 15
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reincarnation - Respawning where you died in 3 seconds!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Reincarnation - Respawning where you died in 3 seconds!
 		es_delayed 2.5 es_playsound event_var(userid) wcs/resurrect.mp3 .8
 		es_delayed 2.5 wcs_spawn event_var(userid) 1
 		es_delayed 2.6 wcs_teleport event_var(userid) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
@@ -64,8 +64,8 @@ block blink
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Blink of an eye - You evaded server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Blink of an eye - Gave you server_var(wcs_chance)% to evade
+    es_tell event_var(userid) #multi #green [WCS]#lightgreen Blink of an eye - You evaded server_var(wcs_tmp1) attacks last round
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Blink of an eye - Gave you server_var(wcs_chance)% to evade
 	es_playsound event_var(userid) weapons\fx\nearmiss\bulletltor13.wav 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
@@ -169,13 +169,13 @@ block summon
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -214,7 +214,7 @@ block ultimate_checks
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -250,10 +250,10 @@ block ultimate_final
 	es_delayed 3 wcs_centertell server_var(wcs_userid) Eye Ra has summoned you to him!
 	es_playsound server_var(wcs_userid) ambient\machines\wall_move5.wav 1
 	es_playsound server_var(wcs_targetid) ambient\machines\wall_move5.wav 1
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Summon - You have summoned an enemy to fight you
-	es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Summon - Your enemy has arrived for battle!
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Summon - You have been summoned to fight Eye Ra
-	es_delayed 3 es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Summon - You've arrived, prepare for battle!
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Summon - You have summoned an enemy to fight you
+	es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Summon - Your enemy has arrived for battle!
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Summon - You have been summoned to fight Eye Ra
+	es_delayed 3 es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Summon - You've arrived, prepare for battle!
 	es_xmath wcs_z1 + 5
 	es_xmath wcs_z2 + 5
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 950 190 3 128 100 0 155 115 100 200 1

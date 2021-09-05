@@ -82,8 +82,8 @@ block reflect
 				es_xmath wcs_z2 + 25
 				es est_effect 3 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .75 5 5 255 255 255 255
 				es est_effect 10 #a 0 sprites/bluelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 51 .75 20 10 0 155 115 100 200 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reflect - Recieved server_var(wcs_dmg) mirror damage
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reflect - Dealt server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Reflect - Recieved server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Reflect - Dealt server_var(wcs_dmg) mirror damage
 			}
 		}
 	}
@@ -102,7 +102,7 @@ block cloak
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
 		es_fire event_var(userid) !self addoutput "renderfx 13"
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cloak of Shadows - You've become flickering invisible
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Cloak of Shadows - You've become flickering invisible
 	}
 	ifx true(wcs_race_debugging) do
 	{

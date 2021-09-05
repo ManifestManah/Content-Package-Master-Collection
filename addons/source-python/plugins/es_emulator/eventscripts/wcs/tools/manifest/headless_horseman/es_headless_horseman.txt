@@ -95,7 +95,7 @@ block immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set headshot_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Jack o' lantern - You're immune to headshots
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Jack o' lantern - You're immune to headshots
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -115,7 +115,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Black stead - server_var(wcs_speed)% increased movement speed
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Black stead - server_var(wcs_speed)% increased movement speed
 	}
 	ifx true(wcs_race_debugging) do
 	{

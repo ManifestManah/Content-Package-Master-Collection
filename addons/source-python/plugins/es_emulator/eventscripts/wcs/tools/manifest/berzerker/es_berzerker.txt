@@ -56,8 +56,8 @@ block secdrop
 		wcs_log [Race]: Berzerker - [Block] Skill: 1 (SECDROP EXECUTED START)
 	}
 	es wcs_drop event_var(userid) 2
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You were forced to drop your secondary weapon n by #green event_var(es_attackername)!
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You forced #green event_var(es_username) #lightgreen to drop his secondary weapon!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You were forced to drop your secondary weapon n by #green event_var(es_attackername)!
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen You forced #green event_var(es_username) #lightgreen to drop his secondary weapon!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Berzerker - [Block] Skill: 1 (SECDROP EXECUTED END)
@@ -71,8 +71,8 @@ block pdrop
 		wcs_log [Race]: Berzerker - [Block] Skill: 1 (PDROP EXECUTED START)
 	}
 	es wcs_drop event_var(userid) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You were forced to drop your primary weapon by #green event_var(es_attackername)!
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You forced #green event_var(es_username) #lightgreen to drop his primary weapon!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You were forced to drop your primary weapon by #green event_var(es_attackername)!
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen You forced #green event_var(es_username) #lightgreen to drop his primary weapon!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Berzerker - [Block] Skill: 1 (PDROP EXECUTED END)
@@ -87,8 +87,8 @@ block doubledrop
 	}
 	es wcs_drop event_var(userid) 1
 	es wcs_drop event_var(userid) 2
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You were forced to drop both of your guns by #green event_var(es_attackername)!
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You've forced #green event_var(es_username) #lightgreen to drop his gun!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You were forced to drop both of your guns by #green event_var(es_attackername)!
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen You've forced #green event_var(es_username) #lightgreen to drop his gun!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Berzerker - [Block] Skill: 1 (DOUBLEDROP EXECUTED END)
@@ -102,7 +102,7 @@ block warfare
 		wcs_log [Race]: Berzerker - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've recieved server_var(wcs_money) cash for warfare
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You've recieved server_var(wcs_money) cash for warfare
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 125
@@ -190,7 +190,7 @@ block bomb
 					//No matter how many targets are affected, this section will only be executed once.
 					//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
 					es wcs_centertell event_var(userid) The Explosion damaged server_var(wcs_count_players_actually_affected) enemies for 100 damage
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
 					es_xrand wcs_rand 1 3
 					if (server_var(wcs_rand) == 1) do
 					{
@@ -208,16 +208,16 @@ block bomb
 			}
 			else do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, there are no living enemies!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, there are no living enemies!
 			}
 			if (server_var(wcs_counter) = 0) do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, no nearby enemies!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, no nearby enemies!
 			}
 		}
 		else do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Could not target an enemy team
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Could not target an enemy team
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -256,18 +256,18 @@ block wcs_ulti_suicide_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's explosion
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, all nearby enemy targets were immune!
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, all nearby enemy targets were immune!
 						}
 					}
 				}
 				else do
 				{
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, you can't hit that many targets at once!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, you can't hit that many targets at once!
 				}
 			}
 		}

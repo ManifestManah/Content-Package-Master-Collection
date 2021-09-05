@@ -41,8 +41,8 @@ block finish
 				es_delayed .1 wcs_setfx freeze event_var(userid) = 1 1
 				es_delayed .5 playerget health wcs_addhealth event_var(userid)
 				es_delayed 1 damage event_var(userid) server_var(wcs_addhealth) 1 event_var(attacker)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Finish him - You got respawned to get finished off!
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Finish him - Respawned your enemy to finish him off!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Finish him - You got respawned to get finished off!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Finish him - Respawned your enemy to finish him off!
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 500 2 100 100 0 255 0 0 255 10
 			}
 		}
@@ -144,13 +144,13 @@ block curse
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -189,7 +189,7 @@ block ultimate_checks
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}

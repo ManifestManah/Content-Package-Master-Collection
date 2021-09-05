@@ -41,7 +41,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Swift feet - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Swift feet - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Legendary Knight - [Block] Skill: 1 (END)
@@ -62,7 +62,7 @@ block damage
 			{
 				es_xrand wcs_dmg 5 15
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Heroic sword - Dealt server_var(wcs_dmg) extra damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Heroic sword - Dealt server_var(wcs_dmg) extra damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 				es_xmath wcs_z1 + 12
@@ -127,7 +127,7 @@ block warcry
 	ifx true(wcs_ffa_enabled) do
 	{
 		es wcs_setfx health server_var(wcs_userid) + 15 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen War cry - Buffed you with 15 health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen War cry - Buffed you with 15 health
 	}
 	ifx false(wcs_ffa_enabled) do
 	{
@@ -153,7 +153,7 @@ block crybuff
 		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (CRYBUFF EXECUTED START)
 	}
 	es wcs_setfx health server_var(wcs_targetid) + 15 0
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen War cry - Buffed all allies by 15 health
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen War cry - Buffed all allies by 15 health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Legendary Knight - [Block] Skill: 4 (CRYBUFF EXECUTED END)

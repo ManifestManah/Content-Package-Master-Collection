@@ -96,7 +96,7 @@ block health
 	{
 		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_delayed .5 wcs_color event_var(userid) 200 0 0 255 1
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ritual - Increased your health by server_var(wcs_addhealth)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ritual - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 40
@@ -128,7 +128,7 @@ block temporary_speed
 	es wcs_setfx speed server_var(wcs_userid) = 1.75 server_var(wcs_duration)
 	es wcs_color server_var(wcs_userid) 200 0 0 40 1
 	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 200 0 0 255 1
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Zeal - You gained extra speed and turned transparent red for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Zeal - You gained extra speed and turned transparent red for server_var(wcs_duration) seconds
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es est_effect 10 #a 0 models/effects/splodecard2_sheet.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 550 100 server_var(wcs_duration) 75 10 0 155 115 100 200 30
 	es_xmath wcs_z1 + 200

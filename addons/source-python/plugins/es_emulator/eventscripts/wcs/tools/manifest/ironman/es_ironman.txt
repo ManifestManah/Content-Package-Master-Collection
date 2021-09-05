@@ -42,7 +42,7 @@ block evade
 	}
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Iron armour - server_var(wcs_chance)% chance to not take damage
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Iron armour - server_var(wcs_chance)% chance to not take damage
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iron man - [Block] Skill: 1 (END)
@@ -58,7 +58,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Metallic boots - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Metallic boots - Increased your speed by server_var(wcs_speed)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iron man - [Block] Skill: 2 (END)

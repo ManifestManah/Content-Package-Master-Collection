@@ -25,7 +25,7 @@ block spawn
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	es_delayed .5 wcs_setfx 1stclip event_var(userid) = 90 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Assassin From The Void - Can only use Scout'n knives
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Assassin From The Void - Can only use Scout'n knives
 	es_delayed .5 wcs_color event_var(userid) 255 20 147 255 1
 	es_xmath wcs_smokestack_counter + 1
 	es_give event_var(userid) env_smokestack
@@ -107,7 +107,7 @@ block longjump_gravity
 	es wcsgroup set voidsinjump event_var(userid) 1
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Devilish Form - Allows you to jump further
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Devilish Form - Allows you to jump further
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Assassin From The Void - [Block] Skill: 1 (END)
@@ -132,9 +132,9 @@ block damage_instantkill
 					es_playsound event_var(userid) vo/npc/barney/ba_danger02.wav 1
 					es_delayed 2 es_playsound event_var(userid) ambient/levels/labs/electric_explosion4.wav 1
 				}
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death Shot - Detonating in 2 seconds, dealing 5000 damage!
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death Shot - You're in some deep shit!
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Death Shot - You've run out of detonating bullets
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Death Shot - Detonating in 2 seconds, dealing 5000 damage!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Death Shot - You're in some deep shit!
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Death Shot - You've run out of detonating bullets
 				es_delayed 2 damage event_var(userid) 5000 1 event_var(attacker)
 				es_delayed 2 wcs_centertell event_var(attacker) Death Shot dealt 5000 damage to event_var(es_username)!
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
@@ -250,10 +250,10 @@ block evasion_shake
 				es wcsgroup set evasion_chance event_var(userid) 33
 				es wcsgroup set evasion_count event_var(userid) 0
 			    es_delayed 1.5 wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-			    es_delayed 1.5 es_tell event_var(userid) #multi #green [WCS]: #Voidish Armour - You evaded server_var(wcs_tmp1) attacks last round
+			    es_delayed 1.5 es_tell event_var(userid) #multi #green [WCS]#lightgreen Voidish Armour - You evaded server_var(wcs_tmp1) attacks last round
 				es_delayed 1.5 wcsgroup set evasion event_var(userid) 0
 				es_delayed 1.5 wcsgroup set evasion_chance event_var(userid) 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Voidish Armour - Activated and affected event_var(es_attackername)
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Voidish Armour - Activated and affected event_var(es_attackername)
 			}
 		}
 	}
@@ -324,7 +324,7 @@ block teleport
 	    }
 		es_delayed .2 wcs_color server_var(wcs_userid) 255 20 147 25 1
 		es_delayed 1.2 wcs_color server_var(wcs_userid) 255 20 147 255 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Boost Of The Void - Made you less visible for 1 second!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Boost Of The Void - Made you less visible for 1 second!
 		es_playsound server_var(wcs_userid) wcs/shadow.mp3 1
     }
     
@@ -426,7 +426,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenTeleport - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenTeleport - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

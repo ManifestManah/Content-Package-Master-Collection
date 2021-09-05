@@ -10,7 +10,7 @@ block invisibility
 		wcs_log [Race]: Bank Robber - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -25,7 +25,7 @@ block longjump
 		wcs_log [Race]: Bank Robber - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - You have increased jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - You have increased jump length
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bank Robber - [Block] Skill: 2 (END)
@@ -44,7 +44,7 @@ block mole
 		{
 			es wcs_domole event_var(userid) 4
 			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
 			es wcs_centertell event_var(userid) Warping to enemy spawn in 4 seconds!
 		}
 	}
@@ -69,14 +69,14 @@ block thief
 				es playerget cash wcs_tmp1 event_var(attacker)
 				if (server_var(wcs_tmp1) < server_var(wcs_money)) do
 				{
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Steal - Failed, enemy do not have enough cash
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Steal - Failed, enemy do not have enough cash
 				}
 				if (server_var(wcs_tmp1) => server_var(wcs_money)) do
 				{
 					es wcs_setfx cash event_var(userid) - server_var(wcs_money) 0
 					es wcs_setfx cash event_var(attacker) + server_var(wcs_money) 0
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Steal - event_var(es_attackername) stole server_var(wcs_money) from you!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Steal - You've stolen server_var(wcs_money) from event_var(es_username)!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Steal - event_var(es_attackername) stole server_var(wcs_money) from you!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Steal - You've stolen server_var(wcs_money) from event_var(es_username)!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 20
@@ -154,7 +154,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenQuick Deposit - You quickly leaped forward!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenQuick Deposit - You quickly leaped forward!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -256,7 +256,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenQuick Deposit - You cannot leap that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenQuick Deposit - You cannot leap that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

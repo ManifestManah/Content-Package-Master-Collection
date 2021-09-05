@@ -99,7 +99,7 @@ block protostar
 					ifx false(wcs_rand) do
 					{
 						es wcsgroup set phoenix_ffa event_var(userid) 1
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Protostar - You'll be reborn if you die during this round!
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Protostar - You'll be reborn if you die during this round!
 					}
 				}
 			}
@@ -116,7 +116,7 @@ block protostar
 						es wcsgroup get phoenix wcs_phoenix server_var(wcs_team)
 						es_xmath wcs_phoenix + 1
 						es wcsgroup set phoenix server_var(wcs_team) server_var(wcs_phoenix)
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Protostar - The first to die on your team will be respawned
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Protostar - The first to die on your team will be respawned
 					}
 				}
 			}
@@ -208,9 +208,9 @@ block nebula
 	es_delayed server_var(wcs_duration) es_fire server_var(wcs_userid) server_var(ss_name) kill
 	es wcs_color server_var(wcs_userid) 51 0 102 server_var(wcs_alpha) 1
 	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 151 65 102 255
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Nebula - You disappeared into a dark cloud for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Nebula - You disappeared into a dark cloud for server_var(wcs_duration) seconds
 	es_xmath wcs_duration - 2
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Nebula - You become fully visible in server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Nebula - You become fully visible in server_var(wcs_duration) seconds
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Nebula - [Block] Skill: 4 (END)

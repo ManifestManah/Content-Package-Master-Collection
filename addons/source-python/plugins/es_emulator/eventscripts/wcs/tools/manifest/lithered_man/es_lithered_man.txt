@@ -299,7 +299,7 @@ block immunity
 		{
 			es wcsgroup set ulti_immunity event_var(userid) 1
 			es wcsgroup set swardinvul event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Lamed mode - Immunity immune to ultimates and wards
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Lamed mode - Immunity immune to ultimates and wards
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -322,10 +322,10 @@ block disarm
 			{
 				es_xrand wcs_rand 1 2
 				es wcs_drop event_var(attacker) server_var(wcs_rand)
-				if (server_var(wcs_rand) == 1) then es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Slide facer - Caused you to drop your primary weapon
-				if (server_var(wcs_rand) == 2) then es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Slide facer - Caused you to drop your secondary weapon
-				if (server_var(wcs_rand) == 1) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Slide facer - Made your enemy drop his primary weapon
-				if (server_var(wcs_rand) == 2) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Slide facer - Made your enemy drop his secondary weapon
+				if (server_var(wcs_rand) == 1) then es_tell event_var(attacker) #multi #green [WCS]#lightgreen Slide facer - Caused you to drop your primary weapon
+				if (server_var(wcs_rand) == 2) then es_tell event_var(attacker) #multi #green [WCS]#lightgreen Slide facer - Caused you to drop your secondary weapon
+				if (server_var(wcs_rand) == 1) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Slide facer - Made your enemy drop his primary weapon
+				if (server_var(wcs_rand) == 2) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Slide facer - Made your enemy drop his secondary weapon
 			}
 		}
 	}

@@ -75,7 +75,7 @@ block swords
 		wcs_log [Race]: Sand Raider - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx attackspeed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wielding 4 swords - Increased your attackspeed!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Wielding 4 swords - Increased your attackspeed!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Sand Raider - [Block] Skill: 1 (END)
@@ -99,7 +99,7 @@ block blocking
 			es est_effect_08 #a 0 particle/smokesprites_0004.vmt server_var(vector1) 20 80 1 .7 30 10 .1 185 122 87 35 12 5
 			es_delayed .1 est_effect_08 #a 0 sprites/splodesprite.vmt server_var(vector1) 12 80 1 .6 30 1 150 150 150 135 6 5
 			es_delayed .2 est_effect_08 #a 0 particle/smokesprites_0013.vmt server_var(vector1) 15 80 1 .5 40 10 .2 190 147 118 50 7 5
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Blocking techniques - You'll be able to block incoming knife attacks!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Blocking techniques - You'll be able to block incoming knife attacks!
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -131,8 +131,8 @@ block poison
 					es_delayed 3 wcsgroup set is_slowed event_var(userid) 0
 					es_delayed 3 es_cexec event_var(userid) r_screenoverlay 0
 					es_delayed 3 wcs_speed event_var(userid) 1
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Desert scorpion poison - Poisoned you for 3 seconds!
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Desert scorpion poison - Poisoned event_var(es_username) for 3 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Desert scorpion poison - Poisoned you for 3 seconds!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Desert scorpion poison - Poisoned event_var(es_username) for 3 seconds!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 20
 					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -222,7 +222,7 @@ block sandfury
 				{
 					es_playsound server_var(wcs_userid) weapons\knife_bowie\knife_bowie_draw.wav 1
 				}
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sandfury affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Sandfury affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) You conjured a fury of sand to distort the view of nearby foes!
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 				es_xmath wcs_z1 + 10
@@ -235,18 +235,18 @@ block sandfury
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -286,19 +286,19 @@ block ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -325,7 +325,7 @@ block ultimate_final
 	{
 		es_playsound server_var(wcs_targetid) weapons\knife_bowie\knife_bowie_draw.wav 1
 	}
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Sandfury distorted your view
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Sandfury distorted your view
 	es wcs_fade server_var(wcs_targetid) 185 122 87 185 2 4
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
 	es_xmath wcs_z2 + 10

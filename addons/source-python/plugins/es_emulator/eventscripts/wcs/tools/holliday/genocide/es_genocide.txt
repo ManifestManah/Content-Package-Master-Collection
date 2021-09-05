@@ -93,7 +93,7 @@ block damage
 		{
 			es_xmath wcs_count + 1
 			es damage server_var(wcs_player) server_var(wcs_dmg) 1 event_var(attacker)
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Genocide - Dealt server_var(wcs_dmg) to server_var(wcs_count) enemy/enemies
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Genocide - Dealt server_var(wcs_dmg) to server_var(wcs_count) enemy/enemies
 			es_playsound event_var(attacker) weapons\hegrenade\explode3.wav 1
 			es_playsound server_var(wcs_player) weapons\hegrenade\explode3.wav 1
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_player)
@@ -144,7 +144,7 @@ block dejavu
 	}
 	es_getplayerlocation wcs_x3 wcs_y3 wcs_z3 server_var(wcs_userid)
 	es_delayed server_var(wcs_duration) wcs_teleport server_var(wcs_userid) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Deja vu - You'll go server_var(wcs_duration) seconds back in time!
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Deja vu - You'll go server_var(wcs_duration) seconds back in time!
 	es_xmath wcs_z1 + 15
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 100 750 1 60 10 5 255 255 255 175 5
 	ifx true(wcs_race_debugging) do

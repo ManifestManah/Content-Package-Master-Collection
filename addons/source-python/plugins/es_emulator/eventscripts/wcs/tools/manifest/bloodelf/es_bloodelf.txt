@@ -74,7 +74,7 @@ block shield
 					ifx true(wcs_ffa_enabled) do
 					{
 						es wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Power word: Shield - Gave you server_var(wcs_rand) health
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Power word: Shield - Gave you server_var(wcs_rand) health
 						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 						es_xmath wcs_z2 + 40
 						es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 16 3 400 200 0 150 10 10 255 0
@@ -102,7 +102,7 @@ block shieldhp
 		wcs_log [Race]: Blood Elf Priest - [Block] Skill: 4 (SHIELDHP EXECUTED START)
 	}
 	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Power word: Shield - Gave all allies server_var(wcs_rand) health
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Power word: Shield - Gave all allies server_var(wcs_rand) health
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z2 + 40
 	es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2 16 3 400 200 0 150 10 10 255 0
@@ -169,7 +169,7 @@ block divine
 		wcs_log [Race]: Blood Elf Priest - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx cash event_var(attacker) + server_var(wcs_money) 0
-	es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Divinity - Rewarded you with server_var(wcs_money) gold
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Divinity - Rewarded you with server_var(wcs_money) gold
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Blood Elf Priest - [Block] Skill: 3 (END)
@@ -187,7 +187,7 @@ block transfusion
 	{
 		if (server_var(wcs_ultinotexec) = 1) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Transfusion - Failed you do not have enough cash
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Transfusion - Failed you do not have enough cash
 			es wcs_cancelulti server_var(wcs_userid)
 		}
 	}
@@ -200,7 +200,7 @@ block transfusion
 		}
 		es wcs_setfx cash server_var(wcs_userid) - server_var(wcs_money) 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Transfusion - Received server_var(wcs_addhealth) health for server_var(wcs_money) gold
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Transfusion - Received server_var(wcs_addhealth) health for server_var(wcs_money) gold
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 		es_xmath wcs_z1 + 650

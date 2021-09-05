@@ -56,7 +56,7 @@ block explosive
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 1 (START)
 	}
 	es wcsgroup set skeletonexplosive event_var(userid) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Explosive arrow - Chance to deal aoe damage
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Explosive arrow - Chance to deal aoe damage
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 1 (END)
@@ -111,7 +111,7 @@ block archery
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx attackspeed event_var(userid) =  server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Archery - Attackspeed has been increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Archery - Attackspeed has been increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 2 (END)
@@ -126,7 +126,7 @@ block distance
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Keeping distance - Increased your speed and jump height
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Keeping distance - Increased your speed and jump height
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 3 (END)
@@ -165,25 +165,25 @@ block paraarrow
 			{
 				//everything related to the wcs_userid
 
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Paralysing Arrow affected server_var(wcs_count_players_actually_affected) people
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Paralysing Arrow affected server_var(wcs_count_players_actually_affected) people
 				es wcs_centertell server_var(wcs_userid) Paralyzing arrow paralyzed server_var(wcs_count_players_actually_affected) enemies
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -223,19 +223,19 @@ block ultimate_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}

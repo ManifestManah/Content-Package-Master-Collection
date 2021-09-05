@@ -24,7 +24,7 @@ block spawn
 	}
 	es_delayed .4 es_give event_var(userid) weapon_hegrenade
 	es_delayed .5 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" 5
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weaponry - You spawned with 5 HE Grenades
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Weaponry - You spawned with 5 HE Grenades
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Nade & Nade - [Block] Spawn (END)
@@ -42,7 +42,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Movement speed - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Movement speed - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -100,8 +100,8 @@ block burn
 						es_delayed 4 wcsgroup set is_burning event_var(userid) 0
 						es wcsgroup set fire_owner event_var(userid) event_var(attacker)
 						es wcs_setfx burn event_var(userid) = 1 4
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Waves Of Fire - You were set ablaze for 4 seconds
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Waves Of Fire - You set an enemy on fire for 4 seconds
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Waves Of Fire - You were set ablaze for 4 seconds
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Waves Of Fire - You set an enemy on fire for 4 seconds
 						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 						es_xmath wcs_z1 + 8
 						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 280 .5 20 10 2 220 110 55 200 20
@@ -133,8 +133,8 @@ block blind
 				{
 					es_delayed .5 es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 					es_delayed 2 es_cexec event_var(userid) r_screenoverlay 0
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Metal fragments - Blinded you for 2 seconds
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Metal fragments - Blinded your enemy for 2 seconds
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Metal fragments - Blinded you for 2 seconds
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Metal fragments - Blinded your enemy for 2 seconds
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_math wcs_z1 + 10
 					es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 200 1 25 10 1 0 50 200 225 5
@@ -159,7 +159,7 @@ block ammo
 	es_give server_var(wcs_userid) weapon_smokegrenade
 	es_give server_var(wcs_userid) weapon_hegrenade
 	es_delayed .1 es_setplayerprop server_var(wcs_userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_ammo)
-	es_tell server_var(wcs_userid) #multi #green[WCS]: #lightgreenYou've received server_var(wcs_ammo) high explosive grenades, a smoke grenade and a flashbang
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen You've received server_var(wcs_ammo) high explosive grenades, a smoke grenade and a flashbang
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_math wcs_z1 + 15
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 500 75 1 30 10 1 0 50 200 220 15

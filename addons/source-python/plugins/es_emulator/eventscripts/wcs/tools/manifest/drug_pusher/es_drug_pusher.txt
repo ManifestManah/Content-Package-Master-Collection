@@ -56,7 +56,7 @@ block drug
 block speed
 {
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cardio - You can run faster
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Cardio - You can run faster
 }
 
 block paid
@@ -105,7 +105,7 @@ block heroine
 	if (server_var(wcs_tmp1) > 200) do
 	{
 		es wcs_setfx health server_var(wcs_userid) = 200 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Heroine - Taking more heroeine will kill you, can't get more than 200 health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Heroine - Taking more heroeine will kill you, can't get more than 200 health
 	}
 	if (server_var(wcs_tmp1) <= 200) do
 	{
@@ -113,7 +113,7 @@ block heroine
 		es_delayed 2 es_cexec server_var(wcs_userid) r_screenoverlay 0
 		es wcs_setfx cash server_var(wcs_userid) - 100 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Take a hit - Heroine gave you + server_var(wcs_addhealth) health but drugged you for 2 seconds!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Take a hit - Heroine gave you + server_var(wcs_addhealth) health but drugged you for 2 seconds!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 25
 		es est_effect 10 #a 0 sprites/yellowglow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 20 1.2 10 10 0 234 2 253 210 0

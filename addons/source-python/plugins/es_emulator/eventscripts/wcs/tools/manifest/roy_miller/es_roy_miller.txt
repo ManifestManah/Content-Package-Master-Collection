@@ -49,7 +49,7 @@ block longjump
 		wcs_log [Race]: Roy Miller - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - You have increased jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - You have increased jump length
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Roy Miller - [Block] Skill: 2 (END)
@@ -63,7 +63,7 @@ block health
 		wcs_log [Race]: Roy Miller - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -134,7 +134,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenHyper Jump - You jumped far in to the distance!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenHyper Jump - You jumped far in to the distance!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -236,7 +236,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenHyper Jump - You cannot jump that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenHyper Jump - You cannot jump that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

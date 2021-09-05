@@ -105,8 +105,8 @@ block swap
 					{
 						es wcs_setfx health event_var(attacker) = server_var(wcs_tmp2) 0
 						es wcs_setfx health event_var(userid) = server_var(wcs_tmp1) 0
-						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Chaotic revenge - Swapped health with event_var(es_username) you now have server_var(wcs_tmp2) health
-						es_tell event_var(userid) #multi #green [WCS]: #lightgreen Chaotic revenge - Swapped health with event_var(es_attackername) you now have server_var(wcs_tmp1) health
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Chaotic revenge - Swapped health with event_var(es_username) you now have server_var(wcs_tmp2) health
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Chaotic revenge - Swapped health with event_var(es_attackername) you now have server_var(wcs_tmp1) health
 						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 						es_xmath wcs_z1 + 10
 						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 175 2 5 10 3 150 0 0 150 1
@@ -159,8 +159,8 @@ block reflect
 				es_xrand wcs_speed 10 20
 				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
 				es_xmath wcs_speed / 100
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Detrimental riposte - Reflected server_var(wcs_dmg) damage and gained server_var(wcs_speed)% speed
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Detrimental riposte - Took server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Detrimental riposte - Reflected server_var(wcs_dmg) damage and gained server_var(wcs_speed)% speed
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Detrimental riposte - Took server_var(wcs_dmg) mirror damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 6
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 50 .5 5 10 3 255 158 62 150 1
@@ -204,14 +204,14 @@ block health
 		es_xrand wcs_addhealth 10 40
 		es wcs_setfx speed server_var(wcs_userid) - .15 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Chaotic survival - Lost 15% speed but gained server_var(wcs_addhealth) health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Chaotic survival - Lost 15% speed but gained server_var(wcs_addhealth) health
 	}
 	if (server_var(wcs_tmp5) =< 29) do
 	{
 		es_xset wcs_addhealth 70
 		es wcs_setfx speed server_var(wcs_userid) - .15 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Chaotic survival - Lost 15% speed but gained 70 health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Chaotic survival - Lost 15% speed but gained 70 health
 	}
 	ifx true(wcs_race_debugging) do
 	{

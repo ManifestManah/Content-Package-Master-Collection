@@ -14,12 +14,12 @@ block suit
 	if (server_var(wcs_tmp3) >= 150) do
 	{
 		es_delayed 1 wcs_setfx armor event_var(userid) = 250 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and set your armor to 250
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and set your armor to 250
 	}
 	else do
 	{
 		es_delayed 1 wcs_setfx armor event_var(userid) + server_var(wcs_armor) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and server_var(wcs_armor) armor
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen ZC9A1 suit - Gave you server_var(wcs_addhealth) health and server_var(wcs_armor) armor
 	}
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 20

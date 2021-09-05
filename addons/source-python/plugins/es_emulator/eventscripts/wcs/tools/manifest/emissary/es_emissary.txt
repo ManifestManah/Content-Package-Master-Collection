@@ -43,22 +43,22 @@ block infuse
 			if (server_var(wcs_rand) = 1) do
 			{
 				es_delayed .1 es_give event_var(userid) weapon_m4a1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Infusible weapon - You spawned with a m4a1!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Infusible weapon - You spawned with a m4a1!
 			}
 			if (server_var(wcs_rand) = 2) do
 			{
 				es_delayed .1 es_give event_var(userid) weapon_ak47
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Infusible weapon - You spawned with an ak47!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Infusible weapon - You spawned with an ak47!
 			}
 			if (server_var(wcs_rand) = 3) do
 			{
 				es_delayed .1 es_give event_var(userid) weapon_p90
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Infusible weapon - You spawned with an P90!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Infusible weapon - You spawned with an P90!
 			}
 			if (server_var(wcs_rand) = 4) do
 			{
 				es_delayed .1 es_give event_var(userid) weapon_scar20
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Infusible weapon - You spawned with an Scar20!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Infusible weapon - You spawned with an Scar20!
 			}
 		}
 	}
@@ -355,13 +355,13 @@ block change
 				es wcs_removeweapon event_var(userid) 2
 				es_xrand wcs_rand 1 4
 				if (server_var(wcs_rand) = 1) then es_give event_var(userid) weapon_glock
-				if (server_var(wcs_rand) = 1) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weapon exchanger - Turned your weapon into a glock
+				if (server_var(wcs_rand) = 1) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Weapon exchanger - Turned your weapon into a glock
 				if (server_var(wcs_rand) = 2) then es_give event_var(userid) weapon_deagle
-				if (server_var(wcs_rand) = 2) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weapon exchanger - Turned your weapon into a deagle
+				if (server_var(wcs_rand) = 2) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Weapon exchanger - Turned your weapon into a deagle
 				if (server_var(wcs_rand) = 3) then es_give event_var(userid) weapon_fiveseven
-				if (server_var(wcs_rand) = 3) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weapon exchanger - Turned your weapon into a fiveseven
+				if (server_var(wcs_rand) = 3) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Weapon exchanger - Turned your weapon into a fiveseven
 				if (server_var(wcs_rand) = 4) then es_give event_var(userid) weapon_elite
-				if (server_var(wcs_rand) = 4) then es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weapon exchanger - Turned your weapon into dual elites
+				if (server_var(wcs_rand) = 4) then es_tell event_var(userid) #multi #green [WCS]#lightgreen Weapon exchanger - Turned your weapon into dual elites
 			}
 		}
 	}
@@ -388,8 +388,8 @@ block knockback
 				es_xmath wcs_z1 - 10
 				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es wcs_pushto event_var(userid) server_var(vector1) -1
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Armour knock-back - Pushed away the enemy
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Armour knock-back - Pushed you away from the weapon emissary
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Armour knock-back - Pushed away the enemy
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Armour knock-back - Pushed you away from the weapon emissary
 			}
 		}
 	}
@@ -406,7 +406,7 @@ block health
 		wcs_log [Race]: Weapon Emissary - [Block] Skill: 5 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ionic armour - Gave you server_var(wcs_addhealth) health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Ionic armour - Gave you server_var(wcs_addhealth) health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Weapon Emissary - [Block] Skill: 5 (END)
@@ -436,24 +436,24 @@ block burst
 	if (server_var(wcs_rand) = 1) do
 	{
 		es_delayed 3 es_give server_var(wcs_userid) weapon_m4a1
-		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Laser burst - You received a m4a1!
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Laser burst - You received a m4a1!
 	}
 	if (server_var(wcs_rand) = 2) do
 	{
 		es_delayed 3 es_give server_var(wcs_userid) weapon_ak47
-		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Laser burst - You received an ak47!
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Laser burst - You received an ak47!
 	}
 	if (server_var(wcs_rand) = 3) do
 	{
 		es_delayed 3 es_give server_var(wcs_userid) weapon_p90
-		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Laser burst - You received a P90!
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Laser burst - You received a P90!
 	}
 	if (server_var(wcs_rand) = 4) do
 	{
 		es_delayed 3 es_give server_var(wcs_userid) weapon_scar20
-		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Laser burst - You received a Scar20!
+		es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Laser burst - You received a Scar20!
 	}
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Laser burst - Shoot where you want the laser burst to happen
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Laser burst - Shoot where you want the laser burst to happen
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Weapon Emissary - [Block] Skill: 6 (END)
@@ -470,7 +470,7 @@ event bullet_impact
 			wcs_log [Race]: Weapon Emissary - [Block] Event Bullet_Impact (START)
 		}
 		es wcsgroup set emissary_burst event_var(userid) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Laser burst - Initiated.
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Laser burst - Initiated.
 		ifx true(wcs_ffa_enabled) do
 		{
 			es_xset wcs_targetteam "#alive"

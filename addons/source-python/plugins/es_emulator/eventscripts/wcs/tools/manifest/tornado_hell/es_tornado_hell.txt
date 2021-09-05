@@ -63,7 +63,7 @@ block mole
 		{
 			es wcs_domole event_var(userid) 4
 			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
 			es wcs_centertell event_var(userid) Warping to enemy spawn in 4 seconds!
 		}
 	}
@@ -120,7 +120,7 @@ block bomb
 					//If you have a global counter you wish to retrieve then use this section, also good for general mesasges or commands you only want to happen on the wcs_userid / event_var(userid)
 					
 					es wcs_centertell event_var(userid) The Explosion damaged server_var(wcs_count_players_actually_affected) enemies for server_var(wcs_magnitude) damage
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
 					es_xrand wcs_rand 1 3
 					if (server_var(wcs_rand) == 1) do
 					{
@@ -138,16 +138,16 @@ block bomb
 			}
 			else do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, there are no living enemies!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, there are no living enemies!
 			}
 			if (server_var(wcs_counter) = 0) do
 			{
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, no nearby enemies!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, no nearby enemies!
 			}
 		}
 		else do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Could not target an enemy team
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Could not target an enemy team
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -186,18 +186,18 @@ block wcs_ulti_suicide_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's explosion
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, all nearby enemy targets were immune!
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, all nearby enemy targets were immune!
 						}
 					}
 				}
 				else do
 				{
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen The Explosion - Failed, you can't hit that many targets at once!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, you can't hit that many targets at once!
 				}
 			}
 		}

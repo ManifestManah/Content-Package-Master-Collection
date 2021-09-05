@@ -21,8 +21,8 @@ block spawn
 	es_xrand wcs_tmp2 2 4
 	es_delayed .4 es_give event_var(userid) weapon_hegrenade
 	es_delayed .5 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_tmp2)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Bag of hand grenades - Gave you server_var(wcs_tmp2) high explosive grenades
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like an explosive barrel
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Bag of hand grenades - Gave you server_var(wcs_tmp2) high explosive grenades
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like an explosive barrel
 	es wcsgroup set bconstruction event_var(userid) 15
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 376 3 150 10 0 0 0 255 200 10
@@ -74,7 +74,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -89,7 +89,7 @@ block health
 		wcs_log [Race]: MadCan - Builder Race - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -106,7 +106,7 @@ block longjump
 		wcs_log [Race]: MadCan - Builder Race - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - You have increased jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - You have increased jump length
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: MadCan - Builder Race - [Block] Skill: 3 (END)
@@ -121,7 +121,7 @@ block respawn
 	}
 	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do 
 	{
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reincarnation - Respawning where you died in 3 seconds!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Reincarnation - Respawning where you died in 3 seconds!
 		es wcs_centertell event_var(userid) Respawning where you died in 3
 		es_delayed 1 es wcs_centertell event_var(userid) Respawning where you died in 2
 		es_delayed 2 es wcs_centertell event_var(userid) Respawning where you died in 1
@@ -147,7 +147,7 @@ block build
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - You don't have any props left
 	}
 	if (server_var(wcs_tmp11) => 1) do
 	{
@@ -162,7 +162,7 @@ block build
 		{
 			es wcs_explosive_barrel server_var(wcs_userid)
 		}
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 	}
 	ifx true(wcs_race_debugging) do
 	{

@@ -40,7 +40,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Arctic environment - Allows you to run server_var(wcs_speed)% faster
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Arctic environment - Allows you to run server_var(wcs_speed)% faster
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Frost Demon - [Block] Skill: 1 (END)
@@ -97,7 +97,7 @@ block invis
 		wcs_log [Race]: Frost Demon - [Block] Skill: 3 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Pure ice - Made you less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Pure ice - Made you less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Frost Demon - [Block] Skill: 3 (END)
@@ -183,7 +183,7 @@ block breeze
 				{
 					es playsound server_var(wcs_userid) ambient\wind\css15_wind_02.wav 1
 				}
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Cold Breeze - Slowed down server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Cold Breeze - Slowed down server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) You've summoned a Cold breeze affecting server_var(wcs_count_players_actually_affected) enemies
 				es playerget viewcoord server_var(wcs_userid) wcs_2 wcs_y2 wcs_z2
 				es_xmath wcs_z2 + 10
@@ -195,18 +195,18 @@ block breeze
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -246,19 +246,19 @@ block coldbreeze_path
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}

@@ -10,7 +10,7 @@ block spawn
 		wcs_log [Race]: Angel Of The Light - [Block] Spawn (START)
 	}
 	es wcsgroup set noflash event_var(userid) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angel of the light - You cannot be flashed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Angel of the light - You cannot be flashed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 80
 	es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 500 2 10 300 0 255 255 255 200 1
@@ -70,7 +70,7 @@ block gravity
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen White feathers - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen White feathers - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Angel Of The Light - [Block] Skill: 1 (END)
@@ -115,7 +115,7 @@ block health
 		wcs_log [Race]: Angel Of The Light - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mental health - Increased your health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Mental health - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Angel Of The Light - [Block] Skill: 3 (END)
@@ -135,7 +135,7 @@ block weapon
 			es wcs_removeweapon event_var(userid) 1
 			es_delayed .2 es_give event_var(userid) weapon_m4a1
 			es_delayed .5 wcs_setfx 1stclip event_var(userid) = 50 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angelic armoury - Received a m4a1 with 50 bullets
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Angelic armoury - Received a m4a1 with 50 bullets
 		}
 	}
 	ifx true(wcs_race_debugging) do

@@ -15,7 +15,7 @@ block cash
 		{
 			es_xrand wcs_money 2500 10000
 			es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Jackpot - You won server_var(wcs_money) $!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Jackpot - You won server_var(wcs_money) $!
 			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 			es_xmath wcs_z2 + 13
 			es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 450 3 60 10 .5 255 200 0 255 1
@@ -43,7 +43,7 @@ block cash_to_health
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen A bigger slot - You gained more health
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen A bigger slot - You gained more health
 			es playerget cash wcs_money event_var(userid)
 			if (server_var(wcs_money) >= 0) then es_xif (server_var(wcs_money) <= 2000) then es wcs_setfx health event_var(userid) + 10 0
 			if (server_var(wcs_money) <= 2000) then es_xif (server_var(wcs_money) <= 4000) then es wcs_setfx health event_var(userid) + 20 0
@@ -126,7 +126,7 @@ block cash_to_speed
 	if (server_var(wcs_tmp2) < 2500) do
 	{
 		es_xset wcs_ultinotexec 1
-		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Wheels - Failed; not enough cash
+		if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Wheels - Failed; not enough cash
 		if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	}
 	if (server_var(wcs_tmp2) >= 2500) do
@@ -134,7 +134,7 @@ block cash_to_speed
 		es_playsound server_var(wcs_userid) wcs/speed.mp3 .8
 		es wcs_setfx cash server_var(wcs_userid) - 2500 0
 		es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Wheels - You paid 2500$ and received more speed
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Wheels - You paid 2500$ and received more speed
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 100
 		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 200 1 50 10 0 180 180 200 255 2

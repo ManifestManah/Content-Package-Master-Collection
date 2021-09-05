@@ -45,7 +45,7 @@ block invisibility
 		wcs_log [Race]: Hirako Shinji - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Invisibility - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
 	es_playsound event_var(userid) wcs/invisibility.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -63,7 +63,7 @@ block regeneration
 	{
 		es_xrand wcs_duration 5 15
 		es wcs_regeneration event_var(userid) server_var(wcs_addhealth) server_var(wcs_duration) 175 1000 50
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Regenaretion - Heals you when you are below 175 health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Regenaretion - Heals you when you are below 175 health
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -133,7 +133,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSonido - Brought you to your new location!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSonido - Brought you to your new location!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -235,7 +235,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenSonido - Cannot bring you that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenSonido - Cannot bring you that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

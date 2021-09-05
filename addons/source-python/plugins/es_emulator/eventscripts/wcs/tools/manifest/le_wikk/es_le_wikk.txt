@@ -52,7 +52,7 @@ block regeneration
 	{
 		es_xrand wcs_duration 5 15
 		es wcs_regeneration event_var(userid) server_var(wcs_addhealth) server_var(wcs_duration) 175 1000 50
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Regenaretion - Heals you when you are below 175 health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Regenaretion - Heals you when you are below 175 health
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -71,7 +71,7 @@ block ultimate_immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set ulti_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ultimate immunity - Renders you immune to enemy ultimates
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Ultimate immunity - Renders you immune to enemy ultimates
 			es_playsound event_var(userid) wcs/divine.mp3 .8
 		}
 	}

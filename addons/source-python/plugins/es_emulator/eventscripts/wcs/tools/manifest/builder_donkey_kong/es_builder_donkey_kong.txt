@@ -24,7 +24,7 @@ block spawn
 	es_xrand wcs_tmp3 2 3
 	es_delayed .4 es_give event_var(userid) weapon_hegrenade
 	es_delayed .5 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_tmp3)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Detonators - You received server_var(wcs_tmp3) barrel detonators
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Detonators - You received server_var(wcs_tmp3) barrel detonators
 	es wcs_setfx speed event_var(userid) = 1.55 0
 	es_delayed .1 es_give event_var(userid) weapon_knife
 	es_delayed .1 es_give event_var(userid) weapon_hegrenade
@@ -68,7 +68,7 @@ block health
 		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -107,7 +107,7 @@ block barreldrop
 						es_delayed 3 wcs_setmodel event_var(attacker) 0
 					}
 					es wcs_setfx speed event_var(attacker) - .35 3
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Barrel drop - You were thrown into a barrel
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Barrel drop - You were thrown into a barrel
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_xmath wcs_z1 + 10
 					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -133,7 +133,7 @@ block longjump_gravity
 	}
 	es wcs_setfx longjump event_var(userid) + .5 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - Gave you longjump and lower gravity
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - Gave you longjump and lower gravity
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 3 (END)
@@ -147,7 +147,7 @@ block wallclimb
 		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 4 (START)
 	}
 	es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize server_var(wcs_range)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wall climb - You can now climb over tall objects
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Wall climb - You can now climb over tall objects
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 4 (END)
@@ -163,7 +163,7 @@ block build
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - You don't have any props left
 	}
 	if (server_var(wcs_tmp11) => 1) do
 	{
@@ -178,7 +178,7 @@ block build
 		{
 			es wcs_explosive_barrel server_var(wcs_userid)
 		}
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 	}
 	ifx true(wcs_race_debugging) do
 	{

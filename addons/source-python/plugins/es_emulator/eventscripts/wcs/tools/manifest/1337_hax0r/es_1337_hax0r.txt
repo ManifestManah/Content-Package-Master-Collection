@@ -53,7 +53,7 @@ block headshot_immunity
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set headshot_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Headshot Immunity - You won't take damage from headshots
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Headshot Immunity - You won't take damage from headshots
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -116,8 +116,8 @@ block shake
 				es wcs_shake event_var(userid) 15 22 2
 				es_playsound event_var(userid) ambient/weather/thunder2.wav 1
 				es_playsound event_var(attacker) ambient/weather/thunder2.wav 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shake - You were shaken for 2 seconds
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shake - You shook event_var(es_username)
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shake - You were shaken for 2 seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Shake - You shook event_var(es_username)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 				es_xmath wcs_z1 + 20
@@ -142,7 +142,7 @@ block speed_gravity
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mobility - You can run faster and jump higher
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Mobility - You can run faster and jump higher
 	es_playsound event_var(userid) skills/hymn.mp3 .8
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_delayed .2 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 500 1.5 60 10 .8 255 255 255 255 5

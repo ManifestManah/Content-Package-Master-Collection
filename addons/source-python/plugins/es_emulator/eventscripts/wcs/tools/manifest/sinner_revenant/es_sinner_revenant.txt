@@ -32,7 +32,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Running from death - Received server_var(wcs_speed)% speed
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Running from death - Received server_var(wcs_speed)% speed
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Sinner Revenant - [Block] Skill: 1 (END)
@@ -104,8 +104,8 @@ block blind
 				es est_effect 10 #a 0 cs_havana/metalgear001a.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 3 2 0 5 5 0 0 5 1
 				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 				es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen White sight - Blinded you for 1 second
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen White sight - Blinded your target for 1 second
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen White sight - Blinded you for 1 second
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen White sight - Blinded your target for 1 second
 			}
 		}
 	}
@@ -132,73 +132,73 @@ block creation
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_ak47
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an AK47 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created an AK47 
 	}
     if (server_var(wcs_tmp3) = 2) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_famas
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Famas 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a Famas 
 	}
     if (server_var(wcs_tmp3) = 3) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_m4a1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an M4a1 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created an M4a1 
 	}
     if (server_var(wcs_tmp3) = 4) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_aug
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an Aug 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created an Aug 
 	}
     if (server_var(wcs_tmp3) = 5) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 2
 		es_delayed .2 es_give server_var(wcs_userid) weapon_elite
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created some Dual elites 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created some Dual elites 
 	}
     if (server_var(wcs_tmp3) = 6) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 2
 		es_delayed .2 es_give server_var(wcs_userid) weapon_fiveseven
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Fiveseven 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a Fiveseven 
 	}
     if (server_var(wcs_tmp3) = 7) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_xm1014
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a Xm1014 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a Xm1014 
 	}
     if (server_var(wcs_tmp3) = 8) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_mac10
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a mac10 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a mac10 
 	}
     if (server_var(wcs_tmp3) = 9) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_ump45
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created an Ump45 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created an Ump45 
 	}
     if (server_var(wcs_tmp3) = 10) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_p90
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a P90 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a P90 
 	}
     if (server_var(wcs_tmp3) = 11) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 1
 		es_delayed .2 es_give server_var(wcs_userid) weapon_m249
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a M249 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a M249 
 	}	
     if (server_var(wcs_tmp3) = 12) do
 	{
 		es wcs_removeweapon server_var(wcs_userid) 2
 		es_delayed .2 es_give server_var(wcs_userid) weapon_deagle
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Creation - You've created a deagle 
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Creation - You've created a deagle 
 	}
 	ifx true(wcs_race_debugging) do
 	{

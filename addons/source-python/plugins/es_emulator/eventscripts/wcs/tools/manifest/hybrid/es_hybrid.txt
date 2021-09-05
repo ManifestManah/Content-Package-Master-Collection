@@ -56,8 +56,8 @@ block skulls
 					es wcsgroup get hybridskulls vector2 event_var(attacker)
 					es_xmath vector2 + 1
 					es wcsgroup set hybridskulls event_var(attacker) server_var(vector2)
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Skull hunter - You acquired a skull
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Skull hunter - You currently have server_var(vector2) skulls
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Skull hunter - You acquired a skull
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Skull hunter - You currently have server_var(vector2) skulls
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 30
@@ -92,7 +92,7 @@ block longjump
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
 	es_xmath wcs_multiplier * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra tail - Has increased your jump length to server_var(wcs_multiplier)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Hydra tail - Has increased your jump length to server_var(wcs_multiplier)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hybrid - [Block] Skill: 2 (END)
@@ -107,7 +107,7 @@ block gravity
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Zealot legs - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Zealot legs - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hybrid - [Block] Skill: 3 (END)
@@ -121,7 +121,7 @@ block invis
 		wcs_log [Race]: Hybrid - [Block] Skill: 4 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Dark templars coat - You're now less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Dark templars coat - You're now less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Hybrid - [Block] Skill: 4 (END)
@@ -161,17 +161,17 @@ block mineral
 	es wcsgroup get hybridskulls vector8 event_var(userid)
 	if (server_var(vector8) == 0) do
 	{
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals - You have 0 skulls and therefore got 0 health and cash
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Minerals - You have 0 skulls and therefore got 0 health and cash
 	}
 	if (server_var(vector8) != 1) do
 	{	
 		es_math vector8 * server_var(wcs_addhealth)
 		es wcs_setfx health event_var(userid) + server_var(vector8) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals and gas - Gave you server_var(vector8) health
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Minerals and gas - Gave you server_var(vector8) health
 		es_math vector8 / server_var(wcs_addhealth)
 		es_math vector8 * server_var(wcs_money)
 		es wcs_setfx cash event_var(userid) + server_var(vector8) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Minerals and gas - Gave you server_var(vector8) cash
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Minerals and gas - Gave you server_var(vector8) cash
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -236,7 +236,7 @@ block warp
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenWarp - You Warped!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenWarp - You Warped!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -338,7 +338,7 @@ block warp
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenWarp - Cannot transport you that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenWarp - Cannot transport you that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do

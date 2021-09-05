@@ -229,7 +229,7 @@ block immunity
 			es wcsgroup set is_slowed event_var(userid) 1
 			es wcsgroup set is_frozen event_var(userid) 1
 			es wcsgroup set is_paralyzed event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Curse Immunity - You've become immune to slow, freeze and paralyzing effects
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Curse Immunity - You've become immune to slow, freeze and paralyzing effects
 		}
 	}
 	ifx true(wcs_race_debugging) do

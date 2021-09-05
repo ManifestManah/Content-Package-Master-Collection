@@ -19,7 +19,7 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;fiveseven;deagle;revolver;tec9;cz75a;sawedoff;nova;xm1014;mag7"
 	}
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Weaponry - You cannot use pistols or shotguns
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Weaponry - You cannot use pistols or shotguns
 	es wcsgroup set sajayin event_var(userid) 1
 	ifx true(wcs_race_debugging) do
 	{

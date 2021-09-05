@@ -82,7 +82,7 @@ block health
 	}
 	es_xrand wcs_addhealth 5 35
 	es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Motivational warcry - Granted you server_var(wcs_addhealth) health
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Motivational warcry - Granted you server_var(wcs_addhealth) health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 10
 	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 server_var(wcs_radius) 1 25 10 0 215 215 215 255 8
@@ -128,7 +128,7 @@ block preparedt
 	{
 		es_delayed .1 es_give server_var(wcs_userid) weapon_ak47
 		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour and an ak47
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour and an ak47
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 60
 		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.1 215
@@ -137,7 +137,7 @@ block preparedt
 	if (server_var(wcs_rand) > server_var(wcs_chance)) do
 	{
 		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -156,7 +156,7 @@ block preparedct
 	{
 		es_delayed .1 es_give server_var(wcs_userid) weapon_m4a1
 		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour and a ak47
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour and a ak47
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 60
 		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 1.1 215
@@ -165,7 +165,7 @@ block preparedct
 	if (server_var(wcs_rand) > server_var(wcs_chance)) do
 	{
 		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen We came prepared - You received server_var(wcs_armor) armour
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -293,7 +293,7 @@ block victoryt
 		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYT EXECUTED START)
 	}
 	es_delayed .1 es_give server_var(wcs_player) weapon_c4
-	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Victory in focus - Gave you a C4 explosive
+	es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Victory in focus - Gave you a C4 explosive
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYT EXECUTED END)
@@ -307,7 +307,7 @@ block victoryct
 		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYCT EXECUTED START)
 	}
 	es_delayed .1 es_give server_var(wcs_player) item_defuser
-	es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen Victory in focus - Gave you a defuse kit
+	es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Victory in focus - Gave you a defuse kit
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Oxiya - The Conqueror - [Block] Skill: 4 (VICTORYCT EXECUTED END)
@@ -361,7 +361,7 @@ block death
 	{
 			es_xset wcs_ultinotexec 1
 	}
-	if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Death sentence - Failed, no nearby allies
+	if (server_var(wcs_ultinotexec) = 1) then es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Death sentence - Failed, no nearby allies
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
 	{

@@ -15,7 +15,7 @@ block spawn
 		es_playsound event_var(userid) ambient/atmosphere/city_skypass1.wav .7
 	}
 	es wcsgroup set solariswalk event_var(userid) 1
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Solaris the Sunfang - Arrived with you sol stone
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Solaris the Sunfang - Arrived with you sol stone
 	es_xmath wcs_smokestack_counter + 1
 	es_give event_var(userid) point_tesla
 	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
@@ -184,7 +184,7 @@ block sunglaive
 						es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_exists ex userid server_var(wcs_targetid);if (server_var(ex) = 1) then es_xdoblock wcs/tools/manifest/solaris/sundamage"
 						if (server_var(wcs_counter) > 0) do
 						{
-							es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Fire glaive - Dealt server_var(wcs_dmg) damage to server_var(wcs_counter) enemies
+							es_tell event_var(attacker) #multi #green [WCS]#lightgreen Fire glaive - Dealt server_var(wcs_dmg) damage to server_var(wcs_counter) enemies
 						}
 					}
 				}
@@ -204,7 +204,7 @@ block sundamage
 		wcs_log [Race]: Solaris - The Sunfang - [Block] Skill: 2 (SUNDAMAGE EXECUTED START)
 	}
 	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 event_var(attacker)
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Fire glaive - Took server_var(wcs_dmg) from a fire glaive
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Fire glaive - Took server_var(wcs_dmg) from a fire glaive
 	es wcs_fade event_var(attacker) 255 20 20 120 1 2
 	es wcs_fade server_var(wcs_targetid) 255 20 20 120 1 2	
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
@@ -271,8 +271,8 @@ block incendium_part2
 		es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_2.wav .8
 		es_delayed .2 es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_2.wav .8
 		es_delayed .3 es_playsound server_var(wcs_targetid) weapons\molotov\fire_ignite_1.wav .8
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Incendium - Dealt server_var(wcs_dmg) fire damage and set you on fire!
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Incendium - Lit nearby enemies on fire and inflicted server_var(wcs_dmg) fire damage 
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Incendium - Dealt server_var(wcs_dmg) fire damage and set you on fire!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Incendium - Lit nearby enemies on fire and inflicted server_var(wcs_dmg) fire damage 
 		es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
 		es_delayed .2 es_playsound event_var(userid) weapons\molotov\fire_ignite_2.wav .8
 		es_delayed .3 es_playsound event_var(userid) weapons\molotov\fire_ignite_1.wav .8
@@ -325,13 +325,13 @@ block solrider
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -360,7 +360,7 @@ block ultimate_checks
 			}
 			if (server_var(wcs_tmp) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 				es_xset wcs_ultinotexec 1
 			}
 		}
@@ -386,8 +386,8 @@ block ultimate_final
 		es wcs_fade server_var(wcs_targetid) 240 120 120 180 2 4
 		es wcsgroup set fire_owner server_var(wcs_targetid) server_var(wcs_userid)
 		es wcs_setfx burn server_var(wcs_targetid) = 1 3
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sun Glaive - Set engulfed you in vicious flames
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Sun Glaive - Engulfed you in event_var(es_username) vicious flames
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Sun Glaive - Set engulfed you in vicious flames
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Sun Glaive - Engulfed you in event_var(es_username) vicious flames
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
 		es_xmath wcs_z1 + 40
@@ -479,7 +479,7 @@ block ultimate_final
 	}
 	ifx true(wcs_tmp3) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was already on fire!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was already on fire!
 		es_xset wcs_ultinotexec 1
 	}
 	ifx true(wcs_race_debugging) do

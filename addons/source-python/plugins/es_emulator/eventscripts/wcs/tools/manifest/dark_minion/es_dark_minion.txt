@@ -62,8 +62,8 @@ block drug
 				es_cexec event_var(userid) r_screenoverlay effects/tp_eyefx/tp_eyefx.vmt
 				es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
 				es wcs_pushed event_var(userid) 0 0 server_var(wcs_push)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Pulsation - You've got pulsated for 1 second
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Pulsation - You pulsated the target for 1 second
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Pulsation - You've got pulsated for 1 second
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Pulsation - You pulsated the target for 1 second
 				es wcs_fade event_var(userid) 255 128 155 210 1.5 4
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 120
@@ -102,7 +102,7 @@ block flicker
 				es_delayed .2 wcs_color event_var(userid) 0 0 200 225 1
 				es_delayed 1.2 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 1
 				es_delayed 1.5 wcs_color event_var(userid) 255 255 255 255 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Taunt - You're changing color while flickering invisible
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Taunt - You're changing color while flickering invisible
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 10
 				es est_effect 11 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) .2 3 255
@@ -154,13 +154,13 @@ block summon
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -199,7 +199,7 @@ block ultimate_checks
 				}
 				if (server_var(wcs_tmp) == 1) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, the targeted enemy was immune!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -230,12 +230,12 @@ block ultimate_final
 	es_delayed 2.8 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 50 120 .3 20 10 1.8 255 0 128 255 10
 	es_xmath wcs_z3 + 45
 	es_playsound server_var(wcs_userid) ambient\machines\wall_move5.wav 1
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Summon - You have summoned an enemy to fight you
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Summon - You have summoned an enemy to fight you
 	es wcs_centertell server_var(wcs_userid) Your enemy will appear in 3 seconds!
 	es_delayed 1 wcs_centertell server_var(wcs_userid) Your enemy will appear in 2 seconds!
 	es_delayed 2 wcs_centertell server_var(wcs_userid) Your enemy will appear in 1 seconds!
 	es_delayed 3 wcs_centertell server_var(wcs_userid) You've summoned forth your enemy!
-	es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Summon - Your enemy has arrived for battle!
+	es_delayed 3 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Summon - Your enemy has arrived for battle!
 
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
 	es_xmath wcs_z2 + 45
@@ -250,12 +250,12 @@ block ultimate_final
 	es_delayed 2.8 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 120 .3 20 10 1.8 255 0 128 255 10
 	es_xmath wcs_z2 + 45
 	es_playsound server_var(wcs_targetid) ambient\machines\wall_move5.wav 1
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Summon - You have been summoned to fight a Dark Minion
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Summon - You have been summoned to fight a Dark Minion
 	es wcs_centertell server_var(wcs_targetid) Dark Minion will summon you in 3 seconds!
 	es_delayed 1 wcs_centertell server_var(wcs_targetid) Dark Minion will summon you in 2 seconds!
 	es_delayed 2 wcs_centertell server_var(wcs_targetid) Dark Minion will summon you in 1 seconds!
 	es_delayed 3 wcs_centertell server_var(wcs_targetid) Dark Minion has summoned you to him!
-	es_delayed 3 es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Summon - You've arrived, prepare for battle!
+	es_delayed 3 es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Summon - You've arrived, prepare for battle!
 	es_delayed 3 wcs_teleport server_var(wcs_targetid) server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
 
 	ifx true(wcs_race_debugging) do

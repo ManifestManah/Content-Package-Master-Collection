@@ -101,7 +101,7 @@ block enchantment
 		wcs_log [Race]: Blood Lord - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Enchantment - Gave you server_var(wcs_addhealth) extra health
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Enchantment - Gave you server_var(wcs_addhealth) extra health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 150
@@ -119,7 +119,7 @@ block invisibility
 		wcs_log [Race]: Blood Lord - [Block] Skill: 3 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Oozed in blood - You have become harder to see
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Oozed in blood - You have become harder to see
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 20
 	es est_effect 10 #a 0 effects/com_shield003a.vmt server_var(wcs_x1) server_var(wcs_y1)server_var(wcs_z1) 90 60 3 120 100 0 211 211 10 255 10
@@ -149,11 +149,11 @@ block shield
 	es wcsgroup set evasion_chance server_var(wcs_userid) server_var(wcs_chance)
 	es wcsgroup set evasion_count server_var(wcs_userid) 0
     es_delayed server_var(wcs_duration) wcsgroup get evasion_count wcs_tmp1 server_var(wcs_userid)
-    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blood Shield - You evaded server_var(wcs_tmp1) attacks
+    es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood Shield - You evaded server_var(wcs_tmp1) attacks
 	es_delayed server_var(wcs_duration) wcsgroup set evasion server_var(wcs_userid) 0
 	es_delayed server_var(wcs_duration) wcsgroup set evasion_chance server_var(wcs_userid) 0
 	es est_effect 4 #a 0 sprites/lgtning.vmt server_var(wcs_userid) 1 10 10 10 100 0 0 180
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blood shield - server_var(wcs_chance)% chance to evade for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood shield - server_var(wcs_chance)% chance to evade for server_var(wcs_duration) seconds
 	es wcs_centertell server_var(wcs_userid) Increased your chance to evade for server_var(wcs_duration) seconds!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 5
@@ -163,7 +163,7 @@ block shield
 	es_xmath wcs_z1 + 10
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 100 101 server_var(wcs_duration) 25 10 0 80 0 0 255 8
 	es_xmath wcs_duration - 1
-	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Blood shield - Your chance of evading is fading...
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood shield - Your chance of evading is fading...
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Blood Lord - [Block] Skill: 4 (END)

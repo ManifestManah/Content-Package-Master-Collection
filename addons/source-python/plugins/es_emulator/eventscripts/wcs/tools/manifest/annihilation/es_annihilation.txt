@@ -115,8 +115,8 @@ block grenade
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen HE blast - Dealt server_var(wcs_dmg) additional damage
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen HE Blast - Dealt server_var(wcs_dmg) additional damage to you
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen HE blast - Dealt server_var(wcs_dmg) additional damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen HE Blast - Dealt server_var(wcs_dmg) additional damage to you
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 15
 				es est_effect 10 #a 0 sprites\laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 120 80 1.5 8 10 5 128 0 128 200 1
@@ -202,7 +202,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Warmen - You're running server_var(wcs_speed)% faster
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Warmen - You're running server_var(wcs_speed)% faster
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Annihilation - [Block] Skill: 4 (END)

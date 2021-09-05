@@ -20,7 +20,7 @@ block invisibility
 	if (event_var(es_userdead) = 0) do
 	{
 		es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wind walk - You've become less visible
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Wind walk - You've become less visible
 		es_playsound event_var(userid) wcs/invisibility.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 1 30 10 0.8 255 100 100 255 1
@@ -45,21 +45,21 @@ block disarm
 				if (server_var(wcs_rand) == 1) do
 				{
 					es wcs_drop event_var(userid) 2
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Disarm - You were forced to drop your secondary weapon
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Disarm - You forced your target to drop his secondary weapon
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Disarm - You were forced to drop your secondary weapon
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Disarm - You forced your target to drop his secondary weapon
 				}
 				if (server_var(wcs_rand) == 2) do
 				{
 					es wcs_drop event_var(userid) 1
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Disarm - You were forced to drop your primary weapon
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Disarm - You forced your target to drop his primary weapon
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Disarm - You were forced to drop your primary weapon
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Disarm - You forced your target to drop his primary weapon
 				}
 				if (server_var(wcs_rand) == 3) do
 				{
 					es wcs_drop event_var(userid) 1
 					es wcs_drop event_var(userid) 2
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Disarm - You were forced to drop both of your weapons
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Disarm - You forced your target to drop both of his weapons
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Disarm - You were forced to drop both of your weapons
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Disarm - You forced your target to drop both of his weapons
 				}
 			}
 		}
@@ -74,8 +74,8 @@ block gravity_evasion
 		es wcsgroup set evasion event_var(userid) 1
 		es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
 	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-	    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evade - You evaded server_var(wcs_tmp1) attacks last round
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Evade - You jump 35% higher and have server_var(wcs_chance)% chance to evade
+	    es_tell event_var(userid) #multi #green [WCS]#lightgreen Evade - You evaded server_var(wcs_tmp1) attacks last round
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Evade - You jump 35% higher and have server_var(wcs_chance)% chance to evade
 	}
 }
 
@@ -114,25 +114,25 @@ block stomp
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/mr_x/stomp_path"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Water Stomp affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Water Stomp affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Water stomp dealt 20 damage to server_var(wcs_count_players_actually_affected) enemies
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 }
@@ -174,19 +174,19 @@ block stomp_path
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -201,7 +201,7 @@ block stomp_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
@@ -209,7 +209,7 @@ block stomp_final
 		es_delayed .7 wcsgroup set is_frozen server_var(wcs_targetid) 0
 		es_delayed .2 wcs_setfx freeze server_var(wcs_targetid) = 1 .5
 	}
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Water Stomp knocked you up and did 20 damage 
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Water Stomp knocked you up and did 20 damage 
 	es wcs_centertell server_var(wcs_targetid) You took 20 damage from Water stomp
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)

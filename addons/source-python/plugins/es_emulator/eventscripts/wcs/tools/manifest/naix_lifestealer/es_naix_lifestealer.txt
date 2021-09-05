@@ -59,7 +59,7 @@ block kill
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set naix_infest event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Infest - You gain health from killing foes, killing while crouching will warp you to their location
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Infest - You gain health from killing foes, killing while crouching will warp you to their location
 			es_playsound event_var(userid) wcs/vampiricstrike.mp3 .8
 		}
 	}
@@ -125,7 +125,7 @@ event player_death
 		{
 			es_xrand wcs_addhealth 15 30
 			es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Infest - Gave you server_var(wcs_addhealth) health
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Infest - Gave you server_var(wcs_addhealth) health
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_xmath wcs_z1 + 5
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 320 1 30 10 0 128 0 0 175 15
@@ -139,7 +139,7 @@ event player_death
 				es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 320 1 20 10 0 180 0 0 255 20
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es wcs_teleport event_var(attacker) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Infest - Teleported you to your victim's location
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Infest - Teleported you to your victim's location
 				es_playsound event_var(attacker) wcs/teleport.mp3 .8
 				es_playsound event_var(userid) wcs/teleport.mp3 .8
 			}
@@ -167,7 +167,7 @@ block health
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Blood bath - Increased your health by server_var(wcs_addhealth)
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Blood bath - Increased your health by server_var(wcs_addhealth)
 	}
 	ifx true(wcs_race_debugging) do
 	{

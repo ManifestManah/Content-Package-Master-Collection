@@ -56,7 +56,7 @@ block health_speed_gravity
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_delayed .2 wcs_setfx speed event_var(userid) = 1.75 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .65 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shinobi Agility - You received HP and became more mobile
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Shinobi Agility - You received HP and became more mobile
 	es_playsound event_var(userid) skills/hymn.mp3 .8
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 5
@@ -77,7 +77,7 @@ block invisibility
 		wcs_log [Race]: Shadow Shinobi - [Block] Skill: 2 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Stick to the shadows - You've become less visible
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Stick to the shadows - You've become less visible
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Shadow Shinobi - [Block] Skill: 2 (END)
@@ -103,8 +103,8 @@ block push
 					es_delayed 1.2 wcsgroup set is_frozen event_var(userid) 0
 					es wcs_pushed event_var(userid) 0 0 420
 					es_delayed .2 wcs_setfx freeze event_var(userid) = 1 1
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Total Assassination - You pushed your enemy
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Total Assassination - You got pushed by an enemy
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Total Assassination - You pushed your enemy
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Total Assassination - You got pushed by an enemy
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 10
 					es_delayed .1 est_effect 10 #a 0 sprites/glow07.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 700 1 2.5 50 255 3 0 0 255 255 1.5
@@ -134,7 +134,7 @@ block mole
 		{
 			es wcs_domole event_var(userid) 4
 			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Mole - You'll teleport to the enemy spawn in 4 seconds!
 			es wcs_centertell event_var(userid) Warping to enemy spawn in 4 seconds!
 		}
 	}
@@ -182,25 +182,25 @@ block shadow_curse
 			es wcs_foreach player wcs_targetid server_var(wcs_targetteam) "es_xdoblock wcs/tools/manifest/shadow_shinobi/ultimate_checks_curse"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Shadow Curse - You've cast a curse on the opposing team		
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Shadow Curse - You've cast a curse on the opposing team		
 				es wcs_centertell server_var(wcs_userid) Shadow Curse affected server_var(wcs_count_players_actually_affected) enemies
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -250,19 +250,19 @@ block ultimate_checks_curse
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -288,7 +288,7 @@ block ultimate_final_curse
 		es_delayed server_var(wcs_duration) wcsgroup set is_slowed server_var(wcs_targetid) 0
 		es wcs_setfx speed server_var(wcs_targetid) - .7 server_var(wcs_duration)
 		es wcs_setfx gravity server_var(wcs_targetid) + .5 server_var(wcs_duration)
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Shadow Curse - Made your body feel heavy and slowed you down
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Shadow Curse - Made your body feel heavy and slowed you down
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
 		es est_effect 10 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 375 .5 20 10 0 162 72 162 220 3
 		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 375 .5 20 10 0 162 72 162 220 1

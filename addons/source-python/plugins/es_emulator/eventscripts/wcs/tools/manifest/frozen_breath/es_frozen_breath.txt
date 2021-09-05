@@ -40,7 +40,7 @@ block speed
 	if (event_var(es_userdead) = 0) do
 	{
 		es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ice skate - You recived bonus speed
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice skate - You recived bonus speed
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -67,8 +67,8 @@ block freeze
 					es_delayed 1.5 wcsgroup set is_frozen event_var(userid) 0
 					es wcs_fade event_var(userid) 0 0 200 40 1 1
 					es wcs_setfx freeze event_var(userid) = 1 1.5
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Lips of ice - You froze an enemy for 1.5 seconds
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Lips of ice - You've been frozen for 1.5 seconds
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Lips of ice - You froze an enemy for 1.5 seconds
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Lips of ice - You've been frozen for 1.5 seconds
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 1 120 150 0 0 50 255 100 5
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 11 120 150 0 0 50 255 100 5
@@ -132,8 +132,8 @@ block health_evade
 		es wcsgroup set evasion event_var(userid) 1
 		es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
 	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-	    es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ice block - You evaded server_var(wcs_tmp1) attacks last round
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ice block - You received 25 health and server_var(wcs_chance) chance to evade
+	    es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice block - You evaded server_var(wcs_tmp1) attacks last round
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice block - You received 25 health and server_var(wcs_chance) chance to evade
 		es wcs_setfx health event_var(userid) + 25 0
 		es_delayed .5 wcs_color event_var(userid) 0 0 255 255 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -164,7 +164,7 @@ block team_health
 		{
 			es_playsound server_var(wcs_userid) ambient\wind\css15_wind_01.wav .8
 		}
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen They shall not freeze - You feel a gentle breeze
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen They shall not freeze - You feel a gentle breeze
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
 		es wcs_fade server_var(wcs_userid) 0 0 255 40 1 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
@@ -209,7 +209,7 @@ block team_health_exe
 		{
 			es_playsound server_var(wcs_targetid) ambient\wind\css15_wind_01.wav .8
 		}
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen They shall not freeze - You feel a gentle breeze
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen They shall not freeze - You feel a gentle breeze
 		es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
 		es wcs_fade server_var(wcs_targetid) 0 0 255 40 1 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)

@@ -29,8 +29,8 @@ block drug_angle
 				es_delayed 2.5 es_setang event_var(userid) 0 0 -200
 				es_delayed 3 wcs_fade event_var(userid) 255 255 255 255 1 1
 				es_delayed 3 es_setang event_var(userid) 0 0 0
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Shrooms - You drugged your enemy
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Shrooms - You have been drugged
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Shrooms - You drugged your enemy
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Shrooms - You have been drugged
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z2 + 15
 				es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 175 20 1 14 10 .3 255 0 255 250 3
@@ -59,7 +59,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Cocaine - You've snorted cocaine and can run faster
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Cocaine - You've snorted cocaine and can run faster
 	es_delayed .8 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -106,7 +106,7 @@ block health_increase
 		es_xrand wcs_addhealth 15 30
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
 		es_playsound server_var(wcs_userid) wcs/heal.mp3 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Bong Rip - Gave you server_var(wcs_addhealth) health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Bong Rip - Gave you server_var(wcs_addhealth) health
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 		es_xmath wcs_z2 + 30
 		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 10 1 50 10 3 200 0 0 220 2
@@ -115,7 +115,7 @@ block health_increase
 	{
 		es wcs_setfx health server_var(wcs_userid) = 200 0
 		es_playsound server_var(wcs_userid) wcs/heal.mp3 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Bong Rip - You took a bong rip and reached the 200 health cap!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Bong Rip - You took a bong rip and reached the 200 health cap!
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 		es_xmath wcs_z2 + 30
 		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 1 10 1 50 10 3 200 0 0 220 2

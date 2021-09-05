@@ -60,8 +60,8 @@ block slip
 				}
 				es_exists wcs_exists userid server_var(wcs_player)
 				es wcs_domole server_var(wcs_player) 2
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen My Jekyll doesn't hide - An enemy will mole to your spawn after the freeze time
-				es_tell server_var(wcs_player) #multi #green [WCS]: #lightgreen My Jekyll doesn't hide - You'll become a mole after the freeze time
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen My Jekyll doesn't hide - An enemy will mole to your spawn after the freeze time
+				es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen My Jekyll doesn't hide - You'll become a mole after the freeze time
 				es_playsound server_var(wcs_player) wcs/mole.mp3 1
 			}	
 		}		
@@ -93,8 +93,8 @@ block mirror
 				es playerset viewcoord event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 				es playerset viewcoord event_var(attacker) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Other side - Swapped places and did server_var(wcs_dmg) mirror damage
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z2 + 100
@@ -173,7 +173,7 @@ block osmosis
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z2 + 45
 	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 255
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ozzmosis - Boosted your stats for server_var(wcs_duration) seconds
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ozzmosis - Boosted your stats for server_var(wcs_duration) seconds
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Ozzmosis - [Block] Skill: 4 (END)

@@ -20,7 +20,7 @@ block frostbite
 		es_delayed 2.8 wcs_spawn event_var(userid) 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 		es_delayed 3 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Respawn - Respawning where you died in 3 seconds
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Respawn - Respawning where you died in 3 seconds
 		es_xmath wcs_z1 + 85
 		es est_effect 11 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 0.5 255
 	}
@@ -44,8 +44,8 @@ block blind
 			{
 				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 				es_delayed 2 es_cexec event_var(userid) r_screenoverlay 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You have been #green blinded #lightgreen by event_var(es_attackername) for 2 seconds.
-				es_tell event_var(attacker) #multi #green [WCS]: #lightgreen You have #green blinded #lightgreen event_var(es_username) for 2 seconds.
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen You have been #green blinded #lightgreen by event_var(es_attackername) for 2 seconds.
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen You have #green blinded #lightgreen event_var(es_username) for 2 seconds.
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2.3 90
 			}
@@ -82,7 +82,7 @@ block flash
 				es_delayed 5 wcs_color event_var(userid) 155 155 255 200 1
 				es_delayed 5.5 es wcs_color event_var(userid) 105 105 255 225 1
 				es_delayed 6 wcs_color event_var(userid) 255 255 255 225 1
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen You're becoming more visible over time
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen You're becoming more visible over time
 				es est_effect 4 #a 0 sprites/tp_beam001.vmt event_var(attacker) 2 10 20 5 100 155 255 255
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -142,25 +142,25 @@ block flashfreeze
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 300 "es_xdoblock wcs/tools/manifest/flashfreeze/ultimate_path"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Flash Freeze affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Flash Freeze affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) Flash Freeze immobilized server_var(wcs_count_players_actually_affected) enemies
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -210,19 +210,19 @@ block ultimate_path
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -246,7 +246,7 @@ block ultimate_final
 	{
 		es wcsgroup set is_paralyzed server_var(wcs_targetid) 1
 		es_delayed .75 wcsgroup set is_paralyzed server_var(wcs_targetid) 0
-		es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Flash Freeze - immobilized you for a short duration
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Flash Freeze - immobilized you for a short duration
 		es wcs_centertell server_var(wcs_targetid) Flash Freeze briefly immobilized you!
 		es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 64
 		es_delayed .75 es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 131329

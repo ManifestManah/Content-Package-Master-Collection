@@ -24,7 +24,7 @@ block spawn
 	es wcs_setfx health event_var(userid) = 75 0
 	es_delayed .1 es_give event_var(userid) weapon_knife
 	es_delayed .1 es_give event_var(userid) weapon_deagle
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Franklin Thanatos - You received your golden deagle.
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Franklin Thanatos - You received your golden deagle.
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Franklin Thanatos - [Block] Spawn (END)
@@ -41,7 +41,7 @@ block death
 	if (server_var(wcs_tmp3) == 1) do
 	{
 		es wcsgroup set medalofhonor event_var(userid) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Medal of Honor - Respawning where you died in 3 seconds!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Medal of Honor - Respawning where you died in 3 seconds!
 		es wcs_centertell event_var(userid) Respawning where you died in 3
 		es_delayed 1 es wcs_centertell event_var(userid) Respawning where you died in 2
 		es_delayed 2 es wcs_centertell event_var(userid) Respawning where you died in 1
@@ -72,7 +72,7 @@ block medalofhonor
 	{
 		ifx true(wcs_ffa_enabled) do
 		{
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Medal of Honor - If you die during this round you'll be brought back to life!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Medal of Honor - If you die during this round you'll be brought back to life!
 			es wcsgroup set medalofhonor event_var(userid) 1
 		}
 		ifx false(wcs_ffa_enabled) do
@@ -88,7 +88,7 @@ block medalofhonor
 					es wcsgroup get phoenix wcs_phoenix server_var(wcs_team)
 					es_xmath wcs_phoenix + 1
 					es wcsgroup set phoenix server_var(wcs_team) server_var(wcs_phoenix)
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Medal of Honor - The first from your team to die will be revived
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Medal of Honor - The first from your team to die will be revived
 					es wcsgroup set medalofhonor event_var(userid) 1
 				}
 			}
@@ -136,7 +136,7 @@ block laststand
 	}
 	if (event_var(es_attackerdead) = 0) do
 	{
-		es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Last Stand - You gained some speed, but lost some health
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Last Stand - You gained some speed, but lost some health
 		es playerget health wcs_tmp3 event_var(attacker)
 		if (server_var(wcs_tmp3) > server_var(wcs_tmp1)) do
 		{
@@ -197,7 +197,7 @@ block bomb_teamhealth
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/franklin_thanatos/wcs_ulti_suicide_thanatos_checks"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen The explosion affected server_var(wcs_count_players_actually_affected) enemies
 				es wcs_centertell server_var(wcs_userid) You sacrificed yourself for your comrades
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -210,7 +210,7 @@ block bomb_teamhealth
 				}
 				ifx true(wcs_ffa_enabled) do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Sacrifice - Franklin Thanatos died in vain...
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Sacrifice - Franklin Thanatos died in vain...
 				}
 				ifx false(wcs_ffa_enabled) do
 				{
@@ -233,18 +233,18 @@ block bomb_teamhealth
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -284,19 +284,19 @@ block wcs_ulti_suicide_thanatos_checks
 						es_xmath wcs_count_players_ultimate_immunity + 1
 						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 						}
 						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 						{
-							es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 							es_xset wcs_ultinotexec 1
 						}
 					}
 				}
 				else do
 				{
-					es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 					es_xset wcs_ultinotexec 1
 				}
 			}
@@ -342,7 +342,7 @@ block bomb_teamhealth_exe
 		wcs_log  [Race]: Franklin Thanatos - [Block] Skill: 4 (BOMB_TEAMHEALTH_EXE EXECUTED START)
 	}
 	es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Sacrifice - Franklin Thanatos healed you for server_var(wcs_addhealth) health
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Sacrifice - Franklin Thanatos healed you for server_var(wcs_addhealth) health
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Franklin Thanatos - [Block] Skill: 4 (BOMB_TEAMHEALTH_EXE EXECUTED END)

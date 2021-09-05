@@ -67,8 +67,8 @@ block slow
 					es wcsgroup set is_slowed event_var(userid) 1
 					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
 					es wcs_setfx speed event_var(userid) = .65 1
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hamstring - Slowed you for 1 seconds 
-					es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Hamstring - Slowed your enemy for 1 second
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Hamstring - Slowed you for 1 seconds 
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Hamstring - Slowed your enemy for 1 second
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 10
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 200 .5 125 10 0 255 128 40 80 4
@@ -96,7 +96,7 @@ block speed
 		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 		es_xmath wcs_speed * 100
 		es_xmath wcs_speed - 100
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mount - Increased your speed by server_var(wcs_speed)%
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Mount - Increased your speed by server_var(wcs_speed)%
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -120,7 +120,7 @@ event player_hurt
 			{
 				es wcs_setfx speed event_var(userid) = 1 0
 				es wcsgroup set warrior_mounted event_var(userid) 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Mount - You were knocked off your mount and lost your speed
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Mount - You were knocked off your mount and lost your speed
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 15
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 400 200 .5 125 10 0 255 128 40 80 4

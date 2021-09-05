@@ -10,7 +10,7 @@ block health
 		wcs_log [Race]: Feral Beast - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Health - You received more health!
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
@@ -69,7 +69,7 @@ block burrow
 	es_delayed 3 wcsgroup set is_paralyzed server_var(wcs_userid) 0
 	es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
 	es_delayed 3 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Burrow - You buried yourself for 3 seconds!
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Burrow - You buried yourself for 3 seconds!
 	es_getplayerlocation wcs_x12 wcs_y12 wcs_z12 server_var(wcs_userid)
 	es_xmath wcs_z12 - 80
 	es playerset location server_var(wcs_userid) server_var(wcs_x12) server_var(wcs_y12) server_var(wcs_z12)

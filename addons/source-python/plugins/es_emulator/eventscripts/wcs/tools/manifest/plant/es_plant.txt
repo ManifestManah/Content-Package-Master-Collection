@@ -74,7 +74,7 @@ block water
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_xmath wcs_addhealth + 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Water - Raised your health to server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Water - Raised your health to server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Potty The Plant - [Block] Skill: 1 (END)
@@ -128,10 +128,10 @@ block angry
 				es wcsgroup set evasion_chance event_var(userid) 33
 				es wcsgroup set evasion_count event_var(userid) 0
 			    es_delayed 2 wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-			    es_delayed 2 es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angry Plant - You evaded server_var(wcs_tmp1) attacks
+			    es_delayed 2 es_tell event_var(userid) #multi #green [WCS]#lightgreen Angry Plant - You evaded server_var(wcs_tmp1) attacks
 				es_delayed 2 wcsgroup set evasion event_var(userid) 0
 				es_delayed 2 wcsgroup set evasion_chance event_var(userid) 0
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Angry plant - Increased your chance to evade attacks for 2 seconds!
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Angry plant - Increased your chance to evade attacks for 2 seconds!
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z2 + 50
@@ -274,7 +274,7 @@ block berries
 	}
 	es_delayed .5 es_give event_var(userid) weapon_hegrenade
 	es_delayed .6 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_duration)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Berries - You spawned with server_var(wcs_duration) HE grenades
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Berries - You spawned with server_var(wcs_duration) HE grenades
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Potty The Plant - [Block] Skill: 4 (END)
@@ -327,18 +327,18 @@ block roots
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -388,19 +388,19 @@ block ultimate_checks_roots
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -422,7 +422,7 @@ block ultimate_final_roots
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{

@@ -193,7 +193,7 @@ block curse
 					{
 						es wcsgroup set dwellcurse event_var(userid) 1
 						es_delayed 3 wcsgroup set dwellcurse event_var(userid) 0
-						es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Dweller's curse - Was casted on event_var(es_username)
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Dweller's curse - Was casted on event_var(es_username)
 						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 						es_xmath wcs_z2 + 50
@@ -247,7 +247,7 @@ block dwell
 		es wcsgroup set dwelling server_var(wcs_userid) 2
 		es wcsgroup set is_frozen server_var(wcs_userid) 1
 		es wcs_setfx freeze server_var(wcs_userid) = 1 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dwelling - You're entering stealth...
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dwelling - You're entering stealth...
 		es wcs_color server_var(wcs_userid) 255 255 255 250 1
 		es_delayed .2 wcs_color server_var(wcs_userid) 255 255 255 225 1
 		es_delayed .3 wcs_color server_var(wcs_userid) 255 255 255 200 1
@@ -258,7 +258,7 @@ block dwell
 		es_delayed .8 wcs_color server_var(wcs_userid) 255 255 255 75 1
 		es_delayed .9 wcs_color server_var(wcs_userid) 255 255 255 50 1
 		es_delayed 1 wcs_color server_var(wcs_userid) 255 255 255 25 1
-		es_delayed 1 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dwelling - You're now stealthed and 90% invisible!
+		es_delayed 1 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dwelling - You're now stealthed and 90% invisible!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 125 .75 15 10 .1 0 128 0 185 1
 		es_delayed .15 est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 15 125 .75 15 10 .1 0 128 0 185 1
@@ -270,7 +270,7 @@ block dwell
 		es wcsgroup set dwelling server_var(wcs_userid) 1
 		es wcsgroup set is_frozen server_var(wcs_userid) 0
 		es wcs_setfx freeze server_var(wcs_userid) = 0 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dwelling - You're leaving stealth...
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dwelling - You're leaving stealth...
 		es wcs_color server_var(wcs_userid) 255 255 255 25 1
 		es_delayed .2 wcs_color server_var(wcs_userid) 255 255 255 50 1
 		es_delayed .3 wcs_color server_var(wcs_userid) 255 255 255 75 1
@@ -282,7 +282,7 @@ block dwell
 		es_delayed .9 wcs_color server_var(wcs_userid) 255 255 255 225 1
 		es_delayed 1 wcs_color server_var(wcs_userid) 255 255 255 0 1
 		es_delayed 1 wcs_color server_var(wcs_userid) 0 150 0 255 0
-		es_delayed 1 es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dwelling - You're now fully visible again!
+		es_delayed 1 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dwelling - You're now fully visible again!
 		es_xmath wcs_smokestack_counter + 1
 		es_give server_var(wcs_userid) env_smokestack
 		es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)

@@ -50,7 +50,7 @@ block wind
 	}
 	es wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 1
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Reduced gravity and you became harder to see 
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Reduced gravity and you became harder to see 
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Vortex - [Block] Skill: 1 (END)
@@ -77,7 +77,7 @@ block whirlwind
 					es wcs_color event_var(userid) 255 255 255 0 1
 					es_delayed 1.5 es wcsgroup set is_already_colored event_var(userid) 0
 					es_delayed 1.5 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 1
-					es_tell event_var(userid) #multi #green [WCS]: #lightgreen Whirlwind - Completely invisible for 1.5 second!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Whirlwind - Completely invisible for 1.5 second!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 80 2.6 20 500 0 54 66 120 100 10
 					es_xmath wcs_z2 + 20
@@ -108,8 +108,8 @@ block deathvortex
 			es_delayed .2 wcs_pushed event_var(attacker) 125 0 0
 			es_delayed .3 wcs_pushed event_var(attacker) 0 125 0
 			es_delayed .4 wcs_pushed event_var(attacker) 0 -75 330
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Death vortex - Caught event_var(es_attackername)!
-			es_tell event_var(attacker) #multi #green [WCS]: #lightgreen Death vortex - You got stuck in a vortex!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Death vortex - Caught event_var(es_attackername)!
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Death vortex - You got stuck in a vortex!
 			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 80 2.6 20 500 0 54 66 120 100 10
 			es_xmath wcs_z2 + 20
@@ -172,7 +172,7 @@ block vortex
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				//everything related to the wcs_userid
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Vortex affected server_var(wcs_count_players_actually_affected) people
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Vortex affected server_var(wcs_count_players_actually_affected) people
 				es wcs_centertell server_var(wcs_userid) Your vortex picked up server_var(wcs_count_players_actually_affected) players dealing server_var(wcs_dmg) damage
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -188,18 +188,18 @@ block vortex
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -249,19 +249,19 @@ block ultimate_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -298,7 +298,7 @@ block ultimate_final
 	es_delayed 1 wcs_pushed server_var(wcs_targetid) 50 -100 100
 	es_delayed 1.25 wcs_pushed server_var(wcs_targetid) -50 65 100
 	es wcs_centertell server_var(wcs_targetid) You've been sucked in to a vortex!
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Vortex - Made you airborne and dealt server_var(wcs_dmg)
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Vortex - Made you airborne and dealt server_var(wcs_dmg)
 	es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
 	es_xmath wcs_z2 + 20
 	es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 100 2.4 20 500 0 54 66 120 100 10

@@ -22,7 +22,7 @@ block spawn
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;m249;negev"
 		es_delayed .1 es_give event_var(userid) weapon_ssg08
 	}
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You can only use sniper rifles
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You can only use sniper rifles
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Cadian Sniper - [Block] Spawn (END)
@@ -36,7 +36,7 @@ block cloak
 		wcs_log [Race]: Cadian Sniper - [Block] Skill: 1 (START)
 	}
 	es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've become harder to see.
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen You've become harder to see.
 	es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 1 30 100 0.8 255 100 100 255 1
 	ifx true(wcs_race_debugging) do
@@ -66,7 +66,7 @@ block awp
 			}
 			es_delayed .2 wcs_drop event_var(userid) 1
 			es_delayed .5 wcs_setfx 1stclip event_var(userid) = 30 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen You've picked up your trustworthy scout!
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen You've picked up your trustworthy scout!
 			es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 40 60 2 20 10 1 10 255 0 255 1
 		}

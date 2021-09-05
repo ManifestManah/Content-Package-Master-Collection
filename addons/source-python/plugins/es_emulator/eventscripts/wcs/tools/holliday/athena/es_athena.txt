@@ -89,7 +89,7 @@ block gravity
 	if (event_var(es_userdead) = 0) do
 	{
 		es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Athena's enlightenment - Reduced your gravity
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Athena's enlightenment - Reduced your gravity
 		ifx true(wcs_race_debugging) do
 	}
 	{
@@ -108,7 +108,7 @@ block goldenhelmet
 		if (event_var(es_userdead) = 0) do
 		{
 			es wcsgroup set headshot_immunity event_var(userid) 1
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Golden helmet - Renders Athena immune to headshots
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Golden helmet - Renders Athena immune to headshots
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -158,7 +158,7 @@ block shield
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				es wcs_fade server_var(wcs_userid) 255 0 153 85 1 4
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Medusa's gaze - Turned server_var(wcs_counter) people to stone
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Medusa's gaze - Turned server_var(wcs_counter) people to stone
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 				{
@@ -173,18 +173,18 @@ block shield
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby enemies!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -234,19 +234,19 @@ block shield_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -277,7 +277,7 @@ block shield_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
@@ -286,7 +286,7 @@ block shield_final
 		es wcs_setfx freeze server_var(wcs_targetid) = 1 2
 	}
 	es wcs_fade server_var(wcs_targetid) 255 0 153 85 1 4
-	es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Medusa's gaze - Turned you into stone for 2 seconds
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Medusa's gaze - Turned you into stone for 2 seconds
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
 	es_xmath wcs_z1 + 30

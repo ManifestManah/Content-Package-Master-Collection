@@ -34,7 +34,7 @@ block longjump
 		wcs_log  [Race]: Faith - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Longjump - You have increased jump length
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - You have increased jump length
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Faith - [Block] Skill: 1 (END)
@@ -122,7 +122,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Faith - [Block] Skill: 4 (END)

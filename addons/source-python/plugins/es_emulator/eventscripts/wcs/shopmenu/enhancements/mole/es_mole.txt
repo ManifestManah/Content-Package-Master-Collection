@@ -32,7 +32,7 @@ block playerismole
 		es wcsgroup set shop_ismole server_var(wcs_targetid) 0
 
 		// Sends a message to the player informing the player that he'll become a mole
-		es_tell server_var(wcs_targetid) #multi #green[WCS] #lightgreenYou're a #greenmole#lightgreen. You'll be teleported to the enemy spawn in 3 seconds!
+		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen You're a #greenmole#lightgreen. You'll be teleported to the enemy spawn in 3 seconds!
 
 		// Obtains the information about which team our player is on, and store the data within our variable wcs_team
 		es_getplayerteam wcs_team server_var(wcs_targetid)
@@ -55,7 +55,7 @@ block playerismole
 		es_delayed .3 wcs_setfx disguiser server_var(wcs_targetid) = 1 0
 
 		// After 3 seconds has passed we'll send yet another message to the player informing him that he became a mole
-		es_delayed 2.8 es_tell server_var(wcs_targetid) #multi #green[WCS] #lightgreenYou became a #greenmole#lightgreen!
+		es_delayed 2.8 es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen You became a #greenmole#lightgreen!
 
 		// If the global variable shop_mole_loop_active is equals to 0 then continue
 		ifx false(shop_mole_loop_active) do

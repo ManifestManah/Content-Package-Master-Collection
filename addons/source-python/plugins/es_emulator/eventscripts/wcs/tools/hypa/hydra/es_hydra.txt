@@ -59,7 +59,7 @@ block aura
 		ifx true(wcs_ffa_enabled) do
 		{
 			es_delayed .5 wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
-			es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra - Granted you server_var(wcs_rand) health
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Hydra - Granted you server_var(wcs_rand) health
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_xmath wcs_z1 + 20
 			es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 6.5 3 255
@@ -84,7 +84,7 @@ block aurae
 		wcs_log [Race]: Hydra - [Block] Skill: 1 (EXECUTED START)
 	}
 	es_delayed .5 wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
-	es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Hydra - Supported you with server_var(wcs_rand) health
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Hydra - Supported you with server_var(wcs_rand) health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 20
 	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 6.5 3 255
@@ -536,7 +536,7 @@ block eva
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
 		es wcsgroup set headshot_immunity event_var(userid) 1
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Hydra Heads - You won't take damage from headshots
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Hydra Heads - You won't take damage from headshots
 		es_xmath wcs_smokestack_counter + 1
 		es_give event_var(userid) env_smokestack
 		es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
@@ -612,25 +612,25 @@ block dehydrate
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				es wcs_fade event_var(userid) 240 240 240 140 1 4
-				es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dehydrate affected server_var(wcs_count_players_actually_affected) Enemys
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dehydrate affected server_var(wcs_count_players_actually_affected) Enemys
 				es wcs_centertell server_var(wcs_userid) Dehydrate dealt 25 damage to server_var(wcs_count_players_actually_affected) Enemys
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, there are no living Enemys!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living Enemys!
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, no nearby Enemys!
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby Enemys!
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Could not target an enemy team
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -680,19 +680,19 @@ block dehydrate_checks
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]: #lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) Enemys were immune to your ultimate!
+								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) Enemys were immune to your ultimate!
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -715,7 +715,7 @@ block dehydrate_final
 	if (server_var(wcs_tmp1) > 250) do
 	{
 		es wcs_setfx health server_var(wcs_userid) = 250 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Dehydrate - Can't exceed more than 250 health
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Dehydrate - Can't exceed more than 250 health
 	}
 	if (server_var(wcs_tmp1) <= 250) do
 	{

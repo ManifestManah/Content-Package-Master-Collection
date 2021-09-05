@@ -21,7 +21,7 @@ block spawn
 	es wcs_setfx health event_var(userid) = 1
 	es est_effect 4 #a 0 sprites/lgtning.vmt event_var(userid) 5 5 10 10 100 100 100 255
 	es wcsgroup set bconstruction event_var(userid) 25
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Appearence - You look like a small remote
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like a small remote
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Mini Remote - Builder Race - [Block] Spawn (END)
@@ -50,7 +50,7 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
 	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
 	ifx true(wcs_race_debugging) do
 	{
@@ -66,7 +66,7 @@ block levitation
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
 	es_xmath wcs_gravity * 100
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Mini Remote - Builder Race - [Block] Skill: 2 (END)
@@ -80,7 +80,7 @@ block wallclimb
 		wcs_log [Race]: Mini Remote - Builder Race - [Block] Skill: 3 (START)
 	}
 	es_setplayerprop event_var(userid) CBasePlayer.localdata.m_Local.m_flStepSize server_var(wcs_range)
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Wall climb - You can now climb over tall objects
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Wall climb - You can now climb over tall objects
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Mini Remote - Builder Race - [Block] Skill: 3 (END)
@@ -96,13 +96,13 @@ block build
 	es wcsgroup get bconstruction wcs_tmp11 server_var(wcs_userid)
 	if (server_var(wcs_tmp11) == 0) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - You don't have any props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - You don't have any props left
 	}
 	if (server_var(wcs_tmp11) => 1) do
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
-		es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreen Construction - server_var(wcs_tmp11) props left
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 		es wcs_create_prop server_var(wcs_userid) models\props\de_nuke\crate_extrasmall.mdl 150
 	}
 	ifx true(wcs_race_debugging) do

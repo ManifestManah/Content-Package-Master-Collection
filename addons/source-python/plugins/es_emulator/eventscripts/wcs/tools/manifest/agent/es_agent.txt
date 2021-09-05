@@ -27,7 +27,7 @@ block speed
 		wcs_log [Race]: Agent - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen High speed - Your speed has been increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen High speed - Your speed has been increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Agent - [Block] Skill: 1 (END)
@@ -85,7 +85,7 @@ block disguise
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
 		es_delayed .5 wcs_setfx disguiser event_var(userid) = 1 0
-		es_tell event_var(userid) #multi #green [WCS]: #lightgreen Double Agent - You've disguised yourself as an enemy!
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Double Agent - You've disguised yourself as an enemy!
 	}
 	ifx true(wcs_race_debugging) do
 	{

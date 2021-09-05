@@ -46,7 +46,7 @@ block armour
 		wcs_log [Race]: Son Gohan - [Block] Skill: 1 (START)
 	}
 	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Saiyan armour - Granted you server_var(wcs_armor) armor
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Saiyan armour - Granted you server_var(wcs_armor) armor
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Son Gohan - [Block] Skill: 1 (END)
@@ -60,7 +60,7 @@ block ki
 		wcs_log [Race]: Son Gohan - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ki collecting - Increased your health by server_var(wcs_addhealth)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Ki collecting - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Son Gohan - [Block] Skill: 2 (END)
@@ -129,7 +129,7 @@ block regen
 					es_delayed 1.4 wcs_setfx health event_var(userid) + event_var(wcs_multiplier) 0
 					es_delayed 2 wcs_setfx health event_var(userid) + event_var(wcs_multiplier) 0
 				}
-				es_tell event_var(userid) #multi #green [WCS]: #lightgreen Ki regeneration - Slowly regenerating lost health
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Ki regeneration - Slowly regenerating lost health
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z2 + 10
 				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)

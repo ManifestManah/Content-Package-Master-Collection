@@ -12,7 +12,7 @@ block speed_longjump_gravity
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es wcs_setfx longjump event_var(userid) + .5 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
-	es_tell event_var(userid) #multi #green [WCS]: #lightgreen Super Powers - Made you way more mobile
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Super Powers - Made you way more mobile
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Rainbow Man - [Block] Skill: 1 (END)
@@ -165,7 +165,7 @@ block teleport
 	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenPestel Colored Portal - You Teleported!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenPestel Colored Portal - You Teleported!
         es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
     }
     
@@ -267,7 +267,7 @@ block teleport
 	    {
 	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]: #lightgreenPestel Colored Portal - You cannot teleport that far!
+        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenPestel Colored Portal - You cannot teleport that far!
 	    es wcs_setcooldown server_var(wcs_userid) 0
     }
 	ifx true(wcs_race_debugging) do
