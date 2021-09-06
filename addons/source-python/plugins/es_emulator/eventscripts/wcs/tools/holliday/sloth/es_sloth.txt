@@ -307,6 +307,7 @@ block sloth
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{
+			es wcs_unrestrict server_var(wcs_userid) all
 			es wcs_restrict server_var(wcs_userid) "glock;usp;p228;deagle;elite;fiveseven;m3;xm1014;mac10;tmp;mp5navy;ump45;p90;galil;famas;ak47;m4a1;scout;aug;sg550;awp;g3sg1;m249"
 			es_give server_var(wcs_userid) weapon_sg552
 			es_playsound server_var(wcs_userid) npc/strider/strider_legstretch1.wav 1
