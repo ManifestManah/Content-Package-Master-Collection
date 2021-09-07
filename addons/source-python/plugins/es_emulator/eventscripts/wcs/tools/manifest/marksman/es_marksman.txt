@@ -92,7 +92,7 @@ block piercer
 					es wcsgroup set fleshripperbullet event_var(attacker) 0
 					es damage event_var(userid) 35 1 event_var(attacker)
 					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Flesh ripper - Dealt 35 additional damage
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flesh ripper - Took 35 additional damage
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flesh ripper - Received 35 additional damage
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 25

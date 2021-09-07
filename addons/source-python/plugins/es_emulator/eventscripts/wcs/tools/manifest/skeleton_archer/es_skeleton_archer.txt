@@ -111,7 +111,7 @@ block archery
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx attackspeed event_var(userid) =  server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Archery - Attackspeed has been increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Archery - Your attackspeed has been increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Skeleton Archer - [Block] Skill: 2 (END)
