@@ -83,7 +83,7 @@ block slow
 				{
 					es wcsgroup set is_slowed event_var(userid) 1
 					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
-					es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 2
+					es wcs_setfx speed event_var(userid) = 0.5 2
 					es wcs_centertell event_var(userid) Marine event_var(es_attackername) slowed you for 2 seconds!
 					es wcs_centertell event_var(attacker) You slowed down event_var(es_username) for 2 seconds!
 					es_playsound event_var(attacker) skills/frostbolt.mp3 .6
