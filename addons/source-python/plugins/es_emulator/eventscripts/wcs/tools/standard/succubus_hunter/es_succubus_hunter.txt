@@ -126,7 +126,7 @@ block health
 			es_xset wcs_money 750
 			es_xset wcs_addhealth 50
 		}
-		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
 		es wcs_getlanguage wcs_lng "player_skill2" 0 "succubuss_hunter"
 		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_money) value2 server_var(wcs_addhealth)

@@ -71,7 +71,7 @@ block aura
 		wcs_log [Race]: Finger Mage - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx cash event_var(userid) + server_var(wcs_money) 0
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_xrand wcs_rand 1 2
 	es_getplayerteam wcs_team event_var(userid)
 	if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "if (server_var(wcs_rand) == 1) then wcs/tools/manifest/finger_mage/manaaura;if (server_var(wcs_rand) == 2) then wcs/tools/manifest/finger_mage/healthaura"

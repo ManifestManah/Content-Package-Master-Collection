@@ -82,7 +82,7 @@ block health
 	{
 		wcs_log [Race]: Nightcrawler - [Block] Skill: 4 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Night pray - Your health was increased by server_var(wcs_addhealth)
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)

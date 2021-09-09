@@ -11,7 +11,7 @@ block health
 	}
 	if (event_var(es_userdead) = 0) do
 	{
-		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Health pack - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
@@ -135,7 +135,7 @@ block team_health
 			ifx true(wcs_ffa_enabled) do
 			{
 				es_xrand wcs_rand 5 25
-				es wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
+				es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
 				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Team power - Granted you server_var(wcs_rand) health
 			}
 			ifx false(wcs_ffa_enabled) do

@@ -94,7 +94,7 @@ block health
 	}
 	if (event_var(es_userdead) = 0) do
 	{
-		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_delayed .5 wcs_color event_var(userid) 200 0 0 255 1
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ritual - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8

@@ -49,7 +49,7 @@ block blood
 		if (event_var(es_userdead) = 0) do
 		{
 			es_xrand wcs_addhealth 40 60
-			es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+			es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Dragon blood - Gave you server_var(wcs_addhealth) extra health
 		}
 	}

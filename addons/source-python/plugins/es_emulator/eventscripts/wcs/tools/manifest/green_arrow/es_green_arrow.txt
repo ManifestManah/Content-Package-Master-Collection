@@ -176,7 +176,7 @@ block health
 	{
 		wcs_log [Race]: Green Arrow - [Block] Skill: 4 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Stamina - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{

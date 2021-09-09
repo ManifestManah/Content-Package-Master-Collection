@@ -45,11 +45,11 @@ block cash_to_health
 		{
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen A bigger slot - You gained more health
 			es playerget cash wcs_money event_var(userid)
-			if (server_var(wcs_money) >= 0) then es_xif (server_var(wcs_money) <= 2000) then es wcs_setfx health event_var(userid) + 10 0
-			if (server_var(wcs_money) <= 2000) then es_xif (server_var(wcs_money) <= 4000) then es wcs_setfx health event_var(userid) + 20 0
-			if (server_var(wcs_money) <= 4000) then es_xif (server_var(wcs_money) <= 7000) then es wcs_setfx health event_var(userid) + 30 0
-			if (server_var(wcs_money) <= 7000) then es_xif (server_var(wcs_money) <= 11000) then es wcs_setfx health event_var(userid) + 40 0
-			if (server_var(wcs_money) <= 11000) then es_xif (server_var(wcs_money) <= 16000) then es wcs_setfx health event_var(userid) + 50 0
+			if (server_var(wcs_money) >= 0) then es_xif (server_var(wcs_money) <= 2000) then es_delayed .2 wcs_setfx health event_var(userid) + 10 0
+			if (server_var(wcs_money) <= 2000) then es_xif (server_var(wcs_money) <= 4000) then es_delayed .2 wcs_setfx health event_var(userid) + 20 0
+			if (server_var(wcs_money) <= 4000) then es_xif (server_var(wcs_money) <= 7000) then es_delayed .2 wcs_setfx health event_var(userid) + 30 0
+			if (server_var(wcs_money) <= 7000) then es_xif (server_var(wcs_money) <= 11000) then es_delayed .2 wcs_setfx health event_var(userid) + 40 0
+			if (server_var(wcs_money) <= 11000) then es_xif (server_var(wcs_money) <= 16000) then es_delayed .2 wcs_setfx health event_var(userid) + 50 0
 		}
 	}
 	ifx true(wcs_race_debugging) do

@@ -134,7 +134,7 @@ block health_evade
 	    es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
 	    es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice block - You evaded server_var(wcs_tmp1) attacks last round
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ice block - You received 25 health and server_var(wcs_chance) chance to evade
-		es wcs_setfx health event_var(userid) + 25 0
+		es_delayed .2 wcs_setfx health event_var(userid) + 25 0
 		es_delayed .5 wcs_color event_var(userid) 0 0 255 255 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 10
@@ -165,7 +165,7 @@ block team_health
 			es_playsound server_var(wcs_userid) ambient\wind\css15_wind_01.wav .8
 		}
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen They shall not freeze - You feel a gentle breeze
-		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
+		es_delayed .2 wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
 		es wcs_fade server_var(wcs_userid) 0 0 255 40 1 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 20
@@ -210,7 +210,7 @@ block team_health_exe
 			es_playsound server_var(wcs_targetid) ambient\wind\css15_wind_01.wav .8
 		}
 		es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen They shall not freeze - You feel a gentle breeze
-		es wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
+		es_delayed .2 wcs_setfx health server_var(wcs_targetid) + server_var(wcs_addhealth) 0
 		es wcs_fade server_var(wcs_targetid) 0 0 255 40 1 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
 		es_xmath wcs_z1 + 20

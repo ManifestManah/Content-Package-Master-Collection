@@ -65,7 +65,7 @@ block health
 		{
 			if (event_var(es_attackerdead) = 0) do
 			{
-				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+				es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 				es wcs_color event_var(userid) 255 83 148 150 1
 				es_delayed 2 wcs_color event_var(userid) 255 255 255 255 1
 				es_tell event_var(userid) #multi #green [WCS]#lightgreen Draconian counter - Restored server_var(wcs_addhealth) health

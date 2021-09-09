@@ -28,7 +28,7 @@ block aura
 		wcs_log [Race]: Warrior - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Your #green Holy aura #lightgreenmade you lighter and gave you server_var(wcs_addhealth) more health!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)

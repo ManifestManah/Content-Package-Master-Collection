@@ -215,7 +215,7 @@ block health
 	{
 		wcs_log  [Race]: Flame Dragon - [Block] Skill: 4 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 - 10

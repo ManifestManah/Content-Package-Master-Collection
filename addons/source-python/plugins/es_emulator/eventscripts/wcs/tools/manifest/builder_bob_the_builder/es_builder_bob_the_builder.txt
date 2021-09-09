@@ -73,7 +73,7 @@ block health
 	{
 		wcs_log [Race]: Bob The Builder - Builder Race - [Block] Skill: 3 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Working suit - Gave you + server_var(wcs_addhealth) health
 	ifx true(wcs_race_debugging) do
 	{

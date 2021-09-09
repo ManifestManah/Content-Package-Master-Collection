@@ -9,7 +9,7 @@ block spawn
 	{
 		wcs_log [Race]: Hermes - [Block] Spawn (START)
 	}
-	es wcs_setfx health event_var(userid) + 20
+	es_delayed .2 wcs_setfx health event_var(userid) + 20
 	es_xmath wcs_smokestack_counter + 1
 	es_give event_var(userid) env_smokestack
 	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)

@@ -35,7 +35,7 @@ block mark
 	{
 		wcs_log [Race]: WoW - Druid - [Block] Skill: 1 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_delayed 1 wcs_setfx armor event_var(userid) + server_var(wcs_addhealth) 0
 	es wcs_setfx speed event_var(userid) + .10 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .8 0

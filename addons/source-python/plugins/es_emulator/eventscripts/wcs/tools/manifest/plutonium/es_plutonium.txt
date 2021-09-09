@@ -88,7 +88,7 @@ block health
 	{
 		wcs_log [Race]: Plutonium - [Block] Skill: 2 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Thick metal skin - Gave you server_var(wcs_addhealth) more health
 	ifx true(wcs_race_debugging) do
 	{

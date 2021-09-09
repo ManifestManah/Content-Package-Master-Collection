@@ -57,7 +57,7 @@ block berserk
 		wcs_log [Race]: Flame Predator - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_xmath wcs_speed * 100
 	es wcs_decimal wcs_speed server_var(wcs_speed)
 	es wcs_getlanguage wcs_lng "player_skill1" 0 "flame_predator"

@@ -61,7 +61,7 @@ block armour
 	}
 	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
 	{
-		es wcs_setfx health event_var(userid) + 10 0
+		es_delayed .2 wcs_setfx health event_var(userid) + 10 0
 		ifx false(wcs_falldamage_compensation) do
 		{
 			es_delayed .5 wcsgroup set falldamage event_var(userid) 0

@@ -69,7 +69,7 @@ block tree
 	{
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 2 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreenTree hugger - Granted you server_var(wcs_addhealth) more HP
 	ifx true(wcs_race_debugging) do
 	{

@@ -202,14 +202,14 @@ block health
 			es_xrand wcs_addhealth 15 25
 			ifx true(wcs_ffa_enabled) do
 			{
-				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
+				es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth)
 				es_tell event_var(userid) #multi #green [WCS]#lightgreen Embrace the darkness - Granted you server_var(wcs_addhealth) health
 			}
 			ifx false(wcs_ffa_enabled) do
 			{
 				es_getplayerteam wcs_team event_var(userid)
-				if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Embrace the darkness - Granted you server_var(wcs_addhealth) health"
-				if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Embrace the darkness - Granted you server_var(wcs_addhealth) health"
+				if (server_var(wcs_team) = 2) then wcs_foreach player wcs_player #t "es_delayed .2 wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Embrace the darkness - Granted you server_var(wcs_addhealth) health"
+				if (server_var(wcs_team) = 3) then wcs_foreach player wcs_player #ct "es_delayed .2 wcs_setfx health server_var(wcs_player) + server_var(wcs_addhealth);es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Embrace the darkness - Granted you server_var(wcs_addhealth) health"
 			}
 		}
 	}

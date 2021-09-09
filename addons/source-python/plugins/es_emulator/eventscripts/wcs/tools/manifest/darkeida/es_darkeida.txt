@@ -100,7 +100,7 @@ block armour
 	{
 		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 3 (START)
 	}
-	es wcs_setfx health event_var(userid) + 25 0
+	es_delayed .2 wcs_setfx health event_var(userid) + 25 0
 	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Armour of spines - Granted you 25 health and server_var(wcs_armor) armour
 	ifx true(wcs_race_debugging) do

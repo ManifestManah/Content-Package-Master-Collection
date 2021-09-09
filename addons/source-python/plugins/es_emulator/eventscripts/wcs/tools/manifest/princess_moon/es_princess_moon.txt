@@ -31,7 +31,7 @@ block berserk
 	{
 		wcs_log [Race]: Princess Moon - [Block] Skill: 1 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Berserk - Your health and speed was increased by server_var(wcs_addhealth) %
 	ifx true(wcs_race_debugging) do

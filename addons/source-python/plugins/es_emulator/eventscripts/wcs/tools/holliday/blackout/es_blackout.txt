@@ -168,7 +168,7 @@ block maximum
 	{
 		wcs_log [Race]: Blackout - [Block] Skill: 2 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Maximum strength - Increased your armor by server_var(wcs_armor) and health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do

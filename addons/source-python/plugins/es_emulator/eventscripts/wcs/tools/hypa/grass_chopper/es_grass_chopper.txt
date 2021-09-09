@@ -22,7 +22,7 @@ block spawn
 	}
 	es_delayed .2 es_give event_var(userid) weapon_knife
 	es wcs_setfx speed event_var(userid) = 1.5
-	es wcs_setfx health event_var(userid) + 35
+	es_delayed .2 wcs_setfx health event_var(userid) + 35
 	es wcsgroup set gcplayer event_var(userid) 1
 	ifx true(wcs_race_debugging) do
 	{

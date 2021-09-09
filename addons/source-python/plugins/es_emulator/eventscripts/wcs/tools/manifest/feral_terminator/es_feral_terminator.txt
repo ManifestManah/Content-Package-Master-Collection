@@ -29,7 +29,7 @@ block speed_health
 		wcs_log [Race]: Feral Terminator - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es wcs_setfx health event_var(userid) + 30 0
+	es_delayed .2 wcs_setfx health event_var(userid) + 30 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Conditioning - Increased your speed and health

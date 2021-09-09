@@ -45,7 +45,7 @@ block devotion
 	{
 		wcs_log [Race]: Human Alliance Expert - [Block] Skill: 2 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Devotion aura - Increased your health by server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{

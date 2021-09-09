@@ -399,7 +399,7 @@ block injection
 		{
 			es_set wcs_dmg event_var(dmg_health)
 			es_math wcs_dmg + server_var(wcs_addhealth)
-			es wcs_setfx health event_var(userid) + server_var(wcs_dmg) 0
+			es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_dmg) 0
 			es_playsound event_var(userid) items/smallmedkit1.wav .9
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Injection - You heal while Grapple Beam is active
 			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Injection - Samus heals while Grapple Beam is active

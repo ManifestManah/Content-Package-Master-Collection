@@ -144,7 +144,7 @@ block health_when_struck
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es_xrand wcs_addhealth 7 25
-				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+				es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 				es_tell event_var(userid) #multi #green [WCS]#lightgreen Recovery - You recovered server_var(wcs_addhealth) health
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 .7 36 10 0 180 0 0 200 12

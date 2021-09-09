@@ -22,7 +22,7 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 	}
-	es wcs_setfx health event_var(userid) + 85 0
+	es_delayed .2 wcs_setfx health event_var(userid) + 85 0
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_z2 + 20
 	es est_effect 10 #a 0 vgui/gfx/vgui/cs_logo.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 80 90 1.6 10 10 0 255 0 0 255 1
@@ -139,7 +139,7 @@ block protection
 				if (server_var(wcs_tmp1) <= 185) do
 				{
 					es_xrand wcs_addhealth 15 40
-					es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+					es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flesh protection - Recieved server_var(wcs_addhealth) health
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)

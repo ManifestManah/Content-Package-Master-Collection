@@ -46,7 +46,7 @@ block flesh
 	{
 		wcs_log [Race]: Risen - [Block] Skill: 1 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Your calloused flesh granted you server_var(wcs_addhealth) bonus health
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 15

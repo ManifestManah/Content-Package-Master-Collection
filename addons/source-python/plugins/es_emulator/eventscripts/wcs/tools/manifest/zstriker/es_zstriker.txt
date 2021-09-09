@@ -9,7 +9,7 @@ block suit
 	{
 		wcs_log [Race]: Zstriker - [Block] Skill: 1 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es playerget armor wcs_tmp3 event_var(userid)
 	if (server_var(wcs_tmp3) >= 150) do
 	{

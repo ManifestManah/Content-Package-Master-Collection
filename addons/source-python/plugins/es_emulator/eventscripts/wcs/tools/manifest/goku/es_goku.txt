@@ -67,7 +67,7 @@ block sensu
 		{
 			if (event_var(es_attackerdead) = 0) do
 			{
-				es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+				es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 				es wcs_centertell event_var(userid) Sensu recovered + server_var(wcs_addhealth) health
 			}
 		}

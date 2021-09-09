@@ -62,7 +62,7 @@ block health
 	{
 		wcs_log [Race]: Roy Miller - [Block] Skill: 3 (START)
 	}
-	es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
 	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)

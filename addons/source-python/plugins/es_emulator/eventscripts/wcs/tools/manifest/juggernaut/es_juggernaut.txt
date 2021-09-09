@@ -11,9 +11,8 @@ block health
 	}
 	if (event_var(es_userdead) = 0) do
 	{
-		es wcs_setfx health event_var(userid) + 40 0
-		es wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_xmath wcs_addhealth + 40
+		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Thick skinned - Increased your health by server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)

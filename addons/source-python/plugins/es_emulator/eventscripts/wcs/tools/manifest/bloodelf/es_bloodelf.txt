@@ -73,7 +73,7 @@ block shield
 					es_xrand wcs_rand 5 10
 					ifx true(wcs_ffa_enabled) do
 					{
-						es wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
+						es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_rand) 0
 						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Power word: Shield - Gave you server_var(wcs_rand) health
 						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 						es_xmath wcs_z2 + 40
@@ -101,7 +101,7 @@ block shieldhp
 	{
 		wcs_log [Race]: Blood Elf Priest - [Block] Skill: 4 (SHIELDHP EXECUTED START)
 	}
-	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
+	es_delayed .2 wcs_setfx health server_var(wcs_userid) + server_var(wcs_rand) 0
 	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Power word: Shield - Gave all allies server_var(wcs_rand) health
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z2 + 40
