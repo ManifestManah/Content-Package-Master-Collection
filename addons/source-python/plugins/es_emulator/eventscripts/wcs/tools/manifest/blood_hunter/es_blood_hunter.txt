@@ -146,7 +146,7 @@ block damage
 		if (event_var(es_attackerdead) = 0) do
 		{
 			es playerget health wcs_tmp1 event_var(userid)
-			if (server_var(wcs_tmp1) <= server_var(wcs_gravity)) do
+			if (server_var(wcs_tmp1) <= server_var(wcs_tmp2)) do
 			{
 				es_xrand wcs_dmg 15 20
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
