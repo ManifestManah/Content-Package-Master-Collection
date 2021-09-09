@@ -216,7 +216,7 @@ block curing
 	{
 		es wcs_setfx cash server_var(wcs_userid) - 100 0
 		es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 0
-		es wcs_getlanguage wcs_lng "player_skill5_centertell" 0 "night_elves"
+		es wcs_getlanguage wcs_lng "player_skill5_centertell" 0 "blood_mage"
 		es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 25
