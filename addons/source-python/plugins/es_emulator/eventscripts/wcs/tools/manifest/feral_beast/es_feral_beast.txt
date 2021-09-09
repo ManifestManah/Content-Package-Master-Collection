@@ -1,6 +1,6 @@
 ////////////////////////
 //MiBShidobu Race Pack//
-//Version 1.0.0D      //
+//Version 1.0.1D      //
 ////////////////////////
 
 block health
