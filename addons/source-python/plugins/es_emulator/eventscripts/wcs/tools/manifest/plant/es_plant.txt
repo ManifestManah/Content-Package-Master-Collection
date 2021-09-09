@@ -273,8 +273,8 @@ block berries
 		wcs_log  [Race]: Potty The Plant - [Block] Skill: 4 (START)
 	}
 	es_delayed .5 es_give event_var(userid) weapon_hegrenade
-	es_delayed .6 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_duration)
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Berries - You spawned with server_var(wcs_duration) HE grenades
+	es_delayed .6 es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iAmmo.014" server_var(wcs_tmp1)
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Berries - You spawned with server_var(wcs_tmp1) HE grenades
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Potty The Plant - [Block] Skill: 4 (END)
