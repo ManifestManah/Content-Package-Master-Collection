@@ -252,8 +252,8 @@ block ultimate_final
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es_playsound server_var(wcs_targetid) ambient\atmosphere\outdoor2.wav 1
-		es_playsound server_var(wcs_userid) ambient\atmosphere\outdoor2.wav 1
+		es_playsound server_var(wcs_targetid) ambient\machines\floodgate_stop1.wav 1
+		es_playsound server_var(wcs_userid) ambient\machines\floodgate_stop1.wav 1
 	}
 	es_getplayerlocation wcs_x3 wcs_y3 wcs_z3 server_var(wcs_userid)
 	es_getplayerlocation wcs_x5 wcs_y5 wcs_z5 server_var(wcs_targetid)
