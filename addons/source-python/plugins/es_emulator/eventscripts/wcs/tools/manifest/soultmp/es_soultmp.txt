@@ -90,16 +90,16 @@ block leech
 				es est_effect 11 #a 0 sprites/strider_blackball.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 75
 				es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 5 75
 				es playerget health wcs_tmp2 event_var(attacker)
-				if (server_var(wcs_tmp2) >= 300) do
+				if (server_var(wcs_tmp2) <= 150) do
 				{
-					es_xrand wcs_addhealth 6 23
+					es_xrand wcs_addhealth 6 25
 					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
 					es wcs_centertell event_var(attacker) Soul transfer did + server_var(wcs_dmg) damage and stole server_var(wcs_addhealth) health!
 				}
-				if (server_var(wcs_tmp2) < 300) do
+				if (server_var(wcs_tmp2) > 150) do
 				{
-					es wcs_setfx health event_var(attacker) = 300 0
-					es wcs_centertell event_var(attacker) You have reached the 300 health cap!
+					es wcs_setfx health event_var(attacker) = 150 0
+					es wcs_centertell event_var(attacker) You have reached the 150 health cap!
 				}
 			}
 		}
