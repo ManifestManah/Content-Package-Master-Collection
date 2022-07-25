@@ -174,17 +174,17 @@ block cyborg_ultimate
 				es_xset wcs_initial_players_struck 0
 				es_xset wcs_count_players_ultimate_immunity 0
 				es_xset wcs_count_players_actually_affected 0
-				es_xset wcs_magnitude 125
+				es_xset wcs_magnitude 175
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 225 "es_xdoblock wcs/tools/manifest/cyborg/wcs_ulti_suicide_ultimate_checks"
 				if (server_var(wcs_execute_ultimate) == 1) do
 				{
 					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
-					es wcs_centertell server_var(wcs_userid) The Explosion dealt 125 damage to server_var(wcs_count_players_actually_affected) enemies
+					es wcs_centertell server_var(wcs_userid) The Explosion dealt server_var(wcs_magnitude) damage to server_var(wcs_count_players_actually_affected) enemies
 					es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .7
 					es_delayed .2 es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .6
 					es_delayed .3 es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav .7
-					es damage server_var(wcs_userid) 1500 1 server_var(wcs_userid)
+					es damage server_var(wcs_userid) server_var(wcs_magnitude) 1 server_var(wcs_userid)
 				}
 			}
 			else do
