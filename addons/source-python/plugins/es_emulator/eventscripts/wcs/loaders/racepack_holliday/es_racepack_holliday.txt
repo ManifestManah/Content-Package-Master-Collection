@@ -17,7 +17,6 @@ block load
 	es_load wcs/tools/holliday/nebula
 	es_load wcs/tools/holliday/ozzmosis
 	es_load wcs/tools/holliday/panorama
-	es_load wcs/tools/holliday/reptile
 	es_load wcs/tools/holliday/scorpion
 	es_load wcs/tools/holliday/sloth
 	es_load wcs/tools/holliday/spiderman
@@ -38,7 +37,6 @@ block unload
 	es_unload wcs/tools/holliday/nebula
 	es_unload wcs/tools/holliday/ozzmosis
 	es_unload wcs/tools/holliday/panorama
-	es_unload wcs/tools/holliday/reptile
 	es_unload wcs/tools/holliday/scorpion
 	es_unload wcs/tools/holliday/sloth
 	es_unload wcs/tools/holliday/spiderman
