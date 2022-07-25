@@ -103,7 +103,7 @@ block build
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
-		es wcs_create_prop server_var(wcs_userid) models\props\de_nuke\crate_extrasmall.mdl 150
+		es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/crate_extrasmall.mdl 150
 	}
 	ifx true(wcs_race_debugging) do
 	{
