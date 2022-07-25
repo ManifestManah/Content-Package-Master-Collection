@@ -21,7 +21,7 @@ block spawn
 	}
 }
 
-block player_death
+block death
 {
 	es wcsgroup set blooddemon_upgraded event_var(userid) 0
 }
@@ -148,8 +148,7 @@ event player_death
 			}
 			if (server_var(wcs_tmp3) == 1) do
 			{
-				es_xmath wcs_tmp3 + 1
-				es wcsgroup set blooddemon_upgraded event_var(attacker) server_var(wcs_tmp3)
+				es wcsgroup set blooddemon_upgraded event_var(attacker) 2
 				es_delayed .5 es_give event_var(attacker) weapon_m4a1
 				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
 				es wcs_drop event_var(attacker) 1
@@ -157,8 +156,7 @@ event player_death
 			}
 			if (server_var(wcs_tmp3) == 0) do
 			{
-				es_xmath wcs_tmp3 + 1
-				es wcsgroup set blooddemon_upgraded event_var(attacker) server_var(wcs_tmp3)
+				es wcsgroup set blooddemon_upgraded event_var(attacker) 1
 				es_delayed .5 es_give event_var(attacker) weapon_ak47
 				es_delayed .6 wcs_setfx 1stclip event_var(attacker) + server_var(wcs_ammo) 0
 				es wcs_drop event_var(attacker) 1
@@ -201,11 +199,14 @@ block blooddemon_reset
 		wcs_log [Race]: Blood Demon - [Block] Skill: 4 (START)
 	}
 	es wcsgroup get blooddemon_upgraded wcs_tmp3 server_var(wcs_userid)
-	if (server_var(wcs_tmp3) == 1) do
+	if (server_var(wcs_tmp3) != 0) do
 	{
 		es wcsgroup set blooddemon_upgraded server_var(wcs_userid) 0
+		es_delayed .2 wcs_removeweapon server_var(wcs_userid) 1
+		es_delayed .2 wcs_removeweapon server_var(wcs_userid) 2
+		es_delayed .2 wcs_removeweapon server_var(wcs_userid) 4
 		es_delayed .2 wcs_spawn server_var(wcs_userid) 1
-		es_delayed .4 wcs_setfx health server_var(wcs_userid) - server_var(wcs_addhealth) 0
+		es_delayed .4 wcs_setfx health server_var(wcs_userid) = server_var(wcs_addhealth) 0
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Reset - You have used reset!
 		es_playsound server_var(wcs_userid) weapons/hegrenade/explode4.wav 1
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
