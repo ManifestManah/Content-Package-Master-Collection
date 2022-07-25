@@ -101,7 +101,7 @@ block godmode_push
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es wcs_setmodel server_var(wcs_userid) models\props_vehicles\car003a.mdl
+		es wcs_setmodel server_var(wcs_userid) models/props_vehicles/car003a.mdl
 	}
 	es wcs_setfx god server_var(wcs_userid) = 1 2	
 	es_delayed .3 wcs_pushed server_var(wcs_userid) 0 1000 0
@@ -122,11 +122,12 @@ block godmode_push
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{
-			es_delayed 2 playerset model server_var(wcs_userid) player/t_phoenix
+			if (server_var(wcs_team) = 2) then es_delayed 2 playerset model server_var(wcs_userid) player/t_phoenix
+			if (server_var(wcs_team) = 3) then es_delayed 2 playerset model server_var(wcs_userid) player/ct_gign
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_setmodel server_var(wcs_userid) 0
+			es_delayed 2 wcs_setmodel server_var(wcs_userid) 0
 		}
 	}
 	ifx false(wcs_ffa_enabled) do
@@ -140,7 +141,7 @@ block godmode_push
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_setmodel server_var(wcs_userid) 0
+			es_delayed 2 wcs_setmodel server_var(wcs_userid) 0
 		}
 	}
 	ifx true(wcs_race_debugging) do
