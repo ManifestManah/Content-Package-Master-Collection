@@ -107,7 +107,7 @@ block stun
 	}
 }
 
-stunned
+block stunned
 {
 	ifx true(wcs_race_debugging) do
 	{
@@ -119,7 +119,7 @@ stunned
 		es wcsgroup set is_paralyzed server_var(wcs_player) 1
 		es_delayed .5 wcsgroup set is_paralyzed server_var(wcs_player) 0
 		es_setplayerprop server_var(wcs_player) CBasePlayer.m_fFlags 64
-		es_delayed .5 es_setplayerprop server_var(wcs_player) CBasePlayer.m_fFlags 131329
+		es_delayed 0.5 es_setplayerprop server_var(wcs_player) CBasePlayer.m_fFlags 131329
 		es wcs_centertell server_var(wcs_player) Storm bolt stunned you for 0.5 second!
 		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Storm bolt - Stunned your targets for 0.5 seconds
 		es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Storm bolt - You were stunned for 0.5 second
