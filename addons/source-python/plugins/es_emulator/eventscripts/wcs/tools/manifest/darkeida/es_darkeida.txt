@@ -14,7 +14,7 @@ block spawn
 	{
 		es_setplayerprop event_var(userid) CBaseEntity.m_fEffects 256
 	}
-	es_delayed .5 wcs_color event_var(userid) 180 0 0 255 0 1
+	es_delayed .5 wcs_color event_var(userid) 180 0 0 255 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 decals/bloodstain_001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 250 3 60 10 0 255 255 255 255 10
 	es_xmath wcs_z1 + 20
