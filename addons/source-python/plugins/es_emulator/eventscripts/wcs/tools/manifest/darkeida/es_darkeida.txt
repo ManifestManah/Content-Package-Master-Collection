@@ -140,7 +140,6 @@ block execution
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Execution affected server_var(wcs_count_players_actually_affected) enemies
-				es wcs_centertell server_var(wcs_userid) Execution dealt server_var(wcs_dmg) damage
 				es_playsound server_var(wcs_userid) wcs\execute.mp3 1
 			}
 		}
@@ -228,7 +227,6 @@ block execution_final
 	{
 		wcs_log [Race]: Darkeida - The Executioner - [Block] Skill: 4 (EXECUTED START)
 	}
-	es wcs_centertell server_var(wcs_targetid) Took server_var(wcs_dmg) damage from execution
 	es_playsound server_var(wcs_targetid) wcs\execute.mp3 1
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
 	es est_effect 10 #a 0 decals/bloodstain_002.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 200 1 25 10 5 51 51 204 100 5
@@ -238,6 +236,17 @@ block execution_final
 	es est_effect_14 #a 0 decals/bloodstain_001.vmt server_var(vector1) server_var(vector1) 100 100 400
 	es est_effect_14 #a 0 decals/bloodstain_001.vmt server_var(vector1) server_var(vector1) 100 100 200
 	es wcs_getinfo server_var(wcs_targetid) wcs_dmg level race
+	if (server_var(wcs_dmg) < 25) do
+	{
+		es_xset wcs_dmg 25
+	}
+
+	if (server_var(wcs_dmg) > 150) do
+	{
+		es_xset wcs_dmg 150
+	}
+	es wcs_centertell server_var(wcs_userid) Execution dealt server_var(wcs_dmg) damage
+	es wcs_centertell server_var(wcs_targetid) Took server_var(wcs_dmg) damage from execution
 	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
 	{
