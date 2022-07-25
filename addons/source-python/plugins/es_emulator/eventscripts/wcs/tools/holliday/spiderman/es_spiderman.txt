@@ -89,7 +89,7 @@ block agility
 	{
 		wcs_log [Race]: Spiderman - [Block] Skill: 2 (START)
 	}
-	es wcs_setfx longjump event_var(userid) + .12 0
+	es wcs_setfx longjump event_var(userid) + 1.30 0
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .75 0
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
