@@ -167,7 +167,7 @@ block osmosis
 	{
 		wcs_log [Race]: Ozzmosis - [Block] Skill: 4 (START)
 	}
-	es wcs_setfx longjump server_var(wcs_userid) + .25 server_var(wcs_duration)
+	es wcs_setfx longjump server_var(wcs_userid) + 1.10 server_var(wcs_duration)
 	es wcs_setfx speed server_var(wcs_userid) = 1.5 server_var(wcs_duration)
 	es wcs_setfx gravity server_var(wcs_userid) = .5 server_var(wcs_duration)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
