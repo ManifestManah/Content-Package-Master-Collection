@@ -119,7 +119,7 @@ block invis
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es_fire event_var(userid) !self addoutput "renderfx 15"
+			es_fire event_var(userid) !self addoutput "renderfx 17"
 		}
 		ifx false(wcs_falldamage_compensation) do
 		{
@@ -152,10 +152,10 @@ block smoke
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es_fire event_var(userid) !self addoutput "renderfx 0"
-				es_delayed .5 wcs_color event_var(userid) 255 255 255 0 1
-				es wcs_centertell event_var(userid) You're invisible for 1 second
-				es_delayed 1 wcs_color event_var(userid) 255 255 255 255 1
-				es_delayed 1 es_fire event_var(userid) !self addoutput "renderfx 15"
+				es wcs_color event_var(userid) 255 255 255 0 1
+				es wcs_centertell event_var(userid) You're invisible for 1.25 second
+				es_delayed 1.25 wcs_color event_var(userid) 255 255 255 255 1
+				es_delayed 1.25 es_fire event_var(userid) !self addoutput "renderfx 17"
 				es_playsound event_var(userid) wcs/shadow.mp3 1.0
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 1
@@ -177,8 +177,10 @@ block tele
 	{
 		wcs_log [Race]: Akiri - The Traitor - [Block] Skill: 5 (START)
 	}
+	es_fire server_var(wcs_userid) !self addoutput "renderfx 0"
 	es wcs_color server_var(wcs_userid) 255 255 255 0 1
 	es_delayed 2 wcs_color server_var(wcs_userid) 255 255 255 255 1
+	es_delayed 2 es_fire server_var(wcs_userid) !self addoutput "renderfx 17"
 	es wcs_centertell server_var(wcs_userid) You're invisible for 2 seconds
 	es_playsound server_var(wcs_userid) wcs/teleport.mp3 1.0
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
