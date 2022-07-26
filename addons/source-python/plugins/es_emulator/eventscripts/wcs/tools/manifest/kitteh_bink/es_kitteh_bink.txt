@@ -83,7 +83,7 @@ block slow_attackspeed
 					es_delayed 1 wcsgroup set is_attackspeed_altered event_var(userid) 0
 					es wcs_setfx attackspeed event_var(userid) = .5 1
 					es_tell event_var(userid) #multi #green [WCS]#lightgreen Disarm - Your attack speed has been reduced!
-					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Disarm - You reduced event_var(es_attackername) attack speed!
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Disarm - You reduced event_var(es_username) attack speed!
 					es_playsound event_var(userid) wcs/execute.mp3 .7
 					es_playsound event_var(attacker) wcs/execute.mp3 .8
 					es es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
