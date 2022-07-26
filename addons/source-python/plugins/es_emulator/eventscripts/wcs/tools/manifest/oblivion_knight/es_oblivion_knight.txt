@@ -250,11 +250,13 @@ block enrage
 		es_setplayerprop server_var(wcs_userid) CBaseAnimating.m_flModelScale 1.25
 		es_delayed 5 es_setplayerprop server_var(wcs_userid) CBaseAnimating.m_flModelScale 1.0
 	}
+	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Enrage - You temporarily received server_var(wcs_addhealth) health and take 30% reduced damage for 5 seconds
 	es wcs_color server_var(wcs_userid) 128 25 25 230 0
 	es wcsgroup set absorb server_var(wcs_userid) 0.30
 	es_delayed 5 wcsgroup set absorb server_var(wcs_userid) 0
 	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 5
 	es_delayed 5 wcs_color server_var(wcs_userid) 160 160 160 255 0
+	es_delayed 5 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Enrage - Your enrage has worn off...
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 5
 	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
