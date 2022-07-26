@@ -127,7 +127,7 @@ block preparedt
 	if (server_var(wcs_rand) <= server_var(wcs_chance)) do
 	{
 		es_delayed .1 es_give server_var(wcs_userid) weapon_ak47
-		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour and an ak47
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 60
@@ -136,7 +136,7 @@ block preparedt
 	}
 	if (server_var(wcs_rand) > server_var(wcs_chance)) do
 	{
-		es_delayed 1 wcs_setfx armor server_var(wcs_userid) = server_var(wcs_armor) 0
+		es_delayed 1 wcs_setfx armor server_var(wcs_userid) + server_var(wcs_armor) 0
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen We came prepared - You received server_var(wcs_armor) armour
 	}
 	ifx true(wcs_race_debugging) do
