@@ -11,10 +11,6 @@ block spawn
 	}
 	es wcsgroup set marksman_player event_var(userid) 1
 	es wcsgroup set fleshripperbullet event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Cazzie - The Marksman - [Block] Spawn (END)
@@ -29,10 +25,6 @@ block death
 	}
 	es wcsgroup set marksman_player event_var(userid) 0
 	es wcsgroup set fleshripperbullet event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Cazzie - The Marksman - [Block] Death (END)
@@ -48,10 +40,6 @@ block onchange
 	es wcsgroup set marksman_player server_var(wcs_userid) 0
 	es wcsgroup set fleshripperbullet server_var(wcs_userid) 0
 	es wcs_unrestrict server_var(wcs_userid) all
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Cazzie - The Marksman - [Block] OnChange (END)
@@ -240,7 +228,7 @@ block nofall
 			es_delayed .2 wcs_setfx gravity event_var(userid) = .70 0
 			ifx false(wcs_falldamage_compensation) do
 			{
-				es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+				es wcs_setfx falldamage event_var(userid) = 1.0 0
 				es_tell event_var(userid) #lightgreen Gravitational device - Reduced your gravity and removed all fall damage
 			}
 			ifx true(wcs_falldamage_compensation) do
