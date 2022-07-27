@@ -11,7 +11,7 @@ block spawn
 	}
 	ifx false(wcs_falldamage_compensation) do
 	{
-		es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+		es wcs_setfx falldamage event_var(userid) = 1.0 0
 	}
 	ifx true(wcs_falldamage_compensation) do
 	{
@@ -48,10 +48,6 @@ block death
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	es wcsgroup set venom_weblines event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Venom - [Block] Death (END)
@@ -67,10 +63,6 @@ block onchange
 	es wcsgroup set venom_weblines server_var(wcs_userid) 0
 	es wcsgroup set evasion server_var(wcs_userid) 0
 	es wcsgroup set evasion_chance server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Venom - [Block] OnChange (END)
