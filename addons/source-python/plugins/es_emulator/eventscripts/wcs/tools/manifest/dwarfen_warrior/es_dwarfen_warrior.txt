@@ -3,45 +3,6 @@
 //Version 1.0.1D       //
 /////////////////////////
 
-block spawn
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] Spawn (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] Spawn (END)
-	}
-}
-
-block death
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] Death (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] Death (END)
-	}
-}
-
-block onchange
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] OnChange (START)
-	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Dwarf Warrior - [Block] OnChange (END)
-	}
-}
-
 block push
 {
 	ifx true(wcs_race_debugging) do
@@ -99,7 +60,7 @@ block fast
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es wcsgroup set headshot_immunity event_var(userid) 1
+			es wcs_setfx headshotimmunity event_var(userid) = 1 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Quickness - You're too fast to be shot in the head
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_xmath wcs_z1 + 40
