@@ -9,7 +9,6 @@ block spawn
 	{
 		wcs_log [Race]: Plasma - [Block] Spawn (START)
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	ifx true(wcs_race_debugging) do
@@ -24,7 +23,6 @@ block death
 	{
 		wcs_log [Race]: Plasma - [Block] Death (START)
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	ifx true(wcs_race_debugging) do
@@ -39,7 +37,6 @@ block onchange
 	{
 		wcs_log [Race]: Plasma - [Block] OnChange (START)
 	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
 	es wcsgroup set evasion server_var(wcs_userid) 0
 	es wcsgroup set evasion_chance server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
@@ -90,7 +87,7 @@ block headshot
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es wcsgroup set headshot_immunity event_var(userid) 1
+			es wcs_setfx headshotimmunity event_var(userid) = 1 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Shock helm - Renders you immune to headshots
 		}
 	}
