@@ -150,8 +150,7 @@ block godmode
 		es wcsgroup set is_paralyzed server_var(wcs_userid) 1
 		es_delayed 2 wcsgroup set is_paralyzed server_var(wcs_userid) 0
 		es wcs_setfx god server_var(wcs_userid) = 1 2
-		es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
-		es_delayed 2 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
+		es wcs_setfx paralyze server_var(wcs_userid) = 1 2
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Withdraw - You're hiding in your shell for 2 seconds!
 		es_delayed 2 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Withdraw - You've come out of your shell!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
