@@ -18,10 +18,6 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "sawedoff;nova;xm1014;mag7"
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 	es_xmath wcs_x2 - 160
@@ -115,10 +111,6 @@ block onchange
 		wcs_log [Race]: Azura - The Champion Slayer - [Block] OnChange (START)
 	}
 	es wcsgroup set aquafall server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Azura - The Champion Slayer - [Block] OnChange (END)
@@ -309,7 +301,7 @@ block aquaticfall
 	es wcsgroup set aquafall event_var(userid) 1
 	ifx false(wcs_falldamage_compensation) do
 	{
-		es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+		es wcs_setfx falldamage event_var(userid) = 1.0 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Aquatic gravity - Reduced your fall damage taken and lowered your gravity
 	}
 	ifx true(wcs_falldamage_compensation) do
