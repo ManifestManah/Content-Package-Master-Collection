@@ -9,7 +9,6 @@ block spawn
 	{
 		wcs_log [Race]: Headless Horseman - [Block] Spawn (START)
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es wcsgroup set horseman_fly event_var(userid) 1
 	es wcsgroup set horseman_aura event_var(userid) 1
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
@@ -60,7 +59,6 @@ block death
 	{
 		wcs_log [Race]: Headless Horseman - [Block] Death (START)
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es wcsgroup set horseman_fly event_var(userid) 0
 	es wcsgroup set horseman_aura event_var(userid) 0
 	ifx true(wcs_race_debugging) do
@@ -75,7 +73,6 @@ block onchange
 	{
 		wcs_log [Race]: Headless Horseman - [Block] OnChange (START)
 	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
 	es wcsgroup set horseman_fly server_var(wcs_userid) 0
 	es wcsgroup set horseman_aura server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
@@ -94,7 +91,7 @@ block immunity
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es wcsgroup set headshot_immunity event_var(userid) 1
+			es wcs_setfx headshotimmunity event_var(userid) = 1 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Jack o' lantern - You're immune to headshots
 		}
 	}
