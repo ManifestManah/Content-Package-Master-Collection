@@ -107,28 +107,28 @@ block build
 			es_emitsound player server_var(wcs_userid) physics/plaster/ceiling_tile_impact_hard2.wav 1.0 .5
 			es wcs_centertell server_var(wcs_userid) ...Creating Concrete Block...
 			es_delayed 2 wcs_centertell server_var(wcs_userid) ...Deploying Concrete Block...
-			es_delayed 2 es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+			es_delayed 2 wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		}
 		if (server_var(wcs_tmp1) = 3) do
 		{
 			es_emitsound player server_var(wcs_userid) physics/plaster/ceiling_tile_impact_hard2.wav 1.0 .5
 			es wcs_centertell server_var(wcs_userid) ...Creating Concrete Block...
 			es_delayed 1.5 wcs_centertell server_var(wcs_userid) ...Deploying Concrete Block...
-			es_delayed 1.5 es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+			es_delayed 1.5 wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		}
 		if (server_var(wcs_tmp1) = 2) do
 		{
 			es_emitsound player server_var(wcs_userid) physics/plaster/ceiling_tile_impact_hard2.wav 1.0 .5
 			es wcs_centertell server_var(wcs_userid) ...Creating Concrete Block...
 			es_delayed 1 wcs_centertell server_var(wcs_userid) ...Deploying Concrete Block...
-			es_delayed 1 es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+			es_delayed 1 wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		}
 		if (server_var(wcs_tmp1) = 0) do
 		{
 			es_emitsound player server_var(wcs_userid) physics/plaster/ceiling_tile_impact_hard2.wav 1.0 .5
 			es wcs_centertell server_var(wcs_userid) ...Creating Concrete Block...
 			es_delayed .5 wcs_centertell server_var(wcs_userid) ...Deploying Concrete Block...
-			es_delayed .5 es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+			es_delayed .5 wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		}
 	}
 	ifx true(wcs_race_debugging) do
