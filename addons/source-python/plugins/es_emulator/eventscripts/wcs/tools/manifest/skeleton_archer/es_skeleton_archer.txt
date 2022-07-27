@@ -259,8 +259,7 @@ block ultimate_final
 		es wcsgroup set is_paralyzed server_var(wcs_targetid) 1
 		es_delayed .75 wcsgroup set is_paralyzed server_var(wcs_targetid) 0
 		es wcs_centertell server_var(wcs_targetid) You were struck by a paralysing arrow
-		es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 64
-		es_delayed .75 es_setplayerprop server_var(wcs_targetid) CBasePlayer.m_fFlags 131329
+		es wcs_setfx paralyze server_var(wcs_targetid) = 1 0.75
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
 		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
