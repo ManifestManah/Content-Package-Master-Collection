@@ -12,7 +12,7 @@ block spawn
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 	{
-		es playerset model event_var(userid) props\cs_office\snowman_mouth1
+		es playerset model event_var(userid) props/cs_office/snowman_mouth1
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
@@ -143,27 +143,27 @@ block build
 			es_xrand wcs_tmp2 1 6
 			if (server_var(wcs_tmp2) = 1) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02a.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite02a.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 2) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02b.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite02b.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 3) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02c.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite02c.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 4) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03a.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite03a.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 5) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03b.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite03b.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 6) do
 			{
-				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03c.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_wasteland/rockgranite03c.mdl 225
 			}
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
