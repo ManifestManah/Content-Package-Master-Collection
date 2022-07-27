@@ -22,10 +22,6 @@ block spawn
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08"
 		es_delayed .2 es_give event_var(userid) weapon_negev
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es wcsgroup set blackout event_var(userid) 1
 	es wcsgroup set helicopter event_var(userid) 1
 	es wcs_setfx jetpack event_var(userid) = 0 0
@@ -42,10 +38,6 @@ block death
 	{
 		wcs_log [Race]: Blackout - [Block] Death (START)
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es wcs_setfx attackspeed event_var(userid) = 1 0
 	es wcsgroup set rotor event_var(userid) 0
 	es wcsgroup set blackoutjump event_var(userid) 0
@@ -60,10 +52,6 @@ block onchange
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Blackout - [Block] OnChange (START)
-	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
 	}
 	es wcs_unrestrict server_var(wcs_userid) all
 	es wcsgroup set rotor server_var(wcs_userid) 0
@@ -106,7 +94,7 @@ block jump
 	es wcsgroup set blackoutjump event_var(userid) 1
 	ifx false(wcs_falldamage_compensation) do
 	{
-		es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+		es wcs_setfx falldamage event_var(userid) = 1.0 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen High jump - Boosted your jump height and removed fall damage
 	}
 	ifx true(wcs_falldamage_compensation) do
