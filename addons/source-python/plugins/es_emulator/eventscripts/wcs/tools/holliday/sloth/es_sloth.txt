@@ -73,8 +73,7 @@ block paralyze
 		{
 			es wcsgroup set is_paralyzed event_var(userid) 1
 			es_delayed .5 wcsgroup set is_paralyzed event_var(userid) 0
-			es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
-			es_delayed .5 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
+			es wcs_setfx paralyze event_var(userid) = 1 0.5
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Paralyze - You are paralyzed for a half second
 			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Paralyze - You paralyzed the enemy for a half second
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
