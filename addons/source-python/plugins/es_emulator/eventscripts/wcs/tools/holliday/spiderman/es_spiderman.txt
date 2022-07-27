@@ -12,11 +12,8 @@ block spawn
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	es wcsgroup set spiderman_weblines event_var(userid) 50
+	es wcs_setfx falldamage event_var(userid) = 1.0 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Weblines - You have enough liquid to use your weblines 50 times
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es_delayed .5 wcsgroup set falldamage event_var(userid) 0
-	}
 	ifx true(wcs_falldamage_compensation) do
 	{
 		es_delayed .5 wcs_setfx health event_var(userid) + 10 0
@@ -37,10 +34,6 @@ block death
 	es wcsgroup set evasion event_var(userid) 0
 	es wcsgroup set evasion_chance event_var(userid) 0
 	es wcsgroup set spiderman_weblines event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spiderman - [Block] Death (END)
@@ -56,10 +49,6 @@ block onchange
 	es wcsgroup set spiderman_weblines server_var(wcs_userid) 0
 	es wcsgroup set evasion server_var(wcs_userid) 0
 	es wcsgroup set evasion_chance server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spiderman - [Block] OnChange (END)
