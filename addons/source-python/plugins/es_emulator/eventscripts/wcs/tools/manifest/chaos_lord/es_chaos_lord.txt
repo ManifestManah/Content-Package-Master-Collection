@@ -97,8 +97,7 @@ block petrify
 				{
 					es wcsgroup set is_paralyzed event_var(userid) 1
 					es_delayed .5 wcsgroup set is_paralyzed event_var(userid) 0
-					es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
-					es_delayed .5 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
+					es wcs_setfx paralyze event_var(userid) = 1 0.5
 					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Petrify - Paralysed event_var(es_username) for a half second
 					es_tell event_var(userid) #multi #green [WCS]#lightgreen Petrify - Paralysed you for a half second
 					es_getgame wcs_gamecheck
