@@ -132,11 +132,11 @@ block build
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_create_prop server_var(wcs_userid) props_industrial\oil_storage.mdl 150
+			es wcs_prop_dynamic_destructible server_var(wcs_userid) props_industrial\oil_storage.mdl 150
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_create_prop server_var(wcs_userid) models/props_industrial/wire_spool_01.mdl 175
+			es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props_industrial/wire_spool_01.mdl 175
 		}
 	}
 	ifx true(wcs_race_debugging) do
