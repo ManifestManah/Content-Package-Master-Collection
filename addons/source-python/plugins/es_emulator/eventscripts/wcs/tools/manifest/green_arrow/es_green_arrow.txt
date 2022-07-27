@@ -9,9 +9,10 @@ block spawn
 	{
 		wcs_log [Race]: Green Arrow - [Block] Spawn (START)
 	}
-	es wcsgroup set greenarrow event_var(userid) 1
 	es wcsgroup set greenarrow_shroud event_var(userid) 0
 	es wcsgroup set greenarrow_explosive event_var(userid) 0
+	es wcs_setfx noscope event_var(userid) = 1 0
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Green Arrow - You cannot scope while playing as The Green Arrow
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 	{
@@ -35,7 +36,6 @@ block death
 	{
 		wcs_log [Race]: Green Arrow - [Block] Death (START)
 	}
-	es wcsgroup set greenarrow event_var(userid) 0
 	es wcsgroup set greenarrow_shroud event_var(userid) 0
 	es wcsgroup set greenarrow_explosive event_var(userid) 0
 	ifx true(wcs_race_debugging) do
@@ -50,7 +50,6 @@ block onchange
 	{
 		wcs_log [Race]: Green Arrow - [Block] OnChange (START)
 	}
-	es wcsgroup set greenarrow server_var(wcs_userid) 0
 	es wcsgroup set greenarrow_shroud server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -86,49 +85,6 @@ block longjump
 		wcs_log [Race]: Green Arrow - [Block] Skill: 2 (END)
 	}
 }
-
-event weapon_zoom
-{
-	es wcsgroup get greenarrow wcs_tmp3 event_var(userid)
-	if (server_var(wcs_tmp3) == 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Green Arrow - [Block] Event Weapon_Zoom (START)
-		}
-		es playerget weaponindex wcs_tmp2 event_var(userid) weapon_ssg08
-		es_setindexprop server_var(wcs_tmp2) "CWeaponSSG08.baseclass.m_zoomLevel" 0
-		es_setindexprop server_var(wcs_tmp2) "CWeaponSSG08.baseclass.m_zoomLevel" -1
-		es_setplayerprop event_var(userid) "CCSPlayer.m_bIsScoped" 0
-		es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iFOV" 0
-		es wcs_centertell event_var(userid) Scoping is prohibited on this race!
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Green Arrow - You cannot scope while playing this race
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Green Arrow - [Block] Event Weapon_Zoom (END)
-		}
-	}
-}
-
-event weapon_fire
-{
-	es wcsgroup get greenarrow wcs_tmp3 event_var(userid)
-	if (server_var(wcs_tmp3) == 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Green Arrow - [Block] Event Weapon_Fire (START)
-		}
-		if (event_var(weapon) = weapon_scout) do
-		{
-			es_setplayerprop event_var(userid) "CCSPlayer.baseclass.m_iFOV" 0
-		}
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Green Arrow - [Block] Event Weapon_Fire (END)
-		}
-	}
-} 
 
 event player_jump
 {
