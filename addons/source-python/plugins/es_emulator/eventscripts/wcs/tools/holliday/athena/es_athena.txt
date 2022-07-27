@@ -18,7 +18,6 @@ block spawn
 	{
 		es_playsound event_var(userid) ambient\misc\metal_str4.wav .9
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 effects/tp_eyefx/tpeye3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 490 3 65 10 0 255 255 255 255 1
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 500 3 100 10 0 255 105 155 255 8
@@ -28,31 +27,6 @@ block spawn
 	}
 }
 
-block death
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Athena - [Block] Death (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Athena - [Block] Death (END)
-	}
-}
-
-block onchange
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Athena - [Block] OnChange (START)
-	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Athena - [Block] OnChange (END)
-	}
-}
 
 block spear
 {
@@ -107,7 +81,7 @@ block goldenhelmet
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es wcsgroup set headshot_immunity event_var(userid) 1
+			es wcs_setfx headshotimmunity event_var(userid) = 1 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Golden helmet - Renders Athena immune to headshots
 		}
 	}
