@@ -143,32 +143,32 @@ block build
 			es_xrand wcs_tmp2 1 6
 			if (server_var(wcs_tmp2) = 1) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite02a.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02a.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 2) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite02b.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02b.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 3) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite02c.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite02c.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 4) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite03a.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03a.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 5) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite03b.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03b.mdl 225
 			}
 			if (server_var(wcs_tmp2) = 6) do
 			{
-				es wcs_create_prop server_var(wcs_userid) props_wasteland\rockgranite03c.mdl 225
+				es wcs_prop_dynamic_destructible server_var(wcs_userid) props_wasteland\rockgranite03c.mdl 225
 			}
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+			es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		}
 	}
 	ifx true(wcs_race_debugging) do
