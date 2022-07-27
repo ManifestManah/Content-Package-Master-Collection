@@ -9,7 +9,6 @@ block spawn
 	{
 		wcs_log [Race]: Hydra - [Block] Spawn (START)
 	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 	{
@@ -21,31 +20,6 @@ block spawn
 	}
 }
 
-block death
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Hydra - [Block] Death (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Hydra - [Block] Death (END)
-	}
-}
-
-block onchange
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Hydra - [Block] OnChange (START)
-	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Hydra - [Block] OnChange (END)
-	}
-}
 
 block aura
 {
@@ -535,7 +509,7 @@ block eva
 	}
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
-		es wcsgroup set headshot_immunity event_var(userid) 1
+		es wcs_setfx headshotimmunity event_var(userid) = 1 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Hydra Heads - You won't take damage from headshots
 		es_xmath wcs_smokestack_counter + 1
 		es_give event_var(userid) env_smokestack
