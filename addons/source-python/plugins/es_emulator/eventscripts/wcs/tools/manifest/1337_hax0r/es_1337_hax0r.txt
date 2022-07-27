@@ -3,44 +3,6 @@
 //Version 1.0.1D              //
 ////////////////////////////////
 
-block spawn
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] Spawn (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] Spawn (END)
-	}
-}
-
-block death
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] Death (START)
-	}
-	es wcsgroup set headshot_immunity event_var(userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] Death (END)
-	}
-}
-
-block onchange
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] OnChange (START)
-	}
-	es wcsgroup set headshot_immunity server_var(wcs_userid) 0
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Leet HaxOr - [Block] OnChange (END)
-	}
-}
 
 block headshot_immunity
 {
@@ -52,7 +14,7 @@ block headshot_immunity
 	{
 		if (event_var(es_userdead) = 0) do
 		{
-			es wcsgroup set headshot_immunity event_var(userid) 1
+			es wcs_setfx headshotimmunity event_var(userid) = 1 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Headshot Immunity - You won't take damage from headshots
 		}
 	}
