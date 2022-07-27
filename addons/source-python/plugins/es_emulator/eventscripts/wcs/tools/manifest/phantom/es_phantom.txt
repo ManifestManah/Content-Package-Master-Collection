@@ -3,22 +3,6 @@
 //Version 1.0.1D           //
 /////////////////////////////
 
-block spawn
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log  [Race]: Phantom - [Block] Spawn (START)
-	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log  [Race]: Phantom - [Block] Spawn (END)
-	}
-}
-
 block onchange
 {
 	ifx true(wcs_race_debugging) do
@@ -26,10 +10,7 @@ block onchange
 		wcs_log  [Race]: Phantom - [Block] OnChange (START)
 	}
 	es wcsgroup set phantom server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
+
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Phantom - [Block] OnChange (END)
@@ -43,10 +24,6 @@ block death
 		wcs_log  [Race]: Phantom - [Block] Death (START)
 	}
 	es wcsgroup set phantom event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Phantom - [Block] Death (END)
@@ -62,7 +39,7 @@ block phantom
 	es wcsgroup set phantom event_var(userid) 1
 	ifx false(wcs_falldamage_compensation) do
 	{
-		es_delayed .5 wcsgroup set falldamage event_var(userid) 0.05
+		es wcs_setfx falldamage event_var(userid) = 0.95 0
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Phantom - You take reduced fall damage, duck to become less visible
 	}
 	ifx true(wcs_falldamage_compensation) do
