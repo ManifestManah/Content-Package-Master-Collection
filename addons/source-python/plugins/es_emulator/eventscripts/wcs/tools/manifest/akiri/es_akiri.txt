@@ -22,10 +22,6 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es wcsgroup set is_attackspeed_altered event_var(userid) 0
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 models/effects/comball_tape.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 500 3 75 10 0 255 255 255 255 2
@@ -45,10 +41,6 @@ block death
 		wcs_log [Race]: Akiri - The Traitor - [Block] Death (START)
 	}
 	es wcsgroup set is_attackspeed_altered event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Akiri - The Traitor - [Block] Death (END)
@@ -62,10 +54,6 @@ block onchange
 		wcs_log [Race]: Akiri - The Traitor - [Block] OnChange (START)
 	}
 	es wcsgroup set is_attackspeed_altered server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Akiri - The Traitor - [Block] OnChange (END)
@@ -123,7 +111,7 @@ block invis
 		}
 		ifx false(wcs_falldamage_compensation) do
 		{
-			es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+			es wcs_setfx falldamage event_var(userid) = 1.0 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Sneaky and agile - You've became harder to see and cannot take damage from falling
 		}
 		ifx true(wcs_falldamage_compensation) do
