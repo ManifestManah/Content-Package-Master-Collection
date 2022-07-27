@@ -67,8 +67,7 @@ block burrow
 	}
 	es wcsgroup set is_paralyzed server_var(wcs_userid) 1
 	es_delayed 3 wcsgroup set is_paralyzed server_var(wcs_userid) 0
-	es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
-	es_delayed 3 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
+	es wcs_setfx paralyze server_var(wcs_userid) = 3 1
 	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Burrow - You buried yourself for 3 seconds!
 	es_getplayerlocation wcs_x12 wcs_y12 wcs_z12 server_var(wcs_userid)
 	es_xmath wcs_z12 - 80
