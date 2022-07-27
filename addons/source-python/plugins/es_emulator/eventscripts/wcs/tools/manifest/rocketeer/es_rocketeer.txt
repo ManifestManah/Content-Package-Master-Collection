@@ -3,21 +3,6 @@
 //Version 1.0.1D    //
 //////////////////////
 
-block spawn
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Rocketeer - [Block] Spawn (START)
-	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Rocketeer - [Block] Spawn (END)
-	}
-}
 
 block death
 {
@@ -26,10 +11,6 @@ block death
 		wcs_log [Race]: Rocketeer - [Block] Death (START)
 	}
 	es wcsgroup set rocketeerjump event_var(userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Rocketeer - [Block] Death (END)
@@ -43,10 +24,6 @@ block onchange
 		wcs_log [Race]: Rocketeer - [Block] OnChange (START)
 	}
 	es wcsgroup set rocketeerjump server_var(wcs_userid) 0
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
-	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Rocketeer - [Block] OnChange (END)
@@ -64,7 +41,7 @@ block armour
 		es_delayed .2 wcs_setfx health event_var(userid) + 10 0
 		ifx false(wcs_falldamage_compensation) do
 		{
-			es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+			es wcs_setfx falldamage event_var(userid) = 1.0 0
 			es_tell event_var(userid) #multi #green [WCS]#lightgreen Seismic armour - Gave you 10 health and made you immune to fall damage!
 		}
 		ifx true(wcs_falldamage_compensation) do
