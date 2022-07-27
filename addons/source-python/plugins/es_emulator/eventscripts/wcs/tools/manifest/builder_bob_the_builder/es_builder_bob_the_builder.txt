@@ -96,7 +96,7 @@ block build
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
-		es wcs_create_prop server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
+		es wcs_prop_dynamic_destructible server_var(wcs_userid) models/props/de_nuke/cinderblock_stack.mdl 250
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 	}
 	ifx true(wcs_race_debugging) do
