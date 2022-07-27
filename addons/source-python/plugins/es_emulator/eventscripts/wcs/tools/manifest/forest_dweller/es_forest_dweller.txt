@@ -132,10 +132,9 @@ block pollen
 						es wcsgroup set is_paralyzed event_var(userid) 1
 						es_delayed 2 wcsgroup set is_paralyzed event_var(userid) 0
 						es wcs_fade event_var(userid) 5 5 5 255 0.6 1
-						es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
+						es wcs_setfx paralyze event_var(userid) = 1 2
 						es_delayed .5 es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 						es_delayed 2 es_cexec event_var(userid) r_screenoverlay 0
-						es_delayed 2 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
 						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 						es_xmath wcs_z1 + 20
