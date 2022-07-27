@@ -179,9 +179,8 @@ block godmode
 		es wcsgroup set is_paralyzed server_var(wcs_userid) 1
 		es_delayed 2 wcsgroup set is_paralyzed server_var(wcs_userid) 0
 		es wcs_setfx god server_var(wcs_userid) = 1 2
+		es wcs_setfx paralyze server_var(wcs_userid) = 1 2
 		es wcs_color server_var(wcs_userid) 0 0 0 255 1
-		es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 64
-		es_delayed 2 es_setplayerprop server_var(wcs_userid) CBasePlayer.m_fFlags 131329
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Protective ball - You're immortal for 2 seconds but unable to move!
 		es_playsound server_var(wcs_userid) player/halloween/ghostmode_on.wav 1.0
 		es_delayed 2 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Protective ball - Your immortality is now gone!
