@@ -17,10 +17,6 @@ block spawn
 	{
 		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es_delayed .5 es_give event_var(userid) weapon_elite
     es_xmath wcs_smokestack_counter + 1
 	es_give event_var(userid) env_smokestack
@@ -67,10 +63,6 @@ block death
 	{
 		es_log [Race]: Hell Hunter - [Block] Death (START)
 	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage event_var(userid) 1
-	}
 	es wcsgroup set dualrapidfire event_var(userid) 0
 	es wcsgroup set hellhunter_flashbangs event_var(userid) 0
 	ifx true(wcs_race_debugging) do
@@ -84,10 +76,6 @@ block onchange
 	ifx true(wcs_race_debugging) do
 	{
 		es_log [Race]: Hell Hunter - [Block] OnChange (START)
-	}
-	ifx false(wcs_falldamage_compensation) do
-	{
-		es wcsgroup set falldamage server_var(wcs_userid) 1
 	}
 	es wcsgroup set dualrapidfire server_var(wcs_userid) 0
 	es wcsgroup set hellhunter_flashbangs server_var(wcs_userid) 0
@@ -192,7 +180,7 @@ block antifalldamage
 		{
 			ifx false(wcs_falldamage_compensation) do
 			{
-				es_delayed .5 wcsgroup set falldamage event_var(userid) 0
+				es wcs_setfx falldamage event_var(userid) = 1.0 0
 				es_tell event_var(userid) #multi #green [WCS]#lightgreen Anti-falldamage - You wont take damage when falling
 			}
 			ifx true(wcs_falldamage_compensation) do
