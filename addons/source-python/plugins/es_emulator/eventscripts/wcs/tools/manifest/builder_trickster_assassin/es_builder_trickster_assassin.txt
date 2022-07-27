@@ -161,7 +161,7 @@ block illusion
 	{
 		es_xmath wcs_tmp11 - 1
 		es wcsgroup set bconstruction server_var(wcs_userid) server_var(wcs_tmp11)
-		es_prop_physics_create server_var(wcs_userid) props_c17/oildrum001.mdl
+		es wcs_prop_physics_destructible server_var(wcs_userid) models/props_c17/oildrum001.mdl 175
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Illusive mirage - server_var(wcs_tmp11) mirages left
 	}
 	ifx true(wcs_race_debugging) do
