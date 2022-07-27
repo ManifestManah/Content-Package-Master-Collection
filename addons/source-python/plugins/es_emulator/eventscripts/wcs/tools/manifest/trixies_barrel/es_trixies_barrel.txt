@@ -125,7 +125,7 @@ block prop
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_explosive_barrel server_var(wcs_userid)
+			es wcs_prop_explosive_barrel server_var(wcs_userid)
 		}
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Construction - server_var(wcs_tmp11) props left
 	}
