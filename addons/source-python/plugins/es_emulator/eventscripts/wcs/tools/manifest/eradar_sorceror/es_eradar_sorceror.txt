@@ -178,8 +178,7 @@ block sleep
 					es wcsgroup set is_paralyzed event_var(userid) 1
 					es_delayed 1 wcsgroup set is_paralyzed event_var(userid) 0
 					es wcs_fade event_var(userid) 5 5 5 255 .6 1
-					es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 64
-					es_delayed 1 es_setplayerprop event_var(userid) CBasePlayer.m_fFlags 131329
+					es wcs_setfx paralyze event_var(userid) = 1 1
 					es_delayed .5 es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
 					es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
 					es_xmath wcs_smokestack_counter + 1
