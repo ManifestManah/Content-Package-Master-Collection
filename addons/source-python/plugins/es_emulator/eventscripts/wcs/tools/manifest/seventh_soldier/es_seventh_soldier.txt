@@ -99,7 +99,9 @@ block speed
 	{
 		wcs_log [Race]: Seventh Soldier - [Block] Skill: 2 (START)
 	}
+	es_xmath wcs_speed - 1
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_speed) 0
+	es_xmath wcs_speed + 1
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
