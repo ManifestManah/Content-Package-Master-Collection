@@ -93,7 +93,7 @@ block agility
 		wcs_log [Race]: Venom - [Block] Skill: 2 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es wcs_setfx longjump event_var(userid) + 0.08 0
+	es wcs_setfx longjump event_var(userid) + 1.15 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Dark agility - Increased your speed and jump length
 	ifx true(wcs_race_debugging) do
 	{
