@@ -131,7 +131,7 @@ block longjump_gravity
 	{
 		wcs_log [Race]: Donkey Kong - Builder Race - [Block] Skill: 3 (START)
 	}
-	es wcs_setfx longjump event_var(userid) + .5 0
+	es wcs_setfx longjump event_var(userid) + 1.0 0
 	es_delayed .2 wcs_setfx gravity event_var(userid) = .7 0
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Longjump - Gave you longjump and lower gravity
 	ifx true(wcs_race_debugging) do
