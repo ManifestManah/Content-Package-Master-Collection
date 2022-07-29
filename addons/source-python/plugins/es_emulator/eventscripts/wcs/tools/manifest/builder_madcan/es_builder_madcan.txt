@@ -16,7 +16,7 @@ block spawn
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es wcs_setmodel event_var(userid) models/props\coop_cementplant/exloding_barrel/exploding_barrel.mdl
+		es wcs_setmodelprop event_var(userid) models/props\coop_cementplant/exloding_barrel/exploding_barrel.mdl
 	}
 	es_xrand wcs_tmp2 2 4
 	es_delayed .4 es_give event_var(userid) weapon_hegrenade
