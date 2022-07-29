@@ -64,7 +64,7 @@ block bounce
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier)
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Electricity bounce reduced your gravity and increased your jump lenght! 
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Electricity bounce reduced your gravity and increased your jump length! 
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 61 2 60 100 0.8 0 20 100 255 1
 	ifx true(wcs_race_debugging) do
