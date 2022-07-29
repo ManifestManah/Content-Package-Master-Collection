@@ -268,7 +268,7 @@ block ultimate
 			}
 			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 			{
-				es wcs_setmodel server_var(wcs_userid) models/props_vehicles/helicopter_rescue.mdl
+				es wcs_setmodelprop server_var(wcs_userid) models/props_vehicles/helicopter_rescue.mdl
 			}
 		}
 		if (server_var(wcs_tmp2) == 2) do
@@ -286,7 +286,7 @@ block ultimate
 				}
 				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 				{
-					es wcs_setmodel server_var(wcs_userid) 0
+					es wcs_setmodelprop server_var(wcs_userid) 0
 				}
 			}
 			ifx false(wcs_ffa_enabled) do
@@ -300,7 +300,7 @@ block ultimate
 				}
 				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 				{
-					es wcs_setmodel server_var(wcs_userid) 0
+					es wcs_setmodelprop server_var(wcs_userid) 0
 				}
 			}
 		}
