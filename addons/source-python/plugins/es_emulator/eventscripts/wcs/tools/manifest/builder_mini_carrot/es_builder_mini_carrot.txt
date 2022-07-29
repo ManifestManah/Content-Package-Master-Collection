@@ -16,7 +16,7 @@ block spawn
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es wcs_setmodel event_var(userid) models/props/cs_office/snowman_nose.mdl
+		es wcs_setmodelprop event_var(userid) models/props/cs_office/snowman_nose.mdl
 	}
 	es wcs_setfx health event_var(userid) = 1
 	es est_effect 4 #a 0 sprites/lgtning.vmt event_var(userid) 5 5 10 10 100 100 100 255
