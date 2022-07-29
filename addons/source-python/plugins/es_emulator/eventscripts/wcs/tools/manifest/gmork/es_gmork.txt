@@ -26,7 +26,7 @@ block leap
 		wcs_log [Race]: Gmork - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Gmork's leap - Your jump lenght is increased
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Gmork's leap - Your jump length is increased
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Gmork - [Block] Skill: 1 (END)
