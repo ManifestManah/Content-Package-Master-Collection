@@ -103,8 +103,8 @@ block barreldrop
 					}
 					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 					{
-						es wcs_setmodel event_var(attacker) models/props_c17/oildrum001.mdl
-						es_delayed 3 wcs_setmodel event_var(attacker) 0
+						es wcs_setmodelprop event_var(attacker) models/props_c17/oildrum001.mdl
+						es_delayed 3 wcs_setmodelprop event_var(attacker) 0
 					}
 					es wcs_setfx speed event_var(attacker) - .35 3
 					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Barrel drop - You were thrown into a barrel
