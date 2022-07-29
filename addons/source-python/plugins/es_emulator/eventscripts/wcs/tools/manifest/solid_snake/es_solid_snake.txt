@@ -142,8 +142,8 @@ block godmode_box
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_setmodel server_var(wcs_userid) models/props/cs_assault/cardboardbox_single.mdl
-			es_delayed 3 wcs_setmodel server_var(wcs_userid) 0
+			es wcs_setmodelprop server_var(wcs_userid) models/props/cs_assault/cardboardbox_single.mdl
+			es_delayed 3 wcs_setmodelprop server_var(wcs_userid) 0
 		}
 		es_delayed 3 wcsgroup set is_already_colored event_var(userid) 0
 		es_delayed 3 wcsgroup set is_paralyzed server_var(wcs_userid) 0
