@@ -7,7 +7,7 @@ block spawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Spawn (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Spawn (START)
 	}
 	es wcsgroup set absorb event_var(userid) 0
 	es_delayed .5 wcs_color event_var(userid) 160 160 160 255 0
@@ -26,7 +26,7 @@ block spawn
 	es_delayed .5 est_effect 10 #a 0 sprites/purplelaser1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 50 .5 10 10 0 150 5 5 200 18
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Spawn (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Spawn (END)
 	}
 }
 
@@ -34,12 +34,12 @@ block onchange
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] OnChange (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] OnChange (START)
 	}
 	es wcsgroup set absorb server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] OnChange (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] OnChange (END)
 	}
 }
 
@@ -47,7 +47,7 @@ block sword
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 1 (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 1 (START)
 	}
 	if (event_var(weapon) = knife) do
 	{
@@ -80,7 +80,7 @@ block sword
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 1 (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 1 (END)
 	}
 }
 
@@ -88,7 +88,7 @@ block magical
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 2 (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 2 (START)
 	}
 	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
 	{
@@ -212,7 +212,7 @@ block magical
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 2 (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 2 (END)
 	}
 }
 
@@ -220,7 +220,7 @@ block immunity
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 3 (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 3 (START)
 	}
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
@@ -234,7 +234,7 @@ block immunity
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 3 (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 3 (END)
 	}
 }
 
@@ -242,7 +242,7 @@ block enrage
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 4 (START)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 4 (START)
 	}
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
@@ -278,6 +278,6 @@ block enrage
 	es_delayed .8 est_effect_08 #a 0 sprites/glow1.vmt server_var(vector1) 10 325 1 .5 25 10 5 128 5 5 225 25 1
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Raxx - [Block] Skill: 4 (END)
+		wcs_log [Race]: Raxx - The Oblivion Knight - [Block] Skill: 4 (END)
 	}
 }
