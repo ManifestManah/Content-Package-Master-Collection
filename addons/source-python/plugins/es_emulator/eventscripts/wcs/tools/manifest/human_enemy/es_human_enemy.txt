@@ -203,166 +203,41 @@ block teleport
 	{
 		wcs_log  [Race]: Human Enemy - [Block] Skill: 4 (START)
 	}
-    es_xset wcs_ok 1
-
-    es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+	es_xset wcs_range 1300
     es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-
 	es_xmath wcs_z2 + 10
 	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 25 10
 	es est_effect_08 #a 0 sprites/lgtning.vmt server_var(vector2) 100 385 1.5 1.5 50 10 0 255 255 255 255 8 5
 	es est_effect_08 #a 0 effects/blueflare1.vmt server_var(vector2) 100 385 1.5 1.5 50 10 0 255 255 255 255 8 5
 	es_xmath wcs_z2 - 10
-
-    es_xcopy wcs_x wcs_x1
-    es_xcopy wcs_y wcs_y1
-    es_xcopy wcs_z wcs_z1
-
-    es_math wcs_x - server_var(wcs_x2)
-    es_math wcs_y - server_var(wcs_y2)
-    es_math wcs_z - server_var(wcs_z2)
-
-    if (server_var(wcs_x) < 0) then es_xmath wcs_x * -1
-    if (server_var(wcs_y) < 0) then es_xmath wcs_y * -1
-    if (server_var(wcs_z) < 0) then es_xmath wcs_z * -1
-
-    if (server_var(wcs_range) < server_var(wcs_x)) do
-    {
-		es_xset wcs_ok 0
-    }
-    if (server_var(wcs_range) < server_var(wcs_y)) do
-    {
-		es_xset wcs_ok 0
-    }
-    if (server_var(wcs_range) < server_var(wcs_z)) do
-    {
-		es_xset wcs_ok 0
-    }
-    
-    ifx true(wcs_ok) do
-    {
- 	    ifx true(wcs_legacy_teleport_fade) do
-	    {
-	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
-	    }
- 	    ifx true(wcs_legacy_teleport_type) do
-	    {
-	    	//To Do: Improve this by finding an alternative teleportation method that prevent players from getting stuck in displacemnts and models
-	    	es playerset location server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-	    	es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-	    }
-	    ifx false(wcs_legacy_teleport_type) do
-	    {
-	    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
-	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
-	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You Teleported!
-        es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
-    }
-    
-    else do
-    {
-        if (server_var(wcs_range) < server_var(wcs_x)) do
-        {
-            if (server_var(wcs_x2) >= 0) do
-            {
-                if (server_var(wcs_x1) >= 0) do
-                {
-                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
-                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_x2 - server_var(wcs_range)
-                }
-            }
-            else do
-            {
-                if (server_var(wcs_x1) < 0) do
-                {
-                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
-                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_x2 + server_var(wcs_range)
-                }
-            }
-            es_xcopy wcs_x1 wcs_x2
-        }
-        
-        if (server_var(wcs_range) < server_var(wcs_y)) do
-        {
-            if (server_var(wcs_y2) >= 0) do
-            {
-                if (server_var(wcs_y1) >= 0) do
-                {
-                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
-                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_y2 - server_var(wcs_range)
-                }
-            }
-            else do
-            {
-                if (server_var(wcs_y1) < 0) do
-                {
-                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
-                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_y2 + server_var(wcs_range)
-                }
-            }
-            es_xcopy wcs_y1 wcs_y2
-        }
-        
-        if (server_var(wcs_range) < server_var(wcs_z)) do
-        {
-            if (server_var(wcs_z2) >= 0) do
-            {
-                if (server_var(wcs_z1) >= 0) do
-                {
-                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
-                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_z2 - server_var(wcs_range)
-                }
-            }
-            else do
-            {
-                if (server_var(wcs_z1) < 0) do
-                {
-                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
-                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
-                }
-                else do
-                {
-                    es_math wcs_z2 + server_var(wcs_range)
-                }
-            }
-            es_xcopy wcs_z1 wcs_z2
-        }
-
-	    ifx false(wcs_legacy_teleport_type) do
-	    {
-	        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-	        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) .1
-	    }
- 	    ifx true(wcs_legacy_teleport_fade) do
-	    {
-	    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
-	    }
-        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You cannot teleport that far!
-	    es wcs_setcooldown server_var(wcs_userid) 0
-    }
+	ifx true(wcs_legacy_teleport_fade) do
+	{
+		es wcs_fade event_var(userid) 65 255 30 50 1 1
+	}
+	ifx true(wcs_legacy_teleport_type) do
+	{
+		es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
+		es playerset location server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		if (server_var(wcs_tmp3) > server_var(wcs_range)) do
+		{
+	        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenMax Distance - You cannot travel that far!
+		    es wcs_setcooldown server_var(wcs_userid) 0
+		}
+		else 
+		{
+			es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+			es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You Teleported!
+		}
+	}
+	ifx false(wcs_legacy_teleport_type) do
+	{
+		es wcs_teleport_push server_var(wcs_userid) server_var(wcs_range)
+		es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenX-Teleport - You Teleported!
+	}
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log  [Race]: Human Enemy - [Block] Skill: 4 (END)
