@@ -1,0 +1,667 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block load
+{
+	repeat create samus_suffering "es_xdoblock wcs/tools/manifest/samus/samus_suffer"
+}
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_stopsound event_var(userid) weapons/physcannon/energy_sing_loop4.wav
+		es_playsound event_var(userid) ambient/machines/machine1_hit1.wav .9
+	}
+	es wcsgroup set samus_phazon_active event_var(userid) 0
+	es wcsgroup set samus_returnnades event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Spawn (END)
+	}
+	//Possible skin
+}
+
+block beamcannon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 1 (START)
+	}
+	es wcsgroup get samus_phazon_active wcs_tmp3 event_var(attacker)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+		{
+			es_xdoblock wcs/tools/manifest/samus/beamcannon_part2
+		}
+	}
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		es_xmath wcs_chance * 2
+		if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+		{
+			es_xdoblock wcs/tools/manifest/samus/beamcannon_part2
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 1 (END)
+	}
+}
+
+block beamcannon_part2
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 1 (BEAMCANNON_PART2 EXECUTED START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es_xrand wcs_rand 1 5
+			if (server_var(wcs_rand)  == 1) do
+			{
+				es_xrand wcs_dmg 18 28
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Charge - Dealt server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es es est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 155 155 155 255
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 200 3 50 100 0 255 55 0 255 10
+			}
+			if (server_var(wcs_rand)  == 2) do
+			{
+				es damage event_var(userid) 7 1 event_var(attacker)
+				es wcs_shake event_var(userid) 33 20 .5
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Shock - Shocked and dealt server_var(wcs_dmg) damage to you
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 255 255 155 255
+				es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 1.3 255
+			}
+			if (server_var(wcs_rand)  == 3) do
+			{
+				es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+				es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Darkness - Blinded you for 1 second
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Beam Cannon: Darkness - Blinded event_var(es_username) for 1 second
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es_xmath wcs_y1 - 20
+				es_xmath wcs_y2 - 20
+				es est_effect 3 #a 0 shadertest/texturescroll.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 1 1 15 15 255 255
+				es_xmath wcs_y1 + 40
+				es_xmath wcs_y2 + 40
+				es est_effect 3 #a 0 shadertest/texturescroll.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 1 1 15 15 255 255
+			}
+			if (server_var(wcs_rand) == 4) do
+			{
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Beam Cannon: Plasma - Made your target catch fire
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z2 + 10
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 6 3000 .5 50 100 8 255 55 0 255 10
+			}
+			if (server_var(wcs_rand)  == 5) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) - 0.5 2
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Ice - Slowed you down for 2 seconds
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Beam Cannon: Ice - Slowed event_var(es_username) for 2 seconds
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z1 + 20
+					es_xmath wcs_z2 + 20
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 200 1 50 100 0 25 5 255 255 10
+					es est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .2 6 12 15 15 255 255
+					es_delayed .2 est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .2 12 6 15 15 255 255
+					es_delayed .4 est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .2 3 18 15 15 255 255
+					es_delayed .6 est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .2 12 2 15 15 255 255
+					es_delayed .8 est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .2 16 2 15 15 255 255
+				}
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 1) do
+				{
+					es_xrand wcs_rand 1 4
+					if (server_var(wcs_rand)  == 1) do
+					{
+						es_xrand wcs_dmg 18 28
+						es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Charge - Dealt server_var(wcs_dmg) extra damage
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+						es_xmath wcs_z1 + 20
+						es_xmath wcs_z2 + 20
+						es es est_effect 3 #a 0 sprites/orangelight1_v2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 155 155 155 255
+						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 20 200 3 50 100 0 255 55 0 255 10
+					}
+					if (server_var(wcs_rand)  == 2) do
+					{
+						es damage event_var(userid) 7 1 event_var(attacker)
+						es wcs_shake event_var(userid) 33 20 0.8
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Shock - Shocked and dealt server_var(wcs_dmg) damage to you
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+						es_xmath wcs_z1 + 20
+						es_xmath wcs_z2 + 20
+						es est_effect 3 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 6 12 255 255 155 255
+						es est_effect 11 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 1.3 255
+					}
+					if (server_var(wcs_rand)  == 3) do
+					{
+						es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+						es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Beam Cannon: Darkness - Blinded you for 1 second
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Beam Cannon: Darkness - Blinded event_var(es_username) for 1 second
+						es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+						es_xmath wcs_z1 + 20
+						es_xmath wcs_z2 + 20
+						es_xmath wcs_y1 - 20
+						es_xmath wcs_y2 - 20
+						es est_effect 3 #a 0 shadertest/texturescroll.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 1 1 15 15 255 255
+						es_xmath wcs_y1 + 40
+						es_xmath wcs_y2 + 40
+						es est_effect 3 #a 0 shadertest/texturescroll.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 1 1 15 15 255 255
+					}
+					if (server_var(wcs_rand) == 4) do
+					{
+						es_xrand wcs_dmg 6 15
+						es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Beam Cannon: Plasma - Dealt server_var(wcs_dmg) extra damage
+						es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+						es_xmath wcs_z2 + 10
+						es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 6 3000 .5 50 100 8 255 55 0 255 10
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 1 (BEAMCANNON_PART2 EXECUTED EMD)
+	}
+}
+
+block status_effect
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_tmp1 1 4
+				if (server_var(wcs_tmp1)  == 1) do
+				{
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Status Effect: Blast - You were pushed back
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Status Effect: Blast - Pushed back event_var(es_username)
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es wcs_pushto event_var(userid) server_var(vector2) -2
+					es_xmath wcs_z1 + 40
+					es_xmath wcs_z2 + 40
+					es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .5 8 6 255 255 255 255
+					es_delayed .5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .5 16 12 255 255 255 255
+				}
+				if (server_var(wcs_tmp1)  == 2) do
+				{
+					es_getplayerteam wcs_team event_var(userid)
+					if (server_var(wcs_team) = 2) do
+					{
+						es wcs_color event_var(userid) 255 0 0 255 1
+					}
+					if (server_var(wcs_team) = 3) do
+					{
+						es wcs_color event_var(userid) 0 0 255 255 1
+					}
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Status Effect: Tracker - Made you easily detectable
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Status Effect: Tracker - Turned event_var(es_username) visible
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .5 8 6 25 255 25 255
+					es_delayed .5 est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) .5 16 12 25 255 25 255
+				}
+				if (server_var(wcs_tmp1)  == 3) do
+				{
+					es damage event_var(userid) 5 1 event_var(attacker)
+					es_playsound event_var(userid) weapons/hegrenade/explode4.wav 1
+					es_playsound event_var(attacker) weapons/hegrenade/explode4.wav .7
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Status Effect: Omega - Caused you to explode
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Status Effect: Omega - Made event_var(es_username) explode
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 25
+					es_createvectorstring vector2 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector2) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+				}
+				if (server_var(wcs_tmp1)  == 4) do
+				{
+					es playerget armor wcs_armor event_var(userid)
+					es wcs_setfx armor event_var(attacker) + server_var(wcs_armor) 0
+					es_xmath wcs_armor / 5
+					es wcs_setfx armor event_var(userid) - server_var(wcs_armor) 0
+					es_delayed .5 wcs_setfx armor event_var(userid) - server_var(wcs_armor) 0
+					es_delayed 1 wcs_setfx armor event_var(userid) - server_var(wcs_armor) 0
+					es_delayed 1.5 wcs_setfx armor event_var(userid) - server_var(wcs_armor) 0
+					es_delayed 2 wcs_setfx armor event_var(userid) - server_var(wcs_armor) 0
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Status Effect: Phazon - You've lost your armor
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Status Effect: Phazon - Stole event_var(es_username) armor
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 2 (END)
+	}
+}
+
+block phazon_suit
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 3 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx longjump event_var(userid) + server_var(wcs_multiplier) 0
+		es_delayed .1 es_give event_var(userid) weapon_hegrenade
+		es wcsgroup set samus_returnnades event_var(userid) 1
+		es_xrand wcs_duration 5 15
+		es wcs_regeneration event_var(userid) server_var(wcs_addhealth) server_var(wcs_duration) 175 1000 50
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Champion of the Chozo - You jump further, and have unlimited grenades and heal when you are below 175 health
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 30
+		es est_effect 10 #a 0 sprites/xfireball3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 180 800 2 20 50 0 255 128 0 155 5
+		es est_effect 11 #a 0 sprites/xfireball3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 2 75
+		es est_effect 11 #a 0 sprites/xfireball3.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3 1 255
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 3 (END)
+	}
+}
+
+block bounty_hunter
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 4 (START)
+	}
+	if (event_var(hitgroup) = 1) do
+	{
+		if (event_var(es_userdead) = 1) do
+		{
+			es wcs_setfx health event_var(attacker) + 25 0
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Bounty Hunter - You received 25 health for a headshot kill
+		}
+	}
+	if (server_var(wcs_dice6) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			if (event_var(es_userdead) = 0) do
+			{
+				es wcsgroup get is_attackspeed_altered wcs_tmp4 event_var(userid)
+				if (server_var(wcs_tmp4) == 0) do
+				{
+					es wcsgroup get is_attackspeed_altered wcs_tmp4 event_var(userid)
+					if (server_var(wcs_tmp4) == 0) do
+					{
+						es wcsgroup set is_attackspeed_altered event_var(userid) 1
+						es_delayed 1 wcsgroup set is_attackspeed_altered event_var(userid) 0
+						es wcs_setfx attackspeed event_var(userid) = .5 1
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Bounty Hunter - Your attackspeed was reduced
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Bounty Hunter - You reduced event_var(es_username)'s attackspeed
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 4 (END)
+	}
+}
+
+block grapple_beam
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 5 (START)
+	}
+	if (server_var(wcs_dice5) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es wcs_getdistance wcs_tmp3 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+				if (server_var(wcs_tmp3) <= 300) do
+				{
+					es wcsgroup get is_frozen wcs_tmp4 event_var(userid)
+					if (server_var(wcs_tmp4) == 0) do
+					{
+						es wcsgroup set is_frozen event_var(userid) 1
+						es_delayed 2 wcsgroup set is_frozen event_var(userid) 0
+						es wcsgroup set samus_grapple_active event_var(attacker) 1
+						es_delayed 2 wcsgroup set samus_grapple_active event_var(attacker) 0
+						es wcs_setfx freeze event_var(userid) = 1 2
+						es wcs_setfx freeze event_var(attacker) = 1 2
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen Grapple Beam - Froze you for 2 seconds
+						es_tell event_var(attacker) #multi #green [WCS]#lightgreen Grapple Beam - Froze you and event_var(es_username) for 2 seconds
+					}
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 5 (END)
+	}
+}
+
+block injection
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcsgroup get samus_grapple_active wcs_tmp3 event_var(userid)
+		if (server_var(wcs_tmp3) == 1) do
+		{
+			es_set wcs_dmg event_var(dmg_health)
+			es_math wcs_dmg + server_var(wcs_addhealth)
+			es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_dmg) 0
+			es_playsound event_var(userid) items/smallmedkit1.wav .9
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Injection - You heal while Grapple Beam is active
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Injection - Samus heals while Grapple Beam is active
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 3000 2 100 300 1.8 175 175 255 255 1
+		}
+	}
+	if (event_var(es_userdead) = 1) do
+	{
+		es wcsgroup get samus_phazon_active wcs_tmp2 event_var(userid)
+		if (server_var(wcs_tmp2) == 1) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_xmath wcs_z1 + 35
+			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+			es est_effect_20 #a 0 sprites/lgtning.vmt server_var(vector1) 1 10 5 200 10 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) metal
+			es_getplayerteam wcs_team event_var(userid)
+			if (server_var(wcs_team) = 2) do
+			{
+				es_xset wcs_targetteam "#ct,#alive"
+				es_getlivingplayercount wcs_pcount 3
+			}	
+			if (server_var(wcs_team) = 3) do
+			{
+				es_xset wcs_targetteam "#t,#alive"
+				es_getlivingplayercount wcs_pcount 2
+			}
+			if (server_var(wcs_targetteam) != 0) do
+			{
+				if (server_var(wcs_pcount) > 0) do
+				{
+					es_xset wcs_counter 0
+					es_xset wcs_initial_players_struck 0
+					es_xset wcs_count_players_ultimate_immunity 0
+					es_xset wcs_count_players_actually_affected 0
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 215 "es_xdoblock wcs/tools/manifest/samus/wcs_ulti_suicide_checks"
+					if (server_var(wcs_execute_ultimate) == 1) do
+					{
+						es wcs_centertell event_var(userid) The Explosion damaged server_var(wcs_count_players_actually_affected) enemies for 100 damage
+						es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion affected server_var(wcs_count_players_actually_affected) enemies
+						es_xrand wcs_rand 1 3
+						if (server_var(wcs_rand) == 1) do
+						{
+							es_playsound event_var(userid) weapons\hegrenade\explode5.wav .7
+						}
+						if (server_var(wcs_rand) == 2) do
+						{
+							es_playsound event_var(userid) weapons\hegrenade\explode4.wav .8
+						}
+						if (server_var(wcs_rand) == 3) do
+						{
+						es_playsound event_var(userid) weapons\hegrenade\explode3.wav .7
+						}
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, there are no living enemies!
+				}
+				if (server_var(wcs_counter) = 0) do
+				{
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, no nearby enemies!
+				}
+			}
+			else do
+			{
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Could not target an enemy team
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (END)
+	}
+}
+
+block wcs_ulti_suicide_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/samus/wcs_ulti_suicide_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's explosion
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, all nearby enemy targets were immune!
+						}
+					}
+				}
+				else do
+				{
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen The Explosion - Failed, you can't hit that many targets at once!
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (CHECKS END)
+	}
+}
+
+block wcs_ulti_suicide_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (EXECUTED START)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took 100 damage from an Explosion
+	es_xrand wcs_rand 1 3
+	if (server_var(wcs_rand) == 1) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode5.wav .7
+	}
+	if (server_var(wcs_rand) == 2) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode4.wav .8
+	}
+	if (server_var(wcs_rand) == 3) do
+	{
+		es_playsound server_var(wcs_targetid) weapons\hegrenade\explode3.wav .7
+	}
+	es damage server_var(wcs_targetid) 100 1 event_var(userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 6 (EXECUTED END)
+	}
+}
+
+block phazon
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 7 (START)
+	}
+	es wcsgroup get samus_phazon_active wcs_tmp2 server_var(wcs_userid)
+	if (server_var(wcs_tmp2) = 0) do
+	{
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_explosion2.wav .9
+			es_delayed .3 es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_loop4.wav .9
+		}
+		repeat start samus_suffering 1
+		es wcsgroup set samus_phazon_active server_var(wcs_userid) 1
+		es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
+		es playerget clip wcs_tmp7 server_var(wcs_userid) 1
+		es wcs_setfx 1stclip server_var(wcs_userid) = 200 0
+		es wcs_color server_var(wcs_userid) 25 25 255 255 1
+		es wcs_centertell server_var(wcs_userid) An energy tank has been injected!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Phazon - Chance of Beam Cannon procs has been doubled!
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 50
+		es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 3000 1 100 300 1.8 175 175 255 255 1
+	}
+	if (server_var(wcs_tmp2) = 1) do
+	{
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_stopsound server_var(wcs_userid) weapons/physcannon/energy_sing_loop4.wav
+			es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_flyby2.wav .9
+		}
+		repeat stop samus_suffering
+		es wcsgroup set samus_phazon_active server_var(wcs_userid) 0
+		es wcs_setfx speed server_var(wcs_userid) = 1 0
+		es wcs_color server_var(wcs_userid) 255 255 255 255 1
+		es wcs_setfx 1stclip server_var(wcs_userid) = server_var(wcs_tmp7) 0
+		es wcs_centertell server_var(wcs_userid) Your energy tank has been depleted
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es_xmath wcs_z1 + 50
+		es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3000 20 .3 100 300 1.8 175 175 255 255 1
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 7 (END)
+	}
+}
+
+block samus_suffer
+{
+	es wcs_foreach player wcs_targetid #alive "es_xdoblock wcs/tools/manifest/samus/samus_suffer_exe"
+}
+
+block samus_suffer_exe
+{
+	es wcsgroup get samus_phazon_active wcs_tmp2 server_var(wcs_targetid)
+	if (server_var(wcs_tmp2) = 1) do
+	{
+		es_xrand wcs_money 3 5
+		es wcs_centertell server_var(wcs_targetid) Phazon you lose 3 to 5 health each second whilst in phazon mode
+		es damage server_var(wcs_targetid) server_var(wcs_money) 1 server_var(wcs_targetid)
+	}
+}
+
+event round_end
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_End (START)
+	}
+	repeat stop samus_suffering
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_End (END)
+	}
+}
+
+event round_start
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_Start (START)
+	}
+	repeat stop samus_suffering
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_Start (END)
+	}
+}
+
+event hegrenade_detonate
+{
+	es wcsgroup get samus_returnnades wcs_tmp event_var(userid)
+	if (server_var(wcs_tmp) == 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Samus - The Corrupted - [Block] Event Hegrenade_Detonate (START)
+		}
+		es_delayed .5 es_give event_var(userid) weapon_hegrenade
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Samus - The Corrupted - [Block] Event Hegrenade_Detonate (END)
+		}
+	}
+}
