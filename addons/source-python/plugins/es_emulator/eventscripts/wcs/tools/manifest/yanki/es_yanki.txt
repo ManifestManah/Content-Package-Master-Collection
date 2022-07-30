@@ -19,7 +19,7 @@ block spawn
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;cz75a;revolver;tec9;taser;m4a1"
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;cz75a;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser"
 	}
 	es wcsgroup set dwelling event_var(userid) 1
 	es wcsgroup set resist_hegrenade event_var(userid) 0.0

@@ -19,7 +19,7 @@ block spawn
 	}
 	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 	{
-		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;ssg08;m249;negev"
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;cz75a;hkp2000;elite;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mp5sd;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;ssg08;m249;negev"
 		es_delayed .5 es_give event_var(userid) weapon_sg556
 	}
 	es wcs_removeweapon event_var(userid) 1
@@ -166,7 +166,7 @@ block sloth
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_restrict server_var(wcs_userid) "knife;glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+			es wcs_restrict server_var(wcs_userid) "knife;glock;usp_silencer;p250;cz75a;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mp5sd;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 			es_playsound server_var(wcs_userid) wcs/shadow.mp3 .8
 		}
 	    es_xset wcs_ok 1
@@ -314,7 +314,7 @@ block sloth
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
 			es wcs_unrestrict server_var(wcs_userid) all
-			es wcs_restrict server_var(wcs_userid) "glock;usp_silencer;p250;hkp2000;elite;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;ssg08;m249;negev"
+			es wcs_restrict server_var(wcs_userid) "glock;usp_silencer;p250;cz75a;hkp2000;elite;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mp5sd;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;ssg08;m249;negev"
 			es_give server_var(wcs_userid) weapon_sg556
 			es_playsound server_var(wcs_userid) wcs/shadow.mp3 .8
 		}

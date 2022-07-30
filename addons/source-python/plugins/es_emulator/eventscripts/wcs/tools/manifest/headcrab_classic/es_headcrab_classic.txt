@@ -22,7 +22,7 @@ block spawn
 	{
 		es wcs_setmodelprop event_var(userid) models/chicken/chicken_zombie.mdl
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Appearence - You look like a zombie chicken!
-		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
+		es wcs_restrict event_var(userid) "glock;usp_silencer;p250;cz75a;hkp2000;elite;fiveseven;deagle;revolver;tec9;taser;sawedoff;nova;xm1014;mag7;p90;cz75a;mp9;mp7;mp5sd;bizon;mac10;ump45;m4a1;m4a1_silencer;galilar;ak47;aug;famas;g3sg1;scar20;awp;sg556;ssg08;m249;negev"
 	}
 	es wcs_setfx jetpack event_var(userid) = 0 0
 	es wcsgroup set headcrab_classic_fly event_var(userid) 1
