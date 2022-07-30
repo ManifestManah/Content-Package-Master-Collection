@@ -1,6 +1,6 @@
 ////////////////////////////////
 //Various Authors V2 Race Pack//
-//Version 1.0.1D              //
+//Version 1.1.0A              //
 ////////////////////////////////
 
 block cloak

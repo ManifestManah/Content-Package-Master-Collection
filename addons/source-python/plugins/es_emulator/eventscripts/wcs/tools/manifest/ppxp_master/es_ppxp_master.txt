@@ -1,6 +1,6 @@
 //////////////////////
 //Eareland Race Pack//
-//Version 1.0.1D    //
+//Version 1.1.0A    //
 //////////////////////
 
 block blind_on_headshot
