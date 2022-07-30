@@ -1,0 +1,127 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 1 (START)
+	}
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your speed by server_var(wcs_speed)%
+	es_delayed 1.5 es_playsound event_var(userid) wcs/speed.mp3 .8
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 1 (END)
+	}
+}
+
+block slow
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es_playsound event_var(attacker) skills/frostbolt.mp3 .8
+					es_playsound event_var(userid) skills/frostbolt.mp3 1
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) - .5 2
+					es wcs_centertell event_var(userid) Slowed by event_var(es_attackername) for 2 seconds!
+					es wcs_centertell event_var(attacker) You slowed event_var(es_username) for 2 seconds!
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 4
+					es_delayed .1 est_effect 10 #a 0 sprites/glow07.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 700 1 2.5 50 255 1 0 255 255 255 1.5
+					es_delayed .1 est_effect 10 #a 0 sprites/glow07.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 700 1 2.5 40 255 1 128 255 255 255 1.5
+					es_xmath wcs_z1 + 10
+					es_delayed .2 est_effect 10 #a 0 sprites/glow07.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 700 1 2.5 50 255 1 0 255 255 255 1.5
+					es_delayed .2 est_effect 10 #a 0 sprites/glow07.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 700 1 2.5 40 255 1 128 255 255 255 1.5
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 2 (END)
+	}
+}
+
+block levitation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 3 (START)
+	}
+	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
+	es_xmath wcs_gravity * 100
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Levitation - Reduced your gravity to server_var(wcs_gravity)%
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 3 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= 12) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es wcs_centertell event_var(attacker) Critical strike did + server_var(wcs_dmg) damage!
+				es_playsound event_var(attacker) wcs/zeal.mp3 .6
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 - 10
+				es_xmath wcs_z2 - 10
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+				es_xmath wcs_z1 + 20
+				es_xmath wcs_z2 + 20
+				es est_effect 3 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 8 8 255 230 50 185
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 4 (END)
+	}
+}
+
+block health
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 5 (START)
+	}
+	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Health - You received more health!
+	es_playsound event_var(userid) skills/stancehealmonk.mp3 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 400 2.5 100 100 0 255 128 128 255 25
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Rafhich - The Damned Soul - [Block] Skill: 5 (END)
+	}
+}
