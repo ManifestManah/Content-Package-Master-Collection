@@ -83,17 +83,23 @@ block fallen
 	}
 	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
 	{
-		es wcs_getweapon event_var(userid) wcs_primary 1
-		es wcs_getweapon event_var(userid) wcs_secondary 2	
+		es playerget primary wcs_primary event_var(userid)
+		es playerget secondary wcs_secondary event_var(userid)
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es wcs_centertell event_var(userid) You'll return to the living in 2 seconds!
 		es_delayed 2 wcs_spawn event_var(userid) 1
 		es_delayed 2 wcs_removeweapon event_var(userid) 1
 		es_delayed 2 wcs_removeweapon event_var(userid) 2
-		es_delayed 2 es_give event_var(userid) server_var(wcs_primary)
-		es_delayed 2 es_give event_var(userid) server_var(wcs_secondary)
 		es_delayed 2 es_emitsound player event_var(userid) wcs/resurrect.mp3 1.0 0.3
 		es_delayed 2.1 wcs_teleport event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		if (server_var(wcs_primary) != 0) do
+		{
+			es_delayed 2.1 es_give event_var(userid) server_var(wcs_primary)
+		}
+		if (server_var(wcs_secondary) != 0) do
+		{
+			es_delayed 2.1 es_give event_var(userid) server_var(wcs_secondary)
+		}
 		es est_effect 10 #a 0 sprites/halo01.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 270 10 2 60 100 0.8 132 66 0 150 10
 		es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 300 10 2 60 100 0.8 108 54 2 150 5
 	}
