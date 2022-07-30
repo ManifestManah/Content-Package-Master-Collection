@@ -1,0 +1,392 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Spawn (START)
+	}
+    es_xmath wcs_smokestack_counter + 1
+	es_give event_var(userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+    es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+    es_fire event_var(userid) server_var(ss_name) addoutput "basespread 80"
+    es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 80"
+    es_fire event_var(userid) server_var(ss_name) addoutput "speed 50"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rate 225"
+    es_fire event_var(userid) server_var(ss_name) addoutput "startsize 3"
+    es_fire event_var(userid) server_var(ss_name) addoutput "endsize 9"
+    es_fire event_var(userid) server_var(ss_name) addoutput "twist 180"
+    es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 90"
+    es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+    es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+    es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+	es_fire event_var(userid) server_var(ss_name) turnon
+	es_delayed .25 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed .75 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 1 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"	
+	es_delayed 1.25 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 1.5 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 1.75 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 2 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 2.25 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 2.5 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 2.75 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 3 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 3.25 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 3.5 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 3.75 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 4 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 128 64"
+	es_delayed 4.25 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_delayed 4.5 es_fire event_var(userid) server_var(ss_name) kill
+	es_getplayerlocation wcs_x4 wcs_y4 wcs_z4 event_var(userid)
+    es_xmath wcs_z4 + 10
+	es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed .25 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed .5 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed .75 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 1 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 1.25 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 1.5 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 1.75 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 2 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 2.25 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 2.5 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 2.75 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 3 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 3.25 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 3.5 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 3.75 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	es_delayed 4 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 128 64 255 5
+	es_delayed 4.25 est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x4) server_var(wcs_y4) server_var(wcs_z4) 50 350 .25 60 100 0.8 255 255 255 255 5
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Spawn (END)
+	}
+}
+
+block soul
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_attackerdead) = 0) do
+	{
+		es wcs_setfx health event_var(attacker) + server_var(wcs_tmp2) 0
+		es wcs_setfx armor event_var(attacker) + 20 0
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Souls of warriors - Someone died and you gained 20 armour and server_var(wcs_tmp2) health for bringing him to Valhalla
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 450 125 2 60 10 0.8 255 200 200 185 10
+	    es_xmath wcs_smokestack_counter + 1
+		es_give event_var(attacker) env_smokestack
+		es_format ss_name "my_ss_%1%2" event_var(attacker) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire event_var(attacker) server_var(ss_name) addoutput "basespread 75"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "spreadspeed 150"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "speed 100"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "rate 125"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "startsize 5"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "endsize 3"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "twist 90"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "jetlength 500"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "angles 0 0 0"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "rendercolor 255 255 255"
+		es_fire event_var(attacker) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+		es_fire event_var(attacker) server_var(ss_name) turnon
+		es_delayed 1 es_fire event_var(attacker) server_var(ss_name) kill
+ 		es_getplayerlocation wcs_x3 wcs_y3 wcs_z3 event_var(userid)
+		es_format coords "origin %1 %2 %3" server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3)
+		es_xmath wcs_smokestack_counter + 1
+		es_give event_var(userid) env_smokestack
+		es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+		es_fire event_var(userid) server_var(ss_name) addoutput "basespread 30"
+		es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 35"
+		es_fire event_var(userid) server_var(ss_name) addoutput "speed 110"
+		es_fire event_var(userid) server_var(ss_name) addoutput "rate 200"
+		es_fire event_var(userid) server_var(ss_name) addoutput "startsize 5"
+		es_fire event_var(userid) server_var(ss_name) addoutput "endsize 3"
+		es_fire event_var(userid) server_var(ss_name) addoutput "twist 10"
+		es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 220"
+		es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+		es_fire event_var(userid) server_var(ss_name) addoutput server_var(coords)
+		es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 0 0 255"
+		es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+		es_fire event_var(userid) server_var(ss_name) turnon
+		es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 1 (END)
+	}
+}
+
+block intimidation
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
+				if (server_var(wcs_tmp3) == 0) do
+				{
+					es wcsgroup set is_slowed event_var(userid) 1
+					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
+					es wcs_setfx speed event_var(userid) = 0.8 2
+					es wcs_centertell event_var(attacker) Your intimidated event_var(es_username)
+					es wcs_centertell event_var(userid) You were intimidated event_var(es_attackername)
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) ambient\creatures\town_child_scream1.wav 1.0
+						es_playsound event_var(attacker) ambient\creatures\town_child_scream1.wav 0.4
+					}
+					es_xrand wcs_red 50 185
+					es_xrand wcs_green 50 185
+					es_xrand wcs_x3 50 185
+					es wcs_fade event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_x3) 200 1 2
+					es_cexec event_var(userid) r_screenoverlay effects/strider_bulge_dudv.vmt
+					es_delayed .2 es_cexec event_var(userid) r_screenoverlay effects/strider_pinch_dudv.vmt
+					es_delayed .4 es_cexec event_var(userid) r_screenoverlay cs_havana/vance_facemap.vmt
+					es_delayed .6 es_cexec event_var(userid) r_screenoverlay decals/bloodstrain_003.vmt
+					es_delayed .7 es_cexec event_var(userid) r_screenoverlay cs_italy/black.vmt
+					es_delayed .9 es_cexec event_var(userid) r_screenoverlay effects/metalfence007.vmt
+					es_delayed 1 es_cexec event_var(userid) r_screenoverlay 0
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 15
+					es_format coords "origin %1 %2 %3" server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(userid) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(userid) server_var(ss_name) addoutput "basespread 20"
+					es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 125"
+					es_fire event_var(userid) server_var(ss_name) addoutput "speed 80"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rate 85"
+					es_fire event_var(userid) server_var(ss_name) addoutput "startsize 6"
+					es_fire event_var(userid) server_var(ss_name) addoutput "endsize 3"
+					es_fire event_var(userid) server_var(ss_name) addoutput "twist 20"
+					es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 50"
+					es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+					es_fire event_var(userid) server_var(ss_name) addoutput server_var(coords)
+					es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+					es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+					es_fire event_var(userid) server_var(ss_name) turnon
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "startsize 30"
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "endsize 50"
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "rate 125"
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "basespread 65"
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 125"
+					es_delayed .5 es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 128 0 128"
+					es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 2 (END)
+	}
+}
+
+block return
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		es wcs_getweapon event_var(userid) wcs_primary 1
+		es wcs_getweapon event_var(userid) wcs_secondary 2
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es wcs_centertell event_var(userid) You'll respawn in 3 seconds!
+		es_delayed 3 es_emitsound player event_var(userid) wcs/resurrect.mp3 1.0 0.3
+		es_delayed 3 wcs_spawn event_var(userid) 1
+		es_delayed 3 es_give event_var(userid) server_var(wcs_primary)
+		es_delayed 3 es_give event_var(userid) server_var(wcs_secondary)
+		es_delayed 3.1 es wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es_xmath wcs_z1 + 5
+		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 350 2 60 100 0.8 255 200 200 100 5
+		es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 350 2 60 100 0.8 255 128 64 255 10
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 3 (END)
+	}
+}
+
+block gaze
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 "es_xdoblock wcs/tools/manifest/sigrun/ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				//everything related to the wcs_userid
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Valkyrie's Gaze affected server_var(wcs_count_players_actually_affected) people
+				es wcs_centertell server_var(wcs_userid) Your gaze distorted your server_var(wcs_count_players_actually_affected) enemies' view
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you need to aim at an enemy
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_ultinotexec 0
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/sigrun/ultimate_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_xset wcs_ultinotexec 1
+						}
+					}
+				}
+				else do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_xrand wcs_red 50 185
+	es_xrand wcs_green 50 185
+	es_xrand wcs_x3 50 185
+	es wcs_centertell server_var(wcs_targetid) Your view was distorted by a valkyrie's gaze!
+	es wcs_fade server_var(wcs_targetid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_x3) 200 1 2
+	es_cexec server_var(wcs_targetid) r_screenoverlay effects/strider_bulge_dudv.vmt
+	es_delayed .4 es_cexec server_var(wcs_targetid) r_screenoverlay effects/strider_pinch_dudv.vmt
+	es_delayed .8 es_cexec server_var(wcs_targetid) r_screenoverlay cs_havana/vance_facemap.vmt
+	es_delayed 1.2 es_cexec server_var(wcs_targetid) r_screenoverlay decals/bloodstrain_003.vmt
+	es_delayed 1.4 es_cexec server_var(wcs_targetid) r_screenoverlay cs_italy/black.vmt
+	es_delayed 1.7 es_cexec server_var(wcs_targetid) r_screenoverlay effects\tp_eyefx\tpeye3.vmt
+	es_delayed 2 es_cexec server_var(wcs_targetid) r_screenoverlay 0
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_targetid)
+	es_xmath wcs_z2 + 15
+	es_format coords "origin %1 %2 %3" server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_targetid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_targetid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "basespread 20"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "spreadspeed 125"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "speed 80"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rate 85"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "startsize 6"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "endsize 3"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "twist 20"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "jetlength 50"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "angles 0 0 0"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput server_var(coords)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rendercolor 255 255 255"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+	es_fire server_var(wcs_targetid) server_var(ss_name) turnon
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "startsize 30"
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "endsize 50"
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rate 125"
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "basespread 65"
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "spreadspeed 125"
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "rendercolor 128 0 128"
+	es_delayed 1 es_fire server_var(wcs_targetid) server_var(ss_name) kill	
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sigrun - The Valkyrie - [Block] Skill: 4 (EXECUTED END)
+	}
+}
