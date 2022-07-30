@@ -7,7 +7,7 @@ block spawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Spawn (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Spawn (START)
 	}
 	es wcs_removeweapon event_var(userid) 1
 	es wcs_removeweapon event_var(userid) 2
@@ -49,7 +49,7 @@ block spawn
 	es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Spawn (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Spawn (END)
 	}
 }
 
@@ -57,12 +57,12 @@ block onchange
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] OnChange (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] OnChange (START)
 	}
 	es wcsgroup set bondultimate server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] OnChange (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] OnChange (END)
 	}
 }
 
@@ -70,7 +70,7 @@ block speed
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 1 (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 1 (START)
 	}
 	if (event_var(es_userdead) = 0) do
 	{
@@ -81,7 +81,7 @@ block speed
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 1 (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 1 (END)
 	}
 }
 
@@ -89,7 +89,7 @@ block armor
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 2 (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 2 (START)
 	}
 	if (event_var(es_userdead) = 0) do
 	{
@@ -105,7 +105,7 @@ block armor
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 2 (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 2 (END)
 	}
 }
 
@@ -113,7 +113,7 @@ block damage
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 3 (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 3 (START)
 	}
 	if (event_var(es_userdead) = 0) do
 	{
@@ -140,7 +140,7 @@ block damage
 					es_delayed 2 es_setplayerprop event_var(userid) CBasePlayer.m_iDefaultFOV 90
 					es_delayed 2 es_setplayerprop event_var(userid) CBasePlayer.m_iFOV 90
 					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Martini - Your enemy got drunk from the Martini
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Martini - James bond served you a Martini, making you drunk
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Martini - James Bond - Agent 007 served you a Martini, making you drunk
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_xmath wcs_z1 + 15
 					es est_effect 10 #a 0 sprites/laser.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 225 1 8 10 0 175 175 175 220 0
@@ -154,7 +154,7 @@ block damage
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 3 (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 3 (END)
 	}
 }
 
@@ -162,7 +162,7 @@ block respawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 4 (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 4 (START)
 	}
 	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
 	{
@@ -206,7 +206,7 @@ block respawn
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 4 (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 4 (END)
 	}
 }
 
@@ -214,7 +214,7 @@ block attackspeed
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 5 (START)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 5 (START)
 	}
 	es wcsgroup get bondultimate wcs_tmp5 server_var(wcs_userid)
 	if (server_var(wcs_tmp5) == 1) do
@@ -247,7 +247,7 @@ block attackspeed
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: James Bond - [Block] Skill: 5 (END)
+		wcs_log [Race]: James Bond - Agent 007 - [Block] Skill: 5 (END)
 	}
 }
 
@@ -258,7 +258,7 @@ event weapon_fire
 	{
 		ifx true(wcs_race_debugging) do
 		{
-			wcs_log [Race]: James Bond - [Block] Event Weapon_Fire (START)
+			wcs_log [Race]: James Bond - Agent 007 - [Block] Event Weapon_Fire (START)
 		}
 		es_xrand wcs_tmp4 1 2
 		if (server_var(wcs_tmp4) == 1) do
@@ -291,7 +291,7 @@ event weapon_fire
 		}
 		ifx true(wcs_race_debugging) do
 		{
-			wcs_log [Race]: James Bond - [Block] Event Weapon_Fire (END)
+			wcs_log [Race]: James Bond - Agent 007 - [Block] Event Weapon_Fire (END)
 		}
 	}
 }
