@@ -1,0 +1,310 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Spawn (START)
+	}
+	es wcsgroup set bloodhunter_feast event_var(userid) 0
+	es wcs_fade event_var(userid) 120 10 10 75 2 1
+	es_delayed .5 wcs_color event_var(userid) 160 0 0 240 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Death (START)
+	}
+	es wcsgroup set bloodhunter_feast event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] OnChange (START)
+	}
+	es wcsgroup set bloodhunter_feast server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] OnChange (END)
+	}
+}
+
+block bleed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 1 (START)
+	}
+	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_xrand wcs_duration 2 6				
+				es_delayed 1 damage event_var(userid) server_var(wcs_duration) 1 event_var(attacker)
+				es_delayed 2 damage event_var(userid) server_var(wcs_duration) 1 event_var(attacker)
+				es_delayed 3 damage event_var(userid) server_var(wcs_duration) 1 event_var(attacker)
+				es wcs_centertell event_var(userid) You've been wounded, you're bleeding for server_var(wcs_duration) seconds
+				es wcs_centertell event_var(attacker) You made your target bleed for server_var(wcs_duration) seconds
+				es wcs_fade event_var(userid) 120 10 10 45 1 2
+				es wcs_fade event_var(attacker) 120 10 10 45 1 2
+				es_playsound event_var(userid) wcs/zeal.mp3 .9
+				es_playsound event_var(attacker) wcs/zeal.mp3 .7
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(userid) env_blood
+				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(userid) server_var(ss_name) addoutput "amount 30"
+				es_fire event_var(userid) server_var(ss_name) addoutput "spawnflags 100"
+				es_fire event_var(userid) server_var(ss_name) emitblood
+				es_delayed .5 es_fire event_var(userid) server_var(ss_name) emitblood
+				es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+				
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 1 (END)
+	}
+}
+
+block leech
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es wcsgroup set bloodhunter_feast event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Feast - You'll receive health upon killing an enemy
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 2 (END)
+	}
+}
+
+event player_death
+{
+	es wcsgroup get bloodhunter_feast wcs_tmp3 event_var(attacker)
+	if (server_var(wcs_tmp3) == 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Event Player_Death (START)
+		}
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es_xrand wcs_addhealth 10 35
+			es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
+			es wcs_centertell event_var(attacker) Feast granted you server_var(wcs_addhealth) health
+			es_tell event_var(attacker) #multi #green [WCS]#lightgreen Feast - You received server_var(wcs_addhealth) health as you killed your enemy
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+			es_xmath wcs_z1 + 20
+			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 400 .5 30 10 0 128 0 0 175 15
+			es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 400 .5 20 10 0 180 0 0 255 20
+			es_delayed .3 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 400 55 1.5 30 10 0 128 0 0 175 15
+			es_delayed .3 est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 400 55 1.5 20 10 0 180 0 0 255 20
+		}
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Event Player_Death (END)
+		}
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 3 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es playerget health wcs_tmp1 event_var(userid)
+			if (server_var(wcs_tmp1) <= server_var(wcs_tmp2)) do
+			{
+				es_xrand wcs_dmg 15 20
+				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Wounded fatality - You caused server_var(wcs_dmg) extra damage
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+				es_xmath wcs_z1 + 15
+				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 15 10 0 128 0 0 175 15
+				es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 10 10 0 180 0 0 255 20
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 15 10 0 128 0 0 175 15
+				es_delayed .2 est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 10 10 0 180 0 0 255 20
+				es_xmath wcs_z1 + 15
+				es_delayed .2 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 15 10 0 128 0 0 175 15
+				es_delayed .2 est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 300 1 10 10 0 180 0 0 255 20
+				es_xmath wcs_smokestack_counter + 1
+				es_give event_var(userid) env_blood
+				es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+				es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+				es_fire event_var(userid) server_var(ss_name) addoutput "amount 75"
+				es_fire event_var(userid) server_var(ss_name) addoutput "spawnflags 100"
+				es_fire event_var(userid) server_var(ss_name) emitblood
+				es_delayed .2 es_fire event_var(userid) server_var(ss_name) emitblood
+				es_delayed .5 es_fire event_var(userid) server_var(ss_name) emitblood
+				es_delayed 1 es_fire event_var(userid) server_var(ss_name) kill
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 3 (END)
+	}
+}
+
+block hunt
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (START)
+	}
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es wcs_randplayer wcs_targetid server_var(wcs_targetteam)
+			if (server_var(wcs_targetid) != 0) do
+			{
+				es_xdoblock wcs/tools/manifest/strygwyr/ultimate_checks
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+			if (server_var(wcs_tmp) != 1) do
+			{
+				es_xset wcs_ultinotexec 0
+				es_xdoblock wcs/tools/manifest/strygwyr/ultimate_final
+			}
+			if (server_var(wcs_tmp) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, the targeted enemy was immune!
+				es_xset wcs_ultinotexec 1
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (EXECUTED START)
+	}
+	es_xrand wcs_rand 10 20
+	es damage server_var(wcs_targetid) server_var(wcs_rand) 1 server_var(wcs_userid)
+	es wcs_centertell server_var(wcs_targetid) Strygwyr - The Bloodseeker's blood scent caused server_var(wcs_rand) to you
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_targetid) env_blood
+	es_format ss_name "my_ss_%1%2" server_var(wcs_targetid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "amount 30"
+	es_fire server_var(wcs_targetid) server_var(ss_name) addoutput "spawnflags 100"
+	es_fire server_var(wcs_targetid) server_var(ss_name) emitblood
+	es_delayed .5 es_fire server_var(wcs_targetid) server_var(ss_name) emitblood
+	es_delayed 1 es_fire server_var(wcs_targetid) server_var(ss_name) kill
+	es wcs_centertell server_var(wcs_userid) Blood scent dealt server_var(wcs_rand) to an enemy
+	es es_xgetplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 126 1 10 10 0 128 0 0 175 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_targetid)
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 125 126 1 10 10 0 128 0 0 175 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es_xmath wcs_z1 + 10
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es_xmath wcs_z1 + 15
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 76 1 10 10 0 128 0 0 175 1
+	es playerget health wcs_tmp2 server_var(wcs_targetid)
+	if (server_var(wcs_tmp2) <= 125) do
+	{
+		es playerget wcs_speed wcs_tmp3 server_var(wcs_userid)
+		if (server_var(wcs_tmp3) < 2.25) do
+		{
+			es wcs_setfx speed server_var(wcs_userid) + .35 0
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood scent - Increased your speed by 35%
+		}
+		if (server_var(wcs_tmp3) >= 2.25) do
+		{
+			es wcs_setfx speed server_var(wcs_userid) = 2.25 0
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blood scent - Your speed is capped at 225%
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Strygwyr - The Bloodseeker - [Block] Skill: 4 (EXECUTED END)
+	}
+}
