@@ -147,6 +147,11 @@ block dejavu
 	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Deja vu - You'll go server_var(wcs_duration) seconds back in time!
 	es_xmath wcs_z1 + 15
 	es_delayed server_var(wcs_duration) est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x3) server_var(wcs_y3) server_var(wcs_z3) 100 750 1 60 10 5 255 255 255 175 5
+	es_delayed server_var(wcs_duration) es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Deja vu - You've gone server_var(wcs_duration) seconds back in time!
+	es_xmath wcs_duration - 2
+	es_delayed server_var(wcs_duration) wcs_centertell server_var(wcs_userid) You'll go back in time in 2 seconds!
+	es_xmath wcs_duration + 1
+	es_delayed server_var(wcs_duration) wcs_centertell server_var(wcs_userid) You'll go back in time in 1 second!
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Genocide - [Block] Skill: 4 (END)
