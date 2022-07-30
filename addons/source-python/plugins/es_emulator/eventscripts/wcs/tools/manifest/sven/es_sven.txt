@@ -1,0 +1,262 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Spawn (START)
+	}
+	es wcsgroup set hammerstorm_buff event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Spawn (END)
+	}
+}
+
+block death
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Death (START)
+	}
+	es wcsgroup set hammerstorm_buff event_var(userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Death (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] OnChange (START)
+	}
+	es wcsgroup set hammerstorm_buff server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] OnChange (END)
+	}
+}
+
+block stun
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		if (event_var(es_attackerdead) = 0) do
+		{
+			es wcsgroup get hammerstorm_buff wcs_tmp5 event_var(attacker)
+			if (server_var(wcs_tmp5) == 0) do
+			{
+				if (server_var(wcs_dice) <= server_var(wcs_chance)) do
+				{
+					es_xrand wcs_dmg 5 16
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Storm bolt dealt + server_var(wcs_dmg) damage
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 5
+					es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+					es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+					es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+					es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+				}
+				if (server_var(wcs_dice) <= 5) do
+				{
+					es_getplayerteam wcs_team event_var(attacker)
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					if (server_var(wcs_team) = 2) then es_xset wcs_targetteam "#ct,#alive"
+					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam "#t,#alive"
+					es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 "es_xdoblock wcs/tools/manifest/sven/stunned"
+				}
+			}
+			if (server_var(wcs_tmp5) == 1) do
+			{
+				if (server_var(wcs_dice) <= 40) do
+				{
+					es_xrand wcs_dmg 16 25
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Storm bolt dealt + server_var(wcs_dmg) damage
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 5
+					es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+					es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+					es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+					es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+				}
+				if (server_var(wcs_dice) <= 10) do
+				{
+					es_getplayerteam wcs_team event_var(attacker)
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					if (server_var(wcs_team) = 2) then es_xset wcs_targetteam "#ct,#alive"
+					if (server_var(wcs_team) = 3) then es_xset wcs_targetteam "#t,#alive"
+					es wcs_nearcoord wcs_player server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 200 "es_xdoblock wcs/tools/manifest/sven/stunned"
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 1 (END)
+	}
+}
+
+block stunned
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 1 (STUNNED EXECUTED START)
+	}
+	es wcsgroup get is_paralyzed wcs_tmp3 server_var(wcs_player)
+	if (server_var(wcs_tmp3) == 0) do
+	{
+		es wcsgroup set is_paralyzed server_var(wcs_player) 1
+		es_delayed .5 wcsgroup set is_paralyzed server_var(wcs_player) 0
+		es wcs_setfx paralyze server_var(wcs_player) = 1 0.5
+		es wcs_centertell server_var(wcs_player) Storm bolt stunned you for 0.5 second!
+		es_tell event_var(attacker) #multi #green [WCS]#lightgreen Storm bolt - Stunned your targets for 0.5 seconds
+		es_tell server_var(wcs_player) #multi #green [WCS]#lightgreen Storm bolt - You were stunned for 0.5 second
+		es_playsound event_var(attacker) wcs/lightning.mp3 .7
+		es_playsound server_var(wcs_player) wcs/lightning.mp3 .9
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 128
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) .5 1.5 155
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 50 .4 35 10 0 160 160 160 210 2
+		es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 375 50 .4 35 10 0 90 90 250 230 4
+		es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 475 50 .4 35 10 0 160 160 160 210 2
+		es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 475 50 .4 35 10 0 90 90 250 230 4
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 1 (STUNNED EXECUTED END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es_getplayerteam wcs_team event_var(attacker)
+				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+				if (server_var(wcs_team) = 2) then es_xset wcs_targetteam "#ct,#alive"
+				if (server_var(wcs_team) = 3) then es_xset wcs_targetteam "#t,#alive"
+				es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 150 "es_xdoblock wcs/tools/manifest/sven/damaged"
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 2 (END)
+	}
+}
+
+block damaged
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 2 (DAMAGED EXECUTED START)
+	}
+	es_playsound event_var(attacker) wcs/zeal.mp3 .7
+	es_playsound server_var(wcs_player) wcs/zeal.mp3 .9
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
+	es_xmath wcs_z1 + 5
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+	es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+	es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 160 160 160 210 2
+	es_delayed .1 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 475 .5 35 10 0 90 90 250 230 4
+	es_xrand wcs_dmg 8 16
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 event_var(attacker)
+	es_tell event_var(attacker) #multi #green [WCS]#lightgreen Great cleave - You dealt + server_var(wcs_dmg) damage
+	es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Great cleave - You received server_var(wcs_dmg) damage
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 2 (DAMAGED EXECUTED END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 3 (START)
+	}
+	es_delayed 1 wcs_setfx armor event_var(userid) = 50 0
+	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+	es_xmath wcs_speed * 100
+	es_xmath wcs_speed - 100
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Warcry - Granted you 50 armor and server_var(wcs_speed)% more speed
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 3 (END)
+	}
+}
+
+block buff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 4 (START)
+	}
+	es wcsgroup set hammerstorm_buff server_var(wcs_userid) 1
+	es_delayed 5 wcsgroup set hammerstorm_buff server_var(wcs_userid) 1
+	es wcs_centertell server_var(wcs_userid) Gods strenght increased the power of your storm bolts for 5 seconds!
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+	es_xmath wcs_z1 + 32
+	es_format vector2 "origin %1 %2 %3" server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 15"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 100"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 360"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 40"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 7"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 9"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 720"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 60"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "angles 90 90 90"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 90 90 250"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput server_var(vector2)
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+	es_fire server_var(wcs_userid) server_var(ss_name) setparent !activator
+	es_delayed 5 es_fire server_var(wcs_userid) server_var(ss_name) kill
+	es_xmath wcs_smokestack_counter + 1
+	es_give server_var(wcs_userid) env_smokestack
+	es_format ss_name "my_ss_%1%2" server_var(wcs_userid) server_var(wcs_smokestack_counter)
+	es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "basespread 15"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "spreadspeed 100"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "speed 360"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rate 70"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "startsize 8"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "endsize 6"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "twist 720"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "jetlength 60"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "angles 90 90 90"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "rendercolor 190 190 190"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput "SmokeMaterial particle/fire.vmt"
+	es_fire server_var(wcs_userid) server_var(ss_name) addoutput server_var(vector2)
+	es_fire server_var(wcs_userid) server_var(ss_name) turnon
+	es_fire server_var(wcs_userid) server_var(ss_name) setparent !activator
+	es_delayed 5 es_fire server_var(wcs_userid) server_var(ss_name) kill
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Sven - The Rogue Knight - [Block] Skill: 4 (END)
+	}
+}
