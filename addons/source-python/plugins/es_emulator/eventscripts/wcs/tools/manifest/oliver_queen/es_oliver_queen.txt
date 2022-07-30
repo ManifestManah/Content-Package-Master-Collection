@@ -12,7 +12,7 @@ block spawn
 	es wcsgroup set greenarrow_shroud event_var(userid) 0
 	es wcsgroup set greenarrow_explosive event_var(userid) 0
 	es wcs_setfx noscope event_var(userid) = 1 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Oliver Queen - The Green Arrow - You cannot scope while playing as The Oliver Queen - The Green Arrow
+	es_tell event_var(userid) #multi #green [WCS]#lightgreen Green Arrow - You are only allowed to No-Scope. 
 	es_getgame wcs_gamecheck
 	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 	{
