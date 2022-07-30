@@ -7,7 +7,7 @@ block spawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Spawn (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Spawn (START)
 	}
 	es wcs_setcooldown event_var(userid) 10
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -21,7 +21,7 @@ block spawn
 	es est_effect_08 #a 0 sprites/plasma.vmt server_var(vector1) 130 131 2 2 20 10 .5 175 175 255 200 4 5
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Spawn (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Spawn (END)
 	}
 }
 
@@ -29,7 +29,7 @@ block curse
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 1 (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 1 (START)
 	}
 	if (event_var(es_attackerdead) = 0) do
 	{
@@ -43,8 +43,8 @@ block curse
 				es_delayed 4 wcsgroup set is_slowed event_var(userid) 0	
 				es wcs_setfx speed event_var(attacker) = server_var(wcs_speed) 4
 				es_xmath wcs_speed * 100
-				es_tell event_var(userid) #multi #green [WCS]#lightgreen Chronos curse - Your speed has been set to server_var(wcs_speed)% for 4 seconds
-				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Chronos curse - You slowed event_var(es_attackername) for 4 seconds
+				es_tell event_var(userid) #multi #green [WCS]#lightgreen Chronos - Father Of Time curse - Your speed has been set to server_var(wcs_speed)% for 4 seconds
+				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Chronos - Father Of Time curse - You slowed event_var(es_attackername) for 4 seconds
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 5
 				es_xmath wcs_x1 + 100
@@ -75,7 +75,7 @@ block curse
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 1 (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 1 (END)
 	}
 }
 
@@ -83,22 +83,22 @@ block blessing
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 2 (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 2 (START)
 	}
 	es_getplayerteam wcs_team event_var(userid)
 	es wcs_setfx speed event_var(userid) + server_var(wcs_speed) 0
-	if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/manifest/chronos/blessing_block"
-	if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/manifest/chronos/blessing_block"
+	if (server_var(wcs_team) = 2) then wcs_foreach player wcs_userid #t "es_xdoblock wcs/tools/manifest/Chronos - Father Of Time/blessing_block"
+	if (server_var(wcs_team) = 3) then wcs_foreach player wcs_userid #ct "es_xdoblock wcs/tools/manifest/Chronos - Father Of Time/blessing_block"
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 2 (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 2 (END)
 	}
 }
 
 block blessing_block
 {
 	es_delayed .5 wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
-	es_delayed .5 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blessing of quickening - Chronos increased your speed
+	es_delayed .5 es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Blessing of quickening - Chronos - Father Of Time increased your speed
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 5
 	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
@@ -109,7 +109,7 @@ block flashback
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 3 (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 3 (START)
 	}
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
@@ -124,7 +124,7 @@ block flashback
 					es_delayed 2.1 wcsgroup set flashback1 event_var(userid) 0
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_delayed 2 wcs_teleport event_var(userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flashback - Chronos sends you back in time in 2 seconds!
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Flashback - Chronos - Father Of Time sends you back in time in 2 seconds!
 					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Flashback - You send your enemy back in time in 2 seconds!
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/combineball_glow_blue_1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 85 86 2 5 10 3 100 100 200 185 1
@@ -160,7 +160,7 @@ block flashback
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 3 (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 3 (END)
 	}
 }
 
@@ -168,7 +168,7 @@ block manipulate
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (START)
 	}
 	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
 	{
@@ -182,15 +182,15 @@ block manipulate
 					es wcsgroup set timemanipulation event_var(userid) 1
 					es_delayed 2.1 wcsgroup set timemanipulation event_var(userid) 0
 					es_xrand wcs_rand 1 2
-					if (server_var(wcs_rand) == 1) then es_xdoblock wcs/tools/manifest/chronos/slow
-					if (server_var(wcs_rand) == 2) then es_xdoblock wcs/tools/manifest/chronos/speed
+					if (server_var(wcs_rand) == 1) then es_xdoblock wcs/tools/manifest/Chronos - Father Of Time/slow
+					if (server_var(wcs_rand) == 2) then es_xdoblock wcs/tools/manifest/Chronos - Father Of Time/speed
 				}
 			}
 		}
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (END)
 	}
 }
 
@@ -198,7 +198,7 @@ block slow
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (SLOW EXECUTED START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (SLOW EXECUTED START)
 	}
 	es wcsgroup get is_slowed wcs_tmp3 event_var(userid)
 	if (server_var(wcs_tmp3) == 0) do
@@ -207,7 +207,7 @@ block slow
 		es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
 		es wcs_setfx speed event_var(userid) - server_var(wcs_speed1) 2
 		es_xmath wcs_speed1 * 100
-		es wcs_centertell event_var(userid) Chronos set your speed to server_var(wcs_speed1)%
+		es wcs_centertell event_var(userid) Chronos - Father Of Time set your speed to server_var(wcs_speed1)%
 		es wcs_centertell event_var(attacker) You set event_var(es_username)'s speed to server_var(wcs_speed1)%
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 15
@@ -235,7 +235,7 @@ block slow
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (SLOW EXECUTED END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (SLOW EXECUTED END)
 	}
 }
 
@@ -243,12 +243,12 @@ block speed
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (SPEED EXECUTED START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (SPEED EXECUTED START)
 	}
 	es wcs_setfx speed event_var(userid) + server_var(wcs_speed2) 2
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es wcs_centertell event_var(userid) Chronos increased your speed by server_var(wcs_speed2)%
+	es wcs_centertell event_var(userid) Chronos - Father Of Time increased your speed by server_var(wcs_speed2)%
 	es wcs_centertell event_var(attacker) You increased event_var(es_username)'s speed by server_var(wcs_speed2)%
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 15
@@ -277,7 +277,7 @@ block speed
     es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 4 (SPEED EXECUTED END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 4 (SPEED EXECUTED END)
 	}
 }
 
@@ -285,7 +285,7 @@ block reverse
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 5 (START)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 5 (START)
 	}
 	es wcs_centertell server_var(wcs_userid) In server_var(wcs_duration) seconds you'll travel back in time!
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
@@ -326,6 +326,6 @@ block reverse
 	es_delayed server_var(wcs_duration) est_effect_08 #a 0 effects/combinemuzzle1.vmt server_var(vector3) 500 20 1 .5 80 420 1 200 200 200 185 10 5
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Chronos - [Block] Skill: 5 (END)
+		wcs_log [Race]: Chronos - Father Of Time - [Block] Skill: 5 (END)
 	}
 }
