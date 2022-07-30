@@ -7,7 +7,7 @@ block spawn
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Spawn (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Spawn (START)
 	}
 	es wcsgroup set horseman_fly event_var(userid) 1
 	es wcsgroup set horseman_aura event_var(userid) 1
@@ -49,7 +49,7 @@ block spawn
     es_delayed 5 es_fire event_var(userid) server_var(ss_name) kill
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Spawn (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Spawn (END)
 	}
 }
 
@@ -57,13 +57,13 @@ block death
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Death (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Death (START)
 	}
 	es wcsgroup set horseman_fly event_var(userid) 0
 	es wcsgroup set horseman_aura event_var(userid) 0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Death (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Death (END)
 	}
 }
 
@@ -71,13 +71,13 @@ block onchange
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] OnChange (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] OnChange (START)
 	}
 	es wcsgroup set horseman_fly server_var(wcs_userid) 0
 	es wcsgroup set horseman_aura server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] OnChange (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] OnChange (END)
 	}
 }
 
@@ -85,7 +85,7 @@ block immunity
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 1 (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 1 (START)
 	}
 	if (server_var(wcs_dice) <= server_var(wcs_chance)) do
 	{
@@ -97,7 +97,7 @@ block immunity
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 1 (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 1 (END)
 	}
 }
 
@@ -105,7 +105,7 @@ block speed
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 2 (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 2 (START)
 	}
 	if (event_var(es_userdead) = 0) do
 	{
@@ -116,7 +116,7 @@ block speed
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 2 (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 2 (END)
 	}
 }
 
@@ -124,7 +124,7 @@ block damage
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 3 (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 3 (START)
 	}
 	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
 	{
@@ -170,7 +170,7 @@ block damage
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 3 (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 3 (END)
 	}
 }
 
@@ -178,7 +178,7 @@ block aura
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 4 (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 4 (START)
 	}
 	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
 	{
@@ -224,7 +224,7 @@ block aura
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 4 (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 4 (END)
 	}
 }
 
@@ -232,7 +232,7 @@ block fly
 {
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 5 (START)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 5 (START)
 	}
 	es_isbot wcs_tmp1 server_var(wcs_userid)
 	if (server_var(wcs_tmp1) = 0) do
@@ -275,6 +275,6 @@ block fly
 	}
 	ifx true(wcs_race_debugging) do
 	{
-		wcs_log [Race]: Headless Horseman - [Block] Skill: 5 (END)
+		wcs_log [Race]: Karrich - Hessian of the Hollow - [Block] Skill: 5 (END)
 	}
 }
