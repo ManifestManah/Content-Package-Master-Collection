@@ -1,0 +1,492 @@
+//////////////////////
+//Manifest Race Pack//
+//Version 1.0.1B    //
+//////////////////////
+
+block spawn
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Spawn (START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound event_var(userid) npc\ichthyosaur\water_breath.wav .8
+		es_delayed 2.5 es_stopsound event_var(userid) npc\ichthyosaur\water_breath.wav
+	}
+	es wcsgroup set waterrunner_user event_var(userid) 0
+	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+	es_xmath wcs_z1 + 100
+	es_xmath wcs_z2 + 15
+	es_xmath wcs_x1 + 75
+	es_xmath wcs_y1 + 75
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2.5 2 100
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2.5 50 2.8 0 0 35 200 40 1
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 1 2.5 25 4 0 .2 0 45 200 200 3
+	es_xmath wcs_x1 - 150
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2.5 2 100
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2.5 50 2.8 0 0 35 200 40 1
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 1 2.5 25 4 0 .2 0 45 200 200 3
+	es_xmath wcs_y1 - 150
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2.5 2 100
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2.5 50 2.8 0 0 35 200 40 1
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 1 2.5 25 4 0 .2 0 45 200 200 3
+	es_xmath wcs_x1 + 150
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2.5 2 100
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2.5 50 2.8 0 0 35 200 40 1
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+	es est_effect_06 #a 0 sprites/bluelight1.vmt server_var(vector1) server_var(vector2) 1 2.5 25 4 0 .2 0 45 200 200 3
+	es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 2.5 2.5 125
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 75 76 2.5 50 2.8 0 0 30 185 30 1
+	es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 450 76 2.5 20 1 0 0 30 185 30 1
+	es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 350 76 2.5 20 2 0 0 30 185 30 1
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Spawn (END)
+	}
+}
+
+block onchange
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] OnChange (START)
+	}
+	es wcsgroup set waterrunner_user server_var(wcs_userid) 0
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] OnChange (END)
+	}
+}
+
+block speed
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 1 (START)
+	}
+	if (event_var(es_userdead) = 0) do
+	{
+		es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
+		es_xmath wcs_speed * 100
+		es_xmath wcs_speed - 100
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Water running - Increased your speed by server_var(wcs_speed)%
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 1 (END)
+	}
+}
+
+block debuff
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 2 (START)
+	}
+	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do 
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es wcsgroup set waterrunner_user event_var(userid) 1
+			}
+			es wcsgroup set is_slowed event_var(userid) 1
+			es_tell event_var(userid) #multi #green [WCS]#lightgreen Aquaplaning - Reduces or remove, all slow buffs from yourself while running
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 2 (END)
+	}
+}
+
+block damage
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 3 (START)
+	}
+	if (server_var(wcs_dice3) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es playerget speed server_var(wcs_tmp1) event_var(userid)
+				es playerget speed server_var(wcs_speed) event_var(attacker)
+				if (server_var(wcs_speed) > server_var(wcs_tmp1)) do
+				{
+					es_xrand wcs_dmg 3 25
+					es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
+					es wcs_centertell event_var(attacker) Corrupted bubbles dealt + server_var(wcs_dmg)
+					
+					es_getgame wcs_gamecheck
+					if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(attacker) weapons\underwater_explode3.wav .2
+						es_delayed .2 es_playsound event_var(attacker) weapons\underwater_explode4.wav .5
+						es_delayed .3 es_playsound event_var(attacker) weapons\underwater_explode4.wav .3
+						es_playsound event_var(userid) weapons\underwater_explode3.wav .2
+						es_delayed .2 es_playsound event_var(userid) weapons\underwater_explode4.wav .5
+						es_delayed .3 es_playsound event_var(userid) weapons\underwater_explode4.wav .3
+					}
+					if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+					{
+						es_playsound event_var(userid) ambient\water\underwater.wav 1
+						es_delayed 1.1 es_stopsound event_var(userid) ambient\water\underwater.wav
+						es_playsound event_var(userid) weapons\hegrenade\explode3_distant.wav 1
+					}
+					es playerget viewcoord event_var(attacker) wcs_x1 wcs_y1 wcs_z1
+					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
+					es_xmath wcs_z2 + 25
+					es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 2 0 0 35 200 75 1
+					es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 2 .3 200 200 220 255 20
+					es_delayed .6 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 450 60 1.3 50 2 0 0 35 200 100 1
+					es_delayed .6 est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 450 60 1.3 50 2 .3 200 200 220 255 20
+					es_xmath wcs_y1 + 60
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/hydraspinalcord.vmt server_var(vector1) server_var(vector2) 1 2 30 5 0 0 0 30 220 200 10
+					es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 1 2 50 10 0 0 0 15 100 130 3
+					es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 2 100
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2 50 2.8 0 0 35 200 40 1
+					es_xmath wcs_y1 - 120
+					es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+					es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+					es est_effect_06 #a 0 sprites/hydraspinalcord.vmt server_var(vector1) server_var(vector2) 1 2 30 5 0 0 0 30 220 200 10
+					es est_effect_06 #a 0 sprites/tp_beam001.vmt server_var(vector1) server_var(vector2) 1 2 50 10 0 0 0 15 100 130 3
+					es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 2 2 100
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 2 50 2.8 0 0 35 200 40 1
+					es_xmath wcs_smokestack_counter + 1
+					es_give event_var(userid) env_smokestack
+					es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
+					es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
+					es_fire event_var(userid) server_var(ss_name) addoutput "basespread 25"
+					es_fire event_var(userid) server_var(ss_name) addoutput "spreadspeed 27"
+					es_fire event_var(userid) server_var(ss_name) addoutput "speed 78"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rate 95"
+					es_fire event_var(userid) server_var(ss_name) addoutput "startsize 1"
+					es_fire event_var(userid) server_var(ss_name) addoutput "endsize 4"
+					es_fire event_var(userid) server_var(ss_name) addoutput "twist 40"
+					es_fire event_var(userid) server_var(ss_name) addoutput "jetlength 104"
+					es_fire event_var(userid) server_var(ss_name) addoutput "angles 0 0 0"
+					es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 150 150 252"
+					es_fire event_var(userid) server_var(ss_name) addoutput "SmokeMaterial effects/bubble.vmt"
+					es_fire event_var(userid) server_var(ss_name) turnon
+					es_delayed 2 es_fire event_var(userid) server_var(ss_name) kill
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 3 (END)
+	}
+}
+
+block mark
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 4 (START)
+	}
+	if (server_var(wcs_dice4) <= server_var(wcs_chance)) do
+	{
+		if (event_var(es_userdead) = 0) do
+		{
+			if (event_var(es_attackerdead) = 0) do
+			{
+				es wcsgroup get waterrunner_mark wcs_tmp6 event_var(userid)
+				if (server_var(wcs_tmp6) != 4) do
+				{
+					es_xmath wcs_tmp6 + 1
+					es wcsgroup set wcs_tmp6 event_var(userid) server_var(wcs_tmp6)
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Water mark - A water runner applied a water mark onto you
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Water mark - You applied a water mark onto your target
+					es_xrand wcs_rand 1 2
+					if (server_var(wcs_rand) == 1) then es_playsound event_var(userid) ambient\water\water_splash2.wav .6
+					if (server_var(wcs_rand) == 2) then es_playsound event_var(userid) ambient\water\water_splash3.wav .7
+					if (server_var(wcs_rand) == 1) then es_playsound event_var(attacker) ambient\water\water_splash2.wav .3
+					if (server_var(wcs_rand) == 2) then es_playsound event_var(attacker) ambient\water\water_splash3.wav .4
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+					es_xmath wcs_z1 + 128
+					es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.5 2 175
+					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 1.5 50 2.8 0 0 35 200 40 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 4 (END)
+	}
+}
+
+block wave
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (START)
+	}
+	es_xset wcs_execute_ultimate 0
+	es_getplayerteam wcs_team server_var(wcs_userid)
+	if (server_var(wcs_team) = 2) do
+	{
+		es_xset wcs_targetteam "#ct,#alive"
+		es_getlivingplayercount wcs_pcount 3
+	}
+	if (server_var(wcs_team) = 3) do
+	{
+		es_xset wcs_targetteam "#t,#alive"
+		es_getlivingplayercount wcs_pcount 2
+	}
+	if (server_var(wcs_targetteam) != 0) do
+	{	
+		if (server_var(wcs_pcount) > 0) do
+		{
+			es_xset wcs_counter 0
+			es_xset wcs_initial_players_struck 0
+			es_xset wcs_count_players_ultimate_immunity 0
+			es_xset wcs_count_players_actually_affected 0
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/uteri/ultimate_checks"
+			if (server_var(wcs_execute_ultimate) == 1) do
+			{
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Waves of desolation hit server_var(wcs_count_players_actually_affected) enemies
+				es wcs_centertell server_var(wcs_userid) Waves of desolation did server_var(wcs_dmg) damage to server_var(wcs_count_players_actually_affected) enemies
+				es_getgame wcs_gamecheck
+				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_userid) ambient/water/wave4.wav .7
+					es_delayed .4 es_playsound server_var(wcs_userid) ambient/water/wave2.wav .8
+					es_delayed .7 es_playsound server_var(wcs_userid) ambient/water/wave1.wav 1
+				}
+				if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+				{
+					es_playsound server_var(wcs_targetid) ambient/water/wave1.wav 1
+					es_playsound server_var(wcs_userid) ambient/water/wave1.wav 1
+				}
+			}
+		}
+		else do
+		{
+			es_xset wcs_ultinotexec 1
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
+		}
+		if (server_var(wcs_counter) = 0) do
+		{
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
+			es_xset wcs_ultinotexec 1
+		}
+	}
+	else do
+	{
+		es_xset wcs_ultinotexec 1
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
+	}
+	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (END)
+	}
+}
+
+block ultimate_checks 
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (CHECKS START)
+	}
+	es_exists ex userid server_var(wcs_targetid)
+	if (server_var(ex) = 1) do
+	{
+		es getplayerinfo wcs_alive server_var(wcs_targetid) isdead
+		if (server_var(wcs_alive) = 0) do
+		{
+			es_xmath wcs_counter + 1
+			if (server_var(wcs_counter) > 0) do
+			{
+				if (server_var(wcs_counter) <= 20) do
+				{
+					es_set wcs_initial_players_struck server_var(wcs_counter)
+					es wcsgroup get ulti_immunity wcs_tmp server_var(wcs_targetid)
+					if (server_var(wcs_tmp) != 1) do
+					{
+						es_xset wcs_ultinotexec 0
+						es_xset wcs_execute_ultimate 1
+						es_xmath wcs_count_players_actually_affected + 1
+						es_xdoblock wcs/tools/manifest/uteri/ultimate_final
+					}
+					if (server_var(wcs_tmp) == 1) do
+					{
+						es_xmath wcs_count_players_ultimate_immunity + 1
+						if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+						}
+						if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
+						{
+							es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+							es_xset wcs_ultinotexec 1
+						}
+					}
+				}
+				else do
+				{
+					es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
+					es_xset wcs_ultinotexec 1
+				}
+			}
+		}
+	}
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (CHECKS END)
+	}
+}
+
+block ultimate_final
+{
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (EXECUTED START)
+	}
+	es_getgame wcs_gamecheck
+	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	{
+		es_trick dispatcheffect server_var(wcs_targetid) WaterSurfaceExplosion 1
+		es_playsound server_var(wcs_targetid) ambient/water/wave4.wav .7
+		es_delayed .4 es_playsound server_var(wcs_targetid) ambient/water/wave2.wav .8
+		es_delayed .7 es_playsound server_var(wcs_targetid) ambient/water/wave1.wav 1
+	}
+	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	{
+		es_playsound server_var(wcs_targetid) ambient/water/wave1.wav 1
+	}
+	es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+	es est_effect_18 #a 0 effects/bubble.vmt server_var(vector1) 0 0 200 10 450 2.8 10
+	es_xmath wcs_z1 + 30
+	es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 1.6 0 0 35 200 100 1
+	es_xmath wcs_z1 - 7
+	es_delayed .05 est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 40 2.2 0 0 30 220 175 1
+	es_xmath wcs_z1 - 13
+	es_delayed .15 est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 60 1 0 0 20 180 125 0
+	es_xmath wcs_z1 + 20
+	es_delayed .25 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 3 0 0 35 200 100 1
+	es_xmath wcs_z1 - 7
+	es_delayed .3 est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 40 3 0 0 30 220 175 1
+	es_xmath wcs_z1 - 13
+	es_delayed .4 est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 60 4 0 0 20 180 125 0
+	es_xmath wcs_z1 + 20
+	es_delayed .45 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 2.6 0 0 35 200 100 1
+	es_xmath wcs_z1 - 7
+	es_delayed .5 est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 40 2 0 0 30 220 175 1
+	es_xmath wcs_z1 - 13
+	es_delayed .6 est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 60 3.2 0 0 20 180 125 0
+	es_xmath wcs_z1 + 20
+	es_delayed .65 est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 50 3 0 0 35 200 100 1
+	es_xmath wcs_z1 - 7
+	es_delayed .7 est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 40 2 0 0 30 220 175 1
+	es_xmath wcs_z1 - 13
+	es_delayed .8 est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 60 450 .7 60 4 0 0 20 180 125 0
+	es wcsgroup get waterrunner_mark wcs_tmp6 server_var(wcs_targetid)
+	if (server_var(wcs_tmp6) == 0) do
+	{
+		es_xrand wcs_dmg 15 25
+	}
+	if (server_var(wcs_tmp6) != 0) do
+	{
+		es_xrand wcs_damage 5 10
+		es_math wcs_damage * server_var(wcs_tmp6)
+		es_xrand wcs_dmg 15 25
+		es_math wcs_dmg + server_var(wcs_damage)
+	}
+	es wcs_centertell server_var(wcs_targetid) You took server_var(wcs_dmg) damage from waves of desolation
+	es damage server_var(wcs_targetid) server_var(wcs_dmg) 1 server_var(wcs_userid)
+	ifx true(wcs_race_debugging) do
+	{
+		wcs_log [Race]: Uteri - The Water Runner - [Block] Skill: 5 (EXECUTED END)
+	}
+}
+
+event player_footstep
+{
+	es wcsgroup get waterrunner_user wcs_tmp9 event_var(userid)
+	if (server_var(wcs_tmp9) == 1) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Uteri - The Water Runner - [Block] Event Player_Footstep (START)
+		}
+		es_getgame wcs_gamecheck
+		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+		{
+			es_trick dispatcheffect event_var(userid) WaterSurfaceExplosion -16
+		}
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+		es est_effect_14 #a 0 effects/bubble.vmt server_var(vector1) server_var(vector1) 84 30 25
+		es_delayed .2 est_effect_14 #a 0 effects/bubble.vmt server_var(vector1) server_var(vector1) 84 30 25
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Uteri - The Water Runner - [Block] Event Player_Footstep (END)
+		}
+	}
+}
+
+event player_spawn
+{
+	es wcsgroup get waterrunner_mark wcs_tmp6 event_var(userid)
+	if (server_var(wcs_tmp6) != 0) do
+	{
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Uteri - The Water Runner - [Block] Event Player_Spawn (START)
+		}
+		es wcsgroup set waterrunner_mark event_var(userid) 0
+		es_tell event_var(userid) #multi #green [WCS]#lightgreen Water Mark - All applied water marks has been removed from you
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+		es_xmath wcs_z1 + 128
+		es est_effect 11 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1.5 2 175
+		es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 55 56 1.5 50 2.8 0 0 35 200 40 1
+		if (server_var(wcs_tmp6) == 1) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 500 2 60 10 0 0 35 200 100 1
+		}
+		if (server_var(wcs_tmp6) == 2) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/hydraspinalcord.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 500 2 60 10 0 0 30 220 175 1
+		}
+		if (server_var(wcs_tmp6) == 3) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 500 2 60 10 0 0 20 180 125 0
+		}
+		if (server_var(wcs_tmp6) == 4) do
+		{
+			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
+			es est_effect 10 #a 0 sprites/tp_beam001.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 500 2 60 10 0 0 20 180 125 0
+			es_xmath wcs_z1 + 8
+			es est_effect 10 #a 0 sprites/glow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 500 2 65 10 .2 210 210 240 255 22
+		}
+		ifx true(wcs_race_debugging) do
+		{
+			wcs_log [Race]: Uteri - The Water Runner - [Block] Event Player_Spawn (END)
+		}		
+	}
+}
