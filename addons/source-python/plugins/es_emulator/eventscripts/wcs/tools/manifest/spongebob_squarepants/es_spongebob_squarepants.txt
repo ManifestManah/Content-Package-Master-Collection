@@ -141,7 +141,7 @@ block godmode_push
 		}
 		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es_delayed 2 wcs_setmodel server_var(wcs_userid) 0
+			es_delayed 2 wcs_setmodelprop server_var(wcs_userid) 0
 		}
 	}
 	ifx true(wcs_race_debugging) do
