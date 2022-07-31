@@ -185,16 +185,13 @@ block warp
 	{
 		wcs_log [Race]: Hybrid - [Block] Skill: 7 (START)
 	}
-    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-    es_xmath wcs_z2 + 25
-	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 1
-    es_xmath wcs_z2 - 25
 	ifx true(wcs_legacy_teleport_fade) do
 	{
 		es wcs_fade event_var(userid) 65 255 30 50 1 1
 	}
 	ifx true(wcs_legacy_teleport_type) do
 	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
 		es playerset location server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 		es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
@@ -208,6 +205,9 @@ block warp
 			es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 			es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
 			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenWarp - You Warped!
+		    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		    es_xmath wcs_z2 + 25
+			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 1
 		}
 	}
 	ifx false(wcs_legacy_teleport_type) do
@@ -215,6 +215,9 @@ block warp
 		es wcs_teleport_push server_var(wcs_userid) server_var(wcs_range)
 		es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenWarp - You Warped!
+	    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+	    es_xmath wcs_z2 + 25
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 1
 	}
 	ifx true(wcs_race_debugging) do
 	{

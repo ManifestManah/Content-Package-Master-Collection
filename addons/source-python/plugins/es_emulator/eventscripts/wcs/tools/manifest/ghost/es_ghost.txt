@@ -47,14 +47,13 @@ block ghost
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es_xset wcs_range 1500
-			    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
-			    es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 35 1.2
 				ifx true(wcs_legacy_teleport_fade) do
 				{
 					es wcs_fade event_var(userid) 65 255 30 50 1 1
 				}
 				ifx true(wcs_legacy_teleport_type) do
 				{
+					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 					es playerget viewcoord event_var(userid) wcs_x2 wcs_y2 wcs_z2
 					es playerset location event_var(userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 					es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
@@ -71,6 +70,8 @@ block ghost
 						es wcs_centertell event_var(userid) You teleported and went invisible for 2 seconds!
 						es_delayed 2 wcs_color event_var(userid) 230 230 230 255 1
 						es_delayed 2 wcs_centertell event_var(userid) You're no longer invisible!
+					    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+					    es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 35 1.2
 					}
 				}
 				ifx false(wcs_legacy_teleport_type) do
@@ -81,6 +82,8 @@ block ghost
 					es wcs_centertell event_var(userid) You teleported and went invisible for 2 seconds!
 					es_delayed 2 wcs_color event_var(userid) 230 230 230 255 1
 					es_delayed 2 wcs_centertell event_var(userid) You're no longer invisible!
+				    es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
+				    es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 35 1.2
 				}
 			}
 		}

@@ -158,16 +158,13 @@ block boost
 		wcs_log [Race]: Rocketeer - [Block] Skill: 4 (START)
 	}
 	es_xset wcs_range 2000
-	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
-	es_delayed .3 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
-	es est_effect 11 #a 0 sprites/ar2_muzzle4b.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 1 200
 	ifx true(wcs_legacy_teleport_fade) do
 	{
 		es wcs_fade event_var(userid) 65 255 30 50 1 1
 	}
 	ifx true(wcs_legacy_teleport_type) do
 	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
 		es playerset location server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 		es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
@@ -193,6 +190,10 @@ block boost
 			es wcs_setfx freeze server_var(wcs_userid) = 1 server_var(wcs_duration)
 			es wcsgroup set is_frozen server_var(wcs_userid) 1
 			es_delayed server_var(wcs_duration) wcsgroup set is_frozen server_var(wcs_userid) 0
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
+			es_delayed .3 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
+			es est_effect 11 #a 0 sprites/ar2_muzzle4b.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 1 200
 		}
 	}
 	ifx false(wcs_legacy_teleport_type) do
@@ -212,6 +213,10 @@ block boost
 		es wcs_setfx freeze server_var(wcs_userid) = 1 server_var(wcs_duration)
 		es wcsgroup set is_frozen server_var(wcs_userid) 1
 		es_delayed server_var(wcs_duration) wcsgroup set is_frozen server_var(wcs_userid) 0
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
+		es_delayed .3 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 40 1
+		es est_effect 11 #a 0 sprites/ar2_muzzle4b.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 0.5 1 200
 	}
 	ifx true(wcs_race_debugging) do
 	{

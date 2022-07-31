@@ -269,10 +269,6 @@ block teleport
 	{
 		wcs_log [Race]: Assassin From The Void - [Block] Skill: 5 (START)
 	}
-	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-	es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
-	es_delayed .2 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
-	es_delayed .4 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
 	es_xset wcs_range 1200
 	ifx true(wcs_legacy_teleport_fade) do
 	{
@@ -280,6 +276,7 @@ block teleport
 	}
 	ifx true(wcs_legacy_teleport_type) do
 	{
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
 		es playerset location server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 		es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
@@ -295,6 +292,10 @@ block teleport
 			es_delayed .2 wcs_color server_var(wcs_userid) 255 20 147 25 1
 			es_delayed 1.2 wcs_color server_var(wcs_userid) 255 20 147 255 1
 			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Boost Of The Void - Made you less visible for 1 second!
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+			es_delayed .2 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+			es_delayed .4 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
 		}
 	}
 	ifx false(wcs_legacy_teleport_type) do
@@ -304,6 +305,10 @@ block teleport
 		es_delayed .2 wcs_color server_var(wcs_userid) 255 20 147 25 1
 		es_delayed 1.2 wcs_color server_var(wcs_userid) 255 20 147 255 1
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Boost Of The Void - Made you less visible for 1 second!
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+		es_delayed .2 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
+		es_delayed .4 est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 100 10
 	}
 	ifx true(wcs_race_debugging) do
 	{
