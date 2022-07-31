@@ -218,227 +218,129 @@ block ultimate
 	{
 		wcs_log [Race]: Vagabond - [Block] Skill: 5 (START)
 	}
-	es_getgame wcs_gamecheck
-	if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+	ifx true(wcs_legacy_teleport_fade) do
 	{
-		es_playsound server_var(wcs_userid) npc/scanner/scanner_nearmiss2.wav .4
+		es wcs_fade event_var(userid) 65 255 30 50 1 1
 	}
-	if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+	ifx true(wcs_legacy_teleport_type) do
 	{
-		es_playsound server_var(wcs_userid) weapons\fx\nearmiss\bulletltor13.wav .7
-	}
-	es wcsgroup get vaga wcs_tmp5 server_var(wcs_userid)
-	if (server_var(wcs_tmp5) == 1) do
-	{
-		es wcsgroup set is_frozen server_var(wcs_userid) 1
-		es wcsgroup set vaga server_var(wcs_userid) 2
-		es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
-		if (server_var(wcs_tmp6) = 1) do
+		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
+		es playerget viewcoord server_var(wcs_userid) wcs_x2 wcs_y2 wcs_z2
+		es playerset location server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+		if (server_var(wcs_tmp3) > server_var(wcs_range)) do
 		{
-			es_fire server_var(wcs_userid) !self addoutput "renderfx 0"
+	        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenMax Distance - You cannot travel that far!
+		    es wcs_setcooldown server_var(wcs_userid) 0
+		}
+		else 
+		{
+			es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
+			es wcsgroup get vaga wcs_tmp5 server_var(wcs_userid)
+			if (server_var(wcs_tmp5) == 1) do
+			{
+				es wcsgroup set is_frozen server_var(wcs_userid) 1
+				es wcsgroup set vaga server_var(wcs_userid) 2
+				es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
+				es wcs_color server_var(wcs_userid) 255 255 255 0 0
+				es_delayed 1 wcs_setfx freeze server_var(wcs_userid) = 1 0
+				es wcs_setcooldown server_var(wcs_userid) 1
+				if (server_var(wcs_tmp6) = 1) do
+				{
+					es_fire server_var(wcs_userid) !self addoutput "renderfx 0"
+				}
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're now frozen invisible
+			}
+			if (server_var(wcs_tmp5) == 2) do
+			{
+				es wcsgroup set is_frozen server_var(wcs_userid) 0
+				es wcsgroup set vaga server_var(wcs_userid) 1
+				es wcs_color server_var(wcs_userid) 255 255 255 255 1
+				es wcs_setfx freeze server_var(wcs_userid) = 0 0
+				es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
+				if (server_var(wcs_tmp6) = 1) do
+				{
+					es_fire server_var(wcs_userid) !self addoutput "renderfx 13"
+				}
+				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're no longer frozen invisible
+			}
+			es_getgame wcs_gamecheck
+			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound server_var(wcs_userid) npc/scanner/scanner_nearmiss2.wav .4
+			}
+			if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
+			{
+				es_playsound server_var(wcs_userid) weapons\fx\nearmiss\bulletltor13.wav .7
+			}
+			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+			es_xmath wcs_z2 + 15
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+			es_xmath wcs_z2 + 10
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+			es_xmath wcs_z2 + 10
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+			es_xmath wcs_z2 + 10
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+			es_xmath wcs_z2 + 10
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+			es_xmath wcs_z2 + 10
+			es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		}
+	}
+	ifx false(wcs_legacy_teleport_type) do
+	{
+		es wcs_teleport_push server_var(wcs_userid) server_var(wcs_range)
+		es wcsgroup get vaga wcs_tmp5 server_var(wcs_userid)
+		if (server_var(wcs_tmp5) == 1) do
+		{
+			es wcsgroup set is_frozen server_var(wcs_userid) 1
+			es wcsgroup set vaga server_var(wcs_userid) 2
+			es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
+			es wcs_color server_var(wcs_userid) 255 255 255 0 0
+			es_delayed 1 wcs_setfx freeze server_var(wcs_userid) = 1 0
+			es wcs_setcooldown server_var(wcs_userid) 1
+			if (server_var(wcs_tmp6) = 1) do
+			{
+				es_fire server_var(wcs_userid) !self addoutput "renderfx 0"
+			}
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're now frozen invisible
+		}
+		if (server_var(wcs_tmp5) == 2) do
+		{
+			es wcsgroup set is_frozen server_var(wcs_userid) 0
+			es wcsgroup set vaga server_var(wcs_userid) 1
+			es wcs_color server_var(wcs_userid) 255 255 255 255 1
+			es wcs_setfx freeze server_var(wcs_userid) = 0 0
+			es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
+			if (server_var(wcs_tmp6) = 1) do
+			{
+				es_fire server_var(wcs_userid) !self addoutput "renderfx 13"
+			}
+			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're no longer frozen invisible
 		}
 		es_getgame wcs_gamecheck
 		if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 		{
-			es wcs_color server_var(wcs_userid) 255 255 255 90 1
+			es_playsound server_var(wcs_userid) npc/scanner/scanner_nearmiss2.wav .4
 		}
-		es wcs_color server_var(wcs_userid) 255 255 255 0 0
-		es_delayed 1 wcs_setfx freeze server_var(wcs_userid) = 1 0
-		es wcs_setcooldown server_var(wcs_userid) 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're now frozen invisible
-
-	    es_xset wcs_ok 1
-
-	    es playerget viewcoord server_var(wcs_userid) wcs_x1 wcs_y1 wcs_z1
-		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-		es_xmath wcs_z2 + 15
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 - 65
-
-	    es_xcopy wcs_x wcs_x1
-	    es_xcopy wcs_y wcs_y1
-	    es_xcopy wcs_z wcs_z1
-
-	    es_math wcs_x - server_var(wcs_x2)
-	    es_math wcs_y - server_var(wcs_y2)
-	    es_math wcs_z - server_var(wcs_z2)
-
-	    if (server_var(wcs_x) < 0) then es_xmath wcs_x * -1
-	    if (server_var(wcs_y) < 0) then es_xmath wcs_y * -1
-	    if (server_var(wcs_z) < 0) then es_xmath wcs_z * -1
-
-	    if (server_var(wcs_range) < server_var(wcs_x)) do
-	    {
-			es_xset wcs_ok 0
-	    }
-	    if (server_var(wcs_range) < server_var(wcs_y)) do
-	    {
-			es_xset wcs_ok 0
-	    }
-	    if (server_var(wcs_range) < server_var(wcs_z)) do
-	    {
-			es_xset wcs_ok 0
-	    }
-	    
-	    ifx true(wcs_ok) do
-	    {
-	 	    ifx true(wcs_legacy_teleport_fade) do
-		    {
-		    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
-		    }
-	 	    ifx true(wcs_legacy_teleport_type) do
-		    {
-		    	//To Do: Improve this by finding an alternative teleportation method that prevent players from getting stuck in displacemnts and models
-		    	es playerset location server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		    	es_delayed .01 wcs_teleport server_var(wcs_userid) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		    }
-		    ifx false(wcs_legacy_teleport_type) do
-		    {
-		    	es_setplayerprop server_var(wcs_userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
-		        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) 2
-		    }
-	        es_playsound server_var(wcs_userid) wcs/teleport.mp3 1
-	    }
-	    
-	    else do
-	    {
-	        if (server_var(wcs_range) < server_var(wcs_x)) do
-	        {
-	            if (server_var(wcs_x2) >= 0) do
-	            {
-	                if (server_var(wcs_x1) >= 0) do
-	                {
-	                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
-	                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_x2 - server_var(wcs_range)
-	                }
-	            }
-	            else do
-	            {
-	                if (server_var(wcs_x1) < 0) do
-	                {
-	                    if (server_var(wcs_x2) <= server_var(wcs_x1)) then es_xmath wcs_x2 + server_var(wcs_range)
-	                    if (server_var(wcs_x2) > server_var(wcs_x1)) then es_xmath wcs_x2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_x2 + server_var(wcs_range)
-	                }
-	            }
-	            es_xcopy wcs_x1 wcs_x2
-	        }
-	        
-	        if (server_var(wcs_range) < server_var(wcs_y)) do
-	        {
-	            if (server_var(wcs_y2) >= 0) do
-	            {
-	                if (server_var(wcs_y1) >= 0) do
-	                {
-	                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
-	                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_y2 - server_var(wcs_range)
-	                }
-	            }
-	            else do
-	            {
-	                if (server_var(wcs_y1) < 0) do
-	                {
-	                    if (server_var(wcs_y2) <= server_var(wcs_y1)) then es_xmath wcs_y2 + server_var(wcs_range)
-	                    if (server_var(wcs_y2) > server_var(wcs_y1)) then es_xmath wcs_y2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_y2 + server_var(wcs_range)
-	                }
-	            }
-	            es_xcopy wcs_y1 wcs_y2
-	        }
-	        
-	        if (server_var(wcs_range) < server_var(wcs_z)) do
-	        {
-	            if (server_var(wcs_z2) >= 0) do
-	            {
-	                if (server_var(wcs_z1) >= 0) do
-	                {
-	                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
-	                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_z2 - server_var(wcs_range)
-	                }
-	            }
-	            else do
-	            {
-	                if (server_var(wcs_z1) < 0) do
-	                {
-	                    if (server_var(wcs_z2) <= server_var(wcs_z1)) then es_xmath wcs_z2 + server_var(wcs_range)
-	                    if (server_var(wcs_z2) > server_var(wcs_z1)) then es_xmath wcs_z2 - server_var(wcs_range)
-	                }
-	                else do
-	                {
-	                    es_math wcs_z2 + server_var(wcs_range)
-	                }
-	            }
-	            es_xcopy wcs_z1 wcs_z2
-	        }
-
-		    ifx false(wcs_legacy_teleport_type) do
-		    {
-		        es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		        es_delayed .01 wcs_pushto server_var(wcs_userid) server_var(vector1) .1
-		    }
-	 	    ifx true(wcs_legacy_teleport_fade) do
-		    {
-		    	es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
-		    }
-		    es wcs_setcooldown server_var(wcs_userid) 1
-	    }
-	}
-	if (server_var(wcs_tmp5) == 2) do
-	{
-		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
-		es_xmath wcs_z2 + 15
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 + 10
-		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
-		es_xmath wcs_z2 - 65
-
-		es wcsgroup set is_frozen server_var(wcs_userid) 0
-		es wcsgroup set vaga server_var(wcs_userid) 1
-		es wcs_color server_var(wcs_userid) 255 255 255 255 1
-		es wcs_setfx freeze server_var(wcs_userid) = 0 0
-		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Frozen Invisible - You're no longer frozen invisible
-		es wcsgroup get vaga_shadows wcs_tmp6 server_var(wcs_userid)
-		if (server_var(wcs_tmp6) = 1) do
+		if ("Counter-Strike: Global Offensive" in server_var(wcs_gamecheck)) do
 		{
-			es_fire server_var(wcs_userid) !self addoutput "renderfx 13"
+			es_playsound server_var(wcs_userid) weapons\fx\nearmiss\bulletltor13.wav .7
 		}
+		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
+		es_xmath wcs_z2 + 15
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
+		es_xmath wcs_z2 + 10
+		es est_effect 10 #a 0 sprites/strider_bluebeam.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 50 65 2 2 10 0 100 177 255 255 1
 	}
 	ifx true(wcs_race_debugging) do
 	{
