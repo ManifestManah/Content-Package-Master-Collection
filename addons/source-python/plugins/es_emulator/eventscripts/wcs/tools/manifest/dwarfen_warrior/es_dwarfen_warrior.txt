@@ -29,11 +29,10 @@ block push
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_xmath wcs_z1 + 10
 				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
+				es_setplayerprop event_var(userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
 				es wcs_pushto event_var(userid) server_var(vector1) -2
 				es_tell event_var(userid) #multi #green [WCS]#lightgreen Push back - You have been pushed by a Dwarfen Warrior
 				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Push back - You pushed back your enemy
-			//	es playerget viewcoord event_var(attacker) wcs_x1 wcs_y1 wcs_z1
-			//	es playerget viewcoord event_var(attacker) wcs_x2 wcs_y2 wcs_z2
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 80
