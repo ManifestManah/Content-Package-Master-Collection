@@ -132,7 +132,8 @@ block pull
 			{
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
-				es_xmath wcs_z1 + 5
+				es_xmath wcs_z1 - 5
+				es_setplayerprop event_var(attacker) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
 				es_createvectorstring wcs_tmp server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es wcs_pushto event_var(attacker) server_var(wcs_tmp) 2
 				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Singularity - Pulled you towards event_var(es_username)
