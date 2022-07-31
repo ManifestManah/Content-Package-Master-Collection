@@ -81,8 +81,9 @@ block bloodyspear
 			es_xmath wcs_z2 + 40
 			es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 			es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
-			es wcs_pushto event_var(userid) server_var(vector2) 1
-			es_delayed .3 wcs_pushto event_var(userid) server_var(vector2) 1
+			es_setplayerprop event_var(userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
+			es_delayed .1 wcs_pushto event_var(userid) server_var(vector2) 1
+			es_delayed .4 wcs_pushto event_var(userid) server_var(vector2) 1
 			es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 100 .8 5 5 1 0 228 128 0 255 50
 			es est_effect_06 #a 0 sprites/flatflame.vmt server_var(vector2) server_var(vector1) 100 .8 1 1 8 0 228 28 28 255 50
 			es_delayed .1 est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 10 20 .6 60 10 .3 228 128 0 255 60
