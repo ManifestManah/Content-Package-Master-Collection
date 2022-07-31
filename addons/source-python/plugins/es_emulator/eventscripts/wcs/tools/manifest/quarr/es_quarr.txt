@@ -1,6 +1,6 @@
 //////////////////////
 //Manifest Race Pack//
-//Version 1.0.2B    //
+//Version 1.1.0A    //
 //////////////////////
 
 block spawn
