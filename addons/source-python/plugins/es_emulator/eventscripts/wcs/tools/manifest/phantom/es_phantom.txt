@@ -183,8 +183,6 @@ block illusion
 				es wcs_color event_var(userid) 255 255 255 0 1
 				es_delayed 1 wcs_color event_var(userid) 255 255 255 255 1
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
-				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-				es wcs_pushto event_var(userid) server_var(vector1) 2.5
 			}
 		}
 	}
