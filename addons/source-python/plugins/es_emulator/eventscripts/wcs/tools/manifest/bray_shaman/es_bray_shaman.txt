@@ -148,7 +148,8 @@ block damage
 				es_math wcs_z2 + 75
 				es_createvectorstring vector1 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
 				es_createvectorstring vector2 server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
-				es wcs_pushto event_var(userid) server_var(vector2) -1
+				es_setplayerprop event_var(userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
+				es_delayed .1 wcs_pushto event_var(userid) server_var(vector2) -1
 				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 10 1 5 6 5 4 17 85 0 220 2
 				es est_effect_06 #a 0 sprites/lgtning.vmt server_var(vector2) server_var(vector1) 10 1 5 6 5 5 20 82 0 220 2
 			}
