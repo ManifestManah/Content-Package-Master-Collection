@@ -263,13 +263,14 @@ block explosion
 	}
 	if (server_var(wcs_dice2) <= server_var(wcs_chance)) do
 	{
+		es_setplayerprop event_var(userid) CBasePlayer.localdata.m_vecBaseVelocity 0,0,250
 		es_xrand wcs_dmg 15 50
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Cosmic Explosion - Dealt server_var(wcs_dmg) to event_var(es_attackername)
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 60
 		es est_effect 11 #a 0 sprites/orangecore2.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) .75 1 200
 		es_createvectorstring vector2 server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)
-		es wcs_pushto event_var(attacker) server_var(vector2) 2
+		es_delayed .1 wcs_pushto event_var(attacker) server_var(vector2) 2
 		es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
 		es_xmath wcs_z1 - 45
 		es_delayed .45 es est_effect 10 #a 0 sprites/halo.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 250 .3 50 100 0.8 128 0 64 255 5
