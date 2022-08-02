@@ -94,6 +94,7 @@ block nade
 	es_delayed 1 es_give event_var(userid) weapon_flashbang
 	es_delayed 1.2 es_give event_var(userid) weapon_hegrenade
 	es_delayed 1.5 es_give event_var(userid) weapon_smokegrenade
+	es wcs_poisonsmoke event_var(userid) 10
 	es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - You've recieved grenades with unique skills
 	ifx true(wcs_race_debugging) do
 	{
@@ -142,28 +143,6 @@ event smokegrenade_detonate
 		es_xmath wcs_y10 - 1
 		es wcsgroup set troll_nades event_var(userid) server_var(wcs_y10)
 		es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - server_var(wcs_y10) grenades left
-		es poison_smoke event_var(x) event_var(y) event_var(z) event_var(userid) 144 10 0.5 18
-		es_xmath wcs_z1 + 5
-		es_createvectorstring vector1 event_var(x) event_var(y) event_var(z)
-		es est_effect_18 #a 0 server_var(vector1) 0 150 0 7 235 18 0
-		es_xmath wcs_smokestack_counter + 1
-		es_xset coords 0
-		es_format coords "origin %1 %2 %3" event_var(x) event_var(y) event_var(z)
-		es_give event_var(userid) env_steam
-		es_format ss_name "my_ss_%1%2" event_var(userid) server_var(wcs_smokestack_counter)
-		es_entitysetvalue server_var(eventscripts_lastgive) "targetname" server_var(ss_name)
-		es_fire event_var(userid) server_var(ss_name) addoutput "SpreadSpeed 92"
-		es_fire event_var(userid) server_var(ss_name) addoutput "Speed 40"
-		es_fire event_var(userid) server_var(ss_name) addoutput "StartSize 16"
-		es_fire event_var(userid) server_var(ss_name) addoutput "EndSize 40"
-		es_fire event_var(userid) server_var(ss_name) addoutput "Rate 100"
-		es_fire event_var(userid) server_var(ss_name) addoutput "JetLength 90"
-		es_fire event_var(userid) server_var(ss_name) addoutput "rendercolor 20 200 10"
-		es_fire event_var(userid) server_var(ss_name) addoutput server_var(coords)
-		es_fire event_var(userid) server_var(ss_name) addoutput "rollspeed 10"
-		es_fire event_var(userid) server_var(ss_name) addoutput "angles 270 0 0"
-		es_delayed .3 es_fire event_var(userid) server_var(ss_name) TurnOn
-		es_delayed 16.5 es_fire event_var(userid) server_var(ss_name) kill
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Event Smokegrenade_Detonate (END)
