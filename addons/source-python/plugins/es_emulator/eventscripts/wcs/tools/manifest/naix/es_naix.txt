@@ -10,7 +10,6 @@ block spawn
 		wcs_log [Race]: Naix - The Lifestealer - [Block] Spawn (START)
 	}
 	es wcsgroup set naix_infest event_var(userid) 0
-	es wcsgroup set naix_duck event_var(userid) 0
 	es wcsgroup set is_attackspeed_altered event_var(userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -25,7 +24,6 @@ block death
 		wcs_log [Race]: Naix - The Lifestealer - [Block] Death (START)
 	}
 	es wcsgroup set naix_infest event_var(userid) 0
-	es wcsgroup set naix_duck event_var(userid) 0
 	es wcsgroup set is_attackspeed_altered event_var(userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -40,7 +38,6 @@ block onchange
 		wcs_log [Race]: Naix - The Lifestealer - [Block] OnChange (START)
 	}
 	es wcsgroup set naix_infest server_var(wcs_userid) 0
-	es wcsgroup set naix_duck server_var(wcs_userid) 0
 	es wcsgroup set is_attackspeed_altered server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -69,48 +66,6 @@ block kill
 	}
 }
 
-event player_duck
-{
-	es wcsgroup get naix_infest wcs_tmp6 event_var(userid)
-	if (server_var(wcs_tmp6) = 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Naix - The Lifestealer - [Block] Event Player_Duck (START)
-		}
-		es_isbot wcs_tmp1 event_var(userid)
-		if (server_var(wcs_tmp1) = 0) do
-		{
-			es wcsgroup set naix_duck event_var(userid) 2
-			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
-			es_xmath wcs_z1 + 5
-			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 125 .5 30 10 0 128 0 0 175 15
-			es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 45 125 .5 20 10 0 180 0 0 255 20
-		}
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Naix - The Lifestealer - [Block] Event Player_Duck (END)
-		}
-	}
-}
-
-event player_unduck
-{
-	es wcsgroup get naix_infest wcs_tmp6 event_var(userid)
-	if (server_var(wcs_tmp6) = 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Naix - The Lifestealer - [Block] Event Player_Unduck (START)
-		}
-		es wcsgroup set naix_duck event_var(userid) 1
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log [Race]: Naix - The Lifestealer - [Block] Event Player_Unduck (END)
-		}
-	}
-}
-
 event player_death
 {
 	es wcsgroup get naix_infest wcs_tmp6 event_var(attacker)
@@ -120,7 +75,7 @@ event player_death
 		{
 			wcs_log [Race]: Naix - The Lifestealer - [Block] Event Player_Death (START)
 		}
-		es_isbot wcs_tmp1 event_var(userid)
+		es_isbot wcs_tmp1 event_var(attacker)
 		if (server_var(wcs_tmp1) = 0) do
 		{
 			es_xrand wcs_addhealth 15 30
@@ -130,8 +85,8 @@ event player_death
 			es_xmath wcs_z1 + 5
 			es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 320 1 30 10 0 128 0 0 175 15
 			es est_effect 10 #a 0 sprites/blueflare1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 65 320 1 20 10 0 180 0 0 255 20
-			es wcsgroup get naix_duck wcs_tmp7 event_var(attacker)
-			if (server_var(wcs_tmp7) = 2) do
+			es wcs_getducking event_var(attacker) wcs_tmp7
+			if (server_var(wcs_tmp7) = 1) do
 			{
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 20
