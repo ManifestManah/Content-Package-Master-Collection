@@ -36,6 +36,7 @@ block phantom
 	{
 		wcs_log  [Race]: Phantom - [Block] Skill: 1 (START)
 	}
+	es wcs_setfx crouchinvisibility event_var(userid) = 40 0
 	es wcsgroup set phantom event_var(userid) 1
 	ifx false(wcs_falldamage_compensation) do
 	{
@@ -86,40 +87,6 @@ event player_falldamage
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log  [Race]: Phantom - [Block] Event Player_Falldamage (END)
-		}
-	}
-}
-
-event player_duck
-{
-	es wcsgroup get phantom phantom event_var(userid)
-	if (server_var(phantom) = 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log  [Race]: Phantom - [Block] Event Player_Duck (START)
-		}
-		es wcs_color event_var(userid) 255 255 255 40 0
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log  [Race]: Phantom - [Block] Event Player_Duck (END)
-		}
-	}
-}
-
-event player_unduck
-{
-	es wcsgroup get phantom phantom event_var(userid)
-	if (server_var(phantom) = 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log  [Race]: Phantom - [Block] Event Player_Unduck (START)
-		}
-		es wcs_color event_var(userid) 255 255 255 255 0
-		ifx true(wcs_race_debugging) do
-		{
-			wcs_log  [Race]: Phantom - [Block] Event Player_Unduck (END)
 		}
 	}
 }
