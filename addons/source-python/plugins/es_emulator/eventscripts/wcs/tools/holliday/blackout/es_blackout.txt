@@ -260,7 +260,7 @@ block ultimate
 			es wcs_pushed server_var(wcs_userid) 0 0 300
 			es_delayed .3 wcs_setfx jetpack server_var(wcs_userid) = 1 0
 			es wcs_setfx attackspeed server_var(wcs_userid) = .2 0
-			es wcs_setfx norecoil server_var(wcs_userid) = 1 0
+			es wcs_setfx norecoilsm server_var(wcs_userid) = 1 0
 			es_getgame wcs_gamecheck
 			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 			{
@@ -276,7 +276,7 @@ block ultimate
 			es wcsgroup set helicopter server_var(wcs_userid) 1
 			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
 			es wcs_setfx attackspeed server_var(wcs_userid) = 1 0
-			es wcs_setfx norecoil server_var(wcs_userid) = 0 0
+			es wcs_setfx norecoilsm server_var(wcs_userid) = 0 0
 			ifx true(wcs_ffa_enabled) do
 			{
 				es_getgame wcs_gamecheck
