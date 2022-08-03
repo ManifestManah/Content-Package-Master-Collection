@@ -3,11 +3,6 @@
 //Version 1.1.0A    //
 //////////////////////
 
-block load
-{
-	repeat create samus_suffering "es_xdoblock wcs/tools/manifest/samus/samus_suffer"
-}
-
 block spawn
 {
 	ifx true(wcs_race_debugging) do
@@ -572,7 +567,8 @@ block phazon
 			es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_explosion2.wav .9
 			es_delayed .3 es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_loop4.wav .9
 		}
-		repeat start samus_suffering 1
+		es wcs_setfx healthdecay server_var(wcs_userid) = 3 0
+		es wcs_centertell server_var(wcs_userid) Phazon you lose 4 health every second whilst in phazon mode
 		es wcsgroup set samus_phazon_active server_var(wcs_userid) 1
 		es wcs_setfx speed server_var(wcs_userid) + server_var(wcs_speed) 0
 		es playerget clip wcs_tmp7 server_var(wcs_userid) 1
@@ -580,6 +576,7 @@ block phazon
 		es wcs_color server_var(wcs_userid) 25 25 255 255 1
 		es wcs_centertell server_var(wcs_userid) An energy tank has been injected!
 		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Phazon - Chance of Beam Cannon procs has been doubled!
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Phazon - You lose 3 health every second whilst in phazon mode!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 50
 		es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 3000 1 100 300 1.8 175 175 255 255 1
@@ -598,6 +595,7 @@ block phazon
 		es wcs_color server_var(wcs_userid) 255 255 255 255 1
 		es wcs_setfx 1stclip server_var(wcs_userid) = server_var(wcs_tmp7) 0
 		es wcs_centertell server_var(wcs_userid) Your energy tank has been depleted
+		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Phazon - You're no longer in phazon mode!
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 		es_xmath wcs_z1 + 50
 		es est_effect 10 #a 0 sprites/bluelight1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 3000 20 .3 100 300 1.8 175 175 255 255 1
@@ -605,48 +603,6 @@ block phazon
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Samus - The Corrupted - [Block] Skill: 7 (END)
-	}
-}
-
-block samus_suffer
-{
-	es wcs_foreach player wcs_targetid #alive "es_xdoblock wcs/tools/manifest/samus/samus_suffer_exe"
-}
-
-block samus_suffer_exe
-{
-	es wcsgroup get samus_phazon_active wcs_tmp2 server_var(wcs_targetid)
-	if (server_var(wcs_tmp2) = 1) do
-	{
-		es_xrand wcs_money 3 5
-		es wcs_centertell server_var(wcs_targetid) Phazon you lose 3 to 5 health each second whilst in phazon mode
-		es damage server_var(wcs_targetid) server_var(wcs_money) 1 server_var(wcs_targetid)
-	}
-}
-
-event round_end
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_End (START)
-	}
-	repeat stop samus_suffering
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_End (END)
-	}
-}
-
-event round_start
-{
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_Start (START)
-	}
-	repeat stop samus_suffering
-	ifx true(wcs_race_debugging) do
-	{
-		wcs_log [Race]: Samus - The Corrupted - [Block] Event Round_Start (END)
 	}
 }
 
