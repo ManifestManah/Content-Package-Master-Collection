@@ -63,7 +63,6 @@ block death
 	{
 		es_log [Race]: Hell Hunter - [Block] Death (START)
 	}
-	es wcsgroup set dualrapidfire event_var(userid) 0
 	es wcsgroup set hellhunter_flashbangs event_var(userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -77,7 +76,6 @@ block onchange
 	{
 		es_log [Race]: Hell Hunter - [Block] OnChange (START)
 	}
-	es wcsgroup set dualrapidfire server_var(wcs_userid) 0
 	es wcsgroup set hellhunter_flashbangs server_var(wcs_userid) 0
 	ifx true(wcs_race_debugging) do
 	{
@@ -203,10 +201,13 @@ block dualrapidfire
 		es_log [Race]: Hell Hunter - [Block] Skill: 4 (START)
 	}
 	es wcsgroup set dualrapidfire server_var(wcs_userid) 1
-	es_delayed server_var(wcs_duration) es wcsgroup set dualrapidfire server_var(wcs_userid) 0
-	es wcs_setfx attackspeed server_var(wcs_userid) = 4 server_var(wcs_duration)
-	es wcs_centertell server_var(wcs_userid) Dual rapid fire
-	es_delayed server_var(wcs_duration) es wcs_centertell server_var(wcs_userid) No more rapid fire
+	es_delayed server_var(wcs_duration) wcsgroup set dualrapidfire server_var(wcs_userid) 0
+	es wcs_setfx norecoilsm server_var(wcs_userid) = 1 server_var(wcs_duration)
+	es wcs_setfx attackspeed server_var(wcs_userid) = 1.5 server_var(wcs_duration)	
+	es wcs_setfx automaticpistols server_var(wcs_userid) = 1 server_var(wcs_duration)
+	es wcs_setfx 2ndclip server_var(wcs_userid) = 255 server_var(wcs_duration)
+	es wcs_centertell server_var(wcs_userid) Dual rapid fire is now active!
+	es_delayed server_var(wcs_duration) wcs_centertell server_var(wcs_userid) No more rapid fire has ended...
 	es wcsgroup get hellhunter_flashbangs wcs_z10 server_var(wcs_userid)
 	if (server_var(wcs_z10) <= 2) do
 	{
@@ -221,29 +222,6 @@ block dualrapidfire
 	}
 }
 
-event weapon_fire
-{
-	es wcsgroup get dualrapidfire wcs_tmp6 event_var(userid)
-	if (server_var(wcs_tmp6) == 1) do
-	{
-		ifx true(wcs_race_debugging) do
-		{
-			es_log [Race]: Hell Hunter - [Block] Event Weapon_Fire (START)
-		}
-		if (event_var(weapon) == weapon_elite) do
-		{
-			es playerget weaponindex wcs_tmp9 event_var(userid) weapon_elite
-			es_setindexprop server_var(wcs_tmp9) "cbasecombatweapon.localactiveweapondata.m_flnextprimaryattack" 0			
-			es_setplayerprop event_var(userid) "ccsplayer.baseclass.baseclass.bcc_localdata.m_flnextattack" 1
-			es_setplayerprop event_var(userid) "CCSPlayer.cslocaldata.m_iShotsFired" -1
-			es_playsound event_var(userid) weapons/elite/elite-1.wav 1
-		}
-		ifx true(wcs_race_debugging) do
-		{
-			es_log [Race]: Hell Hunter - [Block] Event Weapon_Fire (END)
-		}
-	}
-}
 
 event bullet_impact
 {
@@ -254,10 +232,9 @@ event bullet_impact
 		{
 			es_log [Race]: Hell Hunter - [Block] Event Bullet_Impact (START)
 		}
+		es_playsound event_var(userid) weapons/elite/elite-1.wav 1
+
 		es est_effect 11 #a 0 sprites/fire1.vmt event_var(x) event_var(y) event_var(z) .5 .5 255
-		es_xrand wcs_rand 1 2
-		if (server_var(wcs_rand) == 1) then es wcs_setfx 2ndclip event_var(userid) = 30 0
-		if (server_var(wcs_rand) == 2) then es wcs_setfx 2ndclip event_var(userid) = 29 0
 		ifx true(wcs_race_debugging) do
 		{
 			es_log [Race]: Hell Hunter - [Block] Event Bullet_Impact (END)
