@@ -153,7 +153,7 @@ block gendidama
 		wcs_log  [Race]: Son Goku - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx attackspeed server_var(wcs_userid) = 4 server_var(wcs_duration)
-	es wcs_setfx norecoil server_var(wcs_userid) = 1 server_var(wcs_duration)
+	es wcs_setfx norecoilsm server_var(wcs_userid) = 1 server_var(wcs_duration)
 	es wcsgroup set sajayin_fire server_var(wcs_userid) 1
 	es_delayed server_var(wcs_duration) wcsgroup set sajayin_fire server_var(wcs_userid) 0
 	es wcs_centertell server_var(wcs_userid) Genkidama - Absorbing and using nature energy!
