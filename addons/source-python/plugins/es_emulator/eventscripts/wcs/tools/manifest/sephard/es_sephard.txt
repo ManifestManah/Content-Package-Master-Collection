@@ -47,7 +47,7 @@ block accuracy
 			{
 				es_xrand wcs_dmg 6 11
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_setfx norecoil event_var(attacker) = 1 1
+				es wcs_setfx norecoilsm event_var(attacker) = 1 1
 				es wcs_centertell event_var(attacker) You dealt server_var(wcs_dmg) bonus damage and your accuracy was improved for 1 second!
 			}
 		}
