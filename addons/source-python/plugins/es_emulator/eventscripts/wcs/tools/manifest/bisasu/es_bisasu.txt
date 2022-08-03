@@ -48,10 +48,12 @@ block shot
 				{
 					es wcsgroup set heavy_gravity event_var(userid) 1
 					es_delayed 2 wcsgroup set heavy_gravity event_var(userid) 0
-					es wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 2
-					es_xmath wcs_gravity * 100
-					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Gravity shot - Changed your targets gravity to server_var(wcs_gravity)%
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravity shot - Changed your gravity to server_var(wcs_gravity)%
+					es wcs_getgravity event_var(userid) wcs_tmp4
+					es_math wcs_tmp4 + server_var(wcs_gravity)
+					es wcs_setfx gravity event_var(userid) = server_var(wcs_tmp4) 2
+					es_math wcs_tmp4 * 100
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Gravity shot - Changed your targets gravity to server_var(wcs_tmp4)%
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravity shot - Changed your gravity to server_var(wcs_tmp4)%
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 20
