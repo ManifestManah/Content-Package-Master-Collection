@@ -67,8 +67,8 @@ block freeze
 					es_delayed 1.5 wcsgroup set is_frozen event_var(userid) 0
 					es wcs_fade event_var(userid) 0 0 200 40 1 1
 					es wcs_setfx freeze event_var(userid) = 1 1.5
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Lips of ice - You froze an enemy for 1.5 seconds
-					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Lips of ice - You've been frozen for 1.5 seconds
+					es_tell event_var(userid) #multi #green [WCS]#lightgreen Lips of ice - You've been frozen for 1.5 seconds
+					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Lips of ice - You froze an enemy for 1.5 seconds
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 50 200 1 120 150 0 0 50 255 100 5
 					es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 30 50 11 120 150 0 0 50 255 100 5
