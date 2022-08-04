@@ -168,7 +168,7 @@ block tele
 	es_xset wcs_range 1250
 	ifx true(wcs_legacy_teleport_fade) do
 	{
-		es wcs_fade event_var(userid) 65 255 30 50 1 1
+		es wcs_fade server_var(wcs_userid) 65 255 30 50 1 1
 	}
 	ifx true(wcs_legacy_teleport_type) do
 	{
