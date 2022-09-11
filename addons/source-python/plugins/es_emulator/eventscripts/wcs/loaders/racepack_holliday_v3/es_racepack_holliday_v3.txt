@@ -17,7 +17,7 @@ block load
 	es_load wcs/tools/manifest/fire_harpi
 	es_load wcs/tools/manifest/highelf
 	es_load wcs/tools/manifest/pharaoh
-	es_load wcs/tools/manifest/troll_mercenary
+	es_load wcs/tools/manifest/bisasu
 	es_load wcs/tools/manifest/wrath
 }
 
@@ -31,6 +31,6 @@ block unload
 	es_unload wcs/tools/manifest/fire_harpi
 	es_unload wcs/tools/manifest/highelf
 	es_unload wcs/tools/manifest/pharaoh
-	es_unload wcs/tools/manifest/troll_mercenary
+	es_unload wcs/tools/manifest/bisasu
 	es_unload wcs/tools/manifest/wrath
 }

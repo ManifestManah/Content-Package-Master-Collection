@@ -11,68 +11,68 @@ block load
 {
 	es_load wcs/tools/manifest/akiri
 	es_load wcs/tools/manifest/azura
-	es_load wcs/tools/manifest/blood_hunter
-	es_load wcs/tools/manifest/chanter_of_death
+	es_load wcs/tools/manifest/strygwyr
+	es_load wcs/tools/manifest/saleem
 	es_load wcs/tools/manifest/chronos
-	es_load wcs/tools/manifest/corrupted_samus
-	es_load wcs/tools/manifest/damned_soul
+	es_load wcs/tools/manifest/samus
+	es_load wcs/tools/manifest/rafhich
 	es_load wcs/tools/manifest/darkeida
 	es_load wcs/tools/manifest/enchantress
-	es_load wcs/tools/manifest/finger_mage
-	es_load wcs/tools/manifest/forest_dweller
-	es_load wcs/tools/manifest/frost_demon
-	es_load wcs/tools/manifest/fury
-	es_load wcs/tools/manifest/green_arrow
-	es_load wcs/tools/manifest/hammerstorm
-	es_load wcs/tools/manifest/headless_horseman
+	es_load wcs/tools/manifest/jarac
+	es_load wcs/tools/manifest/yanki
+	es_load wcs/tools/manifest/bahur
+	es_load wcs/tools/manifest/sashia
+	es_load wcs/tools/manifest/oliver_queen
+	es_load wcs/tools/manifest/sven
+	es_load wcs/tools/manifest/karrich
 	es_load wcs/tools/manifest/hellhunter
 	es_load wcs/tools/manifest/james_bond
-	es_load wcs/tools/manifest/marksman
-	es_load wcs/tools/manifest/naix_lifestealer
-	es_load wcs/tools/manifest/oblivion_knight
+	es_load wcs/tools/manifest/cazzie
+	es_load wcs/tools/manifest/naix
+	es_load wcs/tools/manifest/raxx
 	es_load wcs/tools/manifest/oxiya
-	es_load wcs/tools/manifest/sand_raider
-	es_load wcs/tools/manifest/skeleton_archer
+	es_load wcs/tools/manifest/quarr
+	es_load wcs/tools/manifest/manrik
 	es_load wcs/tools/manifest/solaris
-	es_load wcs/tools/manifest/supernova
-	es_load wcs/tools/manifest/terrorist
-	es_load wcs/tools/manifest/tormented_soul
-	es_load wcs/tools/manifest/trixies_barrel
-	es_load wcs/tools/manifest/valkyrie
-	es_load wcs/tools/manifest/water_runner
+	es_load wcs/tools/manifest/aurelion
+	es_load wcs/tools/manifest/frellix
+	es_load wcs/tools/manifest/amur
+	es_load wcs/tools/manifest/trixie
+	es_load wcs/tools/manifest/sigrun
+	es_load wcs/tools/manifest/uteri
 }
 
 block unload
 {
 	es_unload wcs/tools/manifest/akiri
 	es_unload wcs/tools/manifest/azura
-	es_unload wcs/tools/manifest/blood_hunter
-	es_unload wcs/tools/manifest/chanter_of_death
+	es_unload wcs/tools/manifest/strygwyr
+	es_unload wcs/tools/manifest/saleem
 	es_unload wcs/tools/manifest/chronos
-	es_unload wcs/tools/manifest/corrupted_samus
-	es_unload wcs/tools/manifest/damned_soul
+	es_unload wcs/tools/manifest/samus
+	es_unload wcs/tools/manifest/rafhich
 	es_unload wcs/tools/manifest/darkeida
 	es_unload wcs/tools/manifest/enchantress
-	es_unload wcs/tools/manifest/finger_mage
-	es_unload wcs/tools/manifest/forest_dweller
-	es_unload wcs/tools/manifest/frost_demon
-	es_unload wcs/tools/manifest/fury
-	es_unload wcs/tools/manifest/green_arrow
-	es_unload wcs/tools/manifest/hammerstorm
-	es_unload wcs/tools/manifest/headless_horseman
+	es_unload wcs/tools/manifest/jarac
+	es_unload wcs/tools/manifest/yanki
+	es_unload wcs/tools/manifest/bahur
+	es_unload wcs/tools/manifest/sashia
+	es_unload wcs/tools/manifest/oliver_queen
+	es_unload wcs/tools/manifest/sven
+	es_unload wcs/tools/manifest/karrich
 	es_unload wcs/tools/manifest/hellhunter
 	es_unload wcs/tools/manifest/james_bond
-	es_unload wcs/tools/manifest/marksman
-	es_unload wcs/tools/manifest/naix_lifestealer
-	es_unload wcs/tools/manifest/oblivion_knight
+	es_unload wcs/tools/manifest/cazzie
+	es_unload wcs/tools/manifest/naix
+	es_unload wcs/tools/manifest/raxx
 	es_unload wcs/tools/manifest/oxiya
-	es_unload wcs/tools/manifest/sand_raider
-	es_unload wcs/tools/manifest/skeleton_archer
+	es_unload wcs/tools/manifest/quarr
+	es_unload wcs/tools/manifest/manrik
 	es_unload wcs/tools/manifest/solaris
-	es_unload wcs/tools/manifest/supernova
-	es_unload wcs/tools/manifest/terrorist
-	es_unload wcs/tools/manifest/tormented_soul
-	es_unload wcs/tools/manifest/trixies_barrel
-	es_unload wcs/tools/manifest/valkyrie
-	es_unload wcs/tools/manifest/water_runner
+	es_unload wcs/tools/manifest/aurelion
+	es_unload wcs/tools/manifest/frellix
+	es_unload wcs/tools/manifest/amur
+	es_unload wcs/tools/manifest/trixie
+	es_unload wcs/tools/manifest/sigrun
+	es_unload wcs/tools/manifest/uteri
 }

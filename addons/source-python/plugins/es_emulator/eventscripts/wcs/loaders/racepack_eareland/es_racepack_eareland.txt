@@ -16,7 +16,7 @@ block load
 	es_load wcs/tools/manifest/chaos_lord
 	es_load wcs/tools/manifest/darkness_hound
 	es_load wcs/tools/manifest/lethal_angel
-	es_load wcs/tools/manifest/ox_life
+	es_load wcs/tools/manifest/ox
 	es_load wcs/tools/manifest/ppxp_master
 	es_load wcs/tools/manifest/psychological_striker
 	es_load wcs/tools/manifest/rage_leecher
@@ -34,7 +34,7 @@ block unload
 	es_unload wcs/tools/manifest/chaos_lord
 	es_unload wcs/tools/manifest/darkness_hound
 	es_unload wcs/tools/manifest/lethal_angel
-	es_unload wcs/tools/manifest/ox_life
+	es_unload wcs/tools/manifest/ox
 	es_unload wcs/tools/manifest/ppxp_master
 	es_unload wcs/tools/manifest/psychological_striker
 	es_unload wcs/tools/manifest/rage_leecher
