@@ -589,7 +589,6 @@ block phazon
 			es_stopsound server_var(wcs_userid) weapons/physcannon/energy_sing_loop4.wav
 			es_playsound server_var(wcs_userid) weapons/physcannon/energy_sing_flyby2.wav .9
 		}
-		repeat stop samus_suffering
 		es wcsgroup set samus_phazon_active server_var(wcs_userid) 0
 		es wcs_setfx speed server_var(wcs_userid) = 1 0
 		es wcs_color server_var(wcs_userid) 255 255 255 255 1
