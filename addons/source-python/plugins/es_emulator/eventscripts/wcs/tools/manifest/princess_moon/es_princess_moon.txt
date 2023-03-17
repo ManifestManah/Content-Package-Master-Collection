@@ -33,7 +33,8 @@ block berserk
 	}
 	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Berserk - Your health and speed was increased by server_var(wcs_addhealth) %
+	es wcs_getlanguage wcs_lng "player_skill1_berserk" 0 "princess_moon"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Princess Moon - [Block] Skill: 1 (END)
@@ -53,7 +54,8 @@ block damage
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(attacker) True shot dealt server_var(wcs_dmg) extra damage!
+				es wcs_getlanguage wcs_lng "player_skill2" 0 "princess_moon"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 				es est_effect 10 #a 0 sprites/crystal_beam1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 75 74 0.8 30 10 0 255 255 255 255 2
@@ -125,26 +127,31 @@ block starfall
 			es wcs_nearcoord wcs_targetid server_var(wcs_targetteam) server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) server_var(wcs_radius) "es_xdoblock wcs/tools/manifest/princess_moon/starfallpath"
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
-				es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Starfall affected server_var(wcs_count_players_actually_affected) enemies
-				es wcs_centertell server_var(wcs_userid) Starfall dealt 25 damage to server_var(wcs_count_players_actually_affected) enemies
+				es wcs_getlanguage wcs_lng "player_skill3" 0 "princess_moon"
+				es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
+				es wcs_getlanguage wcs_lng "player_skill3_centertell" 0 "princess_moon"
+				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
 				es_playsound server_var(wcs_userid) physics/glass/glass_largesheet_break1.wav 1
 			}
 		}
 		else do
 		{
 			es_xset wcs_ultinotexec 1
-			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, there are no living enemies!
+			es wcs_getlanguage wcs_lng "check_skill4_living_enemies" 0 "princess_moon"
+			es wcs_xtell event_var(userid) server_var(wcs_lng)
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
-			es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, no nearby enemies!
+			es wcs_getlanguage wcs_lng "check_skill4_failed_nearby_enemies" 0 "princess_moon"
+			es wcs_xtell event_var(userid) server_var(wcs_lng)
 			es_xset wcs_ultinotexec 1
 		}
 	}
 	else do
 	{
 		es_xset wcs_ultinotexec 1
-		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Could not target an enemy team
+		es wcs_getlanguage wcs_lng "check_skill4_failed_enemy_team" 0 "princess_moon"
+		es wcs_xtell event_var(userid) server_var(wcs_lng)
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -194,19 +201,23 @@ block starfallpath
 							es_xmath wcs_count_players_ultimate_immunity + 1
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_targetid) #multi #green [WCS]#lightgreen Ultimate immunity - You blocked an enemy's ultimate
-								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - server_var(wcs_count_players_ultimate_immunity) enemies were immune to your ultimate!
+								es wcs_getlanguage wcs_lng "check_skill4_failed_enemy_ultimate" 0 "princess_moon"
+								es wcs_xtell event_var(userid) server_var(wcs_lng)
+								es wcs_getlanguage wcs_lng "check_skill4_failed_your_ultimate" 0 "princess_moon"
+								es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_ultimate_immunity)
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
-								es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, all nearby enemy targets were immune!
+								es wcs_getlanguage wcs_lng "check_skill4_failed_were_immune" 0 "princess_moon"
+								es wcs_xtell event_var(userid) server_var(wcs_lng)
 								es_xset wcs_ultinotexec 1
 							}
 						}
 					}
 					else do
 					{
-						es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - Failed, you can't hit that many targets at once!
+						es wcs_getlanguage wcs_lng "check_skill4_failed_at_once" 0 "princess_moon"
+						es wcs_xtell event_var(userid) server_var(wcs_lng)
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -231,7 +242,8 @@ block starfall_final
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
-		es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Ultimate - A target was already immobilized or immune to immobilizing!
+		es wcs_getlanguage wcs_lng "check_skill4_failed_to_immobilizing" 0 "princess_moon"
+		es wcs_xtell event_var(userid) server_var(wcs_lng)
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
