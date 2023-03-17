@@ -128,9 +128,9 @@ block starfall
 			if (server_var(wcs_execute_ultimate) == 1) do
 			{
 				es wcs_getlanguage wcs_lng "player_skill3" 0 "princess_moon"
-				es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
+				es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
 				es wcs_getlanguage wcs_lng "player_skill3_centertell" 0 "princess_moon"
-				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
+				es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_count_players_actually_affected)
 				es_playsound server_var(wcs_userid) physics/glass/glass_largesheet_break1.wav 1
 			}
 		}
@@ -138,12 +138,12 @@ block starfall
 		{
 			es_xset wcs_ultinotexec 1
 			es wcs_getlanguage wcs_lng "check_skill4_living_enemies" 0 "princess_moon"
-			es wcs_xtell event_var(userid) server_var(wcs_lng)
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 		}
 		if (server_var(wcs_counter) = 0) do
 		{
 			es wcs_getlanguage wcs_lng "check_skill4_failed_nearby_enemies" 0 "princess_moon"
-			es wcs_xtell event_var(userid) server_var(wcs_lng)
+			es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 			es_xset wcs_ultinotexec 1
 		}
 	}
@@ -151,7 +151,7 @@ block starfall
 	{
 		es_xset wcs_ultinotexec 1
 		es wcs_getlanguage wcs_lng "check_skill4_failed_enemy_team" 0 "princess_moon"
-		es wcs_xtell event_var(userid) server_var(wcs_lng)
+		es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 	}
 	if (server_var(wcs_ultinotexec) = 1) then es wcs_cancelulti server_var(wcs_userid)
 	ifx true(wcs_race_debugging) do
@@ -202,14 +202,14 @@ block starfallpath
 							if (server_var(wcs_count_players_ultimate_immunity) != server_var(wcs_initial_players_struck)) do
 							{
 								es wcs_getlanguage wcs_lng "check_skill4_failed_enemy_ultimate" 0 "princess_moon"
-								es wcs_xtell event_var(userid) server_var(wcs_lng)
+								es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 								es wcs_getlanguage wcs_lng "check_skill4_failed_your_ultimate" 0 "princess_moon"
-								es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_count_players_ultimate_immunity)
+								es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_count_players_ultimate_immunity)
 							}
 							if (server_var(wcs_count_players_ultimate_immunity) == server_var(wcs_initial_players_struck)) do
 							{
 								es wcs_getlanguage wcs_lng "check_skill4_failed_were_immune" 0 "princess_moon"
-								es wcs_xtell event_var(userid) server_var(wcs_lng)
+								es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 								es_xset wcs_ultinotexec 1
 							}
 						}
@@ -217,7 +217,7 @@ block starfallpath
 					else do
 					{
 						es wcs_getlanguage wcs_lng "check_skill4_failed_at_once" 0 "princess_moon"
-						es wcs_xtell event_var(userid) server_var(wcs_lng)
+						es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 						es_xset wcs_ultinotexec 1
 					}
 				}
@@ -236,14 +236,15 @@ block starfall_final
 	{
 		wcs_log [Race]: Princess Moon - [Block] Skill: 4 (EXECUTED START)
 	}
-	es wcs_centertell server_var(wcs_targetid) You took 20 damage from starfall
+	es wcs_getlanguage wcs_lng "player_skill4__centertell_received_damage" 0 "princess_moon"
+	es wcs_xcentertell server_var(wcs_targetid) server_var(wcs_lng)
 	es_playsound server_var(wcs_targetid) physics/glass/glass_largesheet_break1.wav 1
 	es wcs_pushed server_var(wcs_targetid) 0 0 600
 	es wcsgroup get is_frozen wcs_tmp4 server_var(wcs_targetid)
 	if (server_var(wcs_tmp4) == 1) do
 	{
 		es wcs_getlanguage wcs_lng "check_skill4_failed_to_immobilizing" 0 "princess_moon"
-		es wcs_xtell event_var(userid) server_var(wcs_lng)
+		es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 	}
 	if (server_var(wcs_tmp4) == 0) do
 	{
