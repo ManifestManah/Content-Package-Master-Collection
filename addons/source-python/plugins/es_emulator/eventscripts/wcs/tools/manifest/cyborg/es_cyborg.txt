@@ -75,7 +75,6 @@ block damage_grenade
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell server_var(wcs_userid) Your grenade did server_var(wcs_dmg) extra damage
 				es wcs_getlanguage wcs_lng "player_skill12_centertell_damage_grenade" 0 "cyborg"
 				es wcs_xcentertell server_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
