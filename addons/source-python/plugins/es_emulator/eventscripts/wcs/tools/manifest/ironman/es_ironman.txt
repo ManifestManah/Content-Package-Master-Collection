@@ -42,7 +42,8 @@ block evade
 	}
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Iron armour - server_var(wcs_chance)% chance to not take damage
+	es wcs_getlanguage wcs_lng "player_skill1_evade" 0 "ironman"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_chance)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iron man - [Block] Skill: 1 (END)
@@ -58,7 +59,8 @@ block speed
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
 	es_xmath wcs_speed * 100
 	es_xmath wcs_speed - 100
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Metallic boots - Increased your speed by server_var(wcs_speed)%
+	es wcs_getlanguage wcs_lng "player_skill2_speed" 0 "ironman"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_speed)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Iron man - [Block] Skill: 2 (END)
@@ -78,7 +80,8 @@ block damage
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(attacker) Ion laser dealt + server_var(wcs_dmg) damage
+				es wcs_getlanguage wcs_lng "player_skill3_damage_centertell" 0 "ironman"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_xrand wcs_rand 1 2
 				if (server_var(wcs_rand) == 1) do
 				{
@@ -126,7 +129,8 @@ block jetpack
 			es wcsgroup set ironman_fly server_var(wcs_userid) 2
 			es wcs_setfx speed server_var(wcs_userid) + .35 0
 			es wcs_setfx jetpack server_var(wcs_userid) = 1 0
-			es wcs_centertell server_var(wcs_userid) You are now flying
+			es wcs_getlanguage wcs_lng "player_skill4_jetpack_centertell_on" 0 "ironman"
+			es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
 			es wcs_cancelulti server_var(wcs_userid)
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
@@ -142,7 +146,8 @@ block jetpack
 			es wcsgroup set ironman_fly server_var(wcs_userid) 1
 			es wcs_setfx speed server_var(wcs_userid) - .35 0
 			es wcs_setfx jetpack server_var(wcs_userid) = 0 0
-			es wcs_centertell server_var(wcs_userid) You are no longer flying
+			es wcs_getlanguage wcs_lng "player_skill4_jetpack_centertell_off" 0 "ironman"
+			es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 			es est_effect 7 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 25 10
 			es_xmath wcs_z1 + 3
