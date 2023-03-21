@@ -33,8 +33,10 @@ block blade
 			if (event_var(es_attackerdead) = 0) do 
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(userid) event_var(es_attackername) dealt + server_var(wcs_dmg) knife damage!
-				es wcs_centertell event_var(attacker) You dealt + server_var(wcs_dmg) knife damage!
+				es wcs_getlanguage wcs_lng "player_skill1_blade_centertell" 0 "assassin"
+				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 event_var(es_attackername) value2 server_var(wcs_dmg)
+				es wcs_getlanguage wcs_lng "player_skill1_blade_centertell_attacker" 0 "assassin"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg) 
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 40
 				es est_effect 11 #a 0 sprites/yellowglow1.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 1 2 255
@@ -68,8 +70,10 @@ block shot
 					es wcs_getcolors event_var(userid) wcs_red wcs_green wcs_blue wcs_alpha
 					es wcs_color event_var(userid) 0 255 0 255 0
 					es_delayed 3 wcs_color event_var(userid) server_var(wcs_red) server_var(wcs_green) server_var(wcs_blue) server_var(wcs_alpha) 0
-					es wcs_centertell event_var(userid) event_var(es_attackername) turned you visible for 5 seconds!
-					es wcs_centertell event_var(attacker) Turned event_var(es_username) visible for 5 seconds!
+					es wcs_getlanguage wcs_lng "player_skill2_blade_centertell" 0 "assassin"
+					es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 event_var(es_attackername) 
+					es wcs_getlanguage wcs_lng "player_skill2_blade_centertell_attacker" 0 "assassin"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 					es_xmath wcs_z1 + 25
@@ -96,7 +100,8 @@ block speed
 		wcs_log [Race]: Assassin - [Block] Skill: 3 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Endurance - Increased your movement speed
+	es wcs_xtell event_var(userid) server_var(wcs_lng) 
+	es wcs_getlanguage wcs_lng "player_skill3_speed" 0 "assassin"
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Assassin - [Block] Skill: 3 (END)
@@ -111,8 +116,10 @@ block stealth
 	}
 	es wcs_color server_var(wcs_userid) 255 255 255 0 1
 	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 255 255 255 255 1
-	es wcs_centertell server_var(wcs_userid) Stealthed for server_var(wcs_duration) seconds!
-	es_delayed server_var(wcs_duration) wcs_centertell server_var(wcs_userid) Stealth has run out!
+	es wcs_getlanguage wcs_lng "player_skill4_stealth_centertell" 0 "assassin"
+	es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_duration)
+	es wcs_getlanguage wcs_lng "player_skill4_stealth_centertell_run_out" 0 "assassin"
+	es_delayed server_var(wcs_duration) wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 40
 	es est_effect 10 #a 0 models/gman/pupil_r.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 950 190 3 100 100 0 155 115 155 255 1
