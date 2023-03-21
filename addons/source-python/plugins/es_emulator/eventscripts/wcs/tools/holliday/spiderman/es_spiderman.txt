@@ -13,11 +13,13 @@ block spawn
 	es wcsgroup set evasion_chance event_var(userid) 0
 	es wcsgroup set spiderman_weblines event_var(userid) 50
 	es wcs_setfx falldamage event_var(userid) = 1.0 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Weblines - You have enough liquid to use your weblines 50 times
+	es wcs_getlanguage wcs_lng "player_skill1_spawn" 0 "spiderman"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
 	ifx true(wcs_falldamage_compensation) do
 	{
 		es_delayed .5 wcs_setfx health event_var(userid) + 10 0
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Falldamage Compensation - You've been compensated with 10 extra health
+		es wcs_getlanguage wcs_lng "player_skill1_spawn_extra_health" 0 "spiderman"
+		es wcs_xtell event_var(userid) server_var(wcs_lng)
 	}
 	ifx true(wcs_race_debugging) do
 	{
@@ -64,8 +66,10 @@ block spidersense
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]#lightgreen Spider sense - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Spider sense - Gave you server_var(wcs_chance) to dodge incoming attacks
+    es wcs_getlanguage wcs_lng "player_skill2_spidersense" 0 "spiderman"
+    es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_tmp1)
+    es wcs_getlanguage wcs_lng "player_skill2_spidersense_incoming_attacks" 0 "spiderman"
+    es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_chance)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spiderman - [Block] Skill: 1 (END)
@@ -105,8 +109,10 @@ block shooters
 				es wcsgroup set is_frozen event_var(userid) 1
 				es_delayed 0.5 wcsgroup set is_frozen event_var(userid) 0
 				es wcs_setfx freeze event_var(userid) = 1 .5
-				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Web shooters - Briefly impaired the targets movements
-				es_tell event_var(userid) #multi #green [WCS]#lightgreen Web shooters - Briefly impaired your movements
+				es wcs_getlanguage wcs_lng "player_skill3_shooters" 0 "spiderman"
+				es wcs_xtell event_var(attacker) server_var(wcs_lng)
+				es wcs_getlanguage wcs_lng "player_skill3_shooters_userid" 0 "spiderman"
+				es wcs_xtell event_var(userid) server_var(wcs_lng)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 30
@@ -146,7 +152,8 @@ block weblines
 			es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
 			if (server_var(wcs_tmp3) > server_var(wcs_range)) do
 			{
-		        es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenMax Distance - You cannot travel that far!
+		        es wcs_getlanguage wcs_lng "player_skill4_weblines" 0 "spiderman"
+		        es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
 			    es wcs_setcooldown server_var(wcs_userid) 0
 			}
 			else 
@@ -154,7 +161,8 @@ block weblines
 			    es wcsgroup get spiderman_weblines wcs_tmp10 server_var(wcs_userid)
 				es_xmath wcs_tmp10 - 1
 				es wcsgroup set spiderman_weblines server_var(wcs_userid) server_var(wcs_tmp10)
-				es wcs_centertell server_var(wcs_userid) You have server_var(wcs_tmp10) weblines left!
+				es wcs_getlanguage wcs_lng "player_skill4_weblines_centertell" 0 "spiderman"
+				es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_tmp10)
 				es_getgame wcs_gamecheck
 				if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 				{
@@ -178,7 +186,8 @@ block weblines
 		    es wcsgroup get spiderman_weblines wcs_tmp10 server_var(wcs_userid)
 			es_xmath wcs_tmp10 - 1
 			es wcsgroup set spiderman_weblines server_var(wcs_userid) server_var(wcs_tmp10)
-			es wcs_centertell server_var(wcs_userid) You have server_var(wcs_tmp10) weblines left!
+			es wcs_getlanguage wcs_lng "player_skill4_weblines_centertell_css" 0 "spiderman"
+			es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_tmp10)
 			es_getgame wcs_gamecheck
 			if ("Counter-Strike: Source" in server_var(wcs_gamecheck)) do
 			{
