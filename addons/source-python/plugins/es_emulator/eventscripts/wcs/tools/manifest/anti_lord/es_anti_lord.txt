@@ -12,7 +12,8 @@ block invisibility
 	if (event_var(es_userdead) = 0) do
 	{
 		es_delayed .5 wcs_color event_var(userid) 255 255 255 server_var(wcs_invis) 0
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Invisibility - You've become less visible
+		es wcs_getlanguage wcs_lng "player_skill1_invisibility" 0 "anti_lord"
+		es wcs_xtell event_var(userid) server_var(wcs_lng)
 		es_playsound event_var(userid) wcs/invisibility.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 340 425 3 35 10 0 200 200 255 220 2
@@ -35,7 +36,8 @@ block devotion_aura
 	if (event_var(es_userdead) = 0) do
 	{
 		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Devotion aura - Increased your health by server_var(wcs_addhealth)
+		es wcs_getlanguage wcs_lng "player_skill2_devotion_aura" 0 "anti_lord"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 		es_xmath wcs_z2 + 5
@@ -68,8 +70,10 @@ block mirror_damageage
 				}
 				es_xrand wcs_dmg 5 15
 				es damage event_var(attacker) server_var(wcs_dmg) 1 event_var(userid)
-				es_tell event_var(attacker) #multi #green [WCS]#lightgreen Reflect - Recieved server_var(wcs_dmg) mirror damage
-				es_tell event_var(userid) #multi #green [WCS]#lightgreen Reflect - Dealt server_var(wcs_dmg) mirror damage
+				es wcs_getlanguage wcs_lng "player_skill3_mirror_damageage_attacker" 0 "anti_lord"
+				es wcs_xtell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
+				es wcs_getlanguage wcs_lng "player_skill3_mirror_damageage_user" 0 "anti_lord"
+				es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 5
@@ -107,7 +111,8 @@ block teleport
         es wcs_getdistance wcs_distance server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1)server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2)
         if (server_var(wcs_tmp3) > server_var(wcs_range)) do
         {
-            es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreenMax Distance - You cannot travel that far!
+            es wcs_getlanguage wcs_lng "player_skill4_teleport" 0 "anti_lord"
+            es wcs_xtell server_var(wcs_userid) server_var(wcs_lng)
             es wcs_setcooldown server_var(wcs_userid) 0
         }
         else 
