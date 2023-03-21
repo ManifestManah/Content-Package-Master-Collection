@@ -49,7 +49,8 @@ block hunter
 		if (event_var(es_attackerdead) = 0) do
 		{
 			es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-			es wcs_centertell event_var(attacker) Dealt + server_var(wcs_dmg) damage
+			es wcs_getlanguage wcs_lng "player_skill1_hunter_centertell" 0 "spy_hunter"
+			es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(attacker)
 			es_xmath wcs_z1 + 25
@@ -70,7 +71,8 @@ block tree
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreenTree hugger - Granted you server_var(wcs_addhealth) more HP
+	es wcs_getlanguage wcs_lng "player_skill2_tree" 0 "spy_hunter"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 2 (END)
@@ -86,9 +88,12 @@ block dodge
 	es wcsgroup set evasion event_var(userid) 1
 	es wcsgroup set evasion_chance event_var(userid) server_var(wcs_chance)
     es wcsgroup get evasion_count wcs_tmp1 event_var(userid)
-    es_tell event_var(userid) #multi #green [WCS]#lightgreenMega Dodge - You dodged server_var(wcs_tmp1) attacks last round
-	es_tell event_var(userid) #multi #green [WCS]#lightgreenMega Dodge - You have server_var(wcs_chance)% chance to dodge enemy attacks
-	es wcs_centertell event_var(userid) Evading all bullets for a short duration!
+    es wcs_getlanguage wcs_lng "player_skill3_dodge_last_round" 0 "spy_hunter"
+    es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_tmp1)
+	es wcs_getlanguage wcs_lng "player_skill3_dodge_enemy_attacks" 0 "spy_hunter"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_chance)
+	es wcs_getlanguage wcs_lng "player_skill3_dodge_centertell" 0 "spy_hunter"
+	es wcs_xcentertell event_var(userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 3 (END)
@@ -108,8 +113,10 @@ block mole
 			es wcs_setcooldown event_var(userid) 10
 			es wcs_domole event_var(userid) 5
 			es_emitsound player event_var(userid) wcs/mole.mp3 1.0 0.6
-			es_tell event_var(userid) You'll mole to the enemy spawn in 5 seconds!
-			es wcs_centertell event_var(userid) Warping to enemy spawn in 5 seconds!
+			es wcs_getlanguage wcs_lng "player_skill4_mole_tell" 0 "spy_hunter"
+			es wcs_xtell event_var(userid) server_var(wcs_lng)
+			es wcs_getlanguage wcs_lng "player_skill4_mole_centertell" 0 "spy_hunter"
+			es wcs_xcentertell event_var(userid) server_var(wcs_lng)
 		}
 	}
 	ifx true(wcs_race_debugging) do
@@ -126,8 +133,10 @@ block invisible
 	}
 	es wcs_color server_var(wcs_userid) 255 255 255 0 1
 	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 255 255 255 255 1
-	es wcs_centertell server_var(wcs_userid) You're completely invisible for server_var(wcs_duration) seconds!
-	es_delayed server_var(wcs_duration) wcs_centertell server_var(wcs_userid) You're no longer invisible!
+	es wcs_getlanguage wcs_lng "player_skill5_invisible_centertell" 0 "spy_hunter"
+	es wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_duration)
+	es wcs_getlanguage wcs_lng "player_skill5_invisible_centertell_time_end" 0 "spy_hunter"
+	es_delayed server_var(wcs_duration) wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Spy Hunter - [Block] Skill: 5 (END)
