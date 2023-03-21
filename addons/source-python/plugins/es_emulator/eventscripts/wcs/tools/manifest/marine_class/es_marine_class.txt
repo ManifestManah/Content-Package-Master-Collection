@@ -16,7 +16,8 @@ block weaponry
 			es_delayed .2 wcs_drop event_var(userid) 2
 			es_delayed .5 es_give event_var(userid) weapon_deagle
 			es_delayed .5 es_give event_var(userid) weapon_m4a1
-			es_tell event_var(userid) #multi #green [WCS]#lightgreen Marine weapons - You received a deagle and m4a1
+			es wcs_getlanguage wcs_lng "player_skill1_weaponry" 0 "marine_class"
+			es wcs_xtell event_var(userid) server_var(wcs_lng)
 			es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 			es est_effect 10 #a 0 sprites/cbbl_smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 340 425 3 35 10 0 200 200 255 220 2
 			es_xmath wcs_z1 + 15
@@ -44,7 +45,8 @@ block damage
 			{
 				es_xrand wcs_dmg 6 17
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(attacker) Aim Training did + server_var(wcs_dmg) damage!
+				es wcs_getlanguage wcs_lng "player_skill2_damage_centertell" 0 "marine_class"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_playsound event_var(attacker) wcs/zeal.mp3 .6
 				es_playsound event_var(userid) wcs/zeal.mp3 .8
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -84,8 +86,10 @@ block slow
 					es wcsgroup set is_slowed event_var(userid) 1
 					es_delayed 2 wcsgroup set is_slowed event_var(userid) 0
 					es wcs_setfx speed event_var(userid) = 0.5 2
-					es wcs_centertell event_var(userid) Marine event_var(es_attackername) slowed you for 2 seconds!
-					es wcs_centertell event_var(attacker) You slowed down event_var(es_username) for 2 seconds!
+					es wcs_getlanguage wcs_lng "player_skill3_slow_centertell_user" 0 "marine_class"
+					es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 event_var(es_attackername)
+					es wcs_getlanguage wcs_lng "player_skill3_slow_centertell_attacker" 0 "marine_class"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
 					es_playsound event_var(attacker) skills/frostbolt.mp3 .6
 					es_playsound event_var(userid) skills/frostbolt.mp3 .8
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
@@ -109,7 +113,8 @@ block temporary_health
 		wcs_log [Race]: Marine Class - [Block] Skill: 4 (START)
 	}
 	es wcs_setfx health server_var(wcs_userid) + server_var(wcs_addhealth) 5
-	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Adrenaline - You gained server_var(wcs_addhealth) health for 5 seconds
+	es wcs_getlanguage wcs_lng "player_skill4_temporary_health" 0 "marine_class"
+	es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 	es_playsound server_var(wcs_userid) wcs/shamanisticrage.mp3 .8
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es_xmath wcs_z1 + 25
