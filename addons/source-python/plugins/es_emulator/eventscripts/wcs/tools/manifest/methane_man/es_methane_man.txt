@@ -25,7 +25,8 @@ block speed
 		wcs_log [Race]: Methane Man - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed server_var(wcs_userid) = server_var(wcs_speed)
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Speed - Increased your movement speed
+	es wcs_getlanguage wcs_lng "player_skill1_speed" 0 "methane_man"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Methane Man - [Block] Skill: 1 (END)
@@ -46,8 +47,10 @@ block damage
 			{
 				es_xrand wcs_dmg 3 10
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(userid) Took server_var(wcs_dmg) damage from event_var(es_attackername)'s damage!
-				es wcs_centertell event_var(attacker) Dealt + server_var(wcs_dmg) damage!
+				es wcs_getlanguage wcs_lng "player_skill2_damage_centertell_user" 0 "methane_man"
+				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_dmg) value2 event_var(es_attackername)
+				es wcs_getlanguage wcs_lng "player_skill2_damage_centertell_attacker" 0 "methane_man"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 25
@@ -75,7 +78,8 @@ block beam
 			if (event_var(es_attackerdead) = 0) do
 			{
 				es damage event_var(userid) server_var(wcs_dmg) 1 event_var(attacker)
-				es wcs_centertell event_var(attacker) Dealt server_var(wcs_dmg) damage with beam!
+				es wcs_getlanguage wcs_lng "player_skill3_beam_centertell_attacker" 0 "methane_man"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_dmg)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 				es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 				es_xmath wcs_z1 + 20
@@ -102,7 +106,8 @@ block noclip
 	es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 server_var(wcs_userid)
 	es_xmath wcs_z1 + 45
 	es est_effect 11 #a 0 sprites/plasma1.vmt server_var(wcs_x2) server_var(wcs_y2) server_var(wcs_z2) 3 2 255
-	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Environmental boost - Boosted your stats for server_var(wcs_duration) seconds
+	es wcs_getlanguage wcs_lng "player_skill4_noclip" 0 "methane_man"
+	es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_duration)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Methane Man - [Block] Skill: 4 (END)
