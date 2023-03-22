@@ -52,8 +52,10 @@ block shot
 					es_math wcs_tmp4 + server_var(wcs_gravity)
 					es wcs_setfx gravity event_var(userid) = server_var(wcs_tmp4) 2
 					es_math wcs_tmp4 * 100
-					es_tell event_var(attacker) #multi #green [WCS]#lightgreen Gravity shot - Changed your targets gravity to server_var(wcs_tmp4)%
-					es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravity shot - Changed your gravity to server_var(wcs_tmp4)%
+					es wcs_getlanguage wcs_lng "player_skill1_shot_attacker" 0 "bisasu"
+					es wcs_xtell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_tmp4)
+					es wcs_getlanguage wcs_lng "player_skill1_shot_user" 0 "bisasu"
+					es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_tmp4)
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
 					es_getplayerlocation wcs_x2 wcs_y2 wcs_z2 event_var(userid)
 					es_xmath wcs_z1 + 20
@@ -79,7 +81,8 @@ block health
 	}
 	es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 	es_delayed 1 wcs_setfx armor event_var(userid) = server_var(wcs_armor) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Troll skin - Gave you server_var(wcs_armor) armor and server_var(wcs_addhealth) health
+	es wcs_getlanguage wcs_lng "player_skill2_health" 0 "bisasu"
+	es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_armor) value2 server_var(wcs_addhealth)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Skill: 2 (END)
@@ -97,7 +100,8 @@ block nade
 	es_delayed 1.2 es_give event_var(userid) weapon_hegrenade
 	es_delayed 1.5 es_give event_var(userid) weapon_smokegrenade
 	es wcs_poisonsmoke event_var(userid) 10
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - You've recieved grenades with unique skills
+	es wcs_getlanguage wcs_lng "player_skill3_nade" 0 "bisasu"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Skill: 3 (END)
@@ -144,7 +148,8 @@ event smokegrenade_detonate
 		if (server_var(wcs_y10) == 1) then es wcs_removeweapon event_var(userid) 4
 		es_xmath wcs_y10 - 1
 		es wcsgroup set troll_nades event_var(userid) server_var(wcs_y10)
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - server_var(wcs_y10) grenades left
+		es wcs_getlanguage wcs_lng "player_skill3_nade_detonate_smokegranage" 0 "bisasu"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_y10)
 		ifx true(wcs_race_debugging) do
 		{
 			wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Event Smokegrenade_Detonate (END)
@@ -164,7 +169,8 @@ event hegrenade_detonate
 		if (server_var(wcs_y10) == 1) then es wcs_removeweapon event_var(userid) 4
 		es_xmath wcs_y10 - 1
 		es wcsgroup set troll_nades event_var(userid) server_var(wcs_y10)
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - server_var(wcs_y10) grenades left
+		es wcs_getlanguage wcs_lng "player_skill3_nade_detonate_hegranage" 0 "bisasu"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_y10)
 		es_format coords "origin %1 %2 %3" event_var(x) event_var(y) event_var(z)
 		es_give event_var(userid) env_fire
 		es_fire event_var(userid) env_fire addoutput "targetname troll_fire"
@@ -196,7 +202,8 @@ event flashbang_detonate
 		if (server_var(wcs_y10) == 1) then es_delayed .2 wcs_removeweapon event_var(userid) 4
 		es_xmath wcs_y10 - 1
 		es wcsgroup set troll_nades event_var(userid) server_var(wcs_y10)
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Grenade skills - server_var(wcs_y10) grenades left
+		es wcs_getlanguage wcs_lng "player_skill3_nade_detonate_flashbang" 0 "bisasu"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_y10)
 		es_format coords "origin %1 %2 %3" event_var(x) event_var(y) event_var(z)
 		es_delayed .1 wcs_teleport event_var(userid) event_var(x) event_var(y) event_var(z)
 		es_xmath wcs_smokestack_counter + 1
@@ -228,9 +235,11 @@ block explosive
 		wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Skill: 4 (START)
 	}
 	es wcsgroup set troll_explosives server_var(wcs_userid) server_var(wcs_z10)
-	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Explosive shot - You have server_var(wcs_z10) explosive bullets for 5 seconds
+	es wcs_getlanguage wcs_lng "player_skill4_explosive_tell" 0 "bisasu"
+	es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_z10)
 	es_delayed 3 wcsgroup set troll_explosives server_var(wcs_userid) 0
-	es_delayed 3 wcs_centertell server_var(wcs_userid) Explosive bullets are no longer available
+	es wcs_getlanguage wcs_lng "player_skill4_explosive_centertell" 0 "bisasu"
+	es_delayed 3 wcs_xcentertell server_var(wcs_userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Bisasu - Troll Mercenary - [Block] Skill: 4 (END)
@@ -259,8 +268,10 @@ event bullet_impact
 		}
 		es_xmath wcs_z10 - 1
 		es wcsgroup set troll_explosives event_var(userid) server_var(wcs_z10)
-		if (server_var(wcs_z10) >= 1) then es wcs_centertell event_var(userid) server_var(wcs_z10) explosive bullets left
-		if (server_var(wcs_z10) == 0) then es wcs_centertell event_var(userid) You've run out of explosive bullets
+		es wcs_getlanguage wcs_lng "player_skill4_bullet_impact_centertell" 0 "bisasu"
+		if (server_var(wcs_z10) >= 1) then es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_z10)
+		es wcs_getlanguage wcs_lng "player_skill4_bullet_impact_centertell_run_out" 0 "bisasu"
+		if (server_var(wcs_z10) == 0) then es wcs_xcentertell event_var(userid) server_var(wcs_lng)
 		es_xrand wcs_dmg 13 19
 		ifx true(wcs_ffa_enabled) do
 		{
