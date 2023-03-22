@@ -25,7 +25,8 @@ block unholy
 		wcs_log [Race]: Aura Master - [Block] Skill: 1 (START)
 	}
 	es wcs_setfx speed event_var(userid) = server_var(wcs_speed) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Unholy Aura - Increased your speed
+	es wcs_getlanguage wcs_lng "player_skill1_unholy" 0 "auramaster"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 	es_xmath wcs_z1 + 10
 	es est_effect 10 #a 0 sprites/smoke.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 60 1 4 2 0 255 100 0 255 0
@@ -42,7 +43,8 @@ block gravity
 		wcs_log [Race]: Aura Master - [Block] Skill: 2 (START)
 	}
 	es_delayed .2 wcs_setfx gravity event_var(userid) = server_var(wcs_gravity) 0
-	es_tell event_var(userid) #multi #green [WCS]#lightgreen Gravity Aura - Reduced your gravity
+	es wcs_getlanguage wcs_lng "player_skill2_gravity" 0 "auramaster"
+	es wcs_xtell event_var(userid) server_var(wcs_lng)
 	ifx true(wcs_race_debugging) do
 	{
 		wcs_log [Race]: Aura Master - [Block] Skill: 2 (END)
@@ -73,8 +75,10 @@ block shock
 				es wcs_pushed event_var(userid) 0 0 520
 				es_delayed .4 wcs_pushed event_var(userid) 0 240 0
 				es_delayed .8 wcs_pushed event_var(userid) 260 0 0
-				es wcs_centertell event_var(attacker) Your shock aura affected event_var(es_username)
-				es wcs_centertell event_var(userid) event_var(es_attackername)'s shock aura struck you
+				es wcs_getlanguage wcs_lng "player_skill3_shock_centertell_attacker" 0 "auramaster"
+				es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
+				es wcs_getlanguage wcs_lng "player_skill3_shock_centertell_user" 0 "auramaster"
+				es wcs_xcentertell event_var(userid) server_var(wcs_lng) value1 event_var(es_attackername)
 				es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 				es_xmath wcs_z1 + 5
 				es est_effect 10 #a 0 sprites/lgtning.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 20 50 2 60 100 0.8 0 20 100 255 1
@@ -111,12 +115,14 @@ block ancient
 				{
 					es_xrand wcs_addhealth 12 20
 					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-					es wcs_centertell event_var(attacker) Ancient aura leeched server_var(wcs_addhealth) health!
+					es wcs_getlanguage wcs_lng "player_skill4_ancient_centertell_attacker" 0 "auramaster"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 				}
 				if (server_var(wcs_tmp2) => 260) do
 				{
 					es wcs_setfx health event_var(attacker) = 260 0
-					es wcs_centertell event_var(attacker) You have reached the 260 health cap!
+					es wcs_getlanguage wcs_lng "player_skill4_ancient_centertell_health_cap" 0 "auramaster"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng) 
 				}
 			}
 		}
