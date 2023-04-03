@@ -21,8 +21,10 @@ block freeze
 					es wcsgroup set is_frozen event_var(userid) 1
 					es_delayed 1 wcsgroup set is_frozen event_var(userid) 0
 					es wcs_setfx freeze event_var(userid) = 1 1
-					es wcs_centertell event_var(attacker) Freeze by fear immobalized event_var(es_username) for 1 second!
-					es wcs_centertell event_var(userid) Freeze by fear immobalized you for 1 second!
+					es wcs_getlanguage wcs_lng "player_skill1_freeze_centertell" 0 "die_xonvert"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng) value1 event_var(es_username)
+					es wcs_getlanguage wcs_lng "player_skill1_freeze_centertell_user" 0 "die_xonvert"
+					es wcs_xcentertell event_var(userid) server_var(wcs_lng)
 					es_playsound event_var(attacker) skills/frostbolt.mp3 .7
 					es_playsound event_var(userid) skills/frostbolt.mp3 .9
 					es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(attacker)
@@ -70,12 +72,15 @@ block health_leech
 				{
 					es wcs_setfx health event_var(attacker) = 260 0
 					es wcs_centertell event_var(attacker) Your health leeching is capped!
+					es wcs_getlanguage wcs_lng "player_skill2_health_leech_centertell" 0 "die_xonvert"
+					es wcs_xcentertell event_var(attacker) server_var(wcs_lng)
 				}
 				if (server_var(wcs_tmp1) <= 260) do
 				{
 					es_xrand wcs_addhealth 4 21
 					es wcs_setfx health event_var(attacker) + server_var(wcs_addhealth) 0
-					es wcs_centertell event_var(attacker) Leeched server_var(wcs_addhealth) health!
+					es wcs_centertell event_var(attacker) value1 server_var(wcs_addhealth)
+					es wcs_getlanguage wcs_lng "player_skill2_health_leech_centertell_health" 0 "die_xonvert"
 				}
 			}
 		}
@@ -96,7 +101,8 @@ block health
 	{
 		es_delayed .2 wcs_setfx health event_var(userid) + server_var(wcs_addhealth) 0
 		es_delayed .5 wcs_color event_var(userid) 200 0 0 255 1
-		es_tell event_var(userid) #multi #green [WCS]#lightgreen Ritual - Increased your health by server_var(wcs_addhealth)
+		es wcs_getlanguage wcs_lng "player_skill3_health" 0 "die_xonvert"
+		es wcs_xtell event_var(userid) server_var(wcs_lng) value1 server_var(wcs_addhealth)
 		es_playsound event_var(userid) wcs/defiance.mp3 .8
 		es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 event_var(userid)
 		es_xmath wcs_z1 + 40
@@ -128,7 +134,8 @@ block temporary_speed
 	es wcs_setfx speed server_var(wcs_userid) = 1.75 server_var(wcs_duration)
 	es wcs_color server_var(wcs_userid) 200 0 0 40 1
 	es_delayed server_var(wcs_duration) wcs_color server_var(wcs_userid) 200 0 0 255 1
-	es_tell server_var(wcs_userid) #multi #green [WCS]#lightgreen Zeal - You gained extra speed and turned transparent red for server_var(wcs_duration) seconds
+	es wcs_getlanguage wcs_lng "player_skill4_temporary_speed" 0 "die_xonvert"
+	es wcs_xtell server_var(wcs_userid) server_var(wcs_lng) value1 server_var(wcs_duration)
 	es_getplayerlocation wcs_x1 wcs_y1 wcs_z1 server_var(wcs_userid)
 	es est_effect 10 #a 0 models/effects/splodecard2_sheet.vmt server_var(wcs_x1) server_var(wcs_y1) server_var(wcs_z1) 550 100 server_var(wcs_duration) 75 10 0 155 115 100 200 30
 	es_xmath wcs_z1 + 200
