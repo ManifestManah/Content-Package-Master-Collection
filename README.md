@@ -31,5 +31,5 @@ NOTE! If you already have a races.ini or an autoexec.cfg then make a copy of thi
 
 ## Bug Reports, Problems & Help
 This package has been tested and used on a server, there should be no bugs or issues aside from the known ones found here.
-Should you run in to a bug that isn't listed here, then please report it in our [Discord's](https://discord.gg/zYASbKz) bug channel then I'll look in to it, find a solution and include it in an update.
-If you're having trouble installing the package, you can also get assistance either on the [Warcraft-Source Forum](http://warcraft-source.com/) or on our [Discord](https://discord.gg/zYASbKz).
+Should you run in to a bug that isn't listed here, then please report it in our [Discord's](https://discord.com/invite/rx8Q4PrK6C) bug channel then I'll look in to it, find a solution and include it in an update.
+If you're having trouble installing the package, you can also get assistance on our [Discord](https://discord.com/invite/rx8Q4PrK6C).
